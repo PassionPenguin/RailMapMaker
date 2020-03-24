@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>PassionPenguin/mapGenerator</title>
+    <style>
+        body {
+            background: #fff;
+        }
+
+        #drawable {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        #cursor {
+            overflow: hidden;
+            width: 5px;
+            height: 5px;
+            background: darkred;
+            position: fixed;
+            z-index: 2;
+            transition: 50ms;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #pg-app {
+        }
+
+        #resSvg {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        #resSvg path {
+            stroke-width: 5px;
+            fill: transparent;
+        }
+
+        #lineEditorPrompt {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 400px;
+            background: #fff;
+            z-index: 2;
+            border-radius: 10px 10px 0 0;
+        }
+
+        #lineEditorColorPicker, #lineEditorOpacityPicker, #lineEditorNameInput {
+            display: block;
+            width: 200px;
+            height: 36px;
+            background: transparent;
+            border: 0;
+            outline: none;
+            font: 14px/1 Anodina, sans-serif;
+            text-align: left;
+            margin: 0 auto;
+            white-space: pre;
+            color: #444;
+        }
+
+        #lineEditorPrompt .typeInfo {
+            width: 200px;
+            height: 24px;
+            text-align: left;
+            margin: 20px auto 0;
+            font: 900 12px/2 Anoidina, sans-serif;
+            padding-left: 15px;
+        }
+    </style>
+</head>
+<body>
+<div id="pg-app">
+    <div id="drawable">
+        <svg id="resSvg" xmlns="http://www.w3.org/2000/svg"></svg>
+    </div>
+    <div id="grid"
+         style="background:url('../grid.png') repeat;width:200vw;height:200vh;position:absolute;left:0;top:0;z-index:0; background-size: 50px;"></div>
+    <div id="cursor"></div>
+</div>
+</body>
+<script src="./dist/libs/build.package.js"></script>
+<script>
+    builder.init(() => {
+
+        attachEvent.EditStation.attachClickEvent(pg.$("#drawable")[0]);
+        attachEvent.EditStation.attachMoveEvent(pg.$("#drawable")[0], pg.$("#cursor")[0]);
+
+        const reloadMap = (id) => {
+            const map = pathInfo[id][0];
+            const path = pathInfo[id].path;
+            let not_visited = false, shouldIntercept = false;
+            path.setAttributeNS(null, "d", "M" + map.stations[0].x + " " + map.stations[0].y);
+
+            if (map.stations.length === 2) {
+                path.setAttributeNS(null, "d", path.getAttributeNS(null, "d") + " L" + map.stations[1].x + " " + map.stations[1].y);
+            } else if (map.stations.length !== 1)
+                map.stations.forEach((e, index) => {
+                    // 首先需要判断 一般分三类
+                    // k===0            水平垂直线
+                    // k===1            45度斜线
+                    // k!==1&&k!==0     需要组合线
+                    let k;
+                    console.log(index, e);
+                    try {
+                        if ((index >= map.stations.length - 2) &&
+                            (e.x !== map.stations[index + 1].x || e.y !== map.stations[index + 1].y)) { // 末尾的转折，无需判断更多
+                            path.setAttributeNS(null, "d", path.getAttributeNS(null, "d") + "C" + e.x + " " + e.y + " " + e.x + " " + e.y + " " + map.stations[index + 1].x + " " + map.stations[index + 1].y);
+                            shouldIntercept = true;
+                            return;
+                        }
+                    } catch (e) {
+                    }
+
+                    if (index >= map.stations.length - 1 || shouldIntercept) return;
+                    else if (index >= map.stations.length - 2) {
+                        path.setAttributeNS(null, "d", path.getAttributeNS(null, "d") + "L" + map.stations[index + 1].x + " " + map.stations[index + 1].y);
+                        shouldIntercept = true;
+                        return;
+                    }
+
+                    if (e.x === map.stations[index + 1].x || e.y === map.stations[index + 1].y) k = 0; // 垂直水平直线
+                    else k = (e.x - map.stations[index + 1].x) / (e.y - map.stations[index + 1].y); // 斜率
+
+                    console.log(k);
+                    console.log("(x, y): \t" + e.x + "\t" + map.stations[index + 1].x + "\t" + e.y + "\t" + map.stations[index + 1].y);
+                    if (k === 0) {
+                        // 垂直水平型
+                        if (not_visited) {
+                            // TODO: min-max turning size
+                            // 属于四十五度的折线
+                            path.setAttributeNS(null, "d", path.getAttributeNS(null, "d") + "C" + e.x + " " + e.y + " " + e.x + " " + e.y + " " + map.stations[index + 1].x + " " + map.stations[index + 1].y);
+                            not_visited = false;
+                        }
+                        if (!(e.x === map.stations[index + 1].x && e.x === map.stations[index + 2].x || e.y === map.stations[index + 1].y && e.y === map.stations[index + 2].y)) {
+                            // 不是同一水平线，忽略，传送给处理45度/组合
+                            not_visited = true;
+                        } else {
+                            if (not_visited) {
+                                // TODO: min-max turning size
+                                path.setAttributeNS(null, "d", path.getAttributeNS(null, "d") + "C" + e.x + " " + e.y + " " + e.x + " " + e.y + " " + map.stations[index + 1].x + " " + map.stations[index + 1].y);
+                                not_visited = false;
+                            } else
+                                path.setAttributeNS(null, "d", path.getAttributeNS(null, "d") + "L" + map.stations[index + 1].x + " " + map.stations[index + 1].y);
+                        }
+                    } else if (Math.abs(k) === 1) {
+                        // 45度斜线
+                        if (not_visited) {
+                            // 属于四十五度的折线
+                            // TODO: min-max turning size
+                            path.setAttributeNS(null, "d", path.getAttributeNS(null, "d") + "C" + e.x + " " + e.y + " " + e.x + " " + e.y + " " + map.stations[index + 1].x + " " + map.stations[index + 1].y);
+                            not_visited = false;
+                        } else {
+                            let ktmp;
+                            if (map.stations[index + 2].x === map.stations[index + 1].x || map.stations[index + 2].y === map.stations[index + 1].y) ktmp = 0; // 垂直水平直线
+                            else ktmp = (map.stations[index + 2].x - map.stations[index + 1].x) / (map.stations[index + 2].y - map.stations[index + 1].y); // 斜率
+
+                            if (Math.abs(ktmp) === 1)
+                                path.setAttributeNS(null, "d", path.getAttributeNS(null, "d") + "L" + map.stations[index + 2].x + " " + map.stations[index + 2].y);
+                            else not_visited = true;
+                        }
+                    } else {
+                        // TODO: upd non-usual-type's line
+                    }
+                });
+            else
+                path.setAttributeNS(null, "d", path.getAttributeNS(null, "d") + "a 5 5 0 0 0 0 0 a 5 5 0 0 0 0 0");
+        }
+
+    });
+</script>
+</html>
