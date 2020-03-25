@@ -16,4 +16,6 @@ const strings = {
     production: "社区",
     test: "测试",
     developer: "开发者",
+    parseErr: "JSON语法错误",
+    not_arr: "不是数组"
 };

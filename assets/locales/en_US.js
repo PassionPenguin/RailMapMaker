@@ -16,4 +16,6 @@ const strings = {
     production: "Community",
     test: "Test",
     developer: "Developer",
+    parseErr: "Uncaught SyntaxError",
+    not_arr: "Not an Array"
 };

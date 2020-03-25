@@ -16,4 +16,6 @@ const strings = {
     production: "社區",
     test: "調適",
     developer: "開發者",
+    parseErr: "JSON語法錯誤",
+    not_arr: "不是數組"
 };
