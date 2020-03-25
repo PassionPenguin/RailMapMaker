@@ -1,6 +1,6 @@
 /*
 
-    Package PassionPenguin/mapMaker
+    Package PassionPenguin/PenguinUI
 
 
     Created by @PassionPenguin
@@ -28,7 +28,7 @@
 }
 
 .pg-storyboard > .pg-storyboard-banner > h3 {
-    font: 100 16px/1 Anodina, sans-serif;
+    font: 400 16px/1 Anodina, sans-serif;
     text-align: center;
     margin: 0;
     color: var(--grey);
