@@ -11,6 +11,7 @@
 const builder = {
     debugMode: true,
     version: "1.0",
+    bundles: [{name: "PenguinUI", version: "0.1.2"}],
     displayVersion: "Lemonade/(RMG v0.1 EAP)",
     locales: ["zh_CN", "zh_HK", "zh_YUE", "en_US"],
     buildTime: 1585118965574,

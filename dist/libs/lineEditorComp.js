@@ -35,7 +35,7 @@ const showLineEditor = (e, id) => {
     lineEditorPrompt.appendChild(cE({
         type: "button",
         attr: [["id", "lineEditorColorPicker"]],
-        innerHTML: "不透明度\t\t<span style='width: 20px;height: 20px;display: inline-block;vertical-align: middle;border: 1px solid var(--white);background: url(../opacity.png);opacity:" + pathInfo[id].opacity + "'></span>",
+        innerHTML: "不透明度\t\t<span style='width: 20px;height: 20px;display: inline-block;vertical-align: middle;border: 1px solid var(--white);background: url(./assets/mipmap/opacity.png);opacity:" + pathInfo[id].opacity + "'></span>",
         // transparentPickerFeature
         onclick: () => {
             // U.C.
@@ -44,7 +44,7 @@ const showLineEditor = (e, id) => {
     lineEditorPrompt.appendChild(cE({
         type: "button",
         attr: [["id", "lineEditorColorPicker"]],
-        innerHTML: "边角\t\t<span style='width: 20px;height: 20px;display: inline-block;vertical-align: middle;border: 1px solid var(--white);background: url(../border.png);opacity:" + pathInfo[id].opacity + "'></span>",
+        innerHTML: "边角\t\t<span style='width: 20px;height: 20px;display: inline-block;vertical-align: middle;border: 1px solid var(--white);background: url(./assets/mipmap/border.png);opacity:" + pathInfo[id].opacity + "'></span>",
         // transparentPickerFeature
         onclick: () => {
             // U.C.
@@ -76,7 +76,7 @@ const showLineEditor = (e, id) => {
     lineEditorPrompt.appendChild(cE({
         type: "button",
         attr: [["id", "lineEditorColorPicker"]],
-        innerHTML: "站点\t\t<span style='width: 20px;height: 20px;display: inline-block;vertical-align: middle;border: 1px solid var(--white);background: url(../border.png);opacity:" + pathInfo[id].opacity + "'></span>",
+        innerHTML: "站点\t\t<span style='width: 20px;height: 20px;display: inline-block;vertical-align: middle;border: 1px solid var(--white);background: url(./assets/mipmap/border.png);opacity:" + pathInfo[id].opacity + "'></span>",
         // transparentPickerFeature
         onclick: () => {
             // U.C.
