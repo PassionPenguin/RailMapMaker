@@ -23,7 +23,7 @@ const builder = {
 
         window.state = {
             newPath: true,
-            pathId: -1, currentNode: "editingStations"
+            pathId: -1, currentNode: "editingStations", stationStyle: "rect"
         };
 
         window.contentData = null;
@@ -38,7 +38,7 @@ const builder = {
 
         builder.importStyles(["./dist/libs/bundle/PenguinUI/bundle.PenguinUI.css", "./dist/libs/bundle/storyboard/bundle.storyboard.css"]);
         ProgressManager.update(0, 33.3, 100);
-        builder.importScripts(["./dist/libs/attachWindowCursorEvent.js", "./dist/libs/lineEditorComp.js", "./dist/libs/mapDrawer.js", "./assets/locales/" + builder.locales[pg.language] + ".js"], returnFunc);
+        builder.importScripts(["./dist/libs/attachWindowCursorEvent.js", "./dist/libs/initInterface.js", "./dist/libs/lineEditorComp.js", "./assets/locales/" + builder.locales[pg.language] + ".js"], returnFunc);
         ProgressManager.update(0, 66.6, 100);
     },
     importScripts: (urls, returnFunc) => {
