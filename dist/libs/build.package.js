@@ -1,6 +1,6 @@
 /*
 
-    Package PassionPenguin/mapMaker
+    Package PassionPenguin/PenguinUI
 
 
     Created by @PassionPenguin
@@ -12,6 +12,8 @@ const builder = {
     debugMode: true,
     version: "1.0",
     displayVersion: "Lemonade/(RMG v0.1 EAP)",
+    locales: ["zh_CN", "zh_HK", "zh_YUE", "en_US"],
+    buildTime: 1585118965574,
     debug: (pkg, src, tag, msg) => {
         console.debug("%c> " + pkg + "%c>> " + src + "%c\n" + tag + ":\t %c" + msg, "color:var(--grey);margin:10px auto 0 auto;display:block;font:900 12px/1 Anodina,sans-serif;", "color:var(--black);margin:0 auto 20px auto;display:block;font:900 14px/1 Anodina,sans-serif;", "color:var(--black);margin:10px 20px 0 0;display:context;font:14px/21px Anodina,sans-serif;", "color:var(--black);margin:0;display:context;font:12px/21px Anodina,sans-serif;");
     }, init: (returnFunc) => {
@@ -27,47 +29,16 @@ const builder = {
 
         window.pathInfo = [];
 
-        window.pg = {
-            $: (e) => {
-                return document.querySelectorAll(e);
-            }
-        };
+        if (CookieManager.get("language") === "" || isNaN(Int(CookieManager.get("language"))))
+            pg.language = 0;
+        else pg.language = Int(CookieManager.get("language"));
 
-        window.Int = (val) => {
-            return parseInt(val)
-        };
-
-        window.cE = (data) => {
-            if (data === undefined)
-                data = {type: "div", attr: [], innerText: undefined, innerHTML: undefined, onclick: undefined}
-            let e = document.createElement(data.type);
-            if (data.attr !== undefined)
-                data.attr.forEach((attr) => {
-                    e.setAttribute(attr[0], attr[1]);
-                });
-            if (data.innerText !== undefined)
-                e.innerText = data.innerText;
-            if (data.innerHTML !== undefined)
-                e.innerHTML = data.innerHTML;
-            if (data.onclick !== undefined)
-                e.onclick = (e) => {
-                    data.onclick(e)
-                };
-            return e;
-        };
-
-        window.min = (val) => {
-            return val % 25 > 12.5 ? val + (25 - val % 25) : val - val % 25;
-        };
-
-        if (!Array.prototype.last) {
-            Array.prototype.last = function () {
-                return this[this.length - 1];
-            }
-        }
+        ProgressManager.update(0, 25, 100);
 
         builder.importStyles(["./dist/libs/bundle/PenguinUI/bundle.PenguinUI.css", "./dist/libs/bundle/storyboard/bundle.storyboard.css"]);
-        builder.importScripts(["./dist/libs/attachWindowCursorEvent.js", "./dist/libs/lineEditorComp.js", "./dist/libs/mapDrawer.js","./dist/libs/bundle/PenguinUI/bundle.PenguinUI.js"], returnFunc);
+        ProgressManager.update(0, 33.3, 100);
+        builder.importScripts(["./dist/libs/attachWindowCursorEvent.js", "./dist/libs/lineEditorComp.js", "./dist/libs/mapDrawer.js", "./assets/locales/" + builder.locales[pg.language] + ".js"], returnFunc);
+        ProgressManager.update(0, 66.6, 100);
     },
     importScripts: (urls, returnFunc) => {
         // urls=>array/string
