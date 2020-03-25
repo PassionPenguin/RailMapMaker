@@ -9,10 +9,12 @@
  */
 
 const builder = {
+    debugMode: true,
+    version: "1.0",
+    displayVersion: "Lemonade/(RMG v0.1 EAP)",
     debug: (pkg, src, tag, msg) => {
         console.debug("%c> " + pkg + "%c>> " + src + "%c\n" + tag + ":\t %c" + msg, "color:var(--grey);margin:10px auto 0 auto;display:block;font:900 12px/1 Anodina,sans-serif;", "color:var(--black);margin:0 auto 20px auto;display:block;font:900 14px/1 Anodina,sans-serif;", "color:var(--black);margin:10px 20px 0 0;display:context;font:14px/21px Anodina,sans-serif;", "color:var(--black);margin:0;display:context;font:12px/21px Anodina,sans-serif;");
-    },
-    debugMode: true, init: (returnFunc) => {
+    }, init: (returnFunc) => {
         if (builder.debugMode)
             builder.debug("PassionPenguin/mapGenerator", "builder.package.js", "Network", "loaded script: build.package.js");
 
@@ -20,6 +22,8 @@ const builder = {
             newPath: true,
             pathId: -1, currentNode: "editingStations"
         };
+
+        window.contentData = null;
 
         window.pathInfo = [];
 
@@ -62,8 +66,8 @@ const builder = {
             }
         }
 
-        builder.importScripts(["./dist/libs/attachWindowCursorEvent.js", "./dist/libs/lineEditorComp.js", "./dist/libs/mapDrawer.js"], returnFunc);
-
+        builder.importStyles(["./dist/libs/bundle/PenguinUI/bundle.PenguinUI.css", "./dist/libs/bundle/storyboard/bundle.storyboard.css"]);
+        builder.importScripts(["./dist/libs/attachWindowCursorEvent.js", "./dist/libs/lineEditorComp.js", "./dist/libs/mapDrawer.js","./dist/libs/bundle/PenguinUI/bundle.PenguinUI.js"], returnFunc);
     },
     importScripts: (urls, returnFunc) => {
         // urls=>array/string
@@ -89,5 +93,10 @@ const builder = {
             }
         }
         importScript();
+    }, importStyles: (urls) => {
+        urls = typeof urls === "object" ? urls : [urls];
+        urls.forEach(url => {
+            document.head.appendChild(cE({type: "link", attr: [["rel", "stylesheet"], ["href", url]]}))
+        })
     }
 }
