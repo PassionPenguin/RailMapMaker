@@ -1,0 +1,132 @@
+@charset "UTF-8";
+
+/*
+
+    Package PassionPenguin/mapGenerator
+
+
+    Created by @PassionPenguin
+    Last upd by @PassionPenguin
+
+ */
+@import "require/color.css";
+
+@font-face {
+    font-family: Anodina;
+    src: url("./font/Anodina-Regular.otf");
+}
+
+@font-face {
+    font-family: Anodina;
+    font-weight: 600;
+    src: url("./font/Anodina-Bold.otf");
+}
+
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Material Icons'),
+    local('MaterialIcons-Regular'),
+    url("./font/MaterialIcons-Regular.woff2") format('woff2')
+}
+
+.mi {
+    font-family: 'Material Icons', sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px; /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+}
+
+/* Notification */
+.pg-notification {
+    align-items: flex-end;
+    bottom: 0;
+    position: fixed;
+    right: 16px;
+    z-index: 9999;
+    background-color: var(--white);
+    border: 0;
+    box-shadow: rgba(0, 0, 0, 0.3) 0 0 6px, rgba(0, 0, 0, 0.15) 0 1px 6px;
+    font-family: Anodina, sans-serif;
+    margin: 8px;
+    padding: 20px;
+    transition: 0.5s;
+    opacity: 1;
+}
+
+@keyframes removeNotification {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+.pg-notification.remove {
+    animation: removeNotification 1s cubic-bezier(0.55, 0.06, 0.68, 0.19);
+}
+
+.pg-notification-title {
+    display: block;
+    width: 100%;
+    font: 16px/1 Anodina, sans-serif;
+    margin: 5px 0 0 0;
+    text-align: center;
+}
+
+.pg-notification-msg {
+    color: var(--grey);
+    display: block;
+    font-family: Anodina, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    height: auto;
+    line-height: 22px;
+    padding: 8px 0 12px;
+    max-width: 250px;
+}
+
+.pg-notification-icon.mi {
+    display: block;
+    margin: 0 auto;
+    width: 48px;
+    font-size: 36px;
+    text-align: center;
+    color: var(--theme800);
+}
+
+.pg-notification-button {
+    float: right;
+    padding: 10px 15px;
+    box-shadow: none;
+    background: var(--theme700);
+    border: 0;
+    color: #fff;
+    font: 16px/1 Anodina, sans-serif;
+    border-radius: 5px;
+    transition: 0.5s;
+    cursor: pointer;
+    outline: none;
+}
+
+.pg-notification-button:hover, .pg-notification-button:focus {
+    background: var(--theme200);
+    outline: none;
+}
