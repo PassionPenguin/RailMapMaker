@@ -1,6 +1,6 @@
 /*
 
-    Package PassionPenguin/mapGenerator
+    Package PassionPenguin/mapMaker
 
     
     Created by @PassionPenguin

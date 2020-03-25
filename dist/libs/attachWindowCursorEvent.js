@@ -1,6 +1,6 @@
 /*
 
-    Package PassionPenguin/mapGenerator
+    Package PassionPenguin/mapMaker
 
 
     Created by @PassionPenguin
@@ -54,19 +54,19 @@ const attachEvent = {
 
         attachClickEvent: (element) => {
             if (builder.debugMode)
-                builder.debug("PassionPenguin/mapGenerator", "attachWindowCursorEvent.js", "Event", "Event Attached: EditStation.Click");
+                builder.debug("PassionPenguin/mapMaker", "attachWindowCursorEvent.js", "Event", "Event Attached: EditStation.Click");
             element.addEventListener("click", attachEvent.EditStation.ClickEventListener);
         },
 
         detachClickEvent: (element) => {
             if (builder.debugMode)
-                builder.debug("PassionPenguin/mapGenerator", "attachWindowCursorEvent.js", "Event", "Event Detached: EditStation.Click");
+                builder.debug("PassionPenguin/mapMaker", "attachWindowCursorEvent.js", "Event", "Event Detached: EditStation.Click");
             element.removeEventListener("click", attachEvent.EditStation.ClickEventListener);
         },
 
         attachMoveEvent: (element, target) => {
             if (builder.debugMode)
-                builder.debug("PassionPenguin/mapGenerator", "attachWindowCursorEvent.js", "Event", "Event Attached: EditStation.Move");
+                builder.debug("PassionPenguin/mapMaker", "attachWindowCursorEvent.js", "Event", "Event Attached: EditStation.Move");
             element.addEventListener("mousemove", () => {
                 attachEvent.EditStation.MoveEventListener(target)
             });
@@ -74,7 +74,7 @@ const attachEvent = {
 
         detachMoveEvent: (element, target) => {
             if (builder.debugMode)
-                builder.debug("PassionPenguin/mapGenerator", "attachWindowCursorEvent.js", "Event", "Event Detached: EditStation.Move");
+                builder.debug("PassionPenguin/mapMaker", "attachWindowCursorEvent.js", "Event", "Event Detached: EditStation.Move");
             element.removeEventListener("mousemove", (target) => {
                 attachEvent.EditStation.MoveEventListener(target)
             });
