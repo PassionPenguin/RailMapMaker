@@ -5,7 +5,8 @@
     <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
           name="viewport">
     <meta content="ie=edge" http-equiv="X-UA-Compatible">
-    <title>PassionPenguin/mapGenerator</title>
+    <link rel="icon" href="./assets/mipmap/icon.png">
+    <title>PassionPenguin/RailMapGenerator</title>
     <style>
         body {
             background: #fff;
@@ -82,23 +83,86 @@
             padding-left: 15px;
         }
     </style>
+    <link rel="stylesheet" href="./dist/libs/bundle/PenguinUI/bundle.PenguinUI.css">
+    <link rel="stylesheet" href="./dist/libs/bundle/storyboard/bundle.storyboard.css">
 </head>
 <body>
 <div id="pg-app">
-<!--    <div id="drawable">-->
-<!--        <svg id="resSvg" xmlns="http://www.w3.org/2000/svg"></svg>-->
-<!--    </div>-->
-<!--    <div id="grid"-->
-<!--         style="background:url('grid.png') repeat;width:200vw;height:200vh;position:absolute;left:0;top:0;z-index:0; background-size: 50px;"></div>-->
-<!--    <div id="cursor"></div>-->
+    <div class="pg-storyboard">
+        <div class="pg-storyboard-banner"><img src="./assets/mipmap/icon.png" alt="icon">
+            <h1>RailMapGenerator</h1>
+            <h3>Version Lemonade/(RMG v0.1 EAP)</h3></div>
+        <div class="pg-storyboard-list"><p><span class="mi">attachment</span><span> 上传文件 (*.rmg) </span></p>
+            <p><span class="mi">dashboard</span><span> 打开样板</span></p>
+            <p><span class="mi">info</span><span> 关于RMG </span></p></div>
+    </div>
 </div>
-</body>
+
 <script src="./dist/libs/build.package.js"></script>
 <script>
-    builder.init(() => {
+    function initInterface(type) {
+        if (contentData === null || type === 0) {
+            // load Enter Interface
+            let view = pg.$("#pg-app")[0];
+            view.innerHTML = "";
+            let storyboard = cE({type: "div", attr: [["class", "pg-storyboard"]]});
+            view.appendChild(storyboard);
+            storyboard.appendChild(cE({
+                type: "div",
+                attr: [["class", "pg-storyboard-banner"]],
+                innerHTML: "<img src='./assets/mipmap/icon.png' alt='icon'><h1>RailMapGenerator</h1><h3>Version " + builder.displayVersion + "</h3>"
+            }));
+            let storyboardCtrlList = cE({
+                type: "div",
+                attr: [["class", "pg-storyboard-list"]]
+            });
+            storyboard.appendChild(storyboardCtrlList);
+            storyboardCtrlList.appendChild(cE({
+                type: "p", innerHTML: "<span class='mi'>attachment</span><span> 上传文件 (*.rmg) </span>", onclick: () => {
+                    // upload an rmg file
+                    let file = cE({type: "input", attr: [["type", "file"], ["accept", ".rmg"]]});
+                    file.click();
+                    file.onchange = () => {
+                        let fileContent = file.files[0];
+                        if (fileContent.name.substring(fileContent.name.lastIndexOf(".")) !== ".rmg") {
 
-        attachEvent.EditStation.attachClickEvent(pg.$("#drawable")[0]);
-        attachEvent.EditStation.attachMoveEvent(pg.$("#drawable")[0], pg.$("#cursor")[0]);
+                            return;
+                        }
+                        let reader = new FileReader();
+                        reader.readAsText(fileContent);
+                        reader.onload = () => {
+                            window.contentData = {
+                                content: reader.result,
+                                size: fileContent.size,
+                                name: fileContent.name,
+                                lastModified: fileContent.lastModified, type: fileContent.type
+                            };
+                            PenguinUI.Notification.create("System", "Congrats! File loaded: <span class='color-primary'>" + fileContent.name + "</span>", 0, {
+                                time: -1,
+                                icon: "check"
+                            })
+                        }
+                    }
+                }
+            }));
+            storyboardCtrlList.appendChild(cE({
+                type: "p", innerHTML: "<span class='mi'>dashboard</span><span> 打开样板</span>", onclick: () => {
+                    // upload an rmg file
+                }
+            }));
+            storyboardCtrlList.appendChild(cE({
+                type: "p", innerHTML: "<span class='mi'>info</span><span> 关于RMG </span>", onclick: () => {
+                    // upload an rmg file
+                }
+            }));
+        }
+    }
+
+    builder.init(() => {
+        initInterface(0);
+
+        // attachEvent.EditStation.attachClickEvent(pg.$("#drawable")[0]);
+        // attachEvent.EditStation.attachMoveEvent(pg.$("#drawable")[0], pg.$("#cursor")[0]);
 
         const reloadMap = (id) => {
             const map = pathInfo[id][0];
@@ -183,4 +247,5 @@
 
     });
 </script>
+</body>
 </html>
