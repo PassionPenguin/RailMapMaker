@@ -148,19 +148,116 @@
                     const pathElement = pg.$("#UnnamedPath_" + id)[0];
                     const stationsElement = pg.$("#UnnamedStations_" + id)[0];
                     stationsElement.innerHTML = "";
-                    map.stations.forEach(e => {
-                        if (e.type !== "Auxiliary point") {
-                            let stationNode = document.createElementNS(pg.$("#resSvg")[0].namespaceURI, "use");
-                            stationNode.setAttributeNS(null, "href", "#stationStyle_" + state.stationStyle);
-                            stationNode.setAttributeNS(null, "fill", map.color);
-                            stationNode.setAttributeNS(null, "x", "0");
-                            stationNode.setAttributeNS(null, "y", "0");
-                            stationsElement.appendChild(stationNode);
-                            stationNode.setAttributeNS(null, "style", "transform: matrix(1, 0, 0, 1, " + (e.x - 8) + ", " + (e.y - 8) + ");");
-                            if (e.type === "destination")
-                                stationNode.setAttributeNS(null, "style", "transform: matrix(1, 0, 0, 1, " + (e.x - 12) + ", " + (e.y - 12) + ") scale(1.5);");
+
+                    pathElement.setAttributeNS(null, "d", "M" + map.stations[0].x + " " + map.stations[0].y);
+
+                    const createPath = (Coordinate, place, override) => {
+                        /*
+                        *
+                        * Coordinate: normally, an array of three ([[x1,y1],[x2,y2],[x3,y3]]). (while map.stations.length>2)
+                        * direction: while is not a parallel line, choose upper or lower
+                        * override: while map.stations.length === 2
+                        *
+                        * */
+                        let perpendicular = false;
+                        if (!override) {
+                            try {
+                                if (((Coordinate[0][0] - Coordinate[1][0]) / (Coordinate[0][1] - Coordinate[1][1])) === ((Coordinate[1][0] - Coordinate[2][0]) / (Coordinate[1][1] - Coordinate[2][1])) * (-1)) perpendicular = true;
+                            } catch (e) {
+
+                            }
+                            try {
+                                if ((Coordinate[0][0] === Coordinate[1][0] && Coordinate[1][1] === Coordinate[2][1]) || (Coordinate[0][1] === Coordinate[1][1] && Coordinate[1][0] === Coordinate[2][0])) perpendicular = true;
+                            } catch (e) {
+
+                            }
                         }
-                    });
+
+                        if (perpendicular || (override && (Coordinate[0][0] === Coordinate[1][0])) || (Coordinate[0][0] === Coordinate[1][0] && Coordinate[0][0] === Coordinate[2][0]))
+                            // Parallel to the y-axis
+                            return " v " + (Coordinate[1][1] - Coordinate[0][1]);
+                        else if (perpendicular || (override && (Coordinate[0][1] === Coordinate[1][1])) || (Coordinate[0][1] === Coordinate[1][1] && Coordinate[0][1] === Coordinate[2][1]))
+                            // Parallel to the x-axis
+                            return " h " + (Coordinate[1][0] - Coordinate[0][0]);
+
+
+                        let direction;
+                        if (Coordinate[0][0] > Coordinate[1][0]) {
+                            // x-axis-direction to left
+                            if (Coordinate[0][1] < Coordinate[1][1])
+                                // y-axis-direction to bottom, to left-bottom
+                                direction = 0;
+                            else
+                                // y-axis-direction to top, to left-top
+                                direction = 1;
+                        } else {
+                            // x-axis-direction to right
+                            if (Coordinate[0][1] < Coordinate[1][1])
+                                // y-axis-direction to bottom, to right-bottom
+                                direction = 2;
+                            else
+                                // y-axis-direction to top, to right-top
+                                direction = 3;
+                        }
+
+                        const abs_horn = Math.abs(Coordinate[0][0] - Coordinate[1][0]),
+                            abs_vert = Math.abs(Coordinate[0][1] - Coordinate[1][1]),
+                            rest_horn =
+                                (abs_horn - 50 > 0) ? (abs_horn - 50) : abs_horn,
+                            rest_vert =
+                                (abs_vert - 50 > 0) ? (abs_vert - 50) : abs_vert;
+
+                        console.log(direction, Coordinate);
+
+                        switch (direction) {
+                            case 0:
+                                // left-bottom
+                                if (place === "upper")
+                                    return " h -" + rest_horn + " c -50 0 -50 0 -50 50 v " + rest_vert;
+                                else return " v " + rest_vert + "c 0 50 0 50 -50 50 h -" + rest_horn;
+                            case 1:
+                                // left-top
+                                if (place === "upper")
+                                    return " v -" + rest_vert + " c 0 -50 0 -50 -50 -50 h -" + rest_horn;
+                                else return " h -" + rest_horn + " c -50 0 -50 0 -50 -50 v -" + rest_vert;
+                            case 2:
+                                // right-bottom
+                                if (place === "upper")
+                                    return " h " + rest_horn + " c 50 0 50 0 50 50 v " + rest_vert;
+                                else return " v " + rest_vert + "c 0 50 0 50 50 50 h" + rest_horn;
+                            case 3:
+                                // right-top
+                                if (place === "upper")
+                                    return " v -" + rest_vert + " c 0 50 0 50 50 -50 h " + rest_horn;
+                                else return " h " + rest_horn + " c 50 0 50 0 50 -50 v -" + rest_vert;
+                        }
+                    }
+
+                    if (map.stations.length === 2) {
+                        let Coordinate = [[map.stations[0].x, map.stations[0].y], [map.stations[1].x, map.stations[1].y]];
+                        pathElement.setAttributeNS(null, "d", pathElement.getAttributeNS(null, "d") + createPath(Coordinate, "", true));
+                    }
+                    if (map.stations.length > 2) {
+                        map.stations.forEach((e, index) => {
+                            // Init Stations
+                            if (e.type !== "Auxiliary point") {
+                                let stationNode = document.createElementNS(pg.$("#resSvg")[0].namespaceURI, "use");
+                                stationNode.setAttributeNS(null, "href", "#stationStyle_" + state.stationStyle);
+                                stationNode.setAttributeNS(null, "fill", map.color);
+                                stationNode.setAttributeNS(null, "x", "0");
+                                stationNode.setAttributeNS(null, "y", "0");
+                                stationsElement.appendChild(stationNode);
+                                stationNode.setAttributeNS(null, "style", "transform: matrix(1, 0, 0, 1, " + (e.x - 8) + ", " + (e.y - 8) + ");");
+                                if (e.type === "destination")
+                                    stationNode.setAttributeNS(null, "style", "transform: matrix(1, 0, 0, 1, " + (e.x - 12) + ", " + (e.y - 12) + ") scale(1.5);");
+                            }
+
+                            // Init Paths
+                            if (!(index > map.stations.length - 3))
+                                pathElement.setAttributeNS(null, "d", pathElement.getAttributeNS(null, "d") + createPath([[e.x, e.y], [map.stations[index + 1].x, map.stations[index + 1].y], [map.stations[index + 2].x, map.stations[index + 2].y]], "", false));
+                        });
+                        pathElement.setAttributeNS(null, "d", pathElement.getAttributeNS(null, "d") + createPath([[map.stations[map.stations.length - 2].x, map.stations[map.stations.length - 2].y], [map.stations[map.stations.length - 1].x, map.stations[map.stations.length - 1].y]], "", true));
+                    }
                 }
 
             });
