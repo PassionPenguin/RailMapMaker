@@ -88,19 +88,51 @@
 </head>
 <body>
 <div id="pg-app">
-    <div class="pg-storyboard">
-        <div class="pg-storyboard-banner"><img src="./assets/mipmap/icon.png" alt="icon">
-            <h1>RailMapMaker</h1>
-            <h3>Version Lemonade/(RMG v0.1 EAP)</h3></div>
-        <div class="pg-storyboard-list"><p><span class="mi">attachment</span><span> 上传文件 (*.rmg) </span></p>
-            <p><span class="mi">dashboard</span><span> 打开样板</span></p>
-            <p><span class="mi">info</span><span> 关于RMG </span></p></div>
-    </div>
 </div>
 
 <script src="./dist/libs/build.package.js"></script>
 <script>
+    window.pg = {
+        $: (e) => {
+            return document.querySelectorAll(e);
+        }
+    };
+
+    window.Int = (val) => {
+        return parseInt(val)
+    };
+
+    window.cE = (data) => {
+        if (data === undefined)
+            data = {type: "div", attr: [], innerText: undefined, innerHTML: undefined, onclick: undefined}
+        let e = document.createElement(data.type);
+        if (data.attr !== undefined)
+            data.attr.forEach((attr) => {
+                e.setAttribute(attr[0], attr[1]);
+            });
+        if (data.innerText !== undefined)
+            e.innerText = data.innerText;
+        if (data.innerHTML !== undefined)
+            e.innerHTML = data.innerHTML;
+        if (data.onclick !== undefined)
+            e.onclick = (e) => {
+                data.onclick(e)
+            };
+        return e;
+    };
+
+    window.min = (val) => {
+        return val % 25 > 12.5 ? val + (25 - val % 25) : val - val % 25;
+    };
+
+    if (!Array.prototype.last) {
+        Array.prototype.last = function () {
+            return this[this.length - 1];
+        }
+    }
+
     function initInterface(type) {
+        ProgressManager.update(0, 66.6, 100);
         if (contentData === null || type === 0) {
             // load Enter Interface
             let view = pg.$("#pg-app")[0];
@@ -110,7 +142,7 @@
             storyboard.appendChild(cE({
                 type: "div",
                 attr: [["class", "pg-storyboard-banner"]],
-                innerHTML: "<img src='./assets/mipmap/icon.png' alt='icon'><h1>RailMapMaker</h1><h3>Version " + builder.displayVersion + "</h3>"
+                innerHTML: "<img src='./assets/mipmap/icon.png' alt='icon'><h1>" + strings.appName + "</h1><h3>" + strings.version + " " + builder.displayVersion + "</h3>"
             }));
             let storyboardCtrlList = cE({
                 type: "div",
@@ -118,7 +150,9 @@
             });
             storyboard.appendChild(storyboardCtrlList);
             storyboardCtrlList.appendChild(cE({
-                type: "p", innerHTML: "<span class='mi'>attachment</span><span> 上传文件 (*.rmg) </span>", onclick: () => {
+                type: "p",
+                innerHTML: "<span class='mi'>attachment</span><span> " + strings.importFile + " (*.rmg) </span>",
+                onclick: () => {
                     // upload an rmg file
                     let file = cE({type: "input", attr: [["type", "file"], ["accept", ".rmg"]]});
                     file.click();
@@ -137,7 +171,7 @@
                                 name: fileContent.name,
                                 lastModified: fileContent.lastModified, type: fileContent.type
                             };
-                            PenguinUI.Notification.create("System", "Congrats! File loaded: <span class='color-primary'>" + fileContent.name + "</span>", 0, {
+                            NotificationManager.create(strings.system, strings.uploaded + " <span class='color-primary'>" + fileContent.name + "</span>", 0, {
                                 time: -1,
                                 icon: "check"
                             })
@@ -146,105 +180,165 @@
                 }
             }));
             storyboardCtrlList.appendChild(cE({
-                type: "p", innerHTML: "<span class='mi'>dashboard</span><span> 打开样板</span>", onclick: () => {
-                    // upload an rmg file
+                type: "p",
+                innerHTML: "<span class='mi'>dashboard</span><span> " + strings.openTemplate + "</span>",
+                onclick: () => {
+                    // open templates window
+
                 }
             }));
             storyboardCtrlList.appendChild(cE({
-                type: "p", innerHTML: "<span class='mi'>info</span><span> 关于RMG </span>", onclick: () => {
-                    // upload an rmg file
+                type: "p",
+                innerHTML: "<span class='mi'>info</span><span> " + strings.about + " </span>",
+                onclick: () => {
+                    // open about window
+                    WindowManager.create((e) => {
+                        e.appendChild(cE({
+                            type: "img",
+                            attr: [["alt", "icon"], ["style", "width: 128px;display: block;margin: 0 auto;"], ["src", "./assets/mipmap/icon.png"]]
+                        }));
+                        e.appendChild(cE({
+                            type: "p",
+                            attr: [["style", "font: 900 28px/1 Anodina, sans-serif;text-align: center;margin: 10px 0;"]],
+                            innerHTML: strings.appName
+                        }));
+                        e.appendChild(cE({
+                            type: "p",
+                            attr: [["style", "font: 400 16px/1 Anodina, sans-serif;text-align: center;margin: 10px 0 20px 0;color: var(--grey);"]],
+                            innerHTML: strings.version + " " + builder.displayVersion
+                        }));
+                        e.appendChild(cE({
+                            type: "p",
+                            attr: [["style", "font: 400 14px/1 Anodina, sans-serif;text-align: center;margin: 10px 0;color: var(--grey);"]],
+                            innerHTML: strings.buildTime + "\t" + new Date(builder.buildTime).toLocaleDateString()
+                        }));
+                        e.appendChild(cE({
+                            type: "p",
+                            attr: [["style", "font: 400 14px/1 Anodina, sans-serif;text-align: center;margin: 10px 0;color: var(--grey);"]],
+                            innerHTML: strings.curLanguage + "\t" + builder.locales[pg.language]
+                        }));
+                        e.appendChild(cE({
+                            type: "p",
+                            attr: [["style", "font: 400 14px/1 Anodina, sans-serif;text-align: center;margin: 10px 0;color: var(--grey);"]],
+                            innerHTML: strings.curMode + "\t" + ((builder.debugMode === 0) ? strings.production : strings.dev)
+                        }));
+                        e.appendChild(cE({
+                            type: "p",
+                            attr: [["style", "font: 400 14px/1 Anodina, sans-serif;text-align: center;margin: 10px 0;color: var(--grey);"]],
+                            innerHTML: strings.developer + "\tPassionPenguin"
+                        }));
+                    });
+                }
+            }));
+            storyboardCtrlList.appendChild(cE({
+                type: "p",
+                innerHTML: "<span class='mi'>settings</span><span> " + strings.preference + " </span>",
+                onclick: () => {
+                    // open preference window
+
                 }
             }));
         }
+
+        ProgressManager.update(0, 0, 0);
+        setTimeout(() => {
+            ProgressManager.remove(0);
+        }, 500);
     }
 
-    builder.init(() => {
-        initInterface(0);
+    builder.importScripts(["./dist/libs/bundle/PenguinUI/bundle.PenguinUI.js"], () => {
+        initPenguinUI(() => {
+            ProgressManager.create(0, 0, 0);
 
-        // attachEvent.EditStation.attachClickEvent(pg.$("#drawable")[0]);
-        // attachEvent.EditStation.attachMoveEvent(pg.$("#drawable")[0], pg.$("#cursor")[0]);
+            builder.init(() => {
+                initInterface(0);
 
-        const reloadMap = (id) => {
-            const map = pathInfo[id][0];
-            const path = pathInfo[id].path;
-            let not_visited = false, shouldIntercept = false;
-            path.setAttributeNS(null, "d", "M" + map.stations[0].x + " " + map.stations[0].y);
+                // attachEvent.EditStation.attachClickEvent(pg.$("#drawable")[0]);
+                // attachEvent.EditStation.attachMoveEvent(pg.$("#drawable")[0], pg.$("#cursor")[0]);
 
-            if (map.stations.length === 2) {
-                path.setAttributeNS(null, "d", path.getAttributeNS(null, "d") + " L" + map.stations[1].x + " " + map.stations[1].y);
-            } else if (map.stations.length !== 1)
-                map.stations.forEach((e, index) => {
-                    // 首先需要判断 一般分三类
-                    // k===0            水平垂直线
-                    // k===1            45度斜线
-                    // k!==1&&k!==0     需要组合线
-                    let k;
-                    console.log(index, e);
-                    try {
-                        if ((index >= map.stations.length - 2) &&
-                            (e.x !== map.stations[index + 1].x || e.y !== map.stations[index + 1].y)) { // 末尾的转折，无需判断更多
-                            path.setAttributeNS(null, "d", path.getAttributeNS(null, "d") + "C" + e.x + " " + e.y + " " + e.x + " " + e.y + " " + map.stations[index + 1].x + " " + map.stations[index + 1].y);
-                            shouldIntercept = true;
-                            return;
-                        }
-                    } catch (e) {
-                    }
+                const reloadMap = (id) => {
+                    const map = pathInfo[id][0];
+                    const path = pathInfo[id].path;
+                    let not_visited = false, shouldIntercept = false;
+                    path.setAttributeNS(null, "d", "M" + map.stations[0].x + " " + map.stations[0].y);
 
-                    if (index >= map.stations.length - 1 || shouldIntercept) return;
-                    else if (index >= map.stations.length - 2) {
-                        path.setAttributeNS(null, "d", path.getAttributeNS(null, "d") + "L" + map.stations[index + 1].x + " " + map.stations[index + 1].y);
-                        shouldIntercept = true;
-                        return;
-                    }
+                    if (map.stations.length === 2) {
+                        path.setAttributeNS(null, "d", path.getAttributeNS(null, "d") + " L" + map.stations[1].x + " " + map.stations[1].y);
+                    } else if (map.stations.length !== 1)
+                        map.stations.forEach((e, index) => {
+                            // 首先需要判断 一般分三类
+                            // k===0            水平垂直线
+                            // k===1            45度斜线
+                            // k!==1&&k!==0     需要组合线
+                            let k;
+                            console.log(index, e);
+                            try {
+                                if ((index >= map.stations.length - 2) &&
+                                    (e.x !== map.stations[index + 1].x || e.y !== map.stations[index + 1].y)) { // 末尾的转折，无需判断更多
+                                    path.setAttributeNS(null, "d", path.getAttributeNS(null, "d") + "C" + e.x + " " + e.y + " " + e.x + " " + e.y + " " + map.stations[index + 1].x + " " + map.stations[index + 1].y);
+                                    shouldIntercept = true;
+                                    return;
+                                }
+                            } catch (e) {
+                            }
 
-                    if (e.x === map.stations[index + 1].x || e.y === map.stations[index + 1].y) k = 0; // 垂直水平直线
-                    else k = (e.x - map.stations[index + 1].x) / (e.y - map.stations[index + 1].y); // 斜率
-
-                    console.log(k);
-                    console.log("(x, y): \t" + e.x + "\t" + map.stations[index + 1].x + "\t" + e.y + "\t" + map.stations[index + 1].y);
-                    if (k === 0) {
-                        // 垂直水平型
-                        if (not_visited) {
-                            // TODO: min-max turning size
-                            // 属于四十五度的折线
-                            path.setAttributeNS(null, "d", path.getAttributeNS(null, "d") + "C" + e.x + " " + e.y + " " + e.x + " " + e.y + " " + map.stations[index + 1].x + " " + map.stations[index + 1].y);
-                            not_visited = false;
-                        }
-                        if (!(e.x === map.stations[index + 1].x && e.x === map.stations[index + 2].x || e.y === map.stations[index + 1].y && e.y === map.stations[index + 2].y)) {
-                            // 不是同一水平线，忽略，传送给处理45度/组合
-                            not_visited = true;
-                        } else {
-                            if (not_visited) {
-                                // TODO: min-max turning size
-                                path.setAttributeNS(null, "d", path.getAttributeNS(null, "d") + "C" + e.x + " " + e.y + " " + e.x + " " + e.y + " " + map.stations[index + 1].x + " " + map.stations[index + 1].y);
-                                not_visited = false;
-                            } else
+                            if (index >= map.stations.length - 1 || shouldIntercept) return;
+                            else if (index >= map.stations.length - 2) {
                                 path.setAttributeNS(null, "d", path.getAttributeNS(null, "d") + "L" + map.stations[index + 1].x + " " + map.stations[index + 1].y);
-                        }
-                    } else if (Math.abs(k) === 1) {
-                        // 45度斜线
-                        if (not_visited) {
-                            // 属于四十五度的折线
-                            // TODO: min-max turning size
-                            path.setAttributeNS(null, "d", path.getAttributeNS(null, "d") + "C" + e.x + " " + e.y + " " + e.x + " " + e.y + " " + map.stations[index + 1].x + " " + map.stations[index + 1].y);
-                            not_visited = false;
-                        } else {
-                            let ktmp;
-                            if (map.stations[index + 2].x === map.stations[index + 1].x || map.stations[index + 2].y === map.stations[index + 1].y) ktmp = 0; // 垂直水平直线
-                            else ktmp = (map.stations[index + 2].x - map.stations[index + 1].x) / (map.stations[index + 2].y - map.stations[index + 1].y); // 斜率
+                                shouldIntercept = true;
+                                return;
+                            }
 
-                            if (Math.abs(ktmp) === 1)
-                                path.setAttributeNS(null, "d", path.getAttributeNS(null, "d") + "L" + map.stations[index + 2].x + " " + map.stations[index + 2].y);
-                            else not_visited = true;
-                        }
-                    } else {
-                        // TODO: upd non-usual-type's line
-                    }
-                });
-            else
-                path.setAttributeNS(null, "d", path.getAttributeNS(null, "d") + "a 5 5 0 0 0 0 0 a 5 5 0 0 0 0 0");
-        }
+                            if (e.x === map.stations[index + 1].x || e.y === map.stations[index + 1].y) k = 0; // 垂直水平直线
+                            else k = (e.x - map.stations[index + 1].x) / (e.y - map.stations[index + 1].y); // 斜率
 
+                            console.log(k);
+                            console.log("(x, y): \t" + e.x + "\t" + map.stations[index + 1].x + "\t" + e.y + "\t" + map.stations[index + 1].y);
+                            if (k === 0) {
+                                // 垂直水平型
+                                if (not_visited) {
+                                    // TODO: min-max turning size
+                                    // 属于四十五度的折线
+                                    path.setAttributeNS(null, "d", path.getAttributeNS(null, "d") + "C" + e.x + " " + e.y + " " + e.x + " " + e.y + " " + map.stations[index + 1].x + " " + map.stations[index + 1].y);
+                                    not_visited = false;
+                                }
+                                if (!(e.x === map.stations[index + 1].x && e.x === map.stations[index + 2].x || e.y === map.stations[index + 1].y && e.y === map.stations[index + 2].y)) {
+                                    // 不是同一水平线，忽略，传送给处理45度/组合
+                                    not_visited = true;
+                                } else {
+                                    if (not_visited) {
+                                        // TODO: min-max turning size
+                                        path.setAttributeNS(null, "d", path.getAttributeNS(null, "d") + "C" + e.x + " " + e.y + " " + e.x + " " + e.y + " " + map.stations[index + 1].x + " " + map.stations[index + 1].y);
+                                        not_visited = false;
+                                    } else
+                                        path.setAttributeNS(null, "d", path.getAttributeNS(null, "d") + "L" + map.stations[index + 1].x + " " + map.stations[index + 1].y);
+                                }
+                            } else if (Math.abs(k) === 1) {
+                                // 45度斜线
+                                if (not_visited) {
+                                    // 属于四十五度的折线
+                                    // TODO: min-max turning size
+                                    path.setAttributeNS(null, "d", path.getAttributeNS(null, "d") + "C" + e.x + " " + e.y + " " + e.x + " " + e.y + " " + map.stations[index + 1].x + " " + map.stations[index + 1].y);
+                                    not_visited = false;
+                                } else {
+                                    let ktmp;
+                                    if (map.stations[index + 2].x === map.stations[index + 1].x || map.stations[index + 2].y === map.stations[index + 1].y) ktmp = 0; // 垂直水平直线
+                                    else ktmp = (map.stations[index + 2].x - map.stations[index + 1].x) / (map.stations[index + 2].y - map.stations[index + 1].y); // 斜率
+
+                                    if (Math.abs(ktmp) === 1)
+                                        path.setAttributeNS(null, "d", path.getAttributeNS(null, "d") + "L" + map.stations[index + 2].x + " " + map.stations[index + 2].y);
+                                    else not_visited = true;
+                                }
+                            } else {
+                                // TODO: upd non-usual-type's line
+                            }
+                        });
+                    else
+                        path.setAttributeNS(null, "d", path.getAttributeNS(null, "d") + "a 5 5 0 0 0 0 0 a 5 5 0 0 0 0 0");
+                }
+
+            });
+        });
     });
 </script>
 </body>
