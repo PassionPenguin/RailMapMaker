@@ -31,24 +31,27 @@ const attachEvent = {
             if (state.newPath) {
                 let svg = pg.$("#resSvg")[0];
                 let path = document.createElementNS(svg.namespaceURI, "path");
+                let stations = document.createElementNS(svg.namespaceURI, "g");
                 path.setAttributeNS(null, "stroke", "#000");
+                path.setAttributeNS(null, "id", "UnnamedPath_" + state.pathId);
+                stations.setAttributeNS(null, "id", "UnnamedStations_" + state.pathId);
                 svg.appendChild(path);
-                pathInfo[state.pathId].push({
+                svg.appendChild(stations);
+                pathInfo[state.pathId] = {
                     color: "#000",
                     id: state.pathId,
                     name: "UnnamedPath_" + state.pathId,
                     opacity: 1, stations: [{x: curX, y: curY, type: "destination", routeToNext: ""}]
-                });
-                pathInfo[state.pathId].path = path;
+                };
                 state.newPath = false;
             } else
-                pathInfo[state.pathId][0].stations.push({
+                pathInfo[state.pathId].stations.push({
                     x: curX, y: curY, type: "destination", routeToNext: ""
                 });
             reloadMap(state.pathId);
         },
         MoveEventListener: (element) => {
-            element.setAttribute("style", "left:" + min(event.offsetX) + "px; top:" + min(event.offsetY) + "px;");
+            element.setAttribute("style", "left:" + (min(event.offsetX) - pg.$("#pg-app")[0].scrollLeft) + "px; top:" + (min(event.offsetY) - pg.$("#pg-app")[0].scrollTop) + "px;");
             event.stopPropagation();
         },
 
