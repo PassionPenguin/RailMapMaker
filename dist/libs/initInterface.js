@@ -191,7 +191,7 @@ const initInterface = (type) => {
 
                     attachEvent.EditStation.attachClickEvent(pg.$("#drawable")[0]);
                     attachEvent.EditStation.attachMoveEvent(pg.$("#drawable")[0], pg.$("#cursor")[0]);
-                    pathInfo = []; // TODO: Create an json file and export and enter here.
+                    pathInfo = [];
                     contentData = "[]";
                 });
             }
@@ -257,7 +257,77 @@ const initInterface = (type) => {
             innerHTML: "<span class='mi'>settings</span><span> " + strings.preference + " </span>",
             onclick: () => {
                 // open preference window
-
+                WindowManager.create((e) => {
+                    e.appendChild(cE({
+                        type: "img",
+                        attr: [["alt", "icon"], ["style", "width: 128px;display: block;margin: 0 auto;"], ["src", "./assets/mipmap/icon.png"]]
+                    }));
+                    e.appendChild(cE({
+                        type: "p",
+                        attr: [["style", "font: 900 28px/1 Anodina, sans-serif;text-align: center;margin: 10px 0;"]],
+                        innerHTML: strings.appName
+                    }));
+                    e.appendChild(cE({
+                        type: "p",
+                        attr: [["style", "font: 400 16px/1 Anodina, sans-serif;text-align: center;margin: 20px 0;color: var(--grey);"]],
+                        innerHTML: strings.preference
+                    }));
+                    e.appendChild(cE({
+                        type: "p",
+                        attr: [["style", "font: 400 14px/1 Anodina, sans-serif;text-align: center;margin: 10px 0;color: var(--grey);"]],
+                        innerHTML: strings.curLanguage + "\t" + builder.locales[pg.language],
+                        onclick: () => {
+                            WindowManager.create((e) => {
+                                e.appendChild(cE({
+                                    type: "img",
+                                    attr: [["alt", "icon"], ["style", "width: 128px;display: block;margin: 0 auto;"], ["src", "./assets/mipmap/icon.png"]]
+                                }));
+                                e.appendChild(cE({
+                                    type: "p",
+                                    attr: [["style", "font: 900 28px/1 Anodina, sans-serif;text-align: center;margin: 10px 0;"]],
+                                    innerHTML: strings.appName
+                                }));
+                                e.appendChild(cE({
+                                    type: "p",
+                                    attr: [["style", "font: 400 16px/1 Anodina, sans-serif;text-align: center;margin: 20px 0;color: var(--grey);"]],
+                                    innerHTML: strings.language
+                                }));
+                                e.appendChild(cE({
+                                    type: "p",
+                                    attr: [["style", "font: 400 14px/1 Anodina, sans-serif;text-align: center;margin: 10px 0;color: var(--grey);"]],
+                                    innerHTML: "简体中文", onclick: () => {
+                                        CookieManager.set("language", "0");
+                                        window.location.reload();
+                                    }
+                                }));
+                                e.appendChild(cE({
+                                    type: "p",
+                                    attr: [["style", "font: 400 14px/1 Anodina, sans-serif;text-align: center;margin: 10px 0;color: var(--grey);"]],
+                                    innerHTML: "繁體中文", onclick: () => {
+                                        CookieManager.set("language", "1");
+                                        window.location.reload();
+                                    }
+                                }));
+                                e.appendChild(cE({
+                                    type: "p",
+                                    attr: [["style", "font: 400 14px/1 Anodina, sans-serif;text-align: center;margin: 10px 0;color: var(--grey);"]],
+                                    innerHTML: "粤语", onclick: () => {
+                                        CookieManager.set("language", "2");
+                                        window.location.reload();
+                                    }
+                                }));
+                                e.appendChild(cE({
+                                    type: "p",
+                                    attr: [["style", "font: 400 14px/1 Anodina, sans-serif;text-align: center;margin: 10px 0;color: var(--grey);"]],
+                                    innerHTML: "英语", onclick: () => {
+                                        CookieManager.set("language", "3");
+                                        window.location.reload();
+                                    }
+                                }));
+                            });
+                        }
+                    }));
+                });
             }
         }));
     } else if (type === 1) {

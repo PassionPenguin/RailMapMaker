@@ -18,5 +18,6 @@ const strings = {
     test: "Test",
     developer: "Developer",
     parseErr: "Uncaught SyntaxError",
-    not_arr: "Not an Array"
+    not_arr: "Not an Array",
+    language: "Language"
 };

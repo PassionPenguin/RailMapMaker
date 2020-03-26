@@ -11,12 +11,13 @@ const strings = {
     about: "關於RMG",
     preference: "偏好設定",
     buildTime: "編譯時間",
-    curLanguage:"當前語言",
+    curLanguage: "當前語言",
     curMode: "當前模式",
     dev: "開發",
     production: "社區",
     test: "調適",
     developer: "開發者",
     parseErr: "JSON語法錯誤",
-    not_arr: "不是數組"
+    not_arr: "不是數組",
+    language: "語言"
 };

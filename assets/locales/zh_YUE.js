@@ -18,5 +18,6 @@ const strings = {
     test: "调试",
     developer: "开发者",
     parseErr: "JSON语法错误",
-    not_arr: "不是数组"
+    not_arr: "不是数组",
+    language: "语言"
 };
