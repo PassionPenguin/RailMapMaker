@@ -98,7 +98,7 @@ const initInterface = (type) => {
                     }, 500);
                     view.appendChild(cE({
                         type: "div",
-                        attr: [["id", "grid"], ["style", "background:url('./assets/mipmap/grid.png') repeat;width:200vw;height:200vh;z-index:0; background-size: 50px;"]]
+                        attr: [["id", "grid"], ["style", "background:url('./assets/mipmap/grid.png') repeat;width:5000px;height:5000px;z-index:0; background-size: 50px;"]]
                     }));
                     view.appendChild(cE({
                         type: "div",
@@ -242,7 +242,7 @@ const initInterface = (type) => {
             }, 500);
             view.appendChild(cE({
                 type: "div",
-                attr: [["id", "grid"], ["style", "background:url('./assets/mipmap/grid.png') repeat;width:200vw;height:200vh;z-index:0; background-size: 50px;"]]
+                attr: [["id", "grid"], ["style", "background:url('./assets/mipmap/grid.png') repeat;width:5000px;height:5000px;z-index:0; background-size: 50px;"]]
             }));
             view.appendChild(cE({
                 type: "div",
