@@ -7,6 +7,7 @@ const strings = {
     version: "Version",
     importFile: "Import File",
     openTemplate: "Open Template",
+    openNew: "Open Blank Drawable",
     about: "About RMG",
     preference: "Preference",
     buildTime: "Build Time",

@@ -171,6 +171,33 @@ const initInterface = (type) => {
         }));
         storyboardCtrlList.appendChild(cE({
             type: "p",
+            innerHTML: "<span class='mi'>open_in_new</span><span> " + strings.openNew + "</span>",
+            onclick: () => {
+                [...view.children].forEach((e) => {
+                    e.setAttribute("style", "transition:500ms;opacity:0;");
+                    setTimeout(() => {
+                        view.removeChild(e)
+                    }, 500);
+                    view.appendChild(cE({
+                        type: "div",
+                        attr: [["id", "grid"], ["style", "background:url('./assets/mipmap/grid.png') repeat;width:5000px;height:5000px;z-index:0; background-size: 50px;"]]
+                    }));
+                    view.appendChild(cE({
+                        type: "div",
+                        attr: [["id", "drawable"]],
+                        innerHTML: "<svg id=\"resSvg\" xmlns=\"http://www.w3.org/2000/svg\"><defs><symbol id='stationStyle_circle'><path d='M0 0a8 8 0 1 0 16 0a8 8 0 1 0 -16 0z' style='fill:var(--white);stroke-width: 2px;'/></symbol><symbol id='stationStyle_rect'><path d='M0,0v16h16V0H0z M14,14H2V2h12V14z' style='fill:unset!important'/></symbol></defs></svg>"
+                    }));
+                    view.appendChild(cE({type: "div", attr: [["id", "cursor"]]}));
+
+                    attachEvent.EditStation.attachClickEvent(pg.$("#drawable")[0]);
+                    attachEvent.EditStation.attachMoveEvent(pg.$("#drawable")[0], pg.$("#cursor")[0]);
+                    pathInfo = []; // TODO: Create an json file and export and enter here.
+                    contentData = "[]";
+                });
+            }
+        }));
+        storyboardCtrlList.appendChild(cE({
+            type: "p",
             innerHTML: "<span class='mi'>info</span><span> " + strings.about + " </span>",
             onclick: () => {
                 // open about window

@@ -7,6 +7,7 @@ const strings = {
     version: "版本",
     importFile: "上传文件",
     openTemplate: "打開樣例",
+    openNew: "打開空白畫布",
     about: "關於RMG",
     preference: "偏好設定",
     buildTime: "編譯時間",
