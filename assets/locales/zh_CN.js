@@ -39,4 +39,8 @@ const strings = {
     black: "黑色",
     exportPrefs: "导出设置",
     cancel: "取消",
+    previewNote: "提醒: 预览仅供参考，预览的大小由浏览器窗口大小决定。",
+    actuallyWidth: "实际宽度",
+    actuallyHeight: "实际高度",
+    jpgNotAlphaSupportNote: "图片格式image/jpeg不支持透明度通道，如果你使用JPEG格式导出图片选择使用透明背景，程序将自动以白色为背景导出。",
 };

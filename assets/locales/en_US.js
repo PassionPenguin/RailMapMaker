@@ -39,4 +39,8 @@ const strings = {
     black: "Black",
     exportPrefs: "Export Prefs",
     cancel: "Cancel",
+    previewNote: "Notes: Preview is not reliable due to your browser's window's size.",
+    actuallyWidth: "Actually Width",
+    actuallyHeight: "Actually Height",
+    jpgNotAlphaSupportNote: "Image Type image/jpeg does not support alpha background. If you are using image/jpeg and setting backgroundColor to transparent, the program will export the image white background.",
 };
