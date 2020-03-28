@@ -328,7 +328,7 @@ const initInterface = (type, returnFunc) => {
                         helper_list_display = true;
                         let list = cE({type: "div", attr: [["class", "helper_list"]]});
                         [["open_in_new", strings.export, strings.exportAssets, strings.exportAssetsDescrption, () => {
-                            // showExportDialog();
+                            exportDialog(pg.$("#resSvg")[0]);
                         }], ["settings", strings.settings, strings.openSettings, strings.openSettingsDescription]].forEach((result) => {
                             let element = cE({
                                 type: "div",
@@ -337,7 +337,7 @@ const initInterface = (type, returnFunc) => {
                                 onclick: result[4]
                             });
                             list.appendChild(element);
-                           HoverTips.create(element, result[2], result[3]);
+                            HoverTips.create(element, result[2], result[3]);
                         });
                         document.body.appendChild(list);
                         e.stopPropagation();
