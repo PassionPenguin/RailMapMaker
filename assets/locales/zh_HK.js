@@ -19,5 +19,12 @@ const strings = {
     developer: "開發者",
     parseErr: "JSON語法錯誤",
     not_arr: "不是數組",
-    language: "語言"
+    language: "語言",
+    helper_more: "更多",
+    export: "導出",
+    exportAssets: "導出資源",
+    exportAssetsDescrption: "打開導出窗口",
+    settings: "設定",
+    openSettings: "畫板設定",
+    openSettingsDescription: "打開設定窗口",
 };

@@ -1,7 +1,7 @@
 const strings = {
     system: "System",
     application: "Application",
-    uploaded: "Congrats! The File is Uploaded.",
+    uploaded: "Congrats, The File is Uploaded.",
     file: "File",
     appName: "RailMapMaker",
     version: "Version",
@@ -19,5 +19,12 @@ const strings = {
     developer: "Developer",
     parseErr: "Uncaught SyntaxError",
     not_arr: "Not an Array",
-    language: "Language"
+    language: "Language",
+    helper_more: "More",
+    export: "Export",
+    exportAssets: "Export Assets",
+    exportAssetsDescrption: "Open Export Dialog",
+    settings: "Prefs",
+    openSettings: "Drawable Prefs",
+    openSettingsDescription: "Open Settings Dialog",
 };
