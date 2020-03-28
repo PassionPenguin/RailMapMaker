@@ -62,7 +62,10 @@ const ProgressManager = {
         let progress = document.querySelectorAll("[progress_id='" + chanelId + "']")[0]
         progress.classList.add("remove");
         setTimeout(() => {
-            document.body.removeChild(progress);
+            try {
+                document.body.removeChild(progress);
+            } catch (exception) {
+            }
         }, 1000)
         ProgressManager.query = ProgressManager.query.filter(i => i !== chanelId);
     }
