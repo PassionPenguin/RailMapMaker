@@ -21,11 +21,6 @@
             height: 5000px
         }
 
-        #resSvg {
-            width: 5000px;
-            height: 5000px
-        }
-
         #cursor {
             overflow: hidden;
             width: 5px;
@@ -51,7 +46,7 @@
             top: 0
         }
 
-        #resSvg path.pathElement {
+        #resSvg path.pathElement, #exportSvg path.pathElement {
             stroke-width: 5px;
             fill: transparent;
             stroke-linejoin: round;
@@ -100,7 +95,7 @@
             height: 48px;
             background: var(--white);
             text-align: center;
-            z-index: 1001;
+            z-index: 999;
             user-select: none;
         }
 
