@@ -8,7 +8,7 @@
 
  */
 
-const initInterface = (type) => {
+const initInterface = (type, returnFunc) => {
     /*
     * type: Int
         * 0 => Enter interface
@@ -19,7 +19,7 @@ const initInterface = (type) => {
         ProgressManager.update(0, 66.6, 100);
     else ProgressManager.create(0, 0, 100);
     let view = pg.$("#pg-app")[0];
-    if (contentData === null || type === 0) {
+    if (type === 0) {
         // enter interface
         view.innerHTML = "";
         let storyboard = cE({type: "div", attr: [["class", "pg-storyboard"]]});
@@ -91,24 +91,7 @@ const initInterface = (type) => {
             type: "p",
             innerHTML: "<span class='mi'>dashboard</span><span> " + strings.openTemplate + "</span>",
             onclick: () => {
-                [...view.children].forEach((e) => {
-                    e.setAttribute("style", "transition:500ms;opacity:0;");
-                    setTimeout(() => {
-                        view.removeChild(e)
-                    }, 500);
-                    view.appendChild(cE({
-                        type: "div",
-                        attr: [["id", "grid"], ["style", "background:url('./assets/mipmap/grid.png') repeat;width:5000px;height:5000px;z-index:0; background-size: 50px;"]]
-                    }));
-                    view.appendChild(cE({
-                        type: "div",
-                        attr: [["id", "drawable"]],
-                        innerHTML: "<svg id=\"resSvg\" xmlns=\"http://www.w3.org/2000/svg\"><defs><symbol id='stationStyle_circle'><path d='M0 0a8 8 0 1 0 16 0a8 8 0 1 0 -16 0z'/></symbol><symbol id='stationStyle_rect'><path d='M0,0v16h16V0H0z M14,14H2V2h12V14z'/></symbol></defs></svg>"
-                    }));
-                    view.appendChild(cE({type: "div", attr: [["id", "cursor"]]}));
-
-                    attachEvent.EditStation.attachClickEvent(pg.$("#drawable")[0]);
-                    attachEvent.EditStation.attachMoveEvent(pg.$("#drawable")[0], pg.$("#cursor")[0]);
+                initInterface(1, () => {
                     pathInfo = [{
                         "color": "#000",
                         "id": 0,
@@ -174,27 +157,9 @@ const initInterface = (type) => {
             type: "p",
             innerHTML: "<span class='mi'>open_in_new</span><span> " + strings.openNew + "</span>",
             onclick: () => {
-                [...view.children].forEach((e) => {
-                    e.setAttribute("style", "transition:500ms;opacity:0;");
-                    setTimeout(() => {
-                        view.removeChild(e)
-                    }, 500);
-                    view.appendChild(cE({
-                        type: "div",
-                        attr: [["id", "grid"], ["style", "background:url('./assets/mipmap/grid.png') repeat;width:5000px;height:5000px;z-index:0; background-size: 50px;"]]
-                    }));
-                    view.appendChild(cE({
-                        type: "div",
-                        attr: [["id", "drawable"]],
-                        innerHTML: "<svg id=\"resSvg\" xmlns=\"http://www.w3.org/2000/svg\"><defs><symbol id='stationStyle_circle'><path d='M0 0a8 8 0 1 0 16 0a8 8 0 1 0 -16 0z'/></symbol><symbol id='stationStyle_rect'><path d='M0,0v16h16V0H0z M14,14H2V2h12V14z'/></symbol></defs></svg>"
-                    }));
-                    view.appendChild(cE({type: "div", attr: [["id", "cursor"]]}));
-
-                    attachEvent.EditStation.attachClickEvent(pg.$("#drawable")[0]);
-                    attachEvent.EditStation.attachMoveEvent(pg.$("#drawable")[0], pg.$("#cursor")[0]);
-                    pathInfo = [];
-                    contentData = "[]";
-                });
+                initInterface(1);
+                pathInfo = [];
+                contentData = "[]";
             }
         }));
         storyboardCtrlList.appendChild(cE({
@@ -336,7 +301,10 @@ const initInterface = (type) => {
         [...view.children].forEach((e) => {
             e.setAttribute("style", "transition:500ms;opacity:0;");
             setTimeout(() => {
-                view.removeChild(e)
+                try {
+                    view.removeChild(e);
+                } catch (exception) {
+                }
             }, 500);
             view.appendChild(cE({
                 type: "div",
@@ -349,8 +317,52 @@ const initInterface = (type) => {
             }));
             view.appendChild(cE({type: "div", attr: [["id", "cursor"]]}));
 
+            let helper_list_display = false;
+
+            let toggle = cE({
+                type: "div",
+                attr: [["class", "toggle-Helper"]],
+                innerHTML: "<div class='button'><span class='mi'>layers</span>" + strings.helper_more + "</div>",
+                onclick: (e) => {
+                    if (!helper_list_display) {
+                        helper_list_display = true;
+                        let list = cE({type: "div", attr: [["class", "helper_list"]]});
+                        [["open_in_new", strings.export, strings.exportAssets, strings.exportAssetsDescrption, () => {
+                            // showExportDialog();
+                        }], ["settings", strings.settings, strings.openSettings, strings.openSettingsDescription]].forEach((result) => {
+                            let element = cE({
+                                type: "div",
+                                attr: [["class", "helper_list_item button"]],
+                                innerHTML: "<span class='mi'>" + result[0] + "</span><span>" + result[1] + "</span>",
+                                onclick: result[4]
+                            });
+                            list.appendChild(element);
+                           HoverTips.create(element, result[2], result[3]);
+                        });
+                        document.body.appendChild(list);
+                        e.stopPropagation();
+                        window.addEventListener("click", () => {
+                            try {
+                                helper_list_display = false;
+                                document.body.removeChild(pg.$(".helper_list")[0]);
+                            } catch (e) {
+                            }
+                        }, {once: true});
+                    } else {
+                        helper_list_display = false;
+                        document.body.removeChild(pg.$(".helper_list")[0]);
+                    }
+                }
+            });
+
+            HoverTips.create(toggle, "更多功能", "查看更多功能")
+
+            view.appendChild(toggle);
+
             attachEvent.EditStation.attachClickEvent(pg.$("#drawable")[0]);
             attachEvent.EditStation.attachMoveEvent(pg.$("#drawable")[0], pg.$("#cursor")[0]);
+            if (returnFunc)
+                returnFunc();
         })
     }
 
