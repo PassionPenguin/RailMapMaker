@@ -161,19 +161,46 @@
                                 } else if (prevY === e.y) {
                                     path += `H${e.x}`;
                                 } else if (prevX > e.x && prevY > e.y) {
-
-                                    // TODO: HERE: 90degree only
-                                    path += `h${e.x - prevX + 10}a10,10,0,0,1-10-10V${e.y}`;
-                                } else if (prevX > e.x && prevY < e.y) {
-                                    path += `h${e.x - prevX + 10}a10,10,0,0,0-10,10V${e.y}`;
-                                } else if (prevX < e.x && prevY > e.y) {
-                                    // TODO: HERE: 45degree only
-
                                     let k1 = (prevX - e.x) / (prevY - e.y);
                                     let k2;
                                     if (i < map.stations.length - 1)
                                         k2 = (e.x - map.stations[i + 1].x) / (e.y - map.stations[i + 1].y);
-                                    console.log(k1, k2);
+                                    else k2 = k1 * (-1)
+
+                                    if (k1 * k2 === -1) {
+                                        path += `h${e.x - prevX + 10}a10,10,0,0,1-10-10V${e.y}`;
+                                    } else {
+                                        let R = 30;
+                                        let adx = (Math.sqrt(2) * R) / 2;
+                                        let ady = R - adx;
+                                        let dl = prevY - e.y - ady;
+                                        let dx = prevX - e.x - adx - dl;
+                                        path += `h${-dx}a30,30,0,0,1,${-adx},${-ady}L${e.x},${e.y}`;
+                                    }
+
+                                } else if (prevX > e.x && prevY < e.y) {
+                                    let k1 = (prevX - e.x) / (prevY - e.y);
+                                    let k2;
+                                    if (i < map.stations.length - 1)
+                                        k2 = (e.x - map.stations[i + 1].x) / (e.y - map.stations[i + 1].y);
+                                    else k2 = k1 * (-1)
+
+                                    if (k1 * k2 === -1) {
+                                        path += `h${e.x - prevX + 10}a10,10,0,0,0-10,10V${e.y}`;
+                                    } else {
+                                        let R = 30;
+                                        let adx = (Math.sqrt(2) * R) / 2;
+                                        let ady = R - adx;
+                                        let dl = prevY - e.y - ady;
+                                        let dx = prevX - e.x - adx - dl;
+                                        path += `h${dx}a30,30,0,0,0,${adx},${ady}L${e.x},${e.y}`;
+                                    }
+                                } else if (prevX < e.x && prevY > e.y) {
+                                    let k1 = (prevX - e.x) / (prevY - e.y);
+                                    let k2;
+                                    if (i < map.stations.length - 1)
+                                        k2 = (e.x - map.stations[i + 1].x) / (e.y - map.stations[i + 1].y);
+                                    else k2 = k1 * (-1)
 
                                     if (k1 * k2 === -1) {
                                         path += `h${e.x - prevX - 10}a10,-10,0,0,0,10,-10V${e.y}`;
@@ -190,7 +217,7 @@
                                     let k2;
                                     if (i < map.stations.length - 1)
                                         k2 = (e.x - map.stations[i + 1].x) / (e.y - map.stations[i + 1].y);
-                                    console.log(k1, k2);
+                                    else k2 = k1 * (-1)
 
                                     if (k1 * k2 === -1) {
                                         path += `h${e.x - prevX - 10}a10,10,0,0,1,10,10V${e.y}`;
