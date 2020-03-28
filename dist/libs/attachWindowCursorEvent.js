@@ -34,6 +34,7 @@ const attachEvent = {
                 let stations = document.createElementNS(svg.namespaceURI, "g");
                 path.setAttributeNS(null, "stroke", "#000");
                 path.setAttributeNS(null, "id", "UnnamedPath_" + state.pathId);
+                path.setAttributeNS(null, "class", "pathElement");
                 stations.setAttributeNS(null, "id", "UnnamedStations_" + state.pathId);
                 svg.appendChild(path);
                 svg.appendChild(stations);
