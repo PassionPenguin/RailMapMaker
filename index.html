@@ -90,7 +90,42 @@
             margin: 20px auto 0;
             font: 900 12px/2 Anoidina, sans-serif;
             padding-left: 15px
-        }</style>
+        }
+
+        .toggle-Helper {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            width: 96px;
+            height: 48px;
+            background: var(--white);
+            text-align: center;
+            z-index: 1001;
+            user-select: none;
+        }
+
+        .toggle-Helper .mi, .helper_list_item > .mi {
+            vertical-align: middle;
+            font: 18px/36px 'Material Icons', sans-serif;
+            margin-right: 12px;
+        }
+
+        .helper_list {
+            position: fixed;
+            bottom: 44px;
+            right: 0;
+            width: 96px;
+            background: var(--white);
+            z-index: 1001;
+            user-select: none;
+        }
+
+        .helper_list_item {
+            display: block;
+            margin: 10px 0;
+            text-align: center;
+        }
+    </style>
     <link href="./dist/libs/bundle/PenguinUI/bundle.PenguinUI.css" rel="stylesheet">
     <link href="./dist/libs/bundle/storyboard/bundle.storyboard.css" rel="stylesheet">
 </head>
