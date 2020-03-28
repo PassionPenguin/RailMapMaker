@@ -1,6 +1,6 @@
 /*
 
-    Package PassionPenguin/PenguinUI
+    Package PassionPenguin/RailMapMaker
 
 
     Created by @PassionPenguin
@@ -313,7 +313,7 @@ const initInterface = (type, returnFunc) => {
             view.appendChild(cE({
                 type: "div",
                 attr: [["id", "drawable"]],
-                innerHTML: "<svg id=\"resSvg\" xmlns=\"http://www.w3.org/2000/svg\"><defs><symbol id='stationStyle_circle'><path d='M0 0a8 8 0 1 0 16 0a8 8 0 1 0 -16 0z'/></symbol><symbol id='stationStyle_rect'><path d='M0,0v16h16V0H0z M14,14H2V2h12V14z'/></symbol></defs></svg>"
+                innerHTML: "<svg id=\"resSvg\" xmlns=\"http://www.w3.org/2000/svg\" style='width:5000px;height:5000px;'><defs><symbol id='stationStyle_circle'><path d='M0 0a8 8 0 1 0 16 0a8 8 0 1 0 -16 0z'/></symbol><symbol id='stationStyle_rect'><path d='M0,0v16h16V0H0z M14,14H2V2h12V14z'/></symbol></defs></svg>"
             }));
             view.appendChild(cE({type: "div", attr: [["id", "cursor"]]}));
 
@@ -322,7 +322,7 @@ const initInterface = (type, returnFunc) => {
             let toggle = cE({
                 type: "div",
                 attr: [["class", "toggle-Helper"]],
-                innerHTML: "<div class='button'><span class='mi'>layers</span>" + strings.helper_more + "</div>",
+                innerHTML: "<div class='button'><span class='mi'>layers</span>" + strings.helper_toggle + "</div>",
                 onclick: (e) => {
                     if (!helper_list_display) {
                         helper_list_display = true;
@@ -355,7 +355,7 @@ const initInterface = (type, returnFunc) => {
                 }
             });
 
-            HoverTips.create(toggle, "更多功能", "查看更多功能")
+            HoverTips.create(toggle, strings.helper_more, strings.helper_moreDescription)
 
             view.appendChild(toggle);
 

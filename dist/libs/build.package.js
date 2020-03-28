@@ -1,6 +1,6 @@
 /*
 
-    Package PassionPenguin/PenguinUI
+    Package PassionPenguin/RailMapMaker
 
 
     Created by @PassionPenguin
@@ -38,7 +38,7 @@ const builder = {
 
         builder.importStyles(["./dist/libs/bundle/PenguinUI/bundle.PenguinUI.css", "./dist/libs/bundle/storyboard/bundle.storyboard.css"]);
         ProgressManager.update(0, 33.3, 100);
-        builder.importScripts(["./dist/libs/attachWindowCursorEvent.js", "./dist/libs/initInterface.js", "./dist/libs/lineEditorComp.js", "./assets/locales/" + builder.locales[pg.language] + ".js"], returnFunc);
+        builder.importScripts(["./dist/libs/attachWindowCursorEvent.js", "./dist/libs/initInterface.js", "./dist/libs/lineEditorComp.js", "./dist/libs/exportDrawable.js", "./assets/locales/" + builder.locales[pg.language] + ".js"], returnFunc);
         ProgressManager.update(0, 66.6, 100);
     },
     importScripts: (urls, returnFunc) => {
