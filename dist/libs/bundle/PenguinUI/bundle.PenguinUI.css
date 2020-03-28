@@ -53,6 +53,28 @@
     font-feature-settings: 'liga';
 }
 
+.button {
+    color: var(--grey);
+    z-index: 1001;
+    font: 14px/36px Anodina;
+    border: 2px solid var(--white);
+    border-radius: 5px;
+    transition: 500ms;
+    height: 36px;
+    margin: 4px auto;
+    width: calc(100% - 12px);
+}
+
+.button:hover {
+    border-color: var(--light);
+}
+
+.button:focus {
+    background: var(--dark);
+    border-color: var(--dark);
+    color: var(--black);
+}
+
 /* Notification */
 .pg-notification {
     align-items: flex-end;
@@ -233,4 +255,27 @@
     display: block;
     animation: progress_infinity_decrease 2s 500ms infinite;
     width: 0;
+}
+
+/* Hover Tips */
+.pg-tips {
+    position: fixed;
+    display: block;
+    border: 1px solid var(--white);
+    background: var(--white);
+    padding: 15px 20px;
+    max-width: 175px;
+    z-index: 99999;
+    box-shadow: 0 0 5px var(--light);
+    border-radius: 10px;
+}
+
+.pg-tips-title {
+    font: 600 16px/1 Anodina, sans-serif;
+}
+
+.pg-tips-text {
+    font: 12px/1 Anodina, sans-serif;
+    margin-top: 5px;
+    color: var(--grey);
 }
