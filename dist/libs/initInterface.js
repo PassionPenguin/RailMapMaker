@@ -103,7 +103,7 @@ const initInterface = (type) => {
                     view.appendChild(cE({
                         type: "div",
                         attr: [["id", "drawable"]],
-                        innerHTML: "<svg id=\"resSvg\" xmlns=\"http://www.w3.org/2000/svg\"><defs><symbol id='stationStyle_circle'><path d='M0 0a8 8 0 1 0 16 0a8 8 0 1 0 -16 0z' style='fill:var(--white);stroke-width: 2px;'/></symbol><symbol id='stationStyle_rect'><path d='M0,0v16h16V0H0z M14,14H2V2h12V14z' style='fill:transparent!important'/></symbol></defs></svg>"
+                        innerHTML: "<svg id=\"resSvg\" xmlns=\"http://www.w3.org/2000/svg\"><defs><symbol id='stationStyle_circle'><path d='M0 0a8 8 0 1 0 16 0a8 8 0 1 0 -16 0z'/></symbol><symbol id='stationStyle_rect'><path d='M0,0v16h16V0H0z M14,14H2V2h12V14z'/></symbol></defs></svg>"
                     }));
                     view.appendChild(cE({type: "div", attr: [["id", "cursor"]]}));
 
@@ -150,7 +150,7 @@ const initInterface = (type) => {
                             "type": "destination",
                             "routeToNext": ""
                         }, {"x": 1225, "y": 325, "type": "destination", "routeToNext": ""}]
-                    }]; // TODO: Create an json file and export and enter here.
+                    }];
                     contentData = "[{\"color\":\"#000\",\"id\":0,\"name\":\"UnnamedPath_0\",\"opacity\":1,\"stations\":[{\"x\":225,\"y\":1025,\"type\":\"destination\",\"routeToNext\":\"\"},{\"x\":225,\"y\":900,\"type\":\"destination\",\"routeToNext\":\"\"},{\"x\":225,\"y\":775,\"type\":\"destination\",\"routeToNext\":\"\"},{\"x\":225,\"y\":650,\"type\":\"destination\",\"routeToNext\":\"\"},{\"x\":225,\"y\":525,\"type\":\"destination\",\"routeToNext\":\"\"},{\"x\":350,\"y\":525,\"type\":\"destination\",\"routeToNext\":\"\"},{\"x\":475,\"y\":525,\"type\":\"destination\",\"routeToNext\":\"\"},{\"x\":600,\"y\":525,\"type\":\"destination\",\"routeToNext\":\"\"},{\"x\":725,\"y\":525,\"type\":\"destination\",\"routeToNext\":\"\"},{\"x\":850,\"y\":525,\"type\":\"destination\",\"routeToNext\":\"\"},{\"x\":975,\"y\":525,\"type\":\"destination\",\"routeToNext\":\"\"},{\"x\":1100,\"y\":525,\"type\":\"destination\",\"routeToNext\":\"\"},{\"x\":1225,\"y\":525,\"type\":\"destination\",\"routeToNext\":\"\"},{\"x\":1325,\"y\":425,\"type\":\"destination\",\"routeToNext\":\"\"},{\"x\":1225,\"y\":325,\"type\":\"destination\",\"routeToNext\":\"\"}]}]";
                     pathInfo.forEach(e => {
                         let svg = pg.$("#resSvg")[0];
@@ -158,6 +158,7 @@ const initInterface = (type) => {
                         let stations = document.createElementNS(svg.namespaceURI, "g");
                         path.setAttributeNS(null, "stroke", "#000");
                         path.setAttributeNS(null, "id", "UnnamedPath_" + e.id);
+                        path.setAttributeNS(null, "class", "pathElement");
                         stations.setAttributeNS(null, "id", "UnnamedStations_" + e.id);
                         svg.appendChild(path);
                         svg.appendChild(stations);
@@ -185,7 +186,7 @@ const initInterface = (type) => {
                     view.appendChild(cE({
                         type: "div",
                         attr: [["id", "drawable"]],
-                        innerHTML: "<svg id=\"resSvg\" xmlns=\"http://www.w3.org/2000/svg\"><defs><symbol id='stationStyle_circle'><path d='M0 0a8 8 0 1 0 16 0a8 8 0 1 0 -16 0z' style='fill:var(--white);stroke-width: 2px;'/></symbol><symbol id='stationStyle_rect'><path d='M0,0v16h16V0H0z M14,14H2V2h12V14z' style='fill:transparent!important'/></symbol></defs></svg>"
+                        innerHTML: "<svg id=\"resSvg\" xmlns=\"http://www.w3.org/2000/svg\"><defs><symbol id='stationStyle_circle'><path d='M0 0a8 8 0 1 0 16 0a8 8 0 1 0 -16 0z'/></symbol><symbol id='stationStyle_rect'><path d='M0,0v16h16V0H0z M14,14H2V2h12V14z'/></symbol></defs></svg>"
                     }));
                     view.appendChild(cE({type: "div", attr: [["id", "cursor"]]}));
 
@@ -344,7 +345,7 @@ const initInterface = (type) => {
             view.appendChild(cE({
                 type: "div",
                 attr: [["id", "drawable"]],
-                innerHTML: "<svg id=\"resSvg\" xmlns=\"http://www.w3.org/2000/svg\"><defs><symbol id='stationStyle_circle'><path d='M0 0a8 8 0 1 0 16 0a8 8 0 1 0 -16 0z' style='fill:var(--white);stroke-width: 2px;'/></symbol><symbol id='stationStyle_rect'><path d='M0,0v16h16V0H0z M14,14H2V2h12V14z' style='fill:transparent!important'/></symbol></defs></svg>"
+                innerHTML: "<svg id=\"resSvg\" xmlns=\"http://www.w3.org/2000/svg\"><defs><symbol id='stationStyle_circle'><path d='M0 0a8 8 0 1 0 16 0a8 8 0 1 0 -16 0z'/></symbol><symbol id='stationStyle_rect'><path d='M0,0v16h16V0H0z M14,14H2V2h12V14z'/></symbol></defs></svg>"
             }));
             view.appendChild(cE({type: "div", attr: [["id", "cursor"]]}));
 
