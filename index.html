@@ -192,8 +192,8 @@
                                         let adx = (Math.sqrt(2) * R) / 2;
                                         let ady = R - adx;
                                         let dl = prevY - e.y - ady;
-                                        let dx = prevX - e.x - adx - dl;
-                                        path += `h${-dx}a30,30,0,0,0,${adx},${ady}L${e.x},${e.y}`;
+                                        let dx = e.x - prevX - adx - dl;
+                                        path += `h${dx}a30,30,0,0,0,${-adx},${ady}L${e.x},${e.y}`;
                                     }
                                 } else if (prevX < e.x && prevY > e.y) {
                                     let k1 = (prevX - e.x) / (prevY - e.y);
