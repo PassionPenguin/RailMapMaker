@@ -313,7 +313,7 @@ const initInterface = (type, returnFunc) => {
             view.appendChild(cE({
                 type: "div",
                 attr: [["id", "drawable"]],
-                innerHTML: "<svg id=\"resSvg\" xmlns=\"http://www.w3.org/2000/svg\" style='width:5000px;height:5000px;'><defs><symbol id='stationStyle_circle'><path d='M0 0a8 8 0 1 0 16 0a8 8 0 1 0 -16 0z'/></symbol><symbol id='stationStyle_rect'><path d='M0,0v16h16V0H0z M14,14H2V2h12V14z'/></symbol></defs></svg>"
+                innerHTML: "<svg id=\"resSvg\" xmlns=\"http://www.w3.org/2000/svg\" viewBox='0 0 5000 5000'><defs><symbol id='stationStyle_circle'><path d='M0 0a8 8 0 1 0 16 0a8 8 0 1 0 -16 0z'/></symbol><symbol id='stationStyle_rect'><path d='M0,0v16h16V0H0z M14,14H2V2h12V14z'/></symbol></defs></svg>"
             }));
             view.appendChild(cE({type: "div", attr: [["id", "cursor"]]}));
 
