@@ -9,7 +9,7 @@
 
  */
 
-const exportDialog = (svg, path) => {
+const exportDialog = (svg) => {
     WindowManager.create((view) => {
         view.setAttribute("style", "position:relative;")
         let topView = cE({
@@ -37,7 +37,7 @@ const exportDialog = (svg, path) => {
         pref.appendChild(cE({
             type: "div",
             attr: [["style", "margin: 10px auto 0 auto;display:block;width:calc(100% - 40px);height: 28px;"]],
-            innerHTML: "<div style='width:calc(100% - 100px);display: inline-block;font:800 14px/1 Anodina,sans-serif;color:var(--grey);'>" + strings.scale + "</div><div style='width:100px;display: inline-block'><pg-selector id='transparentBackground' on_valueChange='(e)=>{pg.$(\"#previewWindow\")[0].style.transform=\"scale(e)\";state.scale=e;}'><opt>25%</opt><opt>50%</opt><opt>75%</opt><opt>100%</opt><opt>125%</opt><opt>150%</opt><opt>175%</opt><opt>200%</opt><opt>300%</opt><opt>400%</opt><opt>500%</opt></pg-selector></div>"
+            innerHTML: "<div style='width:calc(100% - 100px);display: inline-block;font:800 14px/1 Anodina,sans-serif;color:var(--grey);'>" + strings.scale + "</div><div style='width:100px;display: inline-block'><pg-selector id='transparentBackground' on_valueChange='(e)=>{e=[1,0.25,0.5,0.75,1.25,1.5,1.75,2,3,4,5][e];pg.$(\"#previewWindow\")[0].children[0].style.width=e*5000;pg.$(\"#previewWindow\")[0].children[0].style.height=e*5000;state.scale=e;}'><opt>100%</opt><opt>25%</opt><opt>50%</opt><opt>75%</opt><opt>125%</opt><opt>150%</opt><opt>175%</opt><opt>200%</opt><opt>300%</opt><opt>400%</opt><opt>500%</opt></pg-selector></div>"
         }));
         pref.appendChild(cE({
             type: "div",
@@ -116,10 +116,14 @@ const exportDrawable = (svgEl) => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         let img = new Image();
-        console.log("", img, "onload");
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-        saveDrawableAs(canvas.toDataURL(format), name + (format === "image/png" ? ".png" : ".jpg"));
-        document.body.removeChild(canvas);
+        img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgEl.outerHTML)));
+        img.onload = () => {
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            saveDrawableAs(canvas.toDataURL(format), name + (format === "image/png" ? ".png" : ".jpg"));
+            console.log(img, canvas);
+            document.body.appendChild(img);
+            // document.body.removeChild(canvas);
+        }
     }
 }
 
