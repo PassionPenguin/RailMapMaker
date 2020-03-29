@@ -11,8 +11,12 @@
 PenguinUI_selector = {
     init: () => {
         [...pg.$("pg-selector:not([pg-init])")].forEach(e => {
-            let curValue = cE({type: "span", innerHTML: e.children[0].innerHTML});
-            e.appendChild(curValue);
+            let curValue;
+            if ([...e.children].filter(i => i.tagName === 'SPAN').length !== 0) curValue = [...e.children].filter(i => i.tagName === 'SPAN')[0];
+            else {
+                curValue = cE({type: "span", innerHTML: e.children[0].innerHTML});
+                e.appendChild(curValue);
+            }
             let clicked = false, displayingDialog = false;
             let selectors = cE({
                 type: "div",
