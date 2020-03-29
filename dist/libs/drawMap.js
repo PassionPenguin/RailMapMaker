@@ -1,3 +1,14 @@
+/*
+
+    Package PassionPenguin/RailMapMaker
+
+
+    Created by @PassionPenguin
+    Co-authored-by @Wongchito
+    Last upd by @PassionPenguin
+
+ */
+
 const reloadMap = id => {
     const map = pathInfo[id];
     const pathElement = pg.$('#UnnamedPath_' + id)[0];
