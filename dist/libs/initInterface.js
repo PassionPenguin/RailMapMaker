@@ -258,38 +258,19 @@ const initInterface = (type, returnFunc) => {
                                     attr: [["style", "font: 400 16px/1 Anodina, sans-serif;text-align: center;margin: 20px 0;color: var(--grey);"]],
                                     innerHTML: strings.language
                                 }));
-                                e.appendChild(cE({
-                                    type: "p",
-                                    attr: [["style", "font: 400 14px/1 Anodina, sans-serif;text-align: center;margin: 10px 0;color: var(--grey);"]],
-                                    innerHTML: "简体中文", onclick: () => {
-                                        CookieManager.set("language", "0");
-                                        window.location.reload();
-                                    }
-                                }));
-                                e.appendChild(cE({
-                                    type: "p",
-                                    attr: [["style", "font: 400 14px/1 Anodina, sans-serif;text-align: center;margin: 10px 0;color: var(--grey);"]],
-                                    innerHTML: "繁體中文", onclick: () => {
-                                        CookieManager.set("language", "1");
-                                        window.location.reload();
-                                    }
-                                }));
-                                e.appendChild(cE({
-                                    type: "p",
-                                    attr: [["style", "font: 400 14px/1 Anodina, sans-serif;text-align: center;margin: 10px 0;color: var(--grey);"]],
-                                    innerHTML: "粤语", onclick: () => {
-                                        CookieManager.set("language", "2");
-                                        window.location.reload();
-                                    }
-                                }));
-                                e.appendChild(cE({
-                                    type: "p",
-                                    attr: [["style", "font: 400 14px/1 Anodina, sans-serif;text-align: center;margin: 10px 0;color: var(--grey);"]],
-                                    innerHTML: "英语", onclick: () => {
-                                        CookieManager.set("language", "3");
-                                        window.location.reload();
-                                    }
-                                }));
+                                let selector = cE({
+                                    type: "pg-selector",
+                                    attr: [["on_valueChange", "(e)=>{CookieManager.set('language',e);window.location.reload();}"], ["style", "    margin: 0 auto;display: block;width: 100px;text-align: center;"]]
+                                });
+                                e.appendChild(selector);
+                                builder.locales.forEach((name, index) => {
+                                    if (index === Int(CookieManager.get('language'))) selector.appendChild(cE({
+                                        type: 'span',
+                                        innerText: name
+                                    }));
+                                    selector.appendChild(cE({type: "opt", innerText: name}));
+                                });
+                                PenguinUI_selector.init();
                             });
                         }
                     }));
