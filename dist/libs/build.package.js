@@ -11,7 +11,7 @@
 const builder = {
     debugMode: true,
     version: "1.0",
-    bundles: [{name: "PenguinUI", version: "0.1.2"}],
+    bundles: [{name: "PenguinUI", version: "0.1.4"}],
     displayVersion: "Lemonade/(RMG v0.1 EAP)",
     locales: ["zh_CN", "zh_HK", "zh_YUE", "en_US"],
     buildTime: 1585118965574,
@@ -38,7 +38,7 @@ const builder = {
 
         builder.importStyles(["./dist/libs/bundle/PenguinUI/bundle.PenguinUI.css", "./dist/libs/bundle/storyboard/bundle.storyboard.css"]);
         ProgressManager.update(0, 33.3, 100);
-        builder.importScripts(["./dist/libs/attachWindowCursorEvent.js", "./dist/libs/initInterface.js", "./dist/libs/lineEditorComp.js", "./dist/libs/exportDrawable.js", "./assets/locales/" + builder.locales[pg.language] + ".js"], returnFunc);
+        builder.importScripts(["./dist/libs/attachWindowCursorEvent.js", "./dist/libs/initInterface.js", "./dist/libs/lineEditorComp.js", "./dist/libs/exportDrawable.js", "./dist/libs/drawMap.js", "./assets/locales/" + builder.locales[pg.language] + ".js"], returnFunc);
         ProgressManager.update(0, 66.6, 100);
     },
     importScripts: (urls, returnFunc) => {
