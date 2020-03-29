@@ -72,7 +72,7 @@ const initInterface = (type, returnFunc) => {
                         }
                         if (Array.isArray(pathInfo)) {
                             for (let i = 0; i < pathInfo.length; i++) {
-                                reloadMap(i);
+                                drawMap(i);
                             }
                             initInterface(1);
                         } else {
@@ -148,7 +148,7 @@ const initInterface = (type, returnFunc) => {
                         state.pathId++;
                     });
                     for (let i = 0; i < pathInfo.length; i++) {
-                        reloadMap(i);
+                        drawMap(i);
                     }
                 });
             }

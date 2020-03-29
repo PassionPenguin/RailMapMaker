@@ -49,7 +49,7 @@ const attachEvent = {
                 pathInfo[state.pathId].stations.push({
                     x: curX, y: curY, type: "destination", routeToNext: ""
                 });
-            reloadMap(state.pathId);
+            drawMap(state.pathId);
         },
         MoveEventListener: (element) => {
             element.setAttribute("style", "left:" + (min(event.offsetX) - pg.$("#pg-app")[0].scrollLeft) + "px; top:" + (min(event.offsetY) - pg.$("#pg-app")[0].scrollTop) + "px;");
