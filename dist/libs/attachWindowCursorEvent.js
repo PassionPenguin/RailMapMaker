@@ -42,12 +42,12 @@ const attachEvent = {
                     color: "#000",
                     id: state.pathId,
                     name: "UnnamedPath_" + state.pathId,
-                    opacity: 1, stations: [{x: curX, y: curY, type: "destination", routeToNext: ""}]
+                    opacity: 1, stations: [{x: curX, y: curY, type: "destination", routeToNext: "0"}]
                 };
                 state.newPath = false;
             } else
                 pathInfo[state.pathId].stations.push({
-                    x: curX, y: curY, type: "destination", routeToNext: ""
+                    x: curX, y: curY, type: "destination", routeToNext: "0"
                 });
             drawMap(state.pathId);
         },
