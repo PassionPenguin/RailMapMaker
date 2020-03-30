@@ -313,7 +313,11 @@ const initInterface = (type, returnFunc) => {
                         let list = cE({type: "div", attr: [["class", "helper_list"]]});
                         [["open_in_new", strings.export, strings.exportAssets, strings.exportAssetsDescrption, () => {
                             exportDialog(pg.$("#resSvg")[0]);
-                        }], ["settings", strings.settings, strings.openSettings, strings.openSettingsDescription]].forEach((result) => {
+                        }], ["settings", strings.settings, strings.openSettings, strings.openSettingsDescription, () => {
+                            // prefDialog()
+                        }], ["edit", strings.newPath, strings.newPath, strings.openNewDescription, (event) => {
+                            selectLineDialog();
+                        }]].forEach((result) => {
                             let element = cE({
                                 type: "div",
                                 attr: [["class", "helper_list_item button"]],
