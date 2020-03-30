@@ -31,12 +31,18 @@ const attachEvent = {
             if (state.newPath) {
                 let svg = pg.$("#resSvg")[0];
                 let path = document.createElementNS(svg.namespaceURI, "path");
+                let pathForHighlight = document.createElementNS(svg.namespaceURI, "path");
                 let stations = document.createElementNS(svg.namespaceURI, "g");
                 path.setAttributeNS(null, "stroke", "#000");
                 path.setAttributeNS(null, "id", "UnnamedPath_" + state.pathId);
                 path.setAttributeNS(null, "class", "pathElement");
+                pathForHighlight.setAttributeNS(null, "stroke", "#000");
+                pathForHighlight.setAttributeNS(null, "id", "UnnamedPath_ForHightlight_" + state.pathId);
+                pathForHighlight.setAttributeNS(null, "class", "pathElement_highlight");
+                pathForHighlight.setAttributeNS(null, "opacity", "0");
                 stations.setAttributeNS(null, "id", "UnnamedStations_" + state.pathId);
                 svg.appendChild(path);
+                svg.appendChild(pathForHighlight);
                 svg.appendChild(stations);
                 builder.debug("PassionPenguin/mapMaker", "attachWindowCursorEvent.js", "Path", "New Path Created: id=" + state.pathId);
                 pathInfo[state.pathId] = {
@@ -54,29 +60,33 @@ const attachEvent = {
             }
             drawMap(state.pathId);
         },
-        MoveEventListener: (element, event) => {
+        MoveEventListener: (element) => {
             element.setAttribute("style", "left:" + (min(event.offsetX) - pg.$("#pg-app")[0].scrollLeft) + "px; top:" + (min(event.offsetY) - pg.$("#pg-app")[0].scrollTop) + "px;");
             event.stopPropagation();
         },
 
         attachClickEvent: (element) => {
             builder.debug("PassionPenguin/mapMaker", "attachWindowCursorEvent.js", "Event", "Event Attached: EditStation.Click");
-            element.onclick = (event) => attachEvent.EditStation.ClickEventListener(event);
+            element.addEventListener("click", attachEvent.EditStation.ClickEventListener);
         },
 
         detachClickEvent: (element) => {
             builder.debug("PassionPenguin/mapMaker", "attachWindowCursorEvent.js", "Event", "Event Detached: EditStation.Click");
-            element.onclick = () => void (0);
+            element.removeEventListener("click", attachEvent.EditStation.ClickEventListener);
         },
 
         attachMoveEvent: (element, target) => {
             builder.debug("PassionPenguin/mapMaker", "attachWindowCursorEvent.js", "Event", "Event Attached: EditStation.Move");
-            element.onmouseover = (event) => attachEvent.EditStation.MoveEventListener(target, event);
+            element.addEventListener("mousemove", () => {
+                attachEvent.EditStation.MoveEventListener(target)
+            });
         },
 
-        detachMoveEvent: (element) => {
+        detachMoveEvent: (element, target) => {
             builder.debug("PassionPenguin/mapMaker", "attachWindowCursorEvent.js", "Event", "Event Detached: EditStation.Move");
-            element.onmouseover = () => void (0);
+            element.removeEventListener("mousemove", (target) => {
+                attachEvent.EditStation.MoveEventListener(target)
+            });
         }
     }
 }
