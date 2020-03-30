@@ -71,7 +71,11 @@ const NotificationManager = {
         let dismissNotification = () => {
             notification.classList.add("remove");
             setTimeout(() => {
-                document.body.removeChild(notification);
+                try {
+                    document.body.removeChild(notification);
+                } catch (e) {
+                    // may not be able to remove if it's dismissible
+                }
             }, 1000);
             NotificationManager.query = NotificationManager.query.filter(i => i !== chanelId);
         }
