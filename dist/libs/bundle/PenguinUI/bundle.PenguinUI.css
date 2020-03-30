@@ -200,6 +200,8 @@
     z-index: 999;
     background: var(--white);
     padding: 20px;
+    box-shadow: 0 0 20px #00000022;
+    border-radius: 5px;
 }
 
 .pg-window-close {
