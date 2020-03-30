@@ -31,18 +31,12 @@ const attachEvent = {
             if (state.newPath) {
                 let svg = pg.$("#resSvg")[0];
                 let path = document.createElementNS(svg.namespaceURI, "path");
-                let pathForHighlight = document.createElementNS(svg.namespaceURI, "path");
                 let stations = document.createElementNS(svg.namespaceURI, "g");
                 path.setAttributeNS(null, "stroke", "#000");
                 path.setAttributeNS(null, "id", "UnnamedPath_" + state.pathId);
                 path.setAttributeNS(null, "class", "pathElement");
-                pathForHighlight.setAttributeNS(null, "stroke", "#000");
-                pathForHighlight.setAttributeNS(null, "id", "UnnamedPath_ForHightlight_" + state.pathId);
-                pathForHighlight.setAttributeNS(null, "class", "pathElement_highlight");
-                pathForHighlight.setAttributeNS(null, "opacity", "0");
                 stations.setAttributeNS(null, "id", "UnnamedStations_" + state.pathId);
                 svg.appendChild(path);
-                svg.appendChild(pathForHighlight);
                 svg.appendChild(stations);
                 builder.debug("PassionPenguin/mapMaker", "attachWindowCursorEvent.js", "Path", "New Path Created: id=" + state.pathId);
                 pathInfo[state.pathId] = {
