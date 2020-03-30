@@ -166,19 +166,40 @@
 /* Window */
 .pg-window {
     position: fixed;
-    left: 0;
-    top: 0;
+    left: 50%;
+    top: 50%;
     width: 100%;
     height: 100%;
     z-index: 1000;
+    transform: translate(-50%, -50%);
+}
+
+.pg-window-mask {
+    background: #00000044;
+}
+
+.pg-window.small {
+    width: 480px;
+    height: 480px;
+}
+
+.pg-window.middle {
+    width: 768px;
+    height: 768px;
+}
+
+.pg-window.large {
+    width: 1024px;
+    height: 1024px;
 }
 
 .pg-window-content {
     position: relative;
-    width: 100%;
-    height: 100%;
+    width: calc(100% - 40px);
+    height: calc(100% - 40px);
     z-index: 999;
     background: var(--white);
+    padding: 20px;
 }
 
 .pg-window-close {
