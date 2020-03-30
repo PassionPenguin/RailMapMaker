@@ -93,6 +93,9 @@ const initInterface = (type, returnFunc) => {
             onclick: () => {
                 initInterface(1, () => {
                     pathInfo = [{
+                        "lineCap": "round",
+                        "lineJoin": "round",
+                        "strokeWidth": "5px",
                         "color": "#000",
                         "id": 0,
                         "name": "UnnamedPath_0",
