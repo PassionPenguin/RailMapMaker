@@ -280,6 +280,49 @@ const initInterface = (type, returnFunc) => {
                 });
             }
         }));
+        storyboardCtrlList.appendChild(cE({
+            type: "p",
+            innerHTML: "<span class='mi'>memory</span><span> " + strings.debugInfo + " </span>",
+            onclick: () => {
+                // open preference window
+                WindowManager.create((e) => {
+                    e.appendChild(cE({
+                        type: "img",
+                        attr: [["alt", "icon"], ["style", "width: 128px;display: block;margin: 0 auto;"], ["src", "./assets/mipmap/icon.png"]]
+                    }));
+                    e.appendChild(cE({
+                        type: "p",
+                        attr: [["style", "font: 900 28px/1 Anodina, sans-serif;text-align: center;margin: 10px 0;"]],
+                        innerHTML: strings.appName
+                    }));
+                    e.appendChild(cE({
+                        type: "p",
+                        attr: [["style", "font: 400 16px/1 Anodina, sans-serif;text-align: center;margin: 20px 0;color: var(--grey);"]],
+                        innerHTML: strings.browserInfo
+                    }));
+                    e.appendChild(cE({
+                        type: "p",
+                        attr: [["style", "font: 400 14px/1 Anodina, sans-serif;text-align: center;margin: 10px 0;color: var(--grey);"]],
+                        innerHTML: strings.windowWidth + "\t" + window.innerWidth + "\t" + strings.windowHeight + "\t" + window.innerHeight
+                    }));
+                    e.appendChild(cE({
+                        type: "p",
+                        attr: [["style", "font: 400 14px/21px Anodina, sans-serif;text-align: center;margin: 10px auto;color: var(--grey);width:80%;"]],
+                        innerHTML: strings.browserAgent + "<br>" + navigator.userAgent
+                    }));
+                    e.appendChild(cE({
+                        type: "p",
+                        attr: [["style", "font: 400 14px/21px Anodina, sans-serif;text-align: center;margin: 10px auto;color: var(--grey);width:80%;"]],
+                        innerHTML: strings.cookieEnabled + ":\t" + (navigator.cookieEnabled ? strings.enabled : strings.disabled)
+                    }));
+                    e.appendChild(cE({
+                        type: "p",
+                        attr: [["style", "font: 400 14px/21px Anodina, sans-serif;text-align: center;margin: 10px auto;color: var(--grey);width:80%;"]],
+                        innerHTML: strings.onLine + ":\t" + (navigator.onLine ? strings.cur_onLine : strings.cur_offLine)
+                    }));
+                });
+            }
+        }));
     } else if (type === 1) {
         // editor interface
         [...view.children].forEach((e) => {
@@ -315,7 +358,7 @@ const initInterface = (type, returnFunc) => {
                             exportDialog(pg.$("#resSvg")[0]);
                         }], ["settings", strings.settings, strings.openSettings, strings.openSettingsDescription, () => {
                             // prefDialog()
-                        }], ["edit", strings.newPath, strings.newPath, strings.openNewDescription, (event) => {
+                        }], ["edit", strings.path, strings.path, strings.pathDescription, (event) => {
                             selectLineDialog();
                         }]].forEach((result) => {
                             let element = cE({
