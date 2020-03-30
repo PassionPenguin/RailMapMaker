@@ -3,7 +3,7 @@ const strings = {
     application: "Application",
     uploaded: "Congrats, The File is Uploaded.",
     file: "File",
-    appName: "RailRailMapGenerator",
+    appName: "RailMapMaker",
     version: "Version",
     importFile: "Import File",
     openTemplate: "Open Template",
