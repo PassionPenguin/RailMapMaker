@@ -9,251 +9,58 @@
 
  */
 
-// const reloadMap = id => {
-//     const map = pathInfo[id];
-//     const pathElement = pg.$('#UnnamedPath_' + id)[0];
-//     const stationsElement = pg.$('#UnnamedStations_' + id)[0];
-//     stationsElement.innerHTML = '';
-//     pathElement.setAttributeNS(null, 'd', 'M' + map.stations[0].x + ' ' + map.stations[0].y);
-//     let path = pathElement.getAttributeNS(null, 'd');
-//     let [prevX, prevY] = [map.stations.x, map.stations.y];
-//
-//     map.stations.forEach((e, i) => {
-//             let stationNode = document.createElementNS(pg.$('#resSvg')[0].namespaceURI, 'use');
-//             stationNode.setAttributeNS(null, 'href', '#stationStyle_' + state.stationStyle);
-//             stationNode.setAttributeNS(null, 'fill', map.color);
-//             stationNode.setAttributeNS(null, 'x', '0');
-//             stationNode.setAttributeNS(null, 'y', '0');
-//             stationsElement.appendChild(stationNode);
-//             stationNode.setAttributeNS(null, 'style', 'transform: matrix(1, 0, 0, 1, ' + (e.x - 8) + ', ' + (e.y - 8) + ');');
-//             if (e.type === 'destination') stationNode.setAttributeNS(null, 'style', 'transform: matrix(1, 0, 0, 1, ' + (e.x - 12) + ', ' + (e.y - 12) + ') scale(1.5);');
-//
-//             if (i > 0) {
-//                 if (prevX === e.x) {
-//                     path += `V${e.y}`;
-//                 } else if (prevY === e.y) {
-//                     path += `H${e.x}`;
-//                 } else {
-//                     if (i < map.stations.length - 2) {
-//                         try {
-//                             let next_points = map.stations[i + 1].filter(i => [i.x, i.y]);
-//                             if (Math.abs((prevX - next_points[0]) / (prevY - next_points[1])) === 1)
-//                                 path += `L${e.x},${e.y}`;
-//                             else {
-//                                 if (prevX > e.x && prevY > e.y) {
-//                                     let k1 = (prevX - e.x) / (prevY - e.y);
-//                                     let k2;
-//                                     if (i < map.stations.length - 1)
-//                                         k2 = (e.x - map.stations[i + 1].x) / (e.y - map.stations[i + 1].y);
-//                                     else k2 = k1 * (-1)
-//                                     if (k1 * k2 === -1) {
-//                                         path += `h${e.x - prevX + 10}a10,10,0,0,1-10-10V${e.y}`;
-//                                     } else {
-//                                         let R = 30;
-//                                         let adx = (Math.sqrt(2) * R) / 2;
-//                                         let ady = R - adx;
-//                                         let dl = prevY - e.y - ady;
-//                                         let dx = prevX - e.x - adx - dl;
-//                                         path += `h${-dx}a30,30,0,0,1,${-adx},${-ady}L${e.x},${e.y}`;
-//                                     }
-//                                 } else if (prevX > e.x && prevY < e.y) {
-//                                     let k1 = (prevX - e.x) / (prevY - e.y);
-//                                     let k2;
-//                                     if (i < map.stations.length - 1)
-//                                         k2 = (e.x - map.stations[i + 1].x) / (e.y - map.stations[i + 1].y);
-//                                     else k2 = k1 * (-1)
-//
-//                                     if (k1 * k2 === -1) {
-//                                         path += `h${e.x - prevX + 10}a10,10,0,0,0-10,10V${e.y}`;
-//                                     } else {
-//                                         let R = 30;
-//                                         let adx = (Math.sqrt(2) * R) / 2;
-//                                         let ady = R - adx;
-//                                         let dl = prevY - e.y - ady;
-//                                         let dx = e.x - prevX - adx - dl;
-//                                         path += `h${dx}a30,30,0,0,0,${-adx},${ady}L${e.x},${e.y}`;
-//                                     }
-//                                 } else if (prevX < e.x && prevY > e.y) {
-//                                     let k1 = (prevX - e.x) / (prevY - e.y);
-//                                     let k2;
-//                                     if (i < map.stations.length - 1)
-//                                         k2 = (e.x - map.stations[i + 1].x) / (e.y - map.stations[i + 1].y);
-//                                     else k2 = k1 * (-1)
-//
-//                                     if (k1 * k2 === -1) {
-//                                         path += `h${e.x - prevX - 10}a10,-10,0,0,0,10,-10V${e.y}`;
-//                                     } else {
-//                                         let R = 30;
-//                                         let adx = (Math.sqrt(2) * R) / 2;
-//                                         let ady = R - adx;
-//                                         let dl = prevY - e.y - ady;
-//                                         let dx = e.x - prevX - adx - dl;
-//                                         path += `h${dx}a30,30,0,0,0,${adx},${-ady}L${e.x},${e.y}`;
-//                                     }
-//                                 } else if (prevX < e.x && prevY < e.y) {
-//                                     let k1 = (prevX - e.x) / (prevY - e.y);
-//                                     let k2;
-//                                     if (i < map.stations.length - 1)
-//                                         k2 = (e.x - map.stations[i + 1].x) / (e.y - map.stations[i + 1].y);
-//                                     else k2 = k1 * (-1)
-//
-//                                     if (k1 * k2 === -1) {
-//                                         path += `h${e.x - prevX - 10}a10,10,0,0,1,10,10V${e.y}`;
-//                                     } else {
-//                                         let R = 30;
-//                                         let adx = (Math.sqrt(2) * R) / 2;
-//                                         let ady = R - adx;
-//                                         let dl = e.y - prevY - ady;
-//                                         let dx = e.x - prevX - adx - dl;
-//                                         path += `h${dx}a30,30,0,0,1,${adx},${ady}L${e.x},${e.y}`;
-//                                     }
-//                                 }
-//                             }
-//                         } catch (e) {
-//                             if (prevX > e.x && prevY > e.y) {
-//                                 let k1 = (prevX - e.x) / (prevY - e.y);
-//                                 let k2;
-//                                 if (i < map.stations.length - 1)
-//                                     k2 = (e.x - map.stations[i + 1].x) / (e.y - map.stations[i + 1].y);
-//                                 else k2 = k1 * (-1)
-//                                 if (k1 * k2 === -1) {
-//                                     path += `h${e.x - prevX + 10}a10,10,0,0,1-10-10V${e.y}`;
-//                                 } else {
-//                                     let R = 30;
-//                                     let adx = (Math.sqrt(2) * R) / 2;
-//                                     let ady = R - adx;
-//                                     let dl = prevY - e.y - ady;
-//                                     let dx = prevX - e.x - adx - dl;
-//                                     path += `h${-dx}a30,30,0,0,1,${-adx},${-ady}L${e.x},${e.y}`;
-//                                 }
-//                             } else if (prevX > e.x && prevY < e.y) {
-//                                 let k1 = (prevX - e.x) / (prevY - e.y);
-//                                 let k2;
-//                                 if (i < map.stations.length - 1)
-//                                     k2 = (e.x - map.stations[i + 1].x) / (e.y - map.stations[i + 1].y);
-//                                 else k2 = k1 * (-1)
-//
-//                                 if (k1 * k2 === -1) {
-//                                     path += `h${e.x - prevX + 10}a10,10,0,0,0-10,10V${e.y}`;
-//                                 } else {
-//                                     let R = 30;
-//                                     let adx = (Math.sqrt(2) * R) / 2;
-//                                     let ady = R - adx;
-//                                     let dl = prevY - e.y - ady;
-//                                     let dx = e.x - prevX - adx - dl;
-//                                     path += `h${dx}a30,30,0,0,0,${-adx},${ady}L${e.x},${e.y}`;
-//                                 }
-//                             } else if (prevX < e.x && prevY > e.y) {
-//                                 let k1 = (prevX - e.x) / (prevY - e.y);
-//                                 let k2;
-//                                 if (i < map.stations.length - 1)
-//                                     k2 = (e.x - map.stations[i + 1].x) / (e.y - map.stations[i + 1].y);
-//                                 else k2 = k1 * (-1)
-//
-//                                 if (k1 * k2 === -1) {
-//                                     path += `h${e.x - prevX - 10}a10,-10,0,0,0,10,-10V${e.y}`;
-//                                 } else {
-//                                     let R = 30;
-//                                     let adx = (Math.sqrt(2) * R) / 2;
-//                                     let ady = R - adx;
-//                                     let dl = prevY - e.y - ady;
-//                                     let dx = e.x - prevX - adx - dl;
-//                                     path += `h${dx}a30,30,0,0,0,${adx},${-ady}L${e.x},${e.y}`;
-//                                 }
-//                             } else if (prevX < e.x && prevY < e.y) {
-//                                 let k1 = (prevX - e.x) / (prevY - e.y);
-//                                 let k2;
-//                                 if (i < map.stations.length - 1)
-//                                     k2 = (e.x - map.stations[i + 1].x) / (e.y - map.stations[i + 1].y);
-//                                 else k2 = k1 * (-1)
-//
-//                                 if (k1 * k2 === -1) {
-//                                     path += `h${e.x - prevX - 10}a10,10,0,0,1,10,10V${e.y}`;
-//                                 } else {
-//                                     let R = 30;
-//                                     let adx = (Math.sqrt(2) * R) / 2;
-//                                     let ady = R - adx;
-//                                     let dl = e.y - prevY - ady;
-//                                     let dx = e.x - prevX - adx - dl;
-//                                     path += `h${dx}a30,30,0,0,1,${adx},${ady}L${e.x},${e.y}`;
-//                                 }
-//                             }
-//                         }
-//                     } else {
-//                         if (prevX > e.x && prevY > e.y) {
-//                             let k1 = (prevX - e.x) / (prevY - e.y);
-//                             let k2;
-//                             if (i < map.stations.length - 1)
-//                                 k2 = (e.x - map.stations[i + 1].x) / (e.y - map.stations[i + 1].y);
-//                             else k2 = k1 * (-1)
-//                             if (k1 * k2 === -1) {
-//                                 path += `h${e.x - prevX + 10}a10,10,0,0,1-10-10V${e.y}`;
-//                             } else {
-//                                 let R = 30;
-//                                 let adx = (Math.sqrt(2) * R) / 2;
-//                                 let ady = R - adx;
-//                                 let dl = prevY - e.y - ady;
-//                                 let dx = prevX - e.x - adx - dl;
-//                                 path += `h${-dx}a30,30,0,0,1,${-adx},${-ady}L${e.x},${e.y}`;
-//                             }
-//                         } else if (prevX > e.x && prevY < e.y) {
-//                             let k1 = (prevX - e.x) / (prevY - e.y);
-//                             let k2;
-//                             if (i < map.stations.length - 1)
-//                                 k2 = (e.x - map.stations[i + 1].x) / (e.y - map.stations[i + 1].y);
-//                             else k2 = k1 * (-1)
-//
-//                             if (k1 * k2 === -1) {
-//                                 path += `h${e.x - prevX + 10}a10,10,0,0,0-10,10V${e.y}`;
-//                             } else {
-//                                 let R = 30;
-//                                 let adx = (Math.sqrt(2) * R) / 2;
-//                                 let ady = R - adx;
-//                                 let dl = prevY - e.y - ady;
-//                                 let dx = e.x - prevX - adx - dl;
-//                                 path += `h${dx}a30,30,0,0,0,${-adx},${ady}L${e.x},${e.y}`;
-//                             }
-//                         } else if (prevX < e.x && prevY > e.y) {
-//                             let k1 = (prevX - e.x) / (prevY - e.y);
-//                             let k2;
-//                             if (i < map.stations.length - 1)
-//                                 k2 = (e.x - map.stations[i + 1].x) / (e.y - map.stations[i + 1].y);
-//                             else k2 = k1 * (-1)
-//
-//                             if (k1 * k2 === -1) {
-//                                 path += `h${e.x - prevX - 10}a10,-10,0,0,0,10,-10V${e.y}`;
-//                             } else {
-//                                 let R = 30;
-//                                 let adx = (Math.sqrt(2) * R) / 2;
-//                                 let ady = R - adx;
-//                                 let dl = prevY - e.y - ady;
-//                                 let dx = e.x - prevX - adx - dl;
-//                                 path += `h${dx}a30,30,0,0,0,${adx},${-ady}L${e.x},${e.y}`;
-//                             }
-//                         } else if (prevX < e.x && prevY < e.y) {
-//                             let k1 = (prevX - e.x) / (prevY - e.y);
-//                             let k2;
-//                             if (i < map.stations.length - 1)
-//                                 k2 = (e.x - map.stations[i + 1].x) / (e.y - map.stations[i + 1].y);
-//                             else k2 = k1 * (-1)
-//
-//                             if (k1 * k2 === -1) {
-//                                 path += `h${e.x - prevX - 10}a10,10,0,0,1,10,10V${e.y}`;
-//                             } else {
-//                                 let R = 30;
-//                                 let adx = (Math.sqrt(2) * R) / 2;
-//                                 let ady = R - adx;
-//                                 let dl = e.y - prevY - ady;
-//                                 let dx = e.x - prevX - adx - dl;
-//                                 path += `h${dx}a30,30,0,0,1,${adx},${ady}L${e.x},${e.y}`;
-//                             }
-//                         } else
-//                             path += `L${e.x},${e.y}`;
-//                     }
-//                 }
-//             }
-//             [prevX, prevY] = [e.x, e.y];
-//         }
-//     );
-//     pathElement.setAttributeNS(null, 'd', path)
-// }
+const drawMap = id => {
+    const info = pathInfo[id];
+    const map = info.stations;
+    let path = `M${map[0].x},${map[0].y}`;
+    let pathEl = pg.$("path.pathElement")[id];
+    for (let i = 1; i < map.length; i++) {
+        const node = map[i];
+        const prev_node = map[i - 1];
+
+        if (prev_node.x === node.x)
+            path += `V${node.y}`;
+        else if (prev_node.y === node.y)
+            path += `H${node.x}`;
+        else {
+
+            const dirX = node.x > prev_node.x; // true => 往右 false => 往左
+            const dirY = node.y > prev_node.y; // true => 往下 false => 往上
+
+            const r = 25;
+
+            const Rx = dirX ? r : -r;
+            const Ry = dirY ? r : -r;
+            const sqrtX = Rx / Math.sqrt(2);
+            const sqrtY = Ry / Math.sqrt(2);
+            const restX = node.x - prev_node.x - 2 * sqrtX - 2 * Rx; // 斜线only
+            const restY = node.y - prev_node.y - 2 * sqrtY - 2 * Ry; // 斜线only
+
+            if (node.routeToNext === "0") {
+                // 斜線，垂直方優先
+                path += `v${Ry}c0,${sqrtY},0,${sqrtY},${sqrtX},${2 * sqrtY}l${restX},${restY}c${sqrtX},${sqrtY},${sqrtX},${Ry},${Rx + sqrtX},${Ry}h${Rx}`;
+            } else if (node.routeToNext === "1") {
+                // 斜線，水平方優先
+                path += `h${Rx}c${sqrtX},0,${sqrtX},0,${2 * sqrtX},${sqrtY}l${restX},${restY}c${sqrtX},${sqrtY},${Rx},${sqrtY},${Rx},${Ry + sqrtY}v${Ry}`;
+            } else if (node.routeToNext === "2") {
+                // 垂直線，垂直方優先
+                path += `v${node.y - prev_node.y - Ry}c0,${Ry},0,${Ry},${sqrtX},${Ry}h${node.x - prev_node.x - sqrtX}`;
+            } else if (node.routeToNext === "3") {
+                // 垂直線，水平方優先
+                path += `h${node.x - prev_node.x - Rx}c${Rx},0,${Rx},0,${Rx},${sqrtY}v${node.y - prev_node.y - sqrtY}`;
+            } else {
+                // 直线
+                path += `L${node.x},${node.y}`;
+            }
+
+        }
+
+    }
+    pathEl.setAttributeNS(null, "d", path);
+    pathEl.setAttributeNS(null, "stroke", info.color);
+    pathEl.setAttributeNS(null, "stroke-width", info.strokeWidth);
+    pathEl.setAttributeNS(null, "stroke-linecap", info.lineCap);
+    pathEl.setAttributeNS(null, "stroke-linejoin", info.lineJoin);
+    console.log(path);
+    return path;
+};
