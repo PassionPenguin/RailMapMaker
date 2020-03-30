@@ -43,4 +43,8 @@ const strings = {
     actuallyWidth: "實際寬度",
     actuallyHeight: "實際高度",
     jpgNotAlphaSupportNote: "圖片格式image/jpeg不支持透明度通道，如果您使用JPEG格式導出圖片並選擇使用透明背景，程序將自動以白色為背景導出。",
-};
+    newPath: "新線",
+    selectLine: "选择线路",
+    selectLineDescription: "選擇您需要編輯的線路",
+    orCreateNewPathDescription: "或者创建新的线路",
+}

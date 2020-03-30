@@ -43,4 +43,8 @@ const strings = {
     actuallyWidth: "Actually Width",
     actuallyHeight: "Actually Height",
     jpgNotAlphaSupportNote: "Image Type image/jpeg does not support alpha background. If you are using image/jpeg and setting backgroundColor to transparent, the program will export the image white background.",
-};
+    newPath: "New Path",
+    selectLine: "select",
+    selectLineDescription: "Select",
+    orCreateNewPathDescription: "Or create a new path.",
+}
