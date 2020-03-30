@@ -36,23 +36,25 @@ const drawMap = id => {
             const restX = node.x - prev_node.x - 2 * sqrtX - 2 * Rx; // 斜线only
             const restY = node.y - prev_node.y - 2 * sqrtY - 2 * Ry; // 斜线only
             const distanceBigger = Math.abs(restX) > Math.abs(restY);
+            const absDistX = Math.abs(restX);
+            const absDistY = Math.abs(restY);
 
             if (node.routeToNext === "0") {
                 // 斜線，垂直方優先
                 if (Math.abs(restX) === Math.abs(restY))
                     path += `v${Ry}c0,${sqrtY},0,${sqrtY},${sqrtX},${2 * sqrtY}l${restX},${restY}c${sqrtX},${sqrtY},${sqrtX},${Ry},${Rx + sqrtX},${Ry}h${Rx}`;
                 else if (distanceBigger)
-                    path += `v${Ry}c0,${sqrtY},0,${sqrtY},${sqrtX},${2 * sqrtY}l${restY},${restX * restY > 0 ? restY : -restY}c${sqrtX},${sqrtY},${sqrtX},${Ry},${Rx + sqrtX},${Ry}h${Rx + restX - restY}`;
+                    path += `v${Ry}c0,${sqrtY},0,${sqrtY},${sqrtX},${2 * sqrtY}l${restY},${restX * restY > 0 ? restY : -restY}c${sqrtX},${sqrtY},${sqrtX},${Ry},${Rx + sqrtX},${Ry}h${Rx + dirX ? (absDistX - absDistY + Rx) : -(absDistX - absDistY)}`;
                 else
-                    path += `v${Ry + distanceBigger ? (restY - restX) : (-restY + restX)}c0,${sqrtY},0,${sqrtY},${sqrtX},${2 * sqrtY}l${restX},${restX * restY > 0 ? restX : -restX}c${sqrtX},${sqrtY},${sqrtX},${Ry},${Rx + sqrtX},${Ry}h${Rx}`;
+                    path += `v${Ry + dirY ? -(absDistX - absDistY - Ry) : (absDistY - absDistX)}c0,${sqrtY},0,${sqrtY},${sqrtX},${2 * sqrtY}l${restX},${restX * restY > 0 ? restX : -restX}c${sqrtX},${sqrtY},${sqrtX},${Ry},${Rx + sqrtX},${Ry}h${Rx}`;
             } else if (node.routeToNext === "1") {
                 // 斜線，水平方優先
                 if (Math.abs(restX) === Math.abs(restY))
                     path += `h${Rx}c${sqrtX},0,${sqrtX},0,${2 * sqrtX},${sqrtY}l${restX},${restY}c${sqrtX},${sqrtY},${Rx},${sqrtY},${Rx},${Ry + sqrtY}v${Ry}`;
                 else if (distanceBigger)
-                    path += `h${Rx + distanceBigger ? (restX - restY) : (restY - restX)}c${sqrtX},0,${sqrtX},0,${2 * sqrtX},${sqrtY}l${restY},${restX * restY > 0 ? restY : -restY}c${sqrtX},${sqrtY},${Rx},${sqrtY},${Rx},${Ry + sqrtY}v${Ry}`;
+                    path += `h${Rx + dirX ? absDistX - absDistY : -(absDistX - absDistY)}c${sqrtX},0,${sqrtX},0,${2 * sqrtX},${sqrtY}l${restY},${restX * restY > 0 ? restY : -restY}c${sqrtX},${sqrtY},${Rx},${sqrtY},${Rx},${Ry + sqrtY}v${Ry}`;
                 else
-                    path += `h${Rx}c${sqrtX},0,${sqrtX},0,${2 * sqrtX},${sqrtY}l${restX},${restX * restY > 0 ? restX : -restX}c${sqrtX},${sqrtY},${Rx},${sqrtY},${Rx},${Ry + sqrtY}v${Ry + distanceBigger ? (restY - restX) : (restX - restY)}`;
+                    path += `h${Rx}c${sqrtX},0,${sqrtX},0,${2 * sqrtX},${sqrtY}l${restX},${restX * restY > 0 ? restX : -restX}c${sqrtX},${sqrtY},${Rx},${sqrtY},${Rx},${Ry + sqrtY}v${Ry + dirY ? absDistY - absDistX : -(absDistY - absDistX)}`;
             } else if (node.routeToNext === "2") {
                 // 垂直線，垂直方優先
                 path += `v${node.y - prev_node.y - Ry}c0,${Ry},0,${Ry},${sqrtX},${Ry}h${node.x - prev_node.x - sqrtX}`;
@@ -64,6 +66,7 @@ const drawMap = id => {
                 path += `L${node.x},${node.y}`;
             }
         }
+        path += `M${node.x},${node.y}`;
 
     }
     pathEl.setAttributeNS(null, "d", path);
@@ -71,6 +74,5 @@ const drawMap = id => {
     pathEl.setAttributeNS(null, "stroke-width", info.strokeWidth);
     pathEl.setAttributeNS(null, "stroke-linecap", info.lineCap);
     pathEl.setAttributeNS(null, "stroke-linejoin", info.lineJoin);
-    console.log(path);
     return path;
 };
