@@ -44,17 +44,17 @@ const drawMap = id => {
                 if (Math.abs(restX) === Math.abs(restY))
                     path += `v${Ry}c0,${sqrtY},0,${sqrtY},${sqrtX},${2 * sqrtY}l${restX},${restY}c${sqrtX},${sqrtY},${sqrtX},${Ry},${Rx + sqrtX},${Ry}h${Rx}`;
                 else if (distanceBigger)
-                    path += `v${Ry}c0,${sqrtY},0,${sqrtY},${sqrtX},${2 * sqrtY}l${restY},${restX * restY > 0 ? restY : -restY}c${sqrtX},${sqrtY},${sqrtX},${Ry},${Rx + sqrtX},${Ry}h${Rx + dirX ? (absDistX - absDistY + Rx) : -(absDistX - absDistY)}`;
+                    path += `v${Ry}c0,${sqrtY},0,${sqrtY},${sqrtX},${2 * sqrtY}l${restX * restY > 0 ? restY : -restY},${restY}c${sqrtX},${sqrtY},${sqrtX},${Ry},${Rx + sqrtX},${Ry}h${dirX ? (absDistX - absDistY + Rx) : (absDistY - absDistX + Rx)}`;
                 else
-                    path += `v${Ry + dirY ? -(absDistX - absDistY - Ry) : (absDistY - absDistX)}c0,${sqrtY},0,${sqrtY},${sqrtX},${2 * sqrtY}l${restX},${restX * restY > 0 ? restX : -restX}c${sqrtX},${sqrtY},${sqrtX},${Ry},${Rx + sqrtX},${Ry}h${Rx}`;
+                    path += `v${dirY ? (absDistY - absDistX + Ry) : (absDistX - absDistY + Ry)}c0,${sqrtY},0,${sqrtY},${sqrtX},${2 * sqrtY}l${restX},${restX * restY > 0 ? restX : -restX}c${sqrtX},${sqrtY},${sqrtX},${Ry},${Rx + sqrtX},${Ry}h${Rx}`;
             } else if (node.routeToNext === "1") {
                 // 斜線，水平方優先
                 if (Math.abs(restX) === Math.abs(restY))
                     path += `h${Rx}c${sqrtX},0,${sqrtX},0,${2 * sqrtX},${sqrtY}l${restX},${restY}c${sqrtX},${sqrtY},${Rx},${sqrtY},${Rx},${Ry + sqrtY}v${Ry}`;
                 else if (distanceBigger)
-                    path += `h${Rx + dirX ? absDistX - absDistY : -(absDistX - absDistY)}c${sqrtX},0,${sqrtX},0,${2 * sqrtX},${sqrtY}l${restY},${restX * restY > 0 ? restY : -restY}c${sqrtX},${sqrtY},${Rx},${sqrtY},${Rx},${Ry + sqrtY}v${Ry}`;
+                    path += `h${dirX ? (absDistX - absDistY + Rx) : (absDistY - absDistX + Rx)}c${sqrtX},0,${sqrtX},0,${2 * sqrtX},${sqrtY}l${restX * restY > 0 ? restY : -restY},${restY}c${sqrtX},${sqrtY},${Rx},${sqrtY},${Rx},${Ry + sqrtY}v${Ry}`;
                 else
-                    path += `h${Rx}c${sqrtX},0,${sqrtX},0,${2 * sqrtX},${sqrtY}l${restX},${restX * restY > 0 ? restX : -restX}c${sqrtX},${sqrtY},${Rx},${sqrtY},${Rx},${Ry + sqrtY}v${Ry + dirY ? absDistY - absDistX : -(absDistY - absDistX)}`;
+                    path += `h${Rx}c${sqrtX},0,${sqrtX},0,${2 * sqrtX},${sqrtY}l${restX},${restX * restY > 0 ? restX : -restX}c${sqrtX},${sqrtY},${Rx},${sqrtY},${Rx},${Ry + sqrtY}v${dirY ? (absDistY - absDistX + Ry) : (absDistX - absDistY + Ry)}`;
             } else if (node.routeToNext === "2") {
                 // 垂直線，垂直方優先
                 path += `v${node.y - prev_node.y - Ry}c0,${Ry},0,${Ry},${sqrtX},${Ry}h${node.x - prev_node.x - sqrtX}`;
