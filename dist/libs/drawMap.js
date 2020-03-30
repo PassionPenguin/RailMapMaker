@@ -73,6 +73,6 @@ const drawMap = id => {
     pathEl.setAttributeNS(null, "stroke-width", info.strokeWidth);
     pathEl.setAttributeNS(null, "stroke-linecap", info.lineCap);
     pathEl.setAttributeNS(null, "stroke-linejoin", info.lineJoin);
-    builder.debug("PassionPenguin/mapMaker", "attachWindowCursorEvent.js", "Path", "Path drew: " + path);
+    builder.debug("PassionPenguin/RailMapMaker", "attachWindowCursorEvent.js", "Path", "Path drew: " + path);
     return path;
 };

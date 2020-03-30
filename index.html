@@ -173,7 +173,7 @@
                     navigator.serviceWorker
                         .register('./.Service/ServiceWorker.js')
                         .then(() => {
-                            builder.debug("PassionPenguin/RailMapGenerator", "build.package.js", "Service", "Service Worker Registered");
+                            builder.debug("PassionPenguin/RailMapMaker", "build.package.js", "Service", "Service Worker Registered");
                             if (CookieManager.get("popup_swRegistered") !== "true")
                                 NotificationManager.create(strings.serviceWorker, strings.serviceWorkerDescription, 999, {
                                     icon: "settings",
