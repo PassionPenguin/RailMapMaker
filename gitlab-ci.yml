@@ -1,0 +1,7 @@
+pages:
+  stage: deploy
+  artifacts:
+    paths:
+      - .
+  only:
+    - master # or dev, the branch you want to publish
