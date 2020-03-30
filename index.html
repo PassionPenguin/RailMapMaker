@@ -123,6 +123,7 @@
     </style>
     <link href="./dist/libs/bundle/PenguinUI/bundle.PenguinUI.css" rel="stylesheet">
     <link href="./dist/libs/bundle/storyboard/bundle.storyboard.css" rel="stylesheet">
+    <link href="/.Service/manifest.webmanifest" rel="manifest">
 </head>
 <body>
 <div id="pg-app"></div>
@@ -168,6 +169,19 @@
             ProgressManager.create(0, 0, 0);
             builder.init(() => {
                 initInterface(0);
+                if ('serviceWorker' in navigator) {
+                    navigator.serviceWorker
+                        .register('./.Service/ServiceWorker.js')
+                        .then(() => {
+                            builder.debug("PassionPenguin/RailMapGenerator", "build.package.js", "Service", "Service Worker Registered");
+                            if (CookieManager.get("popup_swRegistered") !== "true")
+                                NotificationManager.create(strings.serviceWorker, strings.serviceWorkerDescription, 999, {
+                                    icon: "settings",
+                                    priority: 2
+                                });
+                            CookieManager.set("popup_swRegistered", "true");
+                        });
+                }
             })
         })
     })
