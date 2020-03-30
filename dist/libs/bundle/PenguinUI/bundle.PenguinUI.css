@@ -238,6 +238,7 @@
     height: 2px;
     background: var(--theme);
     transition: 250ms;
+    z-index: 99999;
 }
 
 @keyframes progress_infinity_increase {
@@ -270,6 +271,7 @@
     display: block;
     animation: progress_infinity_increase 2s infinite;
     width: 0;
+    z-index: 99999;
 }
 
 .pg-progress-bar.pg-progress-infinity:after {
@@ -280,6 +282,7 @@
     display: block;
     animation: progress_infinity_decrease 2s 500ms infinite;
     width: 0;
+    z-index: 99999;
 }
 
 /* Hover Tips */
