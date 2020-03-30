@@ -54,33 +54,29 @@ const attachEvent = {
             }
             drawMap(state.pathId);
         },
-        MoveEventListener: (element) => {
+        MoveEventListener: (element, event) => {
             element.setAttribute("style", "left:" + (min(event.offsetX) - pg.$("#pg-app")[0].scrollLeft) + "px; top:" + (min(event.offsetY) - pg.$("#pg-app")[0].scrollTop) + "px;");
             event.stopPropagation();
         },
 
         attachClickEvent: (element) => {
             builder.debug("PassionPenguin/mapMaker", "attachWindowCursorEvent.js", "Event", "Event Attached: EditStation.Click");
-            element.addEventListener("click", attachEvent.EditStation.ClickEventListener);
+            element.onclick = (event) => attachEvent.EditStation.ClickEventListener(event);
         },
 
         detachClickEvent: (element) => {
             builder.debug("PassionPenguin/mapMaker", "attachWindowCursorEvent.js", "Event", "Event Detached: EditStation.Click");
-            element.removeEventListener("click", attachEvent.EditStation.ClickEventListener);
+            element.onclick = () => void (0);
         },
 
         attachMoveEvent: (element, target) => {
             builder.debug("PassionPenguin/mapMaker", "attachWindowCursorEvent.js", "Event", "Event Attached: EditStation.Move");
-            element.addEventListener("mousemove", () => {
-                attachEvent.EditStation.MoveEventListener(target)
-            });
+            element.onmouseover = (event) => attachEvent.EditStation.MoveEventListener(target, event);
         },
 
-        detachMoveEvent: (element, target) => {
+        detachMoveEvent: (element) => {
             builder.debug("PassionPenguin/mapMaker", "attachWindowCursorEvent.js", "Event", "Event Detached: EditStation.Move");
-            element.removeEventListener("mousemove", (target) => {
-                attachEvent.EditStation.MoveEventListener(target)
-            });
+            element.onmouseover = () => void (0);
         }
     }
 }
