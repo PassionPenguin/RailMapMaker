@@ -20,7 +20,6 @@ const attachEvent = {
             let curX = min(event.offsetX);
             let curY = min(event.offsetY);
             try {
-                console.log(curX, curY);
                 if ((!state.newPath) && (pathInfo[state.pathId][0].stations.last().x === curX) && (pathInfo[state.pathId][0].stations.last().y === curY)) {
                     return; // 两点同位
                 }
@@ -57,19 +56,16 @@ const attachEvent = {
         },
 
         attachClickEvent: (element) => {
-            if (builder.debugMode)
                 builder.debug("PassionPenguin/mapMaker", "attachWindowCursorEvent.js", "Event", "Event Attached: EditStation.Click");
             element.addEventListener("click", attachEvent.EditStation.ClickEventListener);
         },
 
         detachClickEvent: (element) => {
-            if (builder.debugMode)
                 builder.debug("PassionPenguin/mapMaker", "attachWindowCursorEvent.js", "Event", "Event Detached: EditStation.Click");
             element.removeEventListener("click", attachEvent.EditStation.ClickEventListener);
         },
 
         attachMoveEvent: (element, target) => {
-            if (builder.debugMode)
                 builder.debug("PassionPenguin/mapMaker", "attachWindowCursorEvent.js", "Event", "Event Attached: EditStation.Move");
             element.addEventListener("mousemove", () => {
                 attachEvent.EditStation.MoveEventListener(target)
@@ -77,7 +73,6 @@ const attachEvent = {
         },
 
         detachMoveEvent: (element, target) => {
-            if (builder.debugMode)
                 builder.debug("PassionPenguin/mapMaker", "attachWindowCursorEvent.js", "Event", "Event Detached: EditStation.Move");
             element.removeEventListener("mousemove", (target) => {
                 attachEvent.EditStation.MoveEventListener(target)
