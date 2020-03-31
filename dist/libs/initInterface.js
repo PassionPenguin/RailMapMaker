@@ -184,8 +184,8 @@ const initInterface = (type, returnFunc) => {
                             "x": 1325,
                             "y": 425,
                             "type": "common",
-                            "routeToNext": ""
-                        }, {"x": 1225, "y": 325, "type": "destination", "routeToNext": ""}]
+                            "routeToNext": "3"
+                        }, {"x": 1225, "y": 325, "type": "destination", "routeToNext": "2"}]
                     }]
                 };
                 JSONParser(LocaleStorageManager.get("fileList")).then(i => {

@@ -84,7 +84,7 @@ const exportDialog = (originalSvg) => {
         }));
         let bottomSelector = cE({
             type: "div",
-            attr: [["style", "display:block;width:100%;height:48px;position: fixed;bottom: 0;z-index: 1001;"]]
+            attr: [["style", "display:block;width:calc(100% - 40px);height:48px;position: fixed;bottom: 0;z-index: 1001;"]]
         });
         bottomSelector.appendChild(cE({
             type: "button",
