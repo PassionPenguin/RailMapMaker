@@ -10,9 +10,9 @@
 
 const builder = {
     debugMode: true,
-    version: "1.2",
-    bundles: [{name: "PenguinUI", version: "0.1.4"}],
-    displayVersion: "Cola/(RMG v1.2 Stable)",
+    version: "1.3",
+    bundles: [{name: "PenguinUI", version: "0.1.5"}],
+    displayVersion: "Cola/(RMG v1.3 Stable)",
     locales: ["zh_CN", "zh_HK", "zh_YUE", "en_US"],
     buildTime: 1585118965574,
     debug: (pkg, src, tag, msg) => {
