@@ -31,6 +31,7 @@
 .pg-window .pg-storyboard-fileList {
     visibility: visible;
     transform: unset;
+    z-index: -1;
 }
 
 @media screen and (min-width: 1024px) {
