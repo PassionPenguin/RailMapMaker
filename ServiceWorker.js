@@ -3,10 +3,10 @@ self.addEventListener('install', function (e) {
         caches.open('mainPage').then(function (cache) {
             return cache.addAll([
                 './',
-                './assets/locales/en-US.js',
-                './assets/locales/zh-CN.js',
-                './assets/locales/zh-HK.js',
-                './assets/locales/zh-YUE.js',
+                './assets/locales/en_US.js',
+                './assets/locales/zh_CN.js',
+                './assets/locales/zh_HK.js',
+                './assets/locales/zh_YUE.js',
                 './assets/mipmap/border.png',
                 './assets/mipmap/grid.png',
                 './assets/mipmap/icon.png',
@@ -17,6 +17,8 @@ self.addEventListener('install', function (e) {
                 './dist/libs/bundle/PenguinUI/require/color.css',
                 './dist/libs/bundle/PenguinUI/require/CookieManager.js',
                 './dist/libs/bundle/PenguinUI/require/HoverTips.js',
+                './dist/libs/bundle/PenguinUI/require/LocaleStorageManager.js',
+                './dist/libs/bundle/PenguinUI/require/MediaQuery.js',
                 './dist/libs/bundle/PenguinUI/require/NotificationManager.js',
                 './dist/libs/bundle/PenguinUI/require/PenguinUI.selector.js',
                 './dist/libs/bundle/PenguinUI/require/PenguinUI.switchToggle.js',
@@ -30,9 +32,11 @@ self.addEventListener('install', function (e) {
                 './dist/libs/build.package.js',
                 './dist/libs/drawMap.js',
                 './dist/libs/exportDrawable.js',
+                './dist/libs/initDrawable.js',
                 './dist/libs/initInterface.js',
                 './dist/libs/lineEditorComp.js',
                 './dist/libs/selectLineDialog.js',
+                './dist/libs/SystemFunction.js',
                 './index.html',
             ]);
         })
