@@ -13,7 +13,7 @@ const builder = {
     version: "1.3",
     bundles: [{name: "PenguinUI", version: "0.1.5"}],
     displayVersion: "Cola/(RMG v1.3 Stable)",
-    locales: ["zh_CN", "zh_HK", "zh_YUE", "en_US"],
+    locales: ["zh-CN", "zh-HK", "zh-YUE", "en-US"],
     buildTime: 1585118965574,
     debug: (pkg, src, tag, msg) => {
         if (builder.debugMode)
@@ -34,9 +34,18 @@ const builder = {
         };
 
 
-        if (CookieManager.get("language") === "" || isNaN(Int(CookieManager.get("language"))))
-            pg.language = 0;
-        else pg.language = Int(CookieManager.get("language"));
+        if (CookieManager.get("language") === "" || isNaN(Int(CookieManager.get("language"))) || Int(CookieManager.get("language")) > builder.locales.length - 1) {
+            for (let i = 0; i < navigator.languages.length; i++) {
+                if (builder.locales.indexOf(navigator.languages[i]) !== -1) {
+                    pg.language = builder.locales.indexOf(navigator.languages[i]);
+                    break;
+                }
+            }
+            if (pg.language === undefined)
+                pg.language = 0;
+
+            CookieManager.set("language", pg.language);
+        } else pg.language = Int(CookieManager.get("language"));
 
         ProgressManager.update(0, 25, 100);
 
