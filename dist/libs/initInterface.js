@@ -22,8 +22,35 @@ const initInterface = (type, returnFunc) => {
     if (type === 0) {
         // enter interface
         view.innerHTML = "";
+        view.innerHTML = "";
         let storyboard = cE({type: "div", attr: [["class", "pg-storyboard"]]});
+        let storyboardFileList = cE({type: "div", attr: [["class", "pg-storyboard-fileList"]]});
+        let storyboardFileListContent = cE({
+            type: "div",
+            attr: [["style", "position:relative;width:100%;height:100%;"]]
+        });
+        storyboardFileList.appendChild(storyboardFileListContent);
+        JSONParser(LocaleStorageManager.get("fileList")).then(val => {
+            (val.length === 0) ? storyboardFileListContent.appendChild(cE({
+                type: "span",
+                attr: [["style", "left:50%;top:50%;transform:translate(-50%,-50%);position:absolute;display:inline-block;font:24px/1 Anodina,sans-serif;color:var(--grey);"]],
+                innerHTML: strings.noFile
+            })) : val.forEach(e => {
+                JSONParser(LocaleStorageManager.get('fileData_' + e)).then(i => {
+                    storyboardFileListContent.appendChild(cE({
+                        type: "div", attr: [["class", "pg-storyboard-file"]],
+                        innerHTML: `<p class='fileName'>${i.name}</p><span class='fileMeta'>${new Date(i.lastModified).toLocaleString()} | ${i.author} </span>`,
+                        onclick: () => {
+                            window.contentData = i;
+                            initInterface(1);
+                            initDrawable();
+                        }
+                    }))
+                });
+            });
+        });
         view.appendChild(storyboard);
+        view.appendChild(storyboardFileList);
         storyboard.appendChild(cE({
             type: "div",
             attr: [["class", "pg-storyboard-banner"]],
@@ -44,7 +71,6 @@ const initInterface = (type, returnFunc) => {
                 file.onchange = () => {
                     let fileContent = file.files[0];
                     if (fileContent.name.substring(fileContent.name.lastIndexOf(".")) !== ".rmg") {
-
                         return;
                     }
                     let reader = new FileReader();
@@ -61,19 +87,9 @@ const initInterface = (type, returnFunc) => {
                             icon: "check"
                         });
                         try {
-                            contentData.pathInfo = JSON.parse(reader.result.toString());
-                        } catch (e) {
-                            NotificationManager.create(strings.system, strings.parseErr + " <span class='color-primary'>" + fileContent.name + "</span>: " + e, 0, {
-                                time: -1,
-                                icon: "close"
-                            });
-                            initInterface(0);
-                        }
-                        try {
-                            for (let i = 0; i < contentData.pathInfo.length; i++) {
-                                drawMap(i);
-                            }
+                            window.contentData = JSON.parse(reader.result.toString());
                             initInterface(1);
+                            initDrawable();
                         } catch (e) {
                             NotificationManager.create(strings.system, strings.parseErr + " <span class='color-primary'>" + fileContent.name + "</span>: " + e, 0, {
                                 time: -1,
@@ -88,9 +104,12 @@ const initInterface = (type, returnFunc) => {
         storyboardCtrlList.appendChild(cE({
             type: "p",
             innerHTML: "<span class='mi'>dashboard</span><span> " + strings.openTemplate + "</span>",
-            onclick: () => {
-                initInterface(1, () => {
-                    contentData.pathInfo = [{
+            onclick: (event) => {
+                event.stopPropagation();
+                state.fileId++;
+                window.contentData = {
+                    name: "Guangzhou Line 1", author: "Penguin", lastModified: new Date().getTime(),
+                    pathInfo: [{
                         "lineCap": "round",
                         "lineJoin": "round",
                         "strokeWidth": "5px",
@@ -134,7 +153,13 @@ const initInterface = (type, returnFunc) => {
                             "type": "destination",
                             "routeToNext": ""
                         }, {"x": 1225, "y": 325, "type": "destination", "routeToNext": ""}]
-                    }];
+                    }]
+                };
+                JSONParser(LocaleStorageManager.get("fileList")).then(i => {
+                    i.push(JSON.parse(LocaleStorageManager.get("fileList")).length)
+                    LocaleStorageManager.set("fileList", JSON.stringify(i));
+                });
+                initInterface(1, () => {
                     initDrawable();
                 });
             }
@@ -142,9 +167,22 @@ const initInterface = (type, returnFunc) => {
         storyboardCtrlList.appendChild(cE({
             type: "p",
             innerHTML: "<span class='mi'>open_in_new</span><span> " + strings.openNew + "</span>",
-            onclick: () => {
-                initInterface(1);
-                contentData.pathInfo = [];
+            onclick: (event) => {
+                event.stopPropagation();
+                state.fileId++;
+                JSONParser(LocaleStorageManager.get("fileList")).then(i => {
+                    i.push(JSON.parse(LocaleStorageManager.get("fileList")).length)
+                    LocaleStorageManager.set("fileList", JSON.stringify(i));
+                });
+                window.contentData = {
+                    name: "Untitled Project", author: "Unnamed User", lastModified: new Date().getTime(),
+                    pathInfo: [{
+                        stations: []
+                    }]
+                };
+                initInterface(1, () => {
+                    initDrawable();
+                });
             }
         }));
         storyboardCtrlList.appendChild(cE({
