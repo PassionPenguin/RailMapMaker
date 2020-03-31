@@ -10,7 +10,7 @@
 
 const builder = {
     debugMode: true,
-    version: "1.0",
+    version: "1.2",
     bundles: [{name: "PenguinUI", version: "0.1.4"}],
     displayVersion: "Lemonade/(RMG v0.1 EAP)",
     locales: ["zh_CN", "zh_HK", "zh_YUE", "en_US"],
@@ -26,9 +26,11 @@ const builder = {
             pathId: -1, currentNode: "editingStations", stationStyle: "rect"
         };
 
-        window.contentData = null;
+        window.contentData = {
+            pathInfo: []
+        };
 
-        window.pathInfo = [];
+        FileManager.get("fileList") === null ? FileManager.set("fileList", []) : void (0);
 
         if (CookieManager.get("language") === "" || isNaN(Int(CookieManager.get("language"))))
             pg.language = 0;
@@ -38,7 +40,7 @@ const builder = {
 
         builder.importStyles(["./dist/libs/bundle/PenguinUI/bundle.PenguinUI.css", "./dist/libs/bundle/storyboard/bundle.storyboard.css"]);
         ProgressManager.update(0, 33.3, 100);
-        builder.importScripts(["./dist/libs/attachWindowCursorEvent.js", "./dist/libs/initInterface.js", "./dist/libs/lineEditorComp.js", "./dist/libs/exportDrawable.js", "./dist/libs/drawMap.js", "./dist/libs/selectLineDialog.js", "./assets/locales/" + builder.locales[pg.language] + ".js"], returnFunc);
+        builder.importScripts(["./dist/libs/attachWindowCursorEvent.js", "./dist/libs/initInterface.js", "./dist/libs/lineEditorComp.js", "./dist/libs/exportDrawable.js", "./dist/libs/drawMap.js", "./dist/libs/selectLineDialog.js", "./dist/libs/initDrawable.js", "./assets/locales/" + builder.locales[pg.language] + ".js"], returnFunc);
         ProgressManager.update(0, 66.6, 100);
     },
     importScripts: (urls, returnFunc) => {
