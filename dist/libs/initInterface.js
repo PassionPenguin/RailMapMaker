@@ -21,6 +21,15 @@ const initInterface = (type, returnFunc) => {
     let view = pg.$("#pg-app")[0];
     if (type === 0) {
         // enter interface
+        [...view.children].forEach((e) => {
+            e.setAttribute("style", "transition:500ms;opacity:0;");
+            setTimeout(() => {
+                try {
+                    view.removeChild(e);
+                } catch (exception) {
+                }
+            }, 500);
+        });
         let storyboard = cE({type: "div", attr: [["class", "pg-storyboard"]]});
         let storyboardFileList = cE({type: "div", attr: [["class", "pg-storyboard-fileList"]]});
         let storyboardFileListContent = cE({
