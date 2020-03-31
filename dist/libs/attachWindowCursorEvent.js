@@ -24,14 +24,16 @@ const attachEvent = {
             }
 
             if (state.newPath) {
-                contentData.pathInfo.push({
-                    "lineCap": "round",
-                    "lineJoin": "round",
-                    "strokeWidth": "5px",
-                    "color": "#000",
-                    "id": state.pathId,
-                    "opacity": 1,
-                    "stations": [{"x": curX, "y": curY, "type": "destination", "routeToNext": ""}]
+                contentData.push({
+                    name: "Unnamed Project", author: "@User", lastModified: new Date().getTime(), pathInf: {
+                        "lineCap": "round",
+                        "lineJoin": "round",
+                        "strokeWidth": "5px",
+                        "color": "#000",
+                        "id": state.pathId,
+                        "opacity": 1,
+                        "stations": [{"x": curX, "y": curY, "type": "destination", "routeToNext": ""}]
+                    }
                 });
                 state.newPath = false;
                 initDrawable();
