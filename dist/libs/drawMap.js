@@ -10,7 +10,7 @@
  */
 
 const drawMap = id => {
-    const info = pathInfo[id];
+    const info = contentData.pathInfo[id];
     const map = info.stations;
     let path = `M${map[0].x},${map[0].y}`;
     let pathEl = pg.$("path.pathElement")[id];
@@ -88,5 +88,6 @@ const drawMap = id => {
     pathEl.setAttributeNS(null, "stroke-linecap", info.lineCap);
     pathEl.setAttributeNS(null, "stroke-linejoin", info.lineJoin);
     builder.debug("PassionPenguin/RailMapMaker", "attachWindowCursorEvent.js", "Path", "Path drew: " + path);
+    FileManager.set("fileData_" + FileManager.get("fileList").length, JSON.stringify(contentData));
     return path;
 };

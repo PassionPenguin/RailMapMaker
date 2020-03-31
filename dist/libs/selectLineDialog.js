@@ -20,7 +20,7 @@ const selectLineDialog = () => {
             attr: [["style", "margin-top:20px;font:14px/1 Anodina,sans-serif;color:var(--grey)"]],
             innerText: strings.selectLineDescription
         }));
-        pathInfo.forEach(value => {
+        contentData.pathInfo.forEach(value => {
             view.appendChild(cE({
                 type: "p",
                 attr: [["style", "margin-top:20px;font:14px/1 Anodina,sans-serif;color:var(--grey)"]],

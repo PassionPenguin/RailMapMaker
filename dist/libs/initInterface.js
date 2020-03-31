@@ -61,26 +61,24 @@ const initInterface = (type, returnFunc) => {
                             icon: "check"
                         });
                         try {
-                            pathInfo = JSON.parse(reader.result);
+                            contentData.pathInfo = JSON.parse(reader.result.toString());
                         } catch (e) {
                             NotificationManager.create(strings.system, strings.parseErr + " <span class='color-primary'>" + fileContent.name + "</span>: " + e, 0, {
                                 time: -1,
                                 icon: "close"
                             });
-                            contentData = null;
                             initInterface(0);
                         }
-                        if (Array.isArray(pathInfo)) {
-                            for (let i = 0; i < pathInfo.length; i++) {
+                        try {
+                            for (let i = 0; i < contentData.pathInfo.length; i++) {
                                 drawMap(i);
                             }
                             initInterface(1);
-                        } else {
-                            NotificationManager.create(strings.system, strings.parseErr + " <span class='color-primary'>" + fileContent.name + "</span>: " + strings.not_arr, 0, {
+                        } catch (e) {
+                            NotificationManager.create(strings.system, strings.parseErr + " <span class='color-primary'>" + fileContent.name + "</span>: " + e, 0, {
                                 time: -1,
                                 icon: "close"
                             });
-                            contentData = null;
                             initInterface(0);
                         }
                     }
@@ -92,7 +90,7 @@ const initInterface = (type, returnFunc) => {
             innerHTML: "<span class='mi'>dashboard</span><span> " + strings.openTemplate + "</span>",
             onclick: () => {
                 initInterface(1, () => {
-                    pathInfo = [{
+                    contentData.pathInfo = [{
                         "lineCap": "round",
                         "lineJoin": "round",
                         "strokeWidth": "5px",
@@ -137,23 +135,7 @@ const initInterface = (type, returnFunc) => {
                             "routeToNext": ""
                         }, {"x": 1225, "y": 325, "type": "destination", "routeToNext": ""}]
                     }];
-                    contentData = "[{\"color\":\"#000\",\"id\":0,\"name\":\"UnnamedPath_0\",\"opacity\":1,\"stations\":[{\"x\":225,\"y\":1025,\"type\":\"destination\",\"routeToNext\":\"\"},{\"x\":225,\"y\":900,\"type\":\"destination\",\"routeToNext\":\"\"},{\"x\":225,\"y\":775,\"type\":\"destination\",\"routeToNext\":\"\"},{\"x\":225,\"y\":650,\"type\":\"destination\",\"routeToNext\":\"\"},{\"x\":225,\"y\":525,\"type\":\"destination\",\"routeToNext\":\"\"},{\"x\":350,\"y\":525,\"type\":\"destination\",\"routeToNext\":\"\"},{\"x\":475,\"y\":525,\"type\":\"destination\",\"routeToNext\":\"\"},{\"x\":600,\"y\":525,\"type\":\"destination\",\"routeToNext\":\"\"},{\"x\":725,\"y\":525,\"type\":\"destination\",\"routeToNext\":\"\"},{\"x\":850,\"y\":525,\"type\":\"destination\",\"routeToNext\":\"\"},{\"x\":975,\"y\":525,\"type\":\"destination\",\"routeToNext\":\"\"},{\"x\":1100,\"y\":525,\"type\":\"destination\",\"routeToNext\":\"\"},{\"x\":1225,\"y\":525,\"type\":\"destination\",\"routeToNext\":\"\"},{\"x\":1325,\"y\":425,\"type\":\"destination\",\"routeToNext\":\"\"},{\"x\":1225,\"y\":325,\"type\":\"destination\",\"routeToNext\":\"\"}]}]";
-                    pathInfo.forEach(e => {
-                        let svg = pg.$("#resSvg")[0];
-                        let path = document.createElementNS(svg.namespaceURI, "path");
-                        let stations = document.createElementNS(svg.namespaceURI, "g");
-                        path.setAttributeNS(null, "stroke", "#000");
-                        path.setAttributeNS(null, "id", "UnnamedPath_" + e.id);
-                        path.setAttributeNS(null, "class", "pathElement");
-                        stations.setAttributeNS(null, "id", "UnnamedStations_" + e.id);
-                        stations.setAttributeNS(null, "class", "stationsGroup");
-                        svg.appendChild(path);
-                        svg.appendChild(stations);
-                        state.pathId++;
-                    });
-                    for (let i = 0; i < pathInfo.length; i++) {
-                        drawMap(i);
-                    }
+                    initDrawable();
                 });
             }
         }));
@@ -162,8 +144,7 @@ const initInterface = (type, returnFunc) => {
             innerHTML: "<span class='mi'>open_in_new</span><span> " + strings.openNew + "</span>",
             onclick: () => {
                 initInterface(1);
-                pathInfo = [];
-                contentData = "[]";
+                contentData.pathInfo = [];
             }
         }));
         storyboardCtrlList.appendChild(cE({
@@ -359,7 +340,7 @@ const initInterface = (type, returnFunc) => {
                             exportDialog(pg.$("#resSvg")[0]);
                         }], ["settings", strings.settings, strings.openSettings, strings.openSettingsDescription, () => {
                             // prefDialog()
-                        }], ["edit", strings.path, strings.path, strings.pathDescription, (event) => {
+                        }], ["edit", strings.path, strings.path, strings.pathDescription, () => {
                             selectLineDialog();
                         }]].forEach((result) => {
                             let element = cE({
