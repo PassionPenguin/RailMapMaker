@@ -61,7 +61,7 @@ const initInterface = (type, returnFunc) => {
         storyboard.appendChild(storyboardCtrlList);
         storyboardCtrlList.appendChild(cE({
             type: "p",
-            attr: [["class", "xlg-exclude"]],
+            attr: [["class", "xlg-exclude"], ["style", "margin-top: 20px!important;"]],
             innerHTML: "<span class='mi'>folder</span><span> " + strings.recentFiles + " </span>",
             onclick: () => {
                 // open preference window
@@ -71,6 +71,11 @@ const initInterface = (type, returnFunc) => {
                         type: "div",
                         attr: [["style", "position:relative;width:100%;height:100%;"]]
                     });
+                    popup_storyboardFileListContent.appendChild(cE({
+                        type: "div",
+                        attr: [["class", "pg-storyboard-file-title"], ["style", "    width: fit-content;margin: 10px!important;font: 300 20px/1 Anodina,sans-serif;color: var(--dark);"]],
+                        innerHTML: strings.recentFiles,
+                    }));
                     JSONParser(LocaleStorageManager.get("fileList")).then(val => {
                         (val.length === 0) ? popup_storyboardFileListContent.appendChild(cE({
                             type: "span",
@@ -80,13 +85,13 @@ const initInterface = (type, returnFunc) => {
                             JSONParser(LocaleStorageManager.get('fileData_' + e)).then(i => {
                                 popup_storyboardFileListContent.appendChild(cE({
                                     type: "div", attr: [["class", "pg-storyboard-file"]],
-                                    innerHTML: `<p class='fileName'>${i.name}</p><span class='fileMeta'>${new Date(i.lastModified).toLocaleString()} | ${i.author} </span>`,
+                                    innerHTML: `<p class='fileName' style="font-weight:600;font-size:18px;">${i.name}</p><span class='fileMeta'>${new Date(i.lastModified).toLocaleString()} | ${i.author} </span>`,
                                     onclick: () => {
                                         window.contentData = i;
                                         initInterface(1);
                                         initDrawable();
                                     }
-                                }))
+                                }));
                             });
                         });
                     });
