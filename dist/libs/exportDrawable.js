@@ -10,7 +10,7 @@
  */
 
 const exportDialog = (originalSvg) => {
-    WindowManager.create((view) => {
+    WindowManager.create((view, channelId) => {
         let svg = originalSvg.cloneNode(true);
         view.setAttribute("style", "position:relative;")
         let topView = cE({
@@ -88,7 +88,7 @@ const exportDialog = (originalSvg) => {
         });
         bottomSelector.appendChild(cE({
             type: "button",
-            attr: [["class", "button"], ["style", "width:fit-content;float:right;display:inline-block;line-height:30px!important;"]],
+            attr: [["class", "button"], ["style", "width:fit-content;float:right;display:inline-block;line-height:30px!important;color:var(--theme);"]],
             innerText: strings.export,
             onclick: () => {
                 exportDrawable(svg)
@@ -96,8 +96,8 @@ const exportDialog = (originalSvg) => {
         }));
         bottomSelector.appendChild(cE({
             type: "button",
-            attr: [["style", "color:var(--theme);border:none!important;width:fit-content;float:right;display:inline-block;line-height:30px!important;"], ["class", "button"]],
-            innerText: strings.cancel
+            attr: [["style", "border:none!important;width:fit-content;float:right;display:inline-block;line-height:30px!important;"], ["class", "button"]],
+            innerText: strings.cancel, onclick: () => WindowManager.remove(channelId)
         }));
         view.appendChild(bottomSelector);
     });
