@@ -2,6 +2,8 @@
   <dictionary name="penguin">
     <words>
       <w>anodina</w>
+      <w>appinstalled</w>
+      <w>beforeinstallprompt</w>
       <w>webmanifest</w>
       <w>xxlg</w>
     </words>

@@ -68,4 +68,8 @@ const strings = {
     home: "主页",
     backHomeDescription: "返回主页",
     fileSaved: "文件已保存",
+    installApp: "安装本地化应用",
+    installedApp: "已成功安裝",
+    installAppDescription: "当你按下安装按键，浏览器将会自动向您发送一个弹窗确认（如果您的浏览器符合要求），当应用安装完成后，您既可以使用我们的应用（体验原生应用的窗口界面），也可以继续使用我们网页端。本应用大约占500KB的内存。",
+    install: "安装",
 }

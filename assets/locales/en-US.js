@@ -68,4 +68,8 @@ const strings = {
     home: "Home",
     backHomeDescription: "Back to home page",
     fileSaved: "File Saved",
+    installApp: "Install App",
+    installedApp: "Installed App",
+    installAppDescription: "After you pressing the 'install' button, the browser will send a prompt to you to confirm the installation(If your browser match the requirements). After the application is installed, you can either use the app(to experience the window styles design for native application) or use our web client as usual. The application will take up about 500KB of your disk space.",
+    install: "Install",
 }

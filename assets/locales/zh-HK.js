@@ -68,4 +68,8 @@ const strings = {
     home: "主頁",
     backHomeDescription: "返回主頁",
     fileSaved: "文件已保存",
+    installApp: "安裝本地化應用",
+    installedApp: "已成功安裝",
+    installAppDescription: "當您按下安裝按鍵，瀏覽器將會自動向您發送一個攤床確認（如果您的瀏覽器符合要求），當應用安裝完成後，你既可以使用我們的應用（體驗原生應用的窗口界面），也可以繼續使用我們的網頁端。本應用大約佔內存500KB。",
+    install: "安装",
 }
