@@ -14,9 +14,15 @@ const attachEvent = {
         ClickEventListener: (event) => {
             let curX = min(event.offsetX);
             let curY = min(event.offsetY);
+            let lastData = contentData.pathInfo[state.pathId].stations.last();
             try {
-                if ((!state.newPath) && (contentData.pathInfo[state.pathId][0].stations.last().x === curX) && (contentData.pathInfo[state.pathId][0].stations.last().y === curY)) {
+                if ((!state.newPath) && (lastData.x === curX) && (lastData.y === curY)) {
+                    console.log(lastData, curX, curY);
                     builder.debug("PassionPenguin/RailMapMaker", "attachWindowCursorEvent.js", "Path", "Same station, skip.");
+                    return; // 两点同位
+                } else if ((!state.newPath) && (lastData.x !== curX && lastData.y !== curY) && (Math.abs(lastData.x - curX) < 100 || Math.abs(lastData.y - curY) < 100)) {
+                    console.log("\t", lastData, curX, curY);
+                    builder.debug("PassionPenguin/RailMapMaker", "attachWindowCursorEvent.js", "Path", "Too near, skip.");
                     return; // 两点同位
                 }
             } catch (err) {
