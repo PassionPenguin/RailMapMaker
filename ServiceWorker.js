@@ -3,10 +3,10 @@ self.addEventListener('install', function (e) {
         caches.open('mainPage').then(function (cache) {
             return cache.addAll([
                 './',
-                './assets/locales/en_US.js',
-                './assets/locales/zh_CN.js',
-                './assets/locales/zh_HK.js',
-                './assets/locales/zh_YUE.js',
+                './assets/locales/en-US.js',
+                './assets/locales/zh-CN.js',
+                './assets/locales/zh-HK.js',
+                './assets/locales/zh-YUE.js',
                 './assets/mipmap/border.png',
                 './assets/mipmap/grid.png',
                 './assets/mipmap/icon.png',
@@ -38,7 +38,21 @@ self.addEventListener('install', function (e) {
                 './dist/libs/selectLineDialog.js',
                 './dist/libs/SystemFunction.js',
                 './index.html',
-            ]);
+            ]).then(() => self.skipWaiting());
         })
+    );
+});
+
+self.addEventListener('activate', event => {
+    event.waitUntil(self.clients.claim());
+});
+
+self.addEventListener('fetch', event => {
+    event.respondWith(
+        caches.open("mainPage")
+            .then(cache => cache.match(event.request, {ignoreSearch: true}))
+            .then(response => {
+                return response || fetch(event.request);
+            })
     );
 });

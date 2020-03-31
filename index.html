@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cn" manifest="./manifest.webmanifest">
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1" name="viewport">
@@ -167,9 +167,9 @@
             ProgressManager.create(0, 0, 0);
             builder.init(() => {
                 initInterface(0);
-                if ('serviceWorker' in navigator) {
+                if ('serviceWorker' in navigator && navigator.onLine) {
                     navigator.serviceWorker
-                        .register('./ServiceWorker.js', {scope: "."})
+                        .register('./ServiceWorker.js')
                         .then(() => {
                             builder.debug("PassionPenguin/RailMapMaker", "Main Script", "Service", "Service Worker Registered");
                             if (CookieManager.get("popup_swRegistered") !== "true")
