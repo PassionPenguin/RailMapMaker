@@ -37,7 +37,7 @@ const attachEvent = {
                     "color": "#000",
                     "id": state.pathId,
                     "opacity": 1,
-                    "stations": [{"x": curX, "y": curY, "type": "destination", "routeToNext": ""}]
+                    "stations": [{x: curX, y: curY, type: "destination", routeToNext: ""}]
                 });
                 state.newPath = false;
                 initDrawable();

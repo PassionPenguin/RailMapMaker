@@ -114,7 +114,7 @@ const initInterface = (type, returnFunc) => {
             innerHTML: "<span class='mi'>attachment</span><span> " + strings.importFile + " (*.rmg) </span>",
             onclick: () => {
                 // upload an rmg file
-                let file = cE({type: "input", attr: [["type", "file"], ["accept", ".rmg"]]});
+                let file = cE({type: "input", attr: [[type, "file"], ["accept", ".rmg"]]});
                 file.click();
                 file.onchange = () => {
                     let fileContent = file.files[0];
@@ -155,51 +155,55 @@ const initInterface = (type, returnFunc) => {
             onclick: () => {
                 state.fileId++;
                 window.contentData = {
-                    name: "Guangzhou Line 1", author: "Penguin", lastModified: new Date().getTime(),
+                    name: "Guangzhou Line 1",
+                    author: "Penguin",
+                    lastModified: new Date().getTime(),
+                    width: 2000,
+                    height: 2000,
                     pathInfo: [{
-                        "lineCap": "round",
-                        "lineJoin": "round",
-                        "strokeWidth": "5px",
-                        "color": "#000",
-                        "id": 0,
-                        "name": "UnnamedPath_0",
-                        "opacity": 1,
-                        "stations": [{"x": 225, "y": 1025, "type": "destination", "routeToNext": ""}, {
-                            "x": 225,
-                            "y": 900,
-                            "type": "common",
-                            "routeToNext": ""
-                        }, {"x": 225, "y": 775, "type": "common", "routeToNext": ""}, {
-                            "x": 225,
-                            "y": 650,
-                            "type": "common",
-                            "routeToNext": ""
-                        }, {"x": 225, "y": 525, "type": "common", "routeToNext": ""}, {
-                            "x": 350,
-                            "y": 525,
-                            "type": "common",
-                            "routeToNext": ""
-                        }, {"x": 475, "y": 525, "type": "common", "routeToNext": ""}, {
-                            "x": 600,
-                            "y": 525,
-                            "type": "common",
-                            "routeToNext": ""
-                        }, {"x": 725, "y": 525, "type": "common", "routeToNext": ""}, {
-                            "x": 850,
-                            "y": 525,
-                            "type": "common",
-                            "routeToNext": ""
-                        }, {"x": 975, "y": 525, "type": "common", "routeToNext": ""}, {
-                            "x": 1100,
-                            "y": 525,
-                            "type": "common",
-                            "routeToNext": ""
-                        }, {"x": 1225, "y": 525, "type": "common", "routeToNext": ""}, {
-                            "x": 1325,
-                            "y": 425,
-                            "type": "common",
-                            "routeToNext": "3"
-                        }, {"x": 1225, "y": 325, "type": "destination", "routeToNext": "2"}]
+                        lineCap: "round",
+                        lineJoin: "round",
+                        strokeWidth: "5px",
+                        color: "#000",
+                        id: 0,
+                        name: "UnnamedPath_0",
+                        opacity: 1,
+                        stations: [{x: 225, y: 1025, type: "destination", routeToNext: ""}, {
+                            x: 225,
+                            y: 900,
+                            type: "common",
+                            routeToNext: ""
+                        }, {x: 225, y: 775, type: "common", routeToNext: ""}, {
+                            x: 225,
+                            y: 650,
+                            type: "common",
+                            routeToNext: ""
+                        }, {x: 225, y: 525, type: "common", routeToNext: ""}, {
+                            x: 350,
+                            y: 525,
+                            type: "common",
+                            routeToNext: ""
+                        }, {x: 475, y: 525, type: "common", routeToNext: ""}, {
+                            x: 600,
+                            y: 525,
+                            type: "common",
+                            routeToNext: ""
+                        }, {x: 725, y: 525, type: "common", routeToNext: ""}, {
+                            x: 850,
+                            y: 525,
+                            type: "common",
+                            routeToNext: ""
+                        }, {x: 975, y: 525, type: "common", routeToNext: ""}, {
+                            x: 1100,
+                            y: 525,
+                            type: "common",
+                            routeToNext: ""
+                        }, {x: 1225, y: 525, type: "common", routeToNext: ""}, {
+                            x: 1325,
+                            y: 425,
+                            type: "common",
+                            routeToNext: "3"
+                        }, {x: 1225, y: 325, type: "destination", routeToNext: "2"}]
                     }]
                 };
                 JSONParser(LocaleStorageManager.get("fileList")).then(i => {
@@ -222,6 +226,8 @@ const initInterface = (type, returnFunc) => {
                 });
                 window.contentData = {
                     name: "Untitled Project", author: "Unnamed User", lastModified: new Date().getTime(),
+                    width: 2000,
+                    height: 2000,
                     pathInfo: [{
                         stations: []
                     }]
@@ -403,12 +409,12 @@ const initInterface = (type, returnFunc) => {
 
         view.appendChild(cE({
             type: "div",
-            attr: [["id", "grid"], ["style", "background:url('./assets/mipmap/grid.png') repeat;width:5000px;height:5000px;z-index:0; background-size: 50px;"]]
+            attr: [["id", "grid"], ["style", `background:url('./assets/mipmap/grid.png') repeat;width:${contentData.width}px;height:${contentData.height}px;z-index:0; background-size: 50px;`]]
         }));
         view.appendChild(cE({
             type: "div",
-            attr: [["id", "drawable"]],
-            innerHTML: "<svg id=\"resSvg\" xmlns=\"http://www.w3.org/2000/svg\" viewBox='0 0 5000 5000'><defs><style>._bg-white{fill:#fff;}</style><symbol id='stationStyle_circle'><circle class=\"_bg-white\" cx=\"8\" cy=\"8\" r=\"8\"/><path class=\"_circleStroke\" d=\"M8,0C3.58,0,0,3.58,0,8s3.58,8,8,8s8-3.58,8-8S12.42,0,8,0z M8,14c-3.31,0-6-2.69-6-6c0-3.31,2.69-6,6-6s6,2.69,6,6C14,11.31,11.31,14,8,14z\"/></symbol><symbol id='stationStyle_rect'><path d='M0,0v16h16v-16z' class='_bg-white'/><path d='M0,0v16h16V0H0z M14,14H2V2h12V14z' class='_rectStroke'/></symbol></defs></svg>"
+            attr: [["id", "drawable"], ["style", `width:${contentData.width}px;height:${contentData.height}px;`]],
+            innerHTML: `<svg id=\"resSvg\" xmlns=\"http://www.w3.org/2000/svg\" viewBox='0 0 ${contentData.width} ${contentData.height}' style="width:${contentData.width};height:${contentData.height};"><defs><style>._bg-white{fill:#fff;}</style><symbol id='stationStyle_circle'><circle class=\"_bg-white\" cx=\"8\" cy=\"8\" r=\"8\"/><path class=\"_circleStroke\" d=\"M8,0C3.58,0,0,3.58,0,8s3.58,8,8,8s8-3.58,8-8S12.42,0,8,0z M8,14c-3.31,0-6-2.69-6-6c0-3.31,2.69-6,6-6s6,2.69,6,6C14,11.31,11.31,14,8,14z\"/></symbol><symbol id='stationStyle_rect'><path d='M0,0v16h16v-16z' class='_bg-white'/><path d='M0,0v16h16V0H0z M14,14H2V2h12V14z' class='_rectStroke'/></symbol></defs></svg>`
         }));
         view.appendChild(cE({type: "div", attr: [["id", "cursor"]]}));
 
