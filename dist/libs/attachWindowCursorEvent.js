@@ -62,6 +62,7 @@ const attachEvent = {
         attachMoveEvent: (element, target) => {
             builder.debug("PassionPenguin/RailMapMaker", "attachWindowCursorEvent.js", "Event", "Event Attached: EditStation.Move");
             element.addEventListener("mousemove", (event) => {
+                event.stopPropagation();
                 attachEvent.EditStation.MoveEventListener(target, event)
             });
         },
