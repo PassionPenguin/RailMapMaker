@@ -146,6 +146,7 @@ const initInterface = (type, returnFunc) => {
                         path.setAttributeNS(null, "id", "UnnamedPath_" + e.id);
                         path.setAttributeNS(null, "class", "pathElement");
                         stations.setAttributeNS(null, "id", "UnnamedStations_" + e.id);
+                        stations.setAttributeNS(null, "class", "stationsGroup");
                         svg.appendChild(path);
                         svg.appendChild(stations);
                         state.pathId++;
@@ -340,7 +341,7 @@ const initInterface = (type, returnFunc) => {
             view.appendChild(cE({
                 type: "div",
                 attr: [["id", "drawable"]],
-                innerHTML: "<svg id=\"resSvg\" xmlns=\"http://www.w3.org/2000/svg\" viewBox='0 0 5000 5000'><defs><symbol id='stationStyle_circle'><path d='M0 0a8 8 0 1 0 16 0a8 8 0 1 0 -16 0z'/></symbol><symbol id='stationStyle_rect'><path d='M0,0v16h16V0H0z M14,14H2V2h12V14z'/></symbol></defs></svg>"
+                innerHTML: "<svg id=\"resSvg\" xmlns=\"http://www.w3.org/2000/svg\" viewBox='0 0 5000 5000'><defs><style>._bg-white{fill:#fff;}</style><symbol id='stationStyle_circle'><circle class=\"_bg-white\" cx=\"8\" cy=\"8\" r=\"8\"/><path class=\"_circleStroke\" d=\"M8,0C3.58,0,0,3.58,0,8s3.58,8,8,8s8-3.58,8-8S12.42,0,8,0z M8,14c-3.31,0-6-2.69-6-6c0-3.31,2.69-6,6-6s6,2.69,6,6C14,11.31,11.31,14,8,14z\"/></symbol><symbol id='stationStyle_rect'><path d='M0,0v16h16v-16z' class='_bg-white'/><path d='M0,0v16h16V0H0z M14,14H2V2h12V14z' class='_rectStroke'/></symbol></defs></svg>"
             }));
             view.appendChild(cE({type: "div", attr: [["id", "cursor"]]}));
 

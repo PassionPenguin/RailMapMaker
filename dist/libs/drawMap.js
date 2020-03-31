@@ -14,7 +14,21 @@ const drawMap = id => {
     const map = info.stations;
     let path = `M${map[0].x},${map[0].y}`;
     let pathEl = pg.$("path.pathElement")[id];
+    let stationsGroup = pg.$("g.stationsGroup")[id];
+    const appendStation = (nodeId) => {
+        let stationNode = document.createElementNS(pg.$('#resSvg')[0].namespaceURI, 'use');
+        stationNode.setAttributeNS(null, 'href', '#stationStyle_' + state.stationStyle);
+        stationNode.setAttributeNS(null, 'fill', map.color);
+        stationNode.setAttributeNS(null, 'x', '0');
+        stationNode.setAttributeNS(null, 'y', '0');
+        stationNode.setAttributeNS(null, 'style', 'transform: matrix(1, 0, 0, 1, ' + (map[nodeId].x - 8) + ', ' + (map[nodeId].y - 8) + ');');
+        if (map[nodeId].type === 'destination') stationNode.setAttributeNS(null, 'style', 'transform: matrix(1, 0, 0, 1, ' + (map[nodeId].x - 12) + ', ' + (map[nodeId].y - 12) + ') scale(1.5);');
+        stationsGroup.appendChild(stationNode);
+    };
+    appendStation(0);
     for (let i = 1; i < map.length; i++) {
+        appendStation(i);
+
         const node = map[i];
         const prev_node = map[i - 1];
 

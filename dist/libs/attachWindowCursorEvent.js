@@ -36,6 +36,7 @@ const attachEvent = {
                 path.setAttributeNS(null, "id", "UnnamedPath_" + state.pathId);
                 path.setAttributeNS(null, "class", "pathElement");
                 stations.setAttributeNS(null, "id", "UnnamedStations_" + state.pathId);
+                stations.setAttributeNS(null, "class", "stationsGroup");
                 svg.appendChild(path);
                 svg.appendChild(stations);
                 builder.debug("PassionPenguin/RailMapMaker", "attachWindowCursorEvent.js", "Path", "New Path Created: id=" + state.pathId);
