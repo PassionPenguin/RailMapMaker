@@ -29,7 +29,6 @@ const initInterface = (type, returnFunc) => {
             type: "div",
             attr: [["style", "position:relative;width:100%;height:100%;"]]
         });
-        storyboardFileList.appendChild(storyboardFileListContent);
         JSONParser(LocaleStorageManager.get("fileList")).then(val => {
             (val.length === 0) ? storyboardFileListContent.appendChild(cE({
                 type: "span",
@@ -49,6 +48,7 @@ const initInterface = (type, returnFunc) => {
                 });
             });
         });
+        storyboardFileList.appendChild(storyboardFileListContent);
         view.appendChild(storyboard);
         view.appendChild(storyboardFileList);
         storyboard.appendChild(cE({
@@ -68,7 +68,32 @@ const initInterface = (type, returnFunc) => {
             onclick: () => {
                 // open preference window
                 WindowManager.create(view => {
-                    view.appendChild(storyboardFileList);
+                    let popup_storyboardFileList = cE({type: "div", attr: [["class", "pg-storyboard-fileList"]]});
+                    let popup_storyboardFileListContent = cE({
+                        type: "div",
+                        attr: [["style", "position:relative;width:100%;height:100%;"]]
+                    });
+                    JSONParser(LocaleStorageManager.get("fileList")).then(val => {
+                        (val.length === 0) ? popup_storyboardFileListContent.appendChild(cE({
+                            type: "span",
+                            attr: [["style", "left:50%;top:50%;transform:translate(-50%,-50%);position:absolute;display:inline-block;font:24px/1 Anodina,sans-serif;color:var(--grey);"]],
+                            innerHTML: strings.noFile
+                        })) : val.forEach(e => {
+                            JSONParser(LocaleStorageManager.get('fileData_' + e)).then(i => {
+                                popup_storyboardFileListContent.appendChild(cE({
+                                    type: "div", attr: [["class", "pg-storyboard-file"]],
+                                    innerHTML: `<p class='fileName'>${i.name}</p><span class='fileMeta'>${new Date(i.lastModified).toLocaleString()} | ${i.author} </span>`,
+                                    onclick: () => {
+                                        window.contentData = i;
+                                        initInterface(1);
+                                        initDrawable();
+                                    }
+                                }))
+                            });
+                        });
+                    });
+                    popup_storyboardFileList.appendChild(popup_storyboardFileListContent);
+                    view.appendChild(popup_storyboardFileList);
                 }, {size: "large"});
             }
         }));
