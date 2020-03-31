@@ -16,6 +16,7 @@ const drawMap = id => {
         let path = `M${map[0].x},${map[0].y}`;
         let pathEl = pg.$("path.pathElement")[id];
         let stationsGroup = pg.$("g.stationsGroup")[id];
+        stationsGroup.innerHTML = "";
         const appendStation = (nodeId) => {
             let stationNode = document.createElementNS(pg.$('#resSvg')[0].namespaceURI, 'use');
             stationNode.setAttributeNS(null, 'href', '#stationStyle_' + state.stationStyle);
