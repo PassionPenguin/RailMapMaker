@@ -63,4 +63,5 @@ const strings = {
     disabled: "Disabled",
     noFileSystemError: "Your Browser Doesn't Support File System.",
     initFileSystem: "File System Initialized",
+    noFile: "No Existing File.",
 }

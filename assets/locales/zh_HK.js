@@ -63,4 +63,5 @@ const strings = {
     disabled: "關閉",
     noFileSystemError: "您嘅瀏覽器唔支持文件系統",
     initFileSystem: "文件系統已初始化",
+    noFile: "沒有創建嘅文件",
 }

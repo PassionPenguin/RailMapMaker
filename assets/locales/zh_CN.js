@@ -61,4 +61,5 @@ const strings = {
     enabled: "启用",
     noFileSystemError: "您的浏览器不支持文件系统",
     initFileSystem: "文件系统已初始化",
+    noFile: "创建的文件",
 }
