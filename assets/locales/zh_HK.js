@@ -65,4 +65,7 @@ const strings = {
     initFileSystem: "文件系統已初始化",
     noFile: "沒有最近打開嘅文件",
     recentFiles: "最近打開嘅文件",
+    home: "主頁",
+    backHomeDescription: "返回主頁",
+    fileSaved: "文件已保存",
 }

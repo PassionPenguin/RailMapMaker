@@ -65,4 +65,7 @@ const strings = {
     initFileSystem: "File System Initialized",
     noFile: "No Recent Open File.",
     recentFiles: "Recent Open Files",
+    home: "Home",
+    backHomeDescription: "Back to home page",
+    fileSaved: "File Saved",
 }

@@ -416,6 +416,12 @@ const initInterface = (type, returnFunc) => {
                             // prefDialog()
                         }], ["edit", strings.path, strings.path, strings.pathDescription, () => {
                             selectLineDialog();
+                        }], ["home", strings.home, strings.home, strings.backHomeDescription, () => {
+                            NotificationManager.create(strings.system, strings.fileSaved, 0, {
+                                icon: "check",
+                                icon_color: "var(--theme)"
+                            });
+                            initInterface(0);
                         }]].forEach((result) => {
                             let element = cE({
                                 type: "div",
