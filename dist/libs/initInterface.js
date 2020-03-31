@@ -73,7 +73,6 @@ const initInterface = (type, returnFunc) => {
             attr: [["class", "xlg-exclude"], ["style", "margin-top: 20px!important;"]],
             innerHTML: "<span class='mi'>folder</span><span> " + strings.recentFiles + " </span>",
             onclick: () => {
-                // open preference window
                 WindowManager.create(view => {
                     let popup_storyboardFileList = cE({type: "div", attr: [["class", "pg-storyboard-fileList"]]});
                     let popup_storyboardFileListContent = cE({
@@ -113,7 +112,6 @@ const initInterface = (type, returnFunc) => {
             type: "p",
             innerHTML: "<span class='mi'>attachment</span><span> " + strings.importFile + " (*.rmg) </span>",
             onclick: () => {
-                // upload an rmg file
                 let file = cE({type: "input", attr: [[type, "file"], ["accept", ".rmg"]]});
                 file.click();
                 file.onchange = () => {
@@ -241,7 +239,6 @@ const initInterface = (type, returnFunc) => {
             type: "p",
             innerHTML: "<span class='mi'>info</span><span> " + strings.about + " </span>",
             onclick: () => {
-                // open about window
                 WindowManager.create((e) => {
                     e.appendChild(cE({
                         type: "img",
@@ -297,7 +294,6 @@ const initInterface = (type, returnFunc) => {
             type: "p",
             innerHTML: "<span class='mi'>settings</span><span> " + strings.preference + " </span>",
             onclick: () => {
-                // open preference window
                 WindowManager.create((e) => {
                     e.appendChild(cE({
                         type: "img",
@@ -356,7 +352,6 @@ const initInterface = (type, returnFunc) => {
             type: "p",
             innerHTML: "<span class='mi'>memory</span><span> " + strings.debugInfo + " </span>",
             onclick: () => {
-                // open preference window
                 WindowManager.create((e) => {
                     e.appendChild(cE({
                         type: "img",
@@ -393,6 +388,62 @@ const initInterface = (type, returnFunc) => {
                         innerHTML: strings.onLine + ":\t" + (navigator.onLine ? strings.cur_onLine : strings.cur_offLine)
                     }));
                 });
+            }
+        }));
+        storyboardCtrlList.appendChild(cE({
+            type: "p",
+            innerHTML: "<span class='mi'>launch</span><span> " + strings.installApp + " </span>",
+            onclick: () => {
+
+                WindowManager.create((view, channelId) => {
+                    let topView = cE({
+                        type: "div",
+                        attr: [["style", "height:calc(100% - 48px);width:100%;;overflow:hidden;"]]
+                    });
+                    let pref = cE({type: "div", attr: [["style", "width:360px;margin:0 auto;"]]});
+                    topView.appendChild(pref);
+                    view.appendChild(topView);
+                    pref.appendChild(cE({
+                        type: "p",
+                        attr: [["style", "margin:30px auto 10px auto;display:block;width:calc(100% - 40px);font:20px/1 Anodina,sans-serif;text-align:center;"]],
+                        innerHTML: strings.installApp
+                    }));
+                    pref.appendChild(cE({
+                        type: "p",
+                        attr: [["style", "margin:30px auto 10px auto;display:block;width:calc(100% - 40px);font:300 14px/21px Anodina,sans-serif"]],
+                        innerHTML: strings.installAppDescription
+                    }));
+                    let bottomSelector = cE({
+                        type: "div",
+                        attr: [["style", "display:block;width:calc(100% - 40px);height:48px;position: fixed;bottom: 0;z-index: 1001;"]]
+                    });
+                    bottomSelector.appendChild(cE({
+                        type: "button",
+                        attr: [["class", "button"], ["style", "width:fit-content;float:right;display:inline-block;line-height:30px!important;color:var(--theme);"]],
+                        innerText: strings.install,
+                        onclick: () => {
+                            installAppPrompt.prompt();
+                            // Wait for the user to respond to the prompt
+                            installAppPrompt.userChoice.then((choiceResult) => {
+                                if (choiceResult.outcome === 'accepted') {
+                                    window.addEventListener('appinstalled', (evt) => {
+                                        NotificationManager.create(strings.installApp, strings.installedApp, 0);
+                                    }, {once: true});
+                                } else {
+                                    NotificationManager.create(strings.installApp, strings.dismissedInstallPrompt, 0);
+                                }
+                            })
+                        }
+                    }));
+                    bottomSelector.appendChild(cE({
+                        type: "button",
+                        attr: [["style", "border:none!important;width:fit-content;float:right;display:inline-block;line-height:30px!important;"], ["class", "button"]],
+                        innerText: strings.cancel, onclick: () => {
+                            WindowManager.remove(channelId)
+                        }
+                    }));
+                    view.appendChild(bottomSelector);
+                }, {size: "small"});
             }
         }));
     } else if (type === 1) {
