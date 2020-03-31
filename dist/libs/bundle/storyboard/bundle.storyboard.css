@@ -19,31 +19,34 @@
 }
 
 .pg-storyboard-fileList {
-    width: 100%;
-    height: 100%;
+    width: calc(100% - 40px);
+    height: calc(100% - 40px);
+    margin: 20px;
     left: 0;
+    top: 0;
     visibility: hidden;
+    overflow: scroll;
 }
 
 .pg-window .pg-storyboard-fileList {
     visibility: visible;
-    transform: translateY(-50%);
+    transform: unset;
 }
 
 @media screen and (min-width: 1024px) {
-
     .pg-storyboard {
         transform: translate(-200%, -50%);
     }
 
     .pg-storyboard-fileList {
+        top: 50%;
         left: 50%;
         width: 450px;
         height: 540px;
         transform: translateY(-50%);
         visibility: visible;
+        margin: 0;
     }
-
 }
 
 .pg-storyboard > .pg-storyboard-banner > img {

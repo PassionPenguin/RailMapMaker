@@ -12,7 +12,7 @@ const WindowManager = {
     query: [],
     create: (returnFunc, opt) => {
         opt = opt || {};
-        opt.size = opt.size || "middle";
+        opt.size = opt.size || "medium";
         opt.zIndex = opt.zIndex || "1000";
         opt.channelId = opt.channelId || WindowManager.query.length;
         let WindowFrame = cE({
