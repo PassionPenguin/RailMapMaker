@@ -21,8 +21,6 @@ const initInterface = (type, returnFunc) => {
     let view = pg.$("#pg-app")[0];
     if (type === 0) {
         // enter interface
-        view.innerHTML = "";
-        view.innerHTML = "";
         let storyboard = cE({type: "div", attr: [["class", "pg-storyboard"]]});
         let storyboardFileList = cE({type: "div", attr: [["class", "pg-storyboard-fileList"]]});
         let storyboardFileListContent = cE({
@@ -140,8 +138,7 @@ const initInterface = (type, returnFunc) => {
         storyboardCtrlList.appendChild(cE({
             type: "p",
             innerHTML: "<span class='mi'>dashboard</span><span> " + strings.openTemplate + "</span>",
-            onclick: (event) => {
-                event.stopPropagation();
+            onclick: () => {
                 state.fileId++;
                 window.contentData = {
                     name: "Guangzhou Line 1", author: "Penguin", lastModified: new Date().getTime(),
@@ -203,8 +200,7 @@ const initInterface = (type, returnFunc) => {
         storyboardCtrlList.appendChild(cE({
             type: "p",
             innerHTML: "<span class='mi'>open_in_new</span><span> " + strings.openNew + "</span>",
-            onclick: (event) => {
-                event.stopPropagation();
+            onclick: () => {
                 state.fileId++;
                 JSONParser(LocaleStorageManager.get("fileList")).then(i => {
                     i.push(JSON.parse(LocaleStorageManager.get("fileList")).length)
@@ -389,74 +385,76 @@ const initInterface = (type, returnFunc) => {
                 } catch (exception) {
                 }
             }, 500);
-            view.appendChild(cE({
-                type: "div",
-                attr: [["id", "grid"], ["style", "background:url('./assets/mipmap/grid.png') repeat;width:5000px;height:5000px;z-index:0; background-size: 50px;"]]
-            }));
-            view.appendChild(cE({
-                type: "div",
-                attr: [["id", "drawable"]],
-                innerHTML: "<svg id=\"resSvg\" xmlns=\"http://www.w3.org/2000/svg\" viewBox='0 0 5000 5000'><defs><style>._bg-white{fill:#fff;}</style><symbol id='stationStyle_circle'><circle class=\"_bg-white\" cx=\"8\" cy=\"8\" r=\"8\"/><path class=\"_circleStroke\" d=\"M8,0C3.58,0,0,3.58,0,8s3.58,8,8,8s8-3.58,8-8S12.42,0,8,0z M8,14c-3.31,0-6-2.69-6-6c0-3.31,2.69-6,6-6s6,2.69,6,6C14,11.31,11.31,14,8,14z\"/></symbol><symbol id='stationStyle_rect'><path d='M0,0v16h16v-16z' class='_bg-white'/><path d='M0,0v16h16V0H0z M14,14H2V2h12V14z' class='_rectStroke'/></symbol></defs></svg>"
-            }));
-            view.appendChild(cE({type: "div", attr: [["id", "cursor"]]}));
+        });
 
-            let helper_list_display = false;
+        view.appendChild(cE({
+            type: "div",
+            attr: [["id", "grid"], ["style", "background:url('./assets/mipmap/grid.png') repeat;width:5000px;height:5000px;z-index:0; background-size: 50px;"]]
+        }));
+        view.appendChild(cE({
+            type: "div",
+            attr: [["id", "drawable"]],
+            innerHTML: "<svg id=\"resSvg\" xmlns=\"http://www.w3.org/2000/svg\" viewBox='0 0 5000 5000'><defs><style>._bg-white{fill:#fff;}</style><symbol id='stationStyle_circle'><circle class=\"_bg-white\" cx=\"8\" cy=\"8\" r=\"8\"/><path class=\"_circleStroke\" d=\"M8,0C3.58,0,0,3.58,0,8s3.58,8,8,8s8-3.58,8-8S12.42,0,8,0z M8,14c-3.31,0-6-2.69-6-6c0-3.31,2.69-6,6-6s6,2.69,6,6C14,11.31,11.31,14,8,14z\"/></symbol><symbol id='stationStyle_rect'><path d='M0,0v16h16v-16z' class='_bg-white'/><path d='M0,0v16h16V0H0z M14,14H2V2h12V14z' class='_rectStroke'/></symbol></defs></svg>"
+        }));
+        view.appendChild(cE({type: "div", attr: [["id", "cursor"]]}));
 
-            let toggle = cE({
-                type: "div",
-                attr: [["class", "toggle-Helper"]],
-                innerHTML: "<div class='button'><span class='mi'>layers</span>" + strings.helper_toggle + "</div>",
-                onclick: (e) => {
-                    if (!helper_list_display) {
-                        helper_list_display = true;
-                        let list = cE({type: "div", attr: [["class", "helper_list"]]});
-                        [["open_in_new", strings.export, strings.exportAssets, strings.exportAssetsDescrption, () => {
-                            exportDialog(pg.$("#resSvg")[0]);
-                        }], ["settings", strings.settings, strings.openSettings, strings.openSettingsDescription, () => {
-                            // prefDialog()
-                        }], ["edit", strings.path, strings.path, strings.pathDescription, () => {
-                            selectLineDialog();
-                        }], ["home", strings.home, strings.home, strings.backHomeDescription, () => {
-                            NotificationManager.create(strings.system, strings.fileSaved, 0, {
-                                icon: "check",
-                                icon_color: "var(--theme)"
-                            });
-                            initInterface(0);
-                        }]].forEach((result) => {
-                            let element = cE({
-                                type: "div",
-                                attr: [["class", "helper_list_item button"]],
-                                innerHTML: "<span class='mi'>" + result[0] + "</span><span>" + result[1] + "</span>",
-                                onclick: result[4]
-                            });
-                            list.appendChild(element);
-                            HoverTips.create(element, result[2], result[3]);
+        let helper_list_display = false;
+
+        let toggle = cE({
+            type: "div",
+            attr: [["class", "toggle-Helper"]],
+            innerHTML: "<div class='button'><span class='mi'>layers</span>" + strings.helper_toggle + "</div>",
+            onclick: (e) => {
+                if (!helper_list_display) {
+                    helper_list_display = true;
+                    let list = cE({type: "div", attr: [["class", "helper_list"]]});
+                    [["open_in_new", strings.export, strings.exportAssets, strings.exportAssetsDescrption, () => {
+                        exportDialog(pg.$("#resSvg")[0]);
+                    }], ["settings", strings.settings, strings.openSettings, strings.openSettingsDescription, () => {
+                        // prefDialog()
+                    }], ["edit", strings.path, strings.path, strings.pathDescription, () => {
+                        selectLineDialog();
+                    }], ["home", strings.home, strings.home, strings.backHomeDescription, () => {
+                        NotificationManager.create(strings.system, strings.fileSaved, 0, {
+                            icon: "check",
+                            icon_color: "var(--theme)"
                         });
-                        document.body.appendChild(list);
-                        e.stopPropagation();
-                        window.addEventListener("click", () => {
-                            try {
-                                helper_list_display = false;
-                                document.body.removeChild(pg.$(".helper_list")[0]);
-                            } catch (e) {
-                            }
-                        }, {once: true});
-                    } else {
-                        helper_list_display = false;
-                        document.body.removeChild(pg.$(".helper_list")[0]);
-                    }
+                        initInterface(0);
+                    }]].forEach((result) => {
+                        let element = cE({
+                            type: "div",
+                            attr: [["class", "helper_list_item button"]],
+                            innerHTML: "<span class='mi'>" + result[0] + "</span><span>" + result[1] + "</span>",
+                            onclick: result[4]
+                        });
+                        list.appendChild(element);
+                        HoverTips.create(element, result[2], result[3]);
+                    });
+                    document.body.appendChild(list);
+                    e.stopPropagation();
+                    window.addEventListener("click", () => {
+                        try {
+                            helper_list_display = false;
+                            document.body.removeChild(pg.$(".helper_list")[0]);
+                        } catch (e) {
+                        }
+                    }, {once: true});
+                } else {
+                    helper_list_display = false;
+                    document.body.removeChild(pg.$(".helper_list")[0]);
                 }
-            });
+            }
+        });
 
-            HoverTips.create(toggle, strings.helper_more, strings.helper_moreDescription)
+        HoverTips.create(toggle, strings.helper_more, strings.helper_moreDescription)
 
-            view.appendChild(toggle);
+        view.appendChild(toggle);
 
-            attachEvent.EditStation.attachClickEvent(pg.$("#drawable")[0]);
-            attachEvent.EditStation.attachMoveEvent(pg.$("#drawable")[0], pg.$("#cursor")[0]);
-            if (returnFunc)
-                returnFunc();
-        })
+        if (returnFunc)
+            returnFunc();
+
+        attachEvent.EditStation.attachClickEvent(pg.$("#drawable")[0]);
+        attachEvent.EditStation.attachMoveEvent(pg.$("#drawable")[0], pg.$("#cursor")[0]);
     }
 
 
