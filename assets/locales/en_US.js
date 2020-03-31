@@ -61,4 +61,6 @@ const strings = {
     cur_offLine: "Currently Offline",
     enabled: "Enabled",
     disabled: "Disabled",
+    noFileSystemError: "Your Browser Doesn't Support File System.",
+    initFileSystem: "File System Initialized",
 }

@@ -59,5 +59,6 @@ const strings = {
     cur_onLine: "当前在线",
     cur_offLine: "当前离线",
     enabled: "启用",
-    disabled: "关闭",
+    noFileSystemError: "您的浏览器不支持文件系统",
+    initFileSystem: "文已初始化",
 }

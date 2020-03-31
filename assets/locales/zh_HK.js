@@ -61,4 +61,6 @@ const strings = {
     cur_offLine: "當前離線",
     enabled: "啟用",
     disabled: "關閉",
+    noFileSystemError: "您嘅瀏覽器唔支持文件系統",
+    initFileSystem: "文件系統已初始化",
 }
