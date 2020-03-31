@@ -1,7 +1,9 @@
 pages:
   stage: deploy
+  script:
+    - cp / public
   artifacts:
     paths:
-      - /
+      - public
   only:
     - master
