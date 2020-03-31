@@ -1,0 +1,16 @@
+:root {
+    --grey: #888;
+    --black: #000;
+    --white: #fff;
+    --light: #ddd;
+    --dark: #222;
+    --theme100: #9dd91a;
+    --theme200: #91c819;
+    --theme300: #89bc1a;
+    --theme: #85b51c;
+    --theme500: #81b01b;
+    --theme600: #7ba918;
+    --theme700: #6c9416;
+    --theme800: #658a16;
+    --theme900: #5b7c14;
+}

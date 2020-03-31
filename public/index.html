@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1" name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <link href="./assets/mipmap/icon.png" rel="icon">
+    <title>PassionPenguin/RailMapMaker</title>
+    <style>
+        body {
+            background: #fff;
+            margin: 0
+        }
+
+        #drawable {
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 1;
+            width: 5000px;
+            height: 5000px
+        }
+
+        #cursor {
+            overflow: hidden;
+            width: 5px;
+            height: 5px;
+            background: #8b0000;
+            position: fixed;
+            z-index: 2;
+            transition: 50ms;
+            border-radius: 50%;
+            transform: translate(-50%, -50%)
+        }
+
+        #pg-app {
+            width: 100vw;
+            height: 100vh;
+            overflow: scroll;
+            position: relative
+        }
+
+        #resSvg {
+            position: absolute;
+            left: 0;
+            top: 0
+        }
+
+        #resSvg path.pathElement, #exportSvg path.pathElement {
+            stroke-width: 5px;
+            fill: transparent;
+            stroke-linejoin: round;
+            stroke-linecap: round;
+        }
+
+        #lineEditorPrompt {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 400px;
+            background: #fff;
+            z-index: 2;
+            border-radius: 10px 10px 0 0
+        }
+
+        #lineEditorColorPicker, #lineEditorNameInput, #lineEditorOpacityPicker {
+            display: block;
+            width: 200px;
+            height: 36px;
+            background: 0 0;
+            border: 0;
+            outline: 0;
+            font: 14px/1 Anodina, sans-serif;
+            text-align: left;
+            margin: 0 auto;
+            white-space: pre;
+            color: #444
+        }
+
+        #lineEditorPrompt .typeInfo {
+            width: 200px;
+            height: 24px;
+            text-align: left;
+            margin: 20px auto 0;
+            font: 900 12px/2 Anoidina, sans-serif;
+            padding-left: 15px
+        }
+
+        .toggle-Helper {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            width: 96px;
+            height: 48px;
+            background: var(--white);
+            text-align: center;
+            z-index: 999;
+            user-select: none;
+        }
+
+        .toggle-Helper .mi, .helper_list_item > .mi {
+            vertical-align: middle;
+            font: 18px/36px 'Material Icons', sans-serif;
+            margin-right: 12px;
+        }
+
+        .helper_list {
+            position: fixed;
+            bottom: 44px;
+            right: 0;
+            width: 96px;
+            background: var(--white);
+            z-index: 1001;
+            user-select: none;
+        }
+
+        .helper_list_item {
+            display: block;
+            margin: 10px 0;
+            text-align: center;
+        }
+    </style>
+    <link href="./dist/libs/bundle/PenguinUI/bundle.PenguinUI.css" rel="stylesheet">
+    <link href="./dist/libs/bundle/storyboard/bundle.storyboard.css" rel="stylesheet">
+    <link href="/Service/manifest.webmanifest" rel="manifest">
+</head>
+<body>
+<div id="pg-app"></div>
+<script src="./dist/libs/build.package.js"></script>
+<script>
+    window.pg = {
+        $: e => {
+            return document.querySelectorAll(e)
+        },
+    };
+    window.Int = val => {
+        return parseInt(val)
+    };
+    window.cE = data => {
+        if (data === undefined) data = {
+            type: 'div',
+            attr: [],
+            innerText: undefined,
+            innerHTML: undefined,
+            onclick: undefined
+        };
+        let e = document.createElement(data.type);
+        if (data.attr !== undefined) data.attr.forEach(attr => {
+            e.setAttribute(attr[0], attr[1])
+        });
+        if (data.innerText !== undefined) e.innerText = data.innerText;
+        if (data.innerHTML !== undefined) e.innerHTML = data.innerHTML;
+        if (data.onclick !== undefined) e.onclick = e => {
+            data.onclick(e)
+        };
+        return e
+    };
+    window.min = val => {
+        return val % 25 > 12.5 ? val + (25 - (val % 25)) : val - (val % 25)
+    };
+    if (!Array.prototype.last) {
+        Array.prototype.last = function () {
+            return this[this.length - 1]
+        }
+    }
+    builder.importScripts(['./dist/libs/bundle/PenguinUI/bundle.PenguinUI.js'], () => {
+        initPenguinUI(() => {
+            ProgressManager.create(0, 0, 0);
+            builder.init(() => {
+                initInterface(0);
+                if ('serviceWorker' in navigator) {
+                    navigator.serviceWorker
+                        .register('./Service/ServiceWorker.js')
+                        .then(() => {
+                            builder.debug("PassionPenguin/RailMapMaker", "build.package.js", "Service", "Service Worker Registered");
+                            if (CookieManager.get("popup_swRegistered") !== "true")
+                                NotificationManager.create(strings.serviceWorker, strings.serviceWorkerDescription, 999, {
+                                    icon: "settings",
+                                    priority: 2
+                                });
+                            CookieManager.set("popup_swRegistered", "true");
+                        });
+                }
+            })
+        })
+    })
+
+</script>
+</body>
+</html>
