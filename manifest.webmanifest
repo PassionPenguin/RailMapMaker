@@ -3,9 +3,9 @@
    "short_name":"RMG",
    "scope":"./",
    "start_url":".",
-   "display":"standalone",
+   "display":"fullscreen",
    "background_color":"#fff",
-   "theme_color":"#00bcd4",
+   "theme_color":"#b2ebf2",
    "description":"A tool for generating maps.",
    "icons":[
       {

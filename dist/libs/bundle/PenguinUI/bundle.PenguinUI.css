@@ -555,3 +555,12 @@ pg-switchtoggle[selected="true"] {
         margin: unset !important;
     }
 }
+
+@media all and (display-mode: standalone) {
+    .standalone-exclude {
+        overflow: hidden;
+        height: 0 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+}

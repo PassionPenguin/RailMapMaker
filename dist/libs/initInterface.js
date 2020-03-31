@@ -392,6 +392,7 @@ const initInterface = (type, returnFunc) => {
         }));
         storyboardCtrlList.appendChild(cE({
             type: "p",
+            attr: [["class", "standalone-exclude"]],
             innerHTML: "<span class='mi'>launch</span><span> " + strings.installApp + " </span>",
             onclick: () => {
 
