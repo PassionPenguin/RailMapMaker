@@ -5,12 +5,12 @@
    "start_url":".",
    "display":"standalone",
    "background_color":"#fff",
-   "theme_color":"#85b51c",
+   "theme_color":"#00bcd4",
    "description":"A tool for generating maps.",
    "icons":[
       {
-         "src":"./assets/mipmap/icon.png",
-         "sizes":"2134x2134",
+         "src":"./assets/mipmap/icon@1024.png",
+         "sizes":"1024x1024",
          "type":"image/png"
       },
       {
