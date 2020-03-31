@@ -9,7 +9,7 @@
  */
 
 const selectLineDialog = () => {
-    WindowManager.create(view => {
+    WindowManager.create((view, channelId) => {
         view.appendChild(cE({
             type: "h3",
             attr: [["style", "margin-top:20px;font:20px/1 Anodina,sans-serif;color:var(--dark);"]],
@@ -28,6 +28,7 @@ const selectLineDialog = () => {
                     pg.$("#selectLine_newPathToggle")[0].setAttribute("selected", "false");
                     state.newPath = false;
                     state.pathId = value.id
+                    WindowManager.remove(channelId);
                 }
             }));
         });
