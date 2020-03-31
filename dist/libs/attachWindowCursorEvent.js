@@ -38,7 +38,9 @@ const attachEvent = {
                 builder.debug("PassionPenguin/RailMapMaker", "attachWindowCursorEvent.js", "Path", "New Path Created: id=" + state.pathId);
             } else {
                 builder.debug("PassionPenguin/RailMapMaker", "attachWindowCursorEvent.js", "Path", "New Station Created: [x,y]=" + curX + ", " + curY);
-                contentData.pathInfo[state.pathId].stations.last().type = "common";
+                if (contentData.pathInfo[state.pathId].stations.length > 1)
+                    contentData.pathInfo[state.pathId].stations.last().type = "common";
+
                 contentData.pathInfo[state.pathId].stations.push({
                     x: curX, y: curY, type: "destination", routeToNext: "0"
                 });
@@ -52,7 +54,6 @@ const attachEvent = {
 
         attachClickEvent: (element) => {
             builder.debug("PassionPenguin/RailMapMaker", "attachWindowCursorEvent.js", "Event", "Event Attached: EditStation.Click");
-            element.addEventListener("click", attachEvent.EditStation.ClickEventListener);
             element.onclick = (event) => {
                 attachEvent.EditStation.ClickEventListener(event);
             }
