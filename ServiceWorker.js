@@ -9,7 +9,7 @@ self.addEventListener('install', function (e) {
                 './assets/locales/zh-YUE.js',
                 './assets/mipmap/border.png',
                 './assets/mipmap/grid.png',
-                './assets/mipmap/icon.png',
+                './assets/mipmap/icon@1024.png',
                 './assets/mipmap/opacity.png',
                 './dist/libs/bundle/PenguinUI/font/Anodina-Bold.otf',
                 './dist/libs/bundle/PenguinUI/font/Anodina-Regular.otf',

@@ -61,7 +61,7 @@ const initInterface = (type, returnFunc) => {
         storyboard.appendChild(cE({
             type: "div",
             attr: [["class", "pg-storyboard-banner"]],
-            innerHTML: "<img src='./assets/mipmap/icon.png' alt='icon'><h1>" + strings.appName + "</h1><h3>" + strings.version + " " + builder.displayVersion + "</h3>"
+            innerHTML: "<img src='./assets/mipmap/icon@1024.png' alt='icon'><h1>" + strings.appName + "</h1><h3>" + strings.version + " " + builder.displayVersion + "</h3>"
         }));
         let storyboardCtrlList = cE({
             type: "div",
@@ -245,7 +245,7 @@ const initInterface = (type, returnFunc) => {
                 WindowManager.create((e) => {
                     e.appendChild(cE({
                         type: "img",
-                        attr: [["alt", "icon"], ["style", "width: 128px;display: block;margin: 0 auto;"], ["src", "./assets/mipmap/icon.png"]]
+                        attr: [["alt", "icon"], ["style", "width: 128px;display: block;margin: 0 auto;"], ["src", "./assets/mipmap/icon@1024.png"]]
                     }));
                     e.appendChild(cE({
                         type: "p",
@@ -301,7 +301,7 @@ const initInterface = (type, returnFunc) => {
                 WindowManager.create((e) => {
                     e.appendChild(cE({
                         type: "img",
-                        attr: [["alt", "icon"], ["style", "width: 128px;display: block;margin: 0 auto;"], ["src", "./assets/mipmap/icon.png"]]
+                        attr: [["alt", "icon"], ["style", "width: 128px;display: block;margin: 0 auto;"], ["src", "./assets/mipmap/icon@1024.png"]]
                     }));
                     e.appendChild(cE({
                         type: "p",
@@ -321,7 +321,7 @@ const initInterface = (type, returnFunc) => {
                             WindowManager.create((e) => {
                                 e.appendChild(cE({
                                     type: "img",
-                                    attr: [["alt", "icon"], ["style", "width: 128px;display: block;margin: 0 auto;"], ["src", "./assets/mipmap/icon.png"]]
+                                    attr: [["alt", "icon"], ["style", "width: 128px;display: block;margin: 0 auto;"], ["src", "./assets/mipmap/icon@1024.png"]]
                                 }));
                                 e.appendChild(cE({
                                     type: "p",
@@ -360,7 +360,7 @@ const initInterface = (type, returnFunc) => {
                 WindowManager.create((e) => {
                     e.appendChild(cE({
                         type: "img",
-                        attr: [["alt", "icon"], ["style", "width: 128px;display: block;margin: 0 auto;"], ["src", "./assets/mipmap/icon.png"]]
+                        attr: [["alt", "icon"], ["style", "width: 128px;display: block;margin: 0 auto;"], ["src", "./assets/mipmap/icon@1024.png"]]
                     }));
                     e.appendChild(cE({
                         type: "p",

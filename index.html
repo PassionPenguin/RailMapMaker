@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="cn" manifest="./manifest.webmanifest">
+<html lang="cn">
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1" name="viewport">
     <meta content="ie=edge" http-equiv="X-UA-Compatible">
-    <link href="./assets/mipmap/icon.png" rel="icon">
+    <link href="./assets/mipmap/icon@1024.png" rel="icon">
     <title>PassionPenguin/RailMapMaker</title>
     <style>
         body {
@@ -167,7 +167,7 @@
             ProgressManager.create(0, 0, 0);
             builder.init(() => {
                 initInterface(0);
-                if ('serviceWorker' in navigator && navigator.onLine) {
+                if ('serviceWorker' in navigator) {
                     navigator.serviceWorker
                         .register('./ServiceWorker.js')
                         .then(() => {
