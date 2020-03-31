@@ -63,6 +63,6 @@ const strings = {
     disabled: "关闭",
     noFileSystemError: "你噶浏览器唔支持文件系统",
     initFileSystem: "文件系统已初始化",
-    noFile: "没有创建嘅文件",
+    noFile: "没有最近打开嘅文件",
     recentFiles: "最近打开嘅文件",
 }
