@@ -1,0 +1,40 @@
+self.addEventListener('install', function (e) {
+    e.waitUntil(
+        caches.open('mainPage').then(function (cache) {
+            return cache.addAll([
+                './',
+                './assets/locales/en_US.js',
+                './assets/locales/zh_CN.js',
+                './assets/locales/zh_HK.js',
+                './assets/locales/zh_YUE.js',
+                './assets/mipmap/border.png',
+                './assets/mipmap/grid.png',
+                './assets/mipmap/icon.png',
+                './assets/mipmap/opacity.png',
+                './dist/libs/bundle/PenguinUI/font/Anodina-Bold.otf',
+                './dist/libs/bundle/PenguinUI/font/Anodina-Regular.otf',
+                './dist/libs/bundle/PenguinUI/font/MaterialIcons-Regular.woff2',
+                './dist/libs/bundle/PenguinUI/require/color.css',
+                './dist/libs/bundle/PenguinUI/require/CookieManager.js',
+                './dist/libs/bundle/PenguinUI/require/HoverTips.js',
+                './dist/libs/bundle/PenguinUI/require/NotificationManager.js',
+                './dist/libs/bundle/PenguinUI/require/PenguinUI.selector.js',
+                './dist/libs/bundle/PenguinUI/require/PenguinUI.switchToggle.js',
+                './dist/libs/bundle/PenguinUI/require/ProgressManager.js',
+                './dist/libs/bundle/PenguinUI/require/utils.js',
+                './dist/libs/bundle/PenguinUI/require/WindowManager.js',
+                './dist/libs/bundle/PenguinUI/bundle.PenguinUI.js',
+                './dist/libs/bundle/PenguinUI/bundle.PenguinUI.css',
+                './dist/libs/bundle/storyboard/bundle.storyboard.css',
+                './dist/libs/attachWindowCursorEvent.js',
+                './dist/libs/build.package.js',
+                './dist/libs/drawMap.js',
+                './dist/libs/exportDrawable.js',
+                './dist/libs/initInterface.js',
+                './dist/libs/lineEditorComp.js',
+                './dist/libs/selectLineDialog.js',
+                './index.html',
+            ]);
+        })
+    );
+});

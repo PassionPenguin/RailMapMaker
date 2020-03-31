@@ -123,7 +123,7 @@
     </style>
     <link href="./dist/libs/bundle/PenguinUI/bundle.PenguinUI.css" rel="stylesheet">
     <link href="./dist/libs/bundle/storyboard/bundle.storyboard.css" rel="stylesheet">
-    <link href="./Service/manifest.webmanifest" rel="manifest">
+    <link href="./manifest.webmanifest" rel="manifest">
 </head>
 <body>
 <div id="pg-app"></div>
@@ -171,9 +171,9 @@
                 initInterface(0);
                 if ('serviceWorker' in navigator) {
                     navigator.serviceWorker
-                        .register('./Service/ServiceWorker.js')
+                        .register('./ServiceWorker.js', {scope: "."})
                         .then(() => {
-                            builder.debug("PassionPenguin/RailMapMaker", "build.package.js", "Service", "Service Worker Registered");
+                            builder.debug("PassionPenguin/RailMapMaker", "Main Script", "Service", "Service Worker Registered");
                             if (CookieManager.get("popup_swRegistered") !== "true")
                                 NotificationManager.create(strings.serviceWorker, strings.serviceWorkerDescription, 999, {
                                     icon: "settings",
