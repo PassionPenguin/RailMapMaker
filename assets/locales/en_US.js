@@ -64,4 +64,5 @@ const strings = {
     noFileSystemError: "Your Browser Doesn't Support File System.",
     initFileSystem: "File System Initialized",
     noFile: "No Existing File.",
+    recentFiles: "Recent Open Files",
 }

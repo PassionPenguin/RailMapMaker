@@ -64,4 +64,5 @@ const strings = {
     noFileSystemError: "您嘅瀏覽器唔支持文件系統",
     initFileSystem: "文件系統已初始化",
     noFile: "沒有創建嘅文件",
+    recentFiles: "最近打開嘅文件",
 }
