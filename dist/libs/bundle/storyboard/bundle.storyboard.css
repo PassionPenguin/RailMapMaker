@@ -8,11 +8,37 @@
 
  */
 
-.pg-storyboard {
+.pg-storyboard, .pg-storyboard-fileList {
     position: fixed;
     left: 50%;
     top: 50%;
+    width: 200px;
+    text-align: center;
+    height: 540px;
     transform: translate(-50%, -50%);
+}
+
+.pg-storyboard-fileList {
+    left: 200vw;
+}
+
+.pg-storyboard-fileList.active {
+    left: 50%;
+}
+
+@media screen and (min-width: 1024px) {
+
+    .pg-storyboard {
+        transform: translate(-200%, -50%);
+    }
+
+    .pg-storyboard-fileList, .pg-storyboard-fileList.active {
+        left: 50%;
+        width: 400px;
+        height: 540px;
+        transform: translateY(-50%);
+    }
+
 }
 
 .pg-storyboard > .pg-storyboard-banner > img {
@@ -51,4 +77,36 @@
 .pg-storyboard > .pg-storyboard-list * {
     vertical-align: middle;
     line-height: 24px;
+}
+
+.pg-storyboard-file {
+    margin: 10px 0;
+    text-align: left;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.pg-storyboard-file:hover {
+    background: #00000011;
+}
+
+.pg-storyboard-file:focus {
+    background: #00000022;
+}
+
+.pg-storyboard-file:focus .fileName {
+    color: var(--theme200);
+}
+
+.pg-storyboard-file .fileName {
+    font: 800 20px/1 Anodina, sans-serif;
+    color: var(--dark);
+    margin: 0;
+}
+
+.pg-storyboard-file .fileMeta {
+    font: 13px/1 Anodina, sans-serif;
+    color: var(--grey);
+    margin-top: 5px;
 }
