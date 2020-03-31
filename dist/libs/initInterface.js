@@ -63,6 +63,17 @@ const initInterface = (type, returnFunc) => {
         storyboard.appendChild(storyboardCtrlList);
         storyboardCtrlList.appendChild(cE({
             type: "p",
+            attr: [["class", "xlg-exclude"]],
+            innerHTML: "<span class='mi'>folder</span><span> " + strings.recentFiles + " </span>",
+            onclick: () => {
+                // open preference window
+                WindowManager.create(view => {
+                    view.appendChild(storyboardFileList);
+                }, {size: "large"});
+            }
+        }));
+        storyboardCtrlList.appendChild(cE({
+            type: "p",
             innerHTML: "<span class='mi'>attachment</span><span> " + strings.importFile + " (*.rmg) </span>",
             onclick: () => {
                 // upload an rmg file
