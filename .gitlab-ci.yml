@@ -1,9 +1,0 @@
-pages:
-  stage: deploy
-  script:
-    - cd .
-  artifacts:
-    paths:
-      - public
-  only:
-    - master

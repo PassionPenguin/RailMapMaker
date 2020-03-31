@@ -8,6 +8,4 @@ Co-authored by @Wongchito
 
 \[Gitee Demo]: http://passionpenguin.gitee.io/RailMapMaker
 
-\[GitLab Demo]: http://passionpenguin.gitlab.io/RailMapMaker
-
 Inspired by MiniMetro
