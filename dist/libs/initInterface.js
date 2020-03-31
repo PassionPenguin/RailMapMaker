@@ -153,37 +153,37 @@ const initInterface = (type, returnFunc) => {
                         "stations": [{"x": 225, "y": 1025, "type": "destination", "routeToNext": ""}, {
                             "x": 225,
                             "y": 900,
-                            "type": "destination",
+                            "type": "common",
                             "routeToNext": ""
-                        }, {"x": 225, "y": 775, "type": "destination", "routeToNext": ""}, {
+                        }, {"x": 225, "y": 775, "type": "common", "routeToNext": ""}, {
                             "x": 225,
                             "y": 650,
-                            "type": "destination",
+                            "type": "common",
                             "routeToNext": ""
-                        }, {"x": 225, "y": 525, "type": "destination", "routeToNext": ""}, {
+                        }, {"x": 225, "y": 525, "type": "common", "routeToNext": ""}, {
                             "x": 350,
                             "y": 525,
-                            "type": "destination",
+                            "type": "common",
                             "routeToNext": ""
-                        }, {"x": 475, "y": 525, "type": "destination", "routeToNext": ""}, {
+                        }, {"x": 475, "y": 525, "type": "common", "routeToNext": ""}, {
                             "x": 600,
                             "y": 525,
-                            "type": "destination",
+                            "type": "common",
                             "routeToNext": ""
-                        }, {"x": 725, "y": 525, "type": "destination", "routeToNext": ""}, {
+                        }, {"x": 725, "y": 525, "type": "common", "routeToNext": ""}, {
                             "x": 850,
                             "y": 525,
-                            "type": "destination",
+                            "type": "common",
                             "routeToNext": ""
-                        }, {"x": 975, "y": 525, "type": "destination", "routeToNext": ""}, {
+                        }, {"x": 975, "y": 525, "type": "common", "routeToNext": ""}, {
                             "x": 1100,
                             "y": 525,
-                            "type": "destination",
+                            "type": "common",
                             "routeToNext": ""
-                        }, {"x": 1225, "y": 525, "type": "destination", "routeToNext": ""}, {
+                        }, {"x": 1225, "y": 525, "type": "common", "routeToNext": ""}, {
                             "x": 1325,
                             "y": 425,
-                            "type": "destination",
+                            "type": "common",
                             "routeToNext": ""
                         }, {"x": 1225, "y": 325, "type": "destination", "routeToNext": ""}]
                     }]
