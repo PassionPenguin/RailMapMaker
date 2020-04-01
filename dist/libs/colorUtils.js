@@ -82,11 +82,11 @@ const colorUtils = {
         return colorUtils.RGBtoHSV(colorUtils.HEXtoRGB(hex));
     },
     getColor: (element, curValue, palette, returnFunc) => {
-        let colorSelector = cE({type: "div", attr: [["class", "pg-color-selector"]]});
+        let colorSelector = cE({type: "div", attr: [["class", "pg-color-selector"], ["style", "position:relative;"]]});
         element.appendChild(colorSelector);
         let brightnessAndSaturation = cE({
             type: "div",
-            attr: [["style", "position: relative;width:320px;height:180px;background:#f00"]]
+            attr: [["style", "margin:0 auto;position: relative;width:320px;height:180px;background:#f00"]]
         });
         let brightness = cE({
             type: "div",
@@ -106,7 +106,7 @@ const colorUtils = {
 
         let otherArea = cE({
             type: "div",
-            attr: [["class", "pg-color-other"], ["style", "width:320px;height:120px;position:relative;font-size:0;"]]
+            attr: [["class", "pg-color-other"], ["style", "margin:0 auto;width:320px;height:120px;position:relative;font-size:0;"]]
         });
         let resultColor = cE({
             type: "div",
@@ -141,55 +141,124 @@ const colorUtils = {
         otherArea.appendChild(hueAndAlpha);
         colorSelector.appendChild(otherArea);
 
-        let palettes = cE({type: "div", attr: [["style", ""]]});
-        colorSelector.appendChild(palettes);
-        colorPalette.forEach(colors => {
-            let palette = cE({type: "div", attr: [["style", "font-size:0;"]]});
-            palettes.appendChild(palette);
-            colors.colors.forEach(color => {
-                let colorBlock = cE({
-                    type: "div",
-                    attr: [["style", `background:${color[0]};width:20px;height:20px;border-radius:4px;display:inline-block;margin:10px;`]],
-                    onclick: () => {
-                        let HSV = colorUtils.HEXtoHSV(color[0]);
-                        console.log(HSV);
-                        HueCursor.style.left = (HSV.h * 240 + 7.5) + "px";
-                        const rgb = colorUtils.HSVToRGB({
-                                h: HSV.h, s: 1, v: 1
-                            }
-                        );
-                        brightnessAndSaturation.style.backgroundColor = `rgb(${rgb.r},${rgb.g},${rgb.b})`;
-                        BaSCursor.style.left = (HSV.s * 320 + 5) + "px";
-                        BaSCursor.style.top = (185 - HSV.v * 180) + "px";
-                        resultColor.style.backgroundColor = color[0];
-                    }
-                });
-                palette.appendChild(colorBlock);
-                let hover = null, bcr = colorBlock.getBoundingClientRect();
-                colorBlock.onmouseenter = () => {
-                    hover = cE({
-                        type: "div",
-                        attr: [["style", `position:fixed;left:${bcr.x + 10}px;top:${bcr.y - 20}px;transform:translate(-50%,-50%);width:fit-content;padding:10px 20px;background:var(--white);border-radius:5px;`]],
-                        innerText: color[1]
-                    });
-                    document.body.appendChild(hover);
-                };
-                colorBlock.onmouseleave = () => {
-                    document.body.removeChild(hover);
-                };
+        let palettesBox = cE({
+            type: "div",
+            attr: [["style", "width:320px;margin:0 auto;font-size:0;max-height:200px;overflow:hidden scroll;"]]
+        });
+        let palettes = cE({type: "div", attr: [["style", "vertical-align:middle;width:280px;display:inline-block;"]]});
+
+        let selectPalette = cE({
+            type: "div",
+            attr: [["style", "width:320px;height:200px;position:absolute;bottom:0;left:50%;transform:translate(-50%);background:var(--white);visibility:hidden;opacity:0;transition:500ms;"]]
+        });
+        let selectPaletteToggle = cE({
+            type: "div",
+            attr: [["style", "width:40px;display:inline-block;vertical-align:top;"]],
+            innerHTML: "<span class='mi button' style='text-align:center;color:var(--dark);font:900 18px/36px \"Material Icons\",sans-serif;'>unfold_more</span>",
+            onclick: () => {
+                selectPalette.style.opacity = "1";
+                selectPalette.style.visibility = "visible";
+            }
+        });
+
+        palettesBox.appendChild(palettes);
+        palettesBox.appendChild(selectPaletteToggle);
+        colorSelector.appendChild(palettesBox);
+        colorSelector.appendChild(selectPalette);
+        let paletteContainer = cE({type: "div", attr: [["style", "font-size:0;"]]});
+        palettes.appendChild(paletteContainer);
+        colorPalette[0].colors.forEach(color => {
+            let colorBlock = cE({
+                type: "div",
+                attr: [["style", `background:${color[0]};width:18px;height:18px;border-radius:4px;display:inline-block;margin:5px;`]],
+                onclick: () => {
+                    let HSV = colorUtils.HEXtoHSV(color[0]);
+                    HueCursor.style.left = (HSV.h * 240 + 7.5) + "px";
+                    const rgb = colorUtils.HSVToRGB({
+                            h: HSV.h, s: 1, v: 1
+                        }
+                    );
+                    brightnessAndSaturation.style.backgroundColor = `rgb(${rgb.r},${rgb.g},${rgb.b})`;
+                    BaSCursor.style.left = (HSV.s * 320 + 5) + "px";
+                    BaSCursor.style.top = (185 - HSV.v * 180) + "px";
+                    resultColor.style.backgroundColor = color[0];
+                }
             });
+            paletteContainer.appendChild(colorBlock);
+            let hover = null, bcr = colorBlock.getBoundingClientRect();
+            colorBlock.onmouseenter = () => {
+                hover = cE({
+                    type: "div",
+                    attr: [["style", `position:fixed;left:${bcr.x + 9}px;top:${bcr.y - 18}px;transform:translate(-50%,-50%);width:fit-content;padding:10px 20px;background:var(--white);border-radius:5px;z-index:${Int(getStyle(element, "zIndex")) + 1};box-shadow:rgba(0, 0, 0, 0.1) 0 0 6px, rgba(0, 0, 0, 0.05) 0 1px 6px;font: 800 14px/1 Anodina,sans-serif;`]],
+                    innerText: color[1]
+                });
+                document.body.appendChild(hover);
+            };
+            colorBlock.onmouseleave = () => {
+                document.body.removeChild(hover);
+            };
+        });
+
+        colorPalette.forEach((colors, index) => {
+            let colorsPreview = "";
+            [0, 1, 2, 3, 4, 5].forEach(i => {
+                colorsPreview += `<div style="background:${colors.colors[i][0]};width:18px;height:18px;border-radius:4px;display:inline-block;margin:5px;vertical-align:middle;"></div>`
+            });
+            selectPalette.appendChild(cE({
+                type: "div",
+                attr: [["style", "padding:5px;"], ["class", "button"]],
+                innerHTML: `<span style="font:900 16px/28px Anodina, sans-serif;margin-right:20px;color:var(--grey);">${colors.name}</span>${colorsPreview}`,
+                onclick: () => {
+                    palettes.innerHTML = "";
+                    selectPalette.style.opacity = "0";
+                    selectPalette.style.visibility = "hidden";
+                    let paletteContainer = cE({type: "div", attr: [["style", "font-size:0;"]]});
+                    palettes.appendChild(paletteContainer);
+                    colorPalette[index].colors.forEach(color => {
+                        let colorBlock = cE({
+                            type: "div",
+                            attr: [["style", `background:${color[0]};width:18px;height:18px;border-radius:4px;display:inline-block;margin:5px;`]],
+                            onclick: () => {
+                                let HSV = colorUtils.HEXtoHSV(color[0]);
+                                HueCursor.style.left = (HSV.h * 240 + 7.5) + "px";
+                                const rgb = colorUtils.HSVToRGB({
+                                        h: HSV.h, s: 1, v: 1
+                                    }
+                                );
+                                brightnessAndSaturation.style.backgroundColor = `rgb(${rgb.r},${rgb.g},${rgb.b})`;
+                                BaSCursor.style.left = (HSV.s * 320 + 5) + "px";
+                                BaSCursor.style.top = (185 - HSV.v * 180) + "px";
+                                resultColor.style.backgroundColor = color[0];
+                            }
+                        });
+                        paletteContainer.appendChild(colorBlock);
+                        let hover = null, bcr = colorBlock.getBoundingClientRect();
+                        colorBlock.onmouseenter = () => {
+                            hover = cE({
+                                type: "div",
+                                attr: [["style", `position:fixed;left:${bcr.x + 9}px;top:${bcr.y - 18}px;transform:translate(-50%,-50%);width:fit-content;padding:10px 20px;background:var(--white);border-radius:5px;z-index:${Int(getStyle(element, "zIndex")) + 1};box-shadow:rgba(0, 0, 0, 0.1) 0 0 6px, rgba(0, 0, 0, 0.05) 0 1px 6px;font: 800 14px/1 Anodina,sans-serif;`]],
+                                innerText: color[1]
+                            });
+                            document.body.appendChild(hover);
+                        };
+                        colorBlock.onmouseleave = () => {
+                            document.body.removeChild(hover);
+                        };
+                    });
+                }
+            }));
         });
 
 
         brightnessAndSaturation.onclick = (event) => {
-            if (event.clientX > 320 || event.clientX < 0 || event.clientY > 180 || event.clientY < 0) return;
+            if (event.offsetX > 320 || event.offsetX < 0 || event.offsetY > 180 || event.offsetY < 0) return;
             BaSHandler(event);
         }
         brightnessAndSaturation.onmousedown = (mouseDownEvent) => {
-            if (mouseDownEvent.clientX > 320 || mouseDownEvent.clientX < 0 || mouseDownEvent.clientY > 180 || mouseDownEvent.clientY < 0) return;
+            if (mouseDownEvent.offsetX > 320 || mouseDownEvent.offsetX < 0 || mouseDownEvent.offsetY > 180 || mouseDownEvent.offsetY < 0) return;
             BaSHandler(mouseDownEvent);
             brightnessAndSaturation.onmousemove = (mouseOverEvent) => {
-                if (mouseOverEvent.clientX > 320 || mouseOverEvent.clientX < 0 || mouseOverEvent.clientY > 180 || mouseOverEvent.clientY < 0) return;
+                if (mouseOverEvent.offsetX > 320 || mouseOverEvent.offsetX < 0 || mouseOverEvent.offsetY > 180 || mouseOverEvent.offsetY < 0) return;
                 BaSHandler(mouseOverEvent);
             };
             brightnessAndSaturation.onmouseup = brightnessAndSaturation.onmouseleave = () => {
@@ -198,14 +267,17 @@ const colorUtils = {
             };
         }
         HueSelector.onclick = (event) => {
-            if (event.clientX > 322.5 || event.clientX < 82.5) return;
+            if (event.target !== HueSelector) return;
+            if (event.offsetX > 240 || event.offsetX < 0) return;
             HueHandler(event);
         }
         HueSelector.onmousedown = (mouseDownEvent) => {
-            if (mouseDownEvent.clientX > 322.5 || mouseDownEvent.clientX < 82.5) return;
+            if (mouseDownEvent.target !== HueSelector) return;
+            if (mouseDownEvent.offsetX > 240 || mouseDownEvent.offsetX < 0) return;
             HueHandler(mouseDownEvent);
             HueSelector.onmousemove = (mouseOverEvent) => {
-                if (mouseOverEvent.clientX > 322.5 || mouseOverEvent.clientX < 82.5) return;
+                if (mouseOverEvent.target !== HueSelector) return;
+                if (mouseOverEvent.offsetX > 240 || mouseOverEvent.offsetX < 0) return;
                 HueHandler(mouseOverEvent);
             };
             HueSelector.onmouseup = HueSelector.onmouseleave = () => {
@@ -214,15 +286,19 @@ const colorUtils = {
             };
         }
         AlphaSelector.onclick = (event) => {
-            if (event.clientX > 322.5 || event.clientX < 82.5) return;
+            if (event.target !== AlphaSelector) return;
+            if (event.offsetX > 240 || event.offsetX < 0) return;
             AlphaHandler(event);
         }
         AlphaSelector.onmousedown = (mouseDownEvent) => {
-            if (mouseDownEvent.clientX > 322.5 || mouseDownEvent.clientX < 82.5) return;
+            if (mouseDownEvent.target !== AlphaSelector) return;
+            if (mouseDownEvent.offsetX > 240 || mouseDownEvent.offsetX < 0) return;
             AlphaHandler(mouseDownEvent);
             AlphaSelector.onmousemove = (mouseOverEvent) => {
-                if (mouseOverEvent.clientX > 322.5 || mouseOverEvent.clientX < 82.5) return;
+                if (mouseOverEvent.target !== AlphaSelector) return;
+                if (mouseOverEvent.offsetX > 240 || mouseOverEvent.offsetX < 0) return;
                 AlphaHandler(mouseOverEvent);
+                console.log(mouseOverEvent.offsetX, mouseOverEvent.offsetY, mouseOverEvent.target);
             };
             AlphaSelector.onmouseup = AlphaSelector.onmouseleave = () => {
                 AlphaSelector.onmousemove = () => {
@@ -232,25 +308,25 @@ const colorUtils = {
 
         const BaSHandler = (e) => {
             let event = {};
-            if (e.clientX - 5 >= 320) event.clientX = 320;
-            else if (e.clientY - 5 < 0) event.clientY = 0;
-            else event.clientX = e.clientX + 5;
-            if (e.clientY - 5 >= 180) event.clientX = 180;
-            else if (e.clientY - 5 < 0) event.clientY = 0;
-            else event.clientY = e.clientY + 5;
-            BaSCursor.style.left = event.clientX + "px";
-            BaSCursor.style.top = event.clientY + "px";
+            if (e.offsetX >= 320) event.offsetX = 320;
+            else if (e.offsetX < 10) event.offsetX = 10;
+            else event.offsetX = e.offsetX;
+            if (e.offsetY >= 180) event.offsetY = 180;
+            else if (e.offsetY < 10) event.offsetY = 10;
+            else event.offsetY = e.offsetY;
+            BaSCursor.style.left = event.offsetX + "px";
+            BaSCursor.style.top = event.offsetY + "px";
             render();
         };
 
         const HueHandler = (e) => {
             let event = {};
-            if (e.clientX - 340 >= 0) event.clientX = 332.5;
-            else if (e.clientX - 90 < 0) event.clientX = 90;
-            else event.clientX = e.clientX + 7.5;
-            HueCursor.style.left = (event.clientX - 82.5) + "px";
+            if (e.offsetX - 240 >= 0) event.offsetX = 240;
+            else if (e.offsetX < 0) event.offsetX = 0;
+            else event.offsetX = e.offsetX + 7.5;
+            HueCursor.style.left = event.offsetX + "px";
             const rgb = colorUtils.HSVToRGB({
-                    h: (parseFloat(HueCursor.style.left) - 7.5) / 240 * 360, s: 100, v: 100
+                    h: (parseFloat(HueCursor.style.left) - 7.5) / 240, s: 1, v: 1
                 }
             );
             brightnessAndSaturation.style.backgroundColor = `rgb(${rgb.r},${rgb.g},${rgb.b})`;
@@ -259,10 +335,10 @@ const colorUtils = {
 
         const AlphaHandler = (e) => {
             let event = {};
-            if (e.clientX - 340 >= 0) event.clientX = 332.5;
-            else if (e.clientX - 90 < 0) event.clientX = 90;
-            else event.clientX = e.clientX + 7.5;
-            AlphaCursor.style.left = (event.clientX - 82.5) + "px";
+            if (e.offsetX - 240 >= 0) event.offsetX = 240;
+            else if (e.offsetX < 0) event.offsetX = 0;
+            else event.offsetX = e.offsetX + 7.5;
+            AlphaCursor.style.left = event.offsetX + "px";
             render();
         };
 
