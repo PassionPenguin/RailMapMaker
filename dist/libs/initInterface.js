@@ -393,7 +393,7 @@ const initInterface = (type, returnFunc) => {
         storyboardCtrlList.appendChild(cE({
             type: "p",
             attr: [["class", "standalone-exclude"]],
-            innerHTML: "<span class='mi'>launch</span><span> " + strings.installApp + " </span>",
+            innerHTML: "<span class='mi'>get_app</span><span> " + strings.installApp + " </span>",
             onclick: () => {
 
                 WindowManager.create((view, channelId) => {
@@ -490,14 +490,16 @@ const initInterface = (type, returnFunc) => {
                         exportDialog(pg.$("#resSvg")[0]);
                     }], ["settings", strings.settings, strings.openSettings, strings.openSettingsDescription, () => {
                         // prefDialog()
-                    }], ["edit", strings.path, strings.path, strings.pathDescription, () => {
-                        selectLineDialog();
+                    }], ["mouse", strings.select, strings.selectPath, strings.selectPathDescription, () => {
+                        LineEditorComp.showLineEditor();
                     }], ["home", strings.home, strings.home, strings.backHomeDescription, () => {
                         NotificationManager.create(strings.system, strings.fileSaved, 0, {
                             icon: "check",
                             icon_color: "var(--theme)"
                         });
                         initInterface(0);
+                    }], ["build", strings.edit, strings.edit, strings.editPathsInfo, () => {
+                        LineEditorComp.showLineEditor();
                     }]].forEach((result) => {
                         let element = cE({
                             type: "div",
