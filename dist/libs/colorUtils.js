@@ -74,12 +74,26 @@ const colorUtils = {
             g: Math.round(g * 255),
             b: Math.round(b * 255)
         };
-    }, HEXtoRGB: function (hex) {
+    }, HEXtoRGB: (hex) => {
         hex = parseInt(((hex.indexOf('#') > -1) ? hex.substring(1) : hex), 16);
         return {r: hex >> 16, g: (hex & 0x00FF00) >> 8, b: (hex & 0x0000FF)};
     },
-    HEXtoHSV: function (hex) {
+    HEXtoHSV: (hex) => {
         return colorUtils.RGBtoHSV(colorUtils.HEXtoRGB(hex));
+    },
+    RGBtoHEX: (rgb) => {
+        let hex = [
+            rgb.r.toString(16),
+            rgb.g.toString(16),
+            rgb.b.toString(16)
+        ];
+        hex.map(function (str, i) {
+            if (str.length === 1) {
+                hex[i] = '0' + str;
+            }
+        });
+
+        return hex.join('');
     },
     getColor: (element, curValue, palette, returnFunc) => {
         let colorSelector = cE({type: "div", attr: [["class", "pg-color-selector"], ["style", "position:relative;"]]});
@@ -249,6 +263,28 @@ const colorUtils = {
             }));
         });
 
+        let inputArea = cE({
+            type: "div",
+            attr: [["style", "margin:0 auto;width:320px;font-size:0;height:44px;vertical-align:middle;"]]
+        });
+        let input = cE({
+            type: "input",
+            attr: [["style", "outline:none;padding:5px;display:inline-block;width:240px;font-size:14px;vertical-align:middle;"], ["class", "button"], ["placeholder", "#000000"]],
+            innerText: "#"
+        });
+        let submit = cE({
+            type: "button",
+            attr: [["class", "button"], ["style", "display:inline-block;width:50px;font-size:18px;height:50px;vertical-align:middle;"]],
+            innerHTML: "<span class='mi'>done</span>",
+            onclick: (e) => {
+                console.log(input.value);
+                writer(colorUtils.HEXtoHSV(input.value));
+            }
+        });
+        inputArea.appendChild(input);
+        inputArea.appendChild(submit);
+        colorSelector.appendChild(inputArea);
+
 
         brightnessAndSaturation.onclick = (event) => {
             if (event.offsetX > 320 || event.offsetX < 0 || event.offsetY > 180 || event.offsetY < 0) return;
@@ -352,7 +388,25 @@ const colorUtils = {
                 }
             );
             resultColor.style.backgroundColor = `rgba(${rgb.r},${rgb.g},${rgb.b},${alpha})`;
+            input.value = "#" + colorUtils.RGBtoHEX(rgb);
         };
 
+        const writer = (HSV) => {
+            console.log(HSV);
+            const bgRgb = colorUtils.HSVToRGB({
+                    h: HSV.h, s: 1, v: 1
+                }
+            );
+            const rgb = colorUtils.HSVToRGB({
+                    h: HSV.h, s: HSV.s, v: HSV.v
+                }
+            );
+            console.log(rgb);
+            brightnessAndSaturation.style.backgroundColor = `rgb(${bgRgb.r},${bgRgb.g},${bgRgb.b})`;
+            HueCursor.style.left = (HSV.h * 240 + 7.5) + "px";
+            BaSCursor.style.left = (HSV.s * 320 + 5) + "px";
+            BaSCursor.style.top = (185 - HSV.v * 180) + "px";
+            resultColor.style.backgroundColor = `rgba(${rgb.r},${rgb.g},${rgb.b},1)`;
+        }
     }
 };
