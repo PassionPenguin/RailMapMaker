@@ -83,6 +83,7 @@ const colorUtils = {
     },
     getColor: (element, curValue, palette, returnFunc) => {
         let colorSelector = cE({type: "div", attr: [["class", "pg-color-selector"]]});
+        element.appendChild(colorSelector);
         let brightnessAndSaturation = cE({
             type: "div",
             attr: [["style", "position: relative;width:320px;height:180px;background:#f00"]]
@@ -141,8 +142,10 @@ const colorUtils = {
         colorSelector.appendChild(otherArea);
 
         let palettes = cE({type: "div", attr: [["style", ""]]});
+        colorSelector.appendChild(palettes);
         colorPalette.forEach(colors => {
             let palette = cE({type: "div", attr: [["style", "font-size:0;"]]});
+            palettes.appendChild(palette);
             colors.colors.forEach(color => {
                 let colorBlock = cE({
                     type: "div",
@@ -162,10 +165,20 @@ const colorUtils = {
                     }
                 });
                 palette.appendChild(colorBlock);
+                let hover = null, bcr = colorBlock.getBoundingClientRect();
+                colorBlock.onmouseenter = () => {
+                    hover = cE({
+                        type: "div",
+                        attr: [["style", `position:fixed;left:${bcr.x + 10}px;top:${bcr.y - 20}px;transform:translate(-50%,-50%);width:fit-content;padding:10px 20px;background:var(--white);border-radius:5px;`]],
+                        innerText: color[1]
+                    });
+                    document.body.appendChild(hover);
+                };
+                colorBlock.onmouseleave = () => {
+                    document.body.removeChild(hover);
+                };
             });
-            palettes.appendChild(palette);
         });
-        colorSelector.appendChild(palettes);
 
 
         brightnessAndSaturation.onclick = (event) => {
@@ -264,8 +277,6 @@ const colorUtils = {
             );
             resultColor.style.backgroundColor = `rgba(${rgb.r},${rgb.g},${rgb.b},${alpha})`;
         };
-
-        element.appendChild(colorSelector);
 
     }
 };
