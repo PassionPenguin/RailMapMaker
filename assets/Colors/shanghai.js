@@ -1,4 +1,4 @@
-const Shanghai: LineEntry[] = [
+const Shanghai = [
     {
         id: 'sh1',
         name: {
@@ -244,4 +244,4 @@ const Shanghai: LineEntry[] = [
     },
 ];
 
-export default Shanghai;
+

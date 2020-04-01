@@ -1,4 +1,4 @@
-const Dongguan: LineEntry[] = [
+const Dongguan = [
     {
         id: 'r1',
         name: {
@@ -37,4 +37,4 @@ const Dongguan: LineEntry[] = [
     },
 ];
 
-export default Dongguan;
+

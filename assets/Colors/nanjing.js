@@ -1,4 +1,4 @@
-const Nanjing: LineEntry[] = [
+const Nanjing = [
     {
         id: 'nj1',
         name: {
@@ -154,4 +154,4 @@ const Nanjing: LineEntry[] = [
     },
 ];
 
-export default Nanjing;
+

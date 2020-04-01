@@ -1,4 +1,4 @@
-const Xian: LineEntry[] = [
+const Xian = [
     {
         id: 'xa1',
         name: {
@@ -91,4 +91,4 @@ const Xian: LineEntry[] = [
     },
 ];
 
-export default Xian;
+

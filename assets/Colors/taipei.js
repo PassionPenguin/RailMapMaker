@@ -1,4 +1,4 @@
-const Taipei: LineEntry[] = [
+const Taipei = [
     {
         id: 'br',
         name: {
@@ -105,4 +105,4 @@ const Taipei: LineEntry[] = [
     },
 ];
 
-export default Taipei;
+

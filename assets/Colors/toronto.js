@@ -1,4 +1,4 @@
-const Toronto: LineEntry[] = [
+const Toronto = [
     {
         id: 'l1',
         name: {
@@ -62,4 +62,4 @@ const Toronto: LineEntry[] = [
     },
 ];
 
-export default Toronto;
+

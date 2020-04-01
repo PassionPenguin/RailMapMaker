@@ -1,4 +1,4 @@
-const Guangzhou: LineEntry[] = [
+const Guangzhou = [
     {
         id: 'gz1',
         name: {
@@ -247,4 +247,4 @@ const Guangzhou: LineEntry[] = [
     },
 ];
 
-export default Guangzhou;
+

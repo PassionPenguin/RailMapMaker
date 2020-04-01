@@ -1,4 +1,4 @@
-const Other: LineEntry[] = [
+const Other = [
     {
         id: 'other',
         name: {
@@ -10,4 +10,4 @@ const Other: LineEntry[] = [
     },
 ];
 
-export default Other;
+

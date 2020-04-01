@@ -1,4 +1,4 @@
-const Tianjin: LineEntry[] = [
+const Tianjin = [
     {
         id: 'tj1',
         name: {
@@ -265,4 +265,4 @@ const Tianjin: LineEntry[] = [
     },
 ];
 
-export default Tianjin;
+

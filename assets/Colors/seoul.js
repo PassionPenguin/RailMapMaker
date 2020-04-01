@@ -1,4 +1,4 @@
-const Seoul: LineEntry[] = [
+const Seoul = [
     {
         id: 'su1',
         name: {
@@ -185,4 +185,4 @@ const Seoul: LineEntry[] = [
     },
 ];
 
-export default Seoul;
+

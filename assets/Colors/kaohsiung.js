@@ -1,4 +1,4 @@
-const Kaohsiung: LineEntry[] = [
+const Kaohsiung = [
     {
         id: 'red',
         name: {
@@ -109,4 +109,4 @@ const Kaohsiung: LineEntry[] = [
     },
 ];
 
-export default Kaohsiung;
+

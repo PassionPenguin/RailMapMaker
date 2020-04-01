@@ -1,4 +1,4 @@
-const Beijing: LineEntry[] = [
+const Beijing = [
     {
         id: 'bj1',
         name: {
@@ -180,5 +180,3 @@ const Beijing: LineEntry[] = [
         colour: '#0049A5',
     },
 ];
-
-export default Beijing;

@@ -1,4 +1,4 @@
-const HongKong: LineEntry[] = [
+const HongKong = [
     {
         id: 'twl',
         name: {
@@ -306,4 +306,4 @@ const HongKong: LineEntry[] = [
     },
 ];
 
-export default HongKong;
+

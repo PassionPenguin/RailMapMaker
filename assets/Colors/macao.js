@@ -1,4 +1,4 @@
-const Macao: LineEntry[] = [
+const Macao = [
     {
         id: 'taipa',
         name: {
@@ -65,4 +65,4 @@ const Macao: LineEntry[] = [
     },
 ];
 
-export default Macao;
+

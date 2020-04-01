@@ -1,4 +1,4 @@
-const Foshan: LineEntry[] = [
+const Foshan = [
     {
         id: 'fs1',
         name: {
@@ -73,4 +73,4 @@ const Foshan: LineEntry[] = [
     },
 ];
 
-export default Foshan;
+

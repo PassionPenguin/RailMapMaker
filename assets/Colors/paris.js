@@ -1,4 +1,4 @@
-const Paris: LineEntry[] = [
+const Paris = [
     {
         id: 'm1',
         name: {
@@ -521,4 +521,4 @@ const Paris: LineEntry[] = [
     },
 ];
 
-export default Paris;
+

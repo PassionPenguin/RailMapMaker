@@ -1,134 +1,121 @@
-const Changsha: LineEntry[] = [
+const Hangzhou = [
     {
-        id: 'cs1',
+        id: 'hz1',
         name: {
             en: 'Line 1',
             'zh-Hans': '1号线',
             'zh-Hant': '1號線',
         },
-        colour: '#DA291C',
+        colour: '#DF4661',
     },
     {
-        id: 'cs2',
+        id: 'hz2',
         name: {
             en: 'Line 2',
             'zh-Hans': '2号线',
             'zh-Hant': '2號線',
         },
-        colour: '#8DC8E8',
+        colour: '#DE7C00',
     },
     {
-        id: 'cs3',
+        id: 'hz3',
         name: {
             en: 'Line 3',
             'zh-Hans': '3号线',
             'zh-Hant': '3號線',
         },
-        colour: '#C0DF16',
-        fg: '#000',
+        colour: '#FAC62B',
     },
     {
-        id: 'cs4',
+        id: 'hz4',
         name: {
             en: 'Line 4',
             'zh-Hans': '4号线',
             'zh-Hant': '4號線',
         },
-        colour: '#A51890',
+        colour: '#6CC24A',
     },
     {
-        id: 'cs5',
+        id: 'hz5',
         name: {
             en: 'Line 5',
             'zh-Hans': '5号线',
             'zh-Hant': '5號線',
         },
-        colour: '#FFD100',
-        fg: '#000',
+        colour: '#00AEC7',
     },
     {
-        id: 'cs6',
+        id: 'hz6',
         name: {
             en: 'Line 6',
             'zh-Hans': '6号线',
             'zh-Hant': '6號線',
         },
-        colour: '#0077C8',
+        colour: '#0072CE',
     },
     {
-        id: 'cs7',
+        id: 'hz7',
         name: {
             en: 'Line 7',
             'zh-Hans': '7号线',
             'zh-Hant': '7號線',
         },
-        colour: '#009739',
+        colour: '#87189D',
     },
     {
-        id: 'cs8',
+        id: 'hz8',
         name: {
             en: 'Line 8',
             'zh-Hans': '8号线',
             'zh-Hant': '8號線',
         },
-        colour: '#D9027D',
+        colour: '#AC145A',
     },
     {
-        id: 'cs9',
+        id: 'hz9',
         name: {
             en: 'Line 9',
             'zh-Hans': '9号线',
             'zh-Hant': '9號線',
         },
-        colour: '#00BFB2',
-        fg: '#000',
+        colour: '#BE4D00',
     },
     {
-        id: 'cs10',
+        id: 'hz10',
         name: {
             en: 'Line 10',
             'zh-Hans': '10号线',
             'zh-Hant': '10號線',
         },
-        colour: '#81312F',
+        colour: '#AA8A00',
     },
     {
-        id: 'cs11',
+        id: 'hz16',
         name: {
-            en: 'Line 11',
-            'zh-Hans': '11号线',
-            'zh-Hant': '11號線',
+            en: 'Line 16',
+            'zh-Hans': '16号线',
+            'zh-Hant': '16號線',
         },
-        colour: '#DE7C00',
+        colour: '#FFB25B',
     },
     {
-        id: 'cs12',
+        id: 'hsic',
         name: {
-            en: 'Line 12',
-            'zh-Hans': '12号线',
-            'zh-Hant': '12號線',
+            en: 'Hangzhou-Shaoxing Intercity',
+            'zh-Hans': '杭绍城际',
+            'zh-Hant': '杭紹城際',
         },
-        colour: '#9063CD',
+        colour: '#C5003E',
     },
     {
-        id: 'add1',
+        id: 'hhic',
         name: {
-            en: 'Supplement 1',
-            'zh-Hans': '补充色1',
-            'zh-Hant': '補充色1',
+            en: 'Hangzhou-Haining Intercity',
+            'zh-Hans': '杭海城际',
+            'zh-Hant': '杭海城際',
         },
-        colour: '#F891A5',
-        fg: '#000',
-    },
-    {
-        id: 'add2',
-        name: {
-            en: 'Supplement 2',
-            'zh-Hans': '补充色2',
-            'zh-Hant': '補充色2',
-        },
-        colour: '#115E67',
+        colour: '#9BCBEB',
     },
 ];
 
-export default Changsha;
+

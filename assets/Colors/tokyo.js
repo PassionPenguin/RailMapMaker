@@ -1,4 +1,4 @@
-const Tokyo: LineEntry[] = [
+const Tokyo = [
     {
         id: 'g',
         name: {
@@ -668,4 +668,4 @@ const Tokyo: LineEntry[] = [
     },
 ];
 
-export default Tokyo;
+

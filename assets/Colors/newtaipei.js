@@ -1,4 +1,4 @@
-const NewTaipei: LineEntry[] = [
+const NewTaipei = [
     {
         id: 'lb',
         name: {
@@ -55,4 +55,4 @@ const NewTaipei: LineEntry[] = [
     },
 ];
 
-export default NewTaipei;
+

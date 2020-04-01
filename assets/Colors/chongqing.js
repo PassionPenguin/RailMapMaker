@@ -1,4 +1,4 @@
-const Chongqing: LineEntry[] = [
+const Chongqing = [
     {
         id: 'loop',
         name: {
@@ -172,4 +172,4 @@ const Chongqing: LineEntry[] = [
     },
 ];
 
-export default Chongqing;
+

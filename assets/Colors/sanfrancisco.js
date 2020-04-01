@@ -1,4 +1,4 @@
-const SanFrancisco: LineEntry[] = [
+const SanFrancisco = [
     {
         id: 'orange',
         name: {
@@ -50,4 +50,4 @@ const SanFrancisco: LineEntry[] = [
     },
 ];
 
-export default SanFrancisco;
+
