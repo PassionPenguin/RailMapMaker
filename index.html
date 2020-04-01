@@ -173,7 +173,7 @@
                         .then(() => {
                             builder.debug("PassionPenguin/RailMapMaker", "Main Script", "Service", "Service Worker Registered");
                             if (CookieManager.get("popup_swRegistered") !== "true")
-                                NotificationManager.create(strings.serviceWorker, strings.serviceWorkerDescription, 999, {
+                                NotificationManager.create(strings.serviceWorkerDescription, 999, {
                                     icon: "settings",
                                     priority: 2
                                 });

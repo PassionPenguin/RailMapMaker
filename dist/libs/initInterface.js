@@ -128,7 +128,7 @@ const initInterface = (type, returnFunc) => {
                             name: fileContent.name,
                             lastModified: fileContent.lastModified, type: fileContent.type
                         };
-                        NotificationManager.create(strings.system, strings.uploaded + " <span class='color-primary'>" + fileContent.name + "</span>", 0, {
+                        NotificationManager.create(strings.uploaded + " <span class='color-primary'>" + fileContent.name + "</span>", 0, {
                             time: -1,
                             icon: "check"
                         });
@@ -137,7 +137,7 @@ const initInterface = (type, returnFunc) => {
                             initInterface(1);
                             initDrawable();
                         } catch (e) {
-                            NotificationManager.create(strings.system, strings.parseErr + " <span class='color-primary'>" + fileContent.name + "</span>: " + e, 0, {
+                            NotificationManager.create(strings.parseErr + " <span class='color-primary'>" + fileContent.name + "</span>: " + e, 0, {
                                 time: -1,
                                 icon: "close"
                             });
@@ -418,24 +418,30 @@ const initInterface = (type, returnFunc) => {
                         type: "div",
                         attr: [["style", "display:block;width:calc(100% - 40px);height:48px;position: fixed;bottom: 0;z-index: 1001;"]]
                     });
-                    bottomSelector.appendChild(cE({
-                        type: "button",
-                        attr: [["class", "button"], ["style", "width:fit-content;float:right;display:inline-block;line-height:30px!important;color:var(--theme);"]],
-                        innerText: strings.install,
-                        onclick: () => {
-                            installAppPrompt.prompt();
-                            // Wait for the user to respond to the prompt
-                            installAppPrompt.userChoice.then((choiceResult) => {
-                                if (choiceResult.outcome === 'accepted') {
-                                    window.addEventListener('appinstalled', (evt) => {
-                                        NotificationManager.create(strings.installApp, strings.installedApp, 0);
-                                    }, {once: true});
-                                } else {
-                                    NotificationManager.create(strings.installApp, strings.dismissedInstallPrompt, 0);
-                                }
-                            })
-                        }
-                    }));
+                    navigator.getInstalledRelatedApps()
+                        .then((relatedApps) => {
+                            relatedApps.forEach((app) => {
+                                if (app.id !== "com.passionpenguin.rialmapmaker" && builder.installable)
+                                    bottomSelector.appendChild(cE({
+                                        type: "button",
+                                        attr: [["class", "button"], ["style", "width:fit-content;float:right;display:inline-block;line-height:30px!important;color:var(--theme);"]],
+                                        innerText: strings.install,
+                                        onclick: () => {
+                                            installAppPrompt.prompt();
+                                            // Wait for the user to respond to the prompt
+                                            installAppPrompt.userChoice.then((choiceResult) => {
+                                                if (choiceResult.outcome === 'accepted') {
+                                                    window.addEventListener('appinstalled', (evt) => {
+                                                        NotificationManager.create(strings.installedApp, 0);
+                                                    }, {once: true});
+                                                } else {
+                                                    NotificationManager.create(strings.dismissedInstallPrompt, 0);
+                                                }
+                                            })
+                                        }
+                                    }));
+                            });
+                        });
                     bottomSelector.appendChild(cE({
                         type: "button",
                         attr: [["style", "border:none!important;width:fit-content;float:right;display:inline-block;line-height:30px!important;"], ["class", "button"]],

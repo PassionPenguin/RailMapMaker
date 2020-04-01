@@ -9,6 +9,7 @@
  */
 
 const builder = {
+    installable: false,
     debugMode: true,
     version: "1.3",
     bundles: [{name: "PenguinUI", version: "0.1.5"}],

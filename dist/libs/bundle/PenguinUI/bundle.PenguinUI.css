@@ -79,18 +79,19 @@
 /* Notification */
 .pg-notification {
     align-items: flex-end;
-    bottom: 0;
+    top: 20px;
     position: fixed;
-    right: 16px;
-    z-index: 9999;
+    left: 50%;
+    transform: translate(-50%);
+    z-index: 99999;
     background-color: var(--white);
     border: 0;
-    box-shadow: rgba(0, 0, 0, 0.3) 0 0 6px, rgba(0, 0, 0, 0.15) 0 1px 6px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 0 6px, rgba(0, 0, 0, 0.05) 0 1px 6px;
     font-family: Anodina, sans-serif;
     margin: 8px;
-    padding: 20px;
     transition: 0.5s;
     opacity: 1;
+    min-width: 360px;
 }
 
 @keyframes fadeIn {
@@ -115,52 +116,25 @@
     animation: fadeOut 1s cubic-bezier(0.55, 0.06, 0.68, 0.19);
 }
 
-.pg-notification-title {
-    display: block;
-    width: 100%;
-    font: 16px/1 Anodina, sans-serif;
-    margin: 5px 0 0 0;
-    text-align: center;
-}
-
 .pg-notification-msg {
-    color: var(--grey);
-    display: block;
-    font-family: Anodina, sans-serif;
-    font-size: 14px;
+    color: var(--dark);
+    font: 16px/1 Anodina, sans-serif;
     font-weight: 400;
     height: auto;
     line-height: 22px;
     padding: 8px 0 12px;
     max-width: 250px;
+    vertical-align: middle;
+    display: inline-block;
 }
 
 .pg-notification-icon.mi {
-    display: block;
-    margin: 0 auto;
-    width: 48px;
-    font-size: 36px;
+    width: 24px;
+    font-size: 24px;
+    vertical-align: middle;
+    margin: 0 10px;
     text-align: center;
     color: var(--theme800);
-}
-
-.pg-notification-button {
-    float: right;
-    padding: 10px 15px;
-    box-shadow: none;
-    background: var(--theme700);
-    border: 0;
-    color: #fff;
-    font: 16px/1 Anodina, sans-serif;
-    border-radius: 5px;
-    transition: 0.5s;
-    cursor: pointer;
-    outline: none;
-}
-
-.pg-notification-button:hover, .pg-notification-button:focus {
-    background: var(--theme200);
-    outline: none;
 }
 
 /* Window */
@@ -556,7 +530,7 @@ pg-switchtoggle[selected="true"] {
     }
 }
 
-@media all and (display-mode: standalone) {
+@media all and (display-mode: standalone), all and (display-mode: fullscreen) {
     .standalone-exclude {
         overflow: hidden;
         height: 0 !important;
