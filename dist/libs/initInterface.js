@@ -421,7 +421,7 @@ const initInterface = (type, returnFunc) => {
                     navigator.getInstalledRelatedApps()
                         .then((relatedApps) => {
                             relatedApps.forEach((app) => {
-                                if (app.id !== "com.passionpenguin.rialmapmaker" && builder.installable)
+                                if (app.id !== "com.passionpenguin.railmapmaker" && builder.installable && installAppPrompt !== null)
                                     bottomSelector.appendChild(cE({
                                         type: "button",
                                         attr: [["class", "button"], ["style", "width:fit-content;float:right;display:inline-block;line-height:30px!important;color:var(--theme);"]],
