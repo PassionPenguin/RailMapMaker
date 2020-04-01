@@ -13,7 +13,7 @@ const selectLineDialog = () => {
         view.appendChild(cE({
             type: "h3",
             attr: [["style", "margin-top:20px;font:20px/1 Anodina,sans-serif;color:var(--dark);"]],
-            innerText: strings.selectLine
+            innerText: strings.selectPath
         }));
         view.appendChild(cE({
             type: "p",
