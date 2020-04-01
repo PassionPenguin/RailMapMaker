@@ -85,4 +85,5 @@ const strings = {
     squareStyle: "方头端点",
     inheritStyle: "默认样式",
     clearData: "删除数据",
+    clearedData: "已清除所有数据",
 }

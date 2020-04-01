@@ -465,6 +465,10 @@ const initInterface = (type, returnFunc) => {
                     });
                 LocaleStorageManager.clearData();
                 CookieManager.clear();
+                NotificationManager.create(strings.clearedData, 0, {icon: "delete", iconColor: "#f44336"});
+                setTimeout(() => {
+                    window.location.reload();
+                }, 2000);
             }
         }));
     } else if (type === 1) {

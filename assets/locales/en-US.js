@@ -85,4 +85,5 @@ const strings = {
     squareStyle: "Square",
     inheritStyle: "Inherit",
     clearData: "Remove Data",
+    clearedData: "Deleted All Data",
 }
