@@ -3,7 +3,7 @@
    "short_name":"RMG",
    "scope":"./",
    "start_url":".",
-   "display":"fullscreen",
+   "display":"standalone",
    "background_color":"#fff",
    "theme_color":"#b2ebf2",
    "description":"A tool for generating maps.",
@@ -24,5 +24,12 @@
          "type":"image/png"
       }
    ],
-   "prefer_related_applications":true
+   "prefer_related_applications":true,
+   "related_applications":[
+      {
+         "platform":"webapp",
+         "id":"com.passionpenguin.railmapmaker",
+         "url":"./manifest.webmanifest"
+      }
+   ]
 }
