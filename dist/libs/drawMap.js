@@ -86,13 +86,14 @@ const drawMap = id => {
         }
         pathEl.setAttributeNS(null, "d", path);
         pathEl.setAttributeNS(null, "stroke", info.color);
+        pathEl.setAttributeNS(null, "fill", "transparent");
         pathEl.setAttributeNS(null, "stroke-width", info.strokeWidth);
         pathEl.setAttributeNS(null, "stroke-linecap", info.lineCap);
         pathEl.setAttributeNS(null, "stroke-linejoin", info.lineJoin);
         builder.debug("PassionPenguin/RailMapMaker", "attachWindowCursorEvent.js", "Path", "Path drew: " + path);
-        LocaleStorageManager.set("fileData_" + state.fileId, JSON.stringify(contentData));
+        savePathComp.current();
         if (map.length > 0)
             return path;
     }
-    LocaleStorageManager.set("fileData_" + state.fileId, JSON.stringify(contentData));
+    savePathComp.current();
 };
