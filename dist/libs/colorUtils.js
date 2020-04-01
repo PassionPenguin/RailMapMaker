@@ -9,73 +9,79 @@
  */
 
 const colorUtils = {
-    RGBtoHSB: (rgb) => {
-        let hsb = {h: 0, s: 0, b: 0};
-        let min = Math.min(rgb.r, rgb.g, rgb.b);
-        let max = Math.max(rgb.r, rgb.g, rgb.b);
-        let delta = max - min;
-        hsb.b = max;
-        hsb.s = max !== 0 ? 255 * delta / max : 0;
-        if (hsb.s !== 0) {
-            if (rgb.r === max) hsb.h = (rgb.g - rgb.b) / delta;
-            else if (rgb.g === max) hsb.h = 2 + (rgb.b - rgb.r) / delta;
-            else hsb.h = 4 + (rgb.r - rgb.g) / delta;
-        } else hsb.h = -1;
-        hsb.h *= 60;
-        if (hsb.h < 0) hsb.h += 360;
-        hsb.s *= 100 / 255;
-        hsb.b *= 100 / 255;
-        return hsb;
-    },
-    HSBToRGB: (hsb) => {
-        let rgb = {};
-        let h = Math.round(hsb.h);
-        let s = Math.round(hsb.s * 255 / 100);
-        let v = Math.round(hsb.b * 255 / 100);
+    RGBtoHSV: (rgb) => {
+        let r = rgb.r, g = rgb.g, b = rgb.b;
 
-        if (s === 0) {
-            rgb.r = rgb.g = rgb.b = v;
-        } else {
-            let t1 = v;
-            let t2 = (255 - s) * v / 255;
-            let t3 = (t1 - t2) * (h % 60) / 60;
+        let max = Math.max(r, g, b), min = Math.min(r, g, b),
+            d = max - min,
+            h,
+            s = (max === 0 ? 0 : d / max),
+            v = max / 255;
 
-            if (h === 360) h = 0;
-
-            if (h < 60) {
-                rgb.r = t1;
-                rgb.b = t2;
-                rgb.g = t2 + t3
-            } else if (h < 120) {
-                rgb.g = t1;
-                rgb.b = t2;
-                rgb.r = t1 - t3
-            } else if (h < 180) {
-                rgb.g = t1;
-                rgb.r = t2;
-                rgb.b = t2 + t3
-            } else if (h < 240) {
-                rgb.b = t1;
-                rgb.r = t2;
-                rgb.g = t1 - t3
-            } else if (h < 300) {
-                rgb.b = t1;
-                rgb.g = t2;
-                rgb.r = t2 + t3
-            } else if (h < 360) {
-                rgb.r = t1;
-                rgb.g = t2;
-                rgb.b = t1 - t3
-            } else {
-                rgb.r = 0;
-                rgb.g = 0;
-                rgb.b = 0
-            }
+        switch (max) {
+            case min:
+                h = 0;
+                break;
+            case r:
+                h = (g - b) + d * (g < b ? 6 : 0);
+                h /= 6 * d;
+                break;
+            case g:
+                h = (b - r) + d * 2;
+                h /= 6 * d;
+                break;
+            case b:
+                h = (r - g) + d * 4;
+                h /= 6 * d;
+                break;
         }
 
-        return {r: Math.round(rgb.r), g: Math.round(rgb.g), b: Math.round(rgb.b)};
+        return {
+            h: h,
+            s: s,
+            v: v
+        };
     },
-    getColor: (element, curValue, returnFunc) => {
+    HSVToRGB: (HSV) => {
+        let r, g, b, i, f, p, q, t, h = HSV.h, s = HSV.s, v = HSV.v;
+        i = Math.floor(h * 6);
+        f = h * 6 - i;
+        p = v * (1 - s);
+        q = v * (1 - f * s);
+        t = v * (1 - (1 - f) * s);
+        switch (i % 6) {
+            case 0:
+                r = v, g = t, b = p;
+                break;
+            case 1:
+                r = q, g = v, b = p;
+                break;
+            case 2:
+                r = p, g = v, b = t;
+                break;
+            case 3:
+                r = p, g = q, b = v;
+                break;
+            case 4:
+                r = t, g = p, b = v;
+                break;
+            case 5:
+                r = v, g = p, b = q;
+                break;
+        }
+        return {
+            r: Math.round(r * 255),
+            g: Math.round(g * 255),
+            b: Math.round(b * 255)
+        };
+    }, HEXtoRGB: function (hex) {
+        hex = parseInt(((hex.indexOf('#') > -1) ? hex.substring(1) : hex), 16);
+        return {r: hex >> 16, g: (hex & 0x00FF00) >> 8, b: (hex & 0x0000FF)};
+    },
+    HEXtoHSV: function (hex) {
+        return colorUtils.RGBtoHSV(colorUtils.HEXtoRGB(hex));
+    },
+    getColor: (element, curValue, palette, returnFunc) => {
         let colorSelector = cE({type: "div", attr: [["class", "pg-color-selector"]]});
         let brightnessAndSaturation = cE({
             type: "div",
@@ -132,8 +138,34 @@ const colorUtils = {
         AlphaSelector.appendChild(AlphaCursor);
         hueAndAlpha.appendChild(AlphaSelector);
         otherArea.appendChild(hueAndAlpha);
-
         colorSelector.appendChild(otherArea);
+
+        let palettes = cE({type: "div", attr: [["style", ""]]});
+        colorPalette.forEach(colors => {
+            let palette = cE({type: "div", attr: [["style", "font-size:0;"]]});
+            colors.colors.forEach(color => {
+                let colorBlock = cE({
+                    type: "div",
+                    attr: [["style", `background:${color[0]};width:20px;height:20px;border-radius:4px;display:inline-block;margin:10px;`]],
+                    onclick: () => {
+                        let HSV = colorUtils.HEXtoHSV(color[0]);
+                        console.log(HSV);
+                        HueCursor.style.left = (HSV.h * 240 + 7.5) + "px";
+                        const rgb = colorUtils.HSVToRGB({
+                                h: HSV.h, s: 1, v: 1
+                            }
+                        );
+                        brightnessAndSaturation.style.backgroundColor = `rgb(${rgb.r},${rgb.g},${rgb.b})`;
+                        BaSCursor.style.left = (HSV.s * 320 + 5) + "px";
+                        BaSCursor.style.top = (185 - HSV.v * 180) + "px";
+                        resultColor.style.backgroundColor = color[0];
+                    }
+                });
+                palette.appendChild(colorBlock);
+            });
+            palettes.appendChild(palette);
+        });
+        colorSelector.appendChild(palettes);
 
 
         brightnessAndSaturation.onclick = (event) => {
@@ -204,8 +236,8 @@ const colorUtils = {
             else if (e.clientX - 90 < 0) event.clientX = 90;
             else event.clientX = e.clientX + 7.5;
             HueCursor.style.left = (event.clientX - 82.5) + "px";
-            const rgb = colorUtils.HSBToRGB({
-                    h: (parseFloat(HueCursor.style.left) - 7.5) / 240 * 360, s: 100, b: 100
+            const rgb = colorUtils.HSVToRGB({
+                    h: (parseFloat(HueCursor.style.left) - 7.5) / 240 * 360, s: 100, v: 100
                 }
             );
             brightnessAndSaturation.style.backgroundColor = `rgb(${rgb.r},${rgb.g},${rgb.b})`;
@@ -223,11 +255,11 @@ const colorUtils = {
 
         const render = () => {
             const hue = (parseFloat(HueCursor.style.left) - 7.5) / 240 * 360;
-            const saturation = (parseFloat(BaSCursor.style.left) - 5) / 320 * 100;
-            const brightness = (180 - (parseFloat(BaSCursor.style.top) - 5)) / 180 * 100;
+            const saturation = (parseFloat(BaSCursor.style.left) - 5) / 320;
+            const brightness = (180 - (parseFloat(BaSCursor.style.top) - 5)) / 180;
             const alpha = (parseFloat(AlphaCursor.style.left) - 7.5) / 240;
-            const rgb = colorUtils.HSBToRGB({
-                    h: hue, s: saturation, b: brightness
+            const rgb = colorUtils.HSVToRGB({
+                    h: hue, s: saturation, v: brightness
                 }
             );
             resultColor.style.backgroundColor = `rgba(${rgb.r},${rgb.g},${rgb.b},${alpha})`;
