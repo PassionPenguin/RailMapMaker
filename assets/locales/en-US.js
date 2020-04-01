@@ -49,7 +49,7 @@ const strings = {
     selectLineDescription: "Select a line you're going to edit",
     orCreateNewPathDescription: "Or create a new path.",
     serviceWorker: "Service Worker",
-    serviceWorkerDescription: "Service Worker Registered. This means you can use the software offline.",
+    serviceWorkerDescription: "You are now be able to use offline.",
     windowWidth: "Window's Width",
     windowHeight: "Window's Height",
     browserAgent: "Browser User Agent",

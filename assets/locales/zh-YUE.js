@@ -49,7 +49,7 @@ const strings = {
     selectLineDescription: "选择您需要编辑嘅線路",
     orCreateNewPathDescription: "或者创建新嘅线路",
     serviceWorker: "本地服务",
-    serviceWorkerDescription: "本地服务注册讲明左您依家可以离线使用软件啦",
+    serviceWorkerDescription: "您依家可以离线使用软件啦",
     windowWidth: "窗口宽度",
     windowHeight: "窗口高度",
     browserAgent: "浏览器用户代理",
