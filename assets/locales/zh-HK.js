@@ -84,4 +84,5 @@ const strings = {
     roundStyle: "圓頭端點",
     squareStyle: "方頭端點",
     inheritStyle: "默認樣式",
+    clearData: "刪除數據",
 }

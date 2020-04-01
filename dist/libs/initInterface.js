@@ -453,6 +453,20 @@ const initInterface = (type, returnFunc) => {
                 }, {size: "small"});
             }
         }));
+        storyboardCtrlList.appendChild(cE({
+            type: "p",
+            innerHTML: "<span class='mi'>delete</span><span> " + strings.clearData + " </span>",
+            onclick: () => {
+                navigator.serviceWorker.getRegistrations().then(
+                    function (registrations) {
+                        for (let registration of registrations) {
+                            registration.unregister();
+                        }
+                    });
+                LocaleStorageManager.clearData();
+                CookieManager.clear();
+            }
+        }));
     } else if (type === 1) {
         // editor interface
         [...view.children].forEach((e) => {

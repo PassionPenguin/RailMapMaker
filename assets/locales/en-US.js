@@ -84,4 +84,5 @@ const strings = {
     roundStyle: "Round",
     squareStyle: "Square",
     inheritStyle: "Inherit",
+    clearData: "Remove Data",
 }
