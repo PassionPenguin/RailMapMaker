@@ -86,4 +86,5 @@ const strings = {
     inheritStyle: "Inherit",
     clearData: "Remove Data",
     clearedData: "Deleted All Data",
+    confirm: "Confirm",
 }

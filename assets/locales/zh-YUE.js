@@ -86,4 +86,5 @@ const strings = {
     inheritStyle: "默认样式",
     clearData: "删除数据",
     clearedData: "已清除所有数据",
+    confirm: "确认",
 }
