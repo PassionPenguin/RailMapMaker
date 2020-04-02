@@ -154,57 +154,624 @@ const initInterface = (type, returnFunc) => {
             onclick: () => {
                 state.fileId++;
                 window.contentData = {
-                    name: "Guangzhou Line 1",
-                    author: "Penguin",
-                    lastModified: new Date().getTime(),
-                    width: 2000,
-                    height: 2000,
-                    pathInfo: [{
-                        lineCap: "round",
-                        lineJoin: "round",
-                        strokeWidth: "5px",
-                        color: "#000",
-                        id: 0,
-                        name: "UnnamedPath_0",
-                        opacity: 1,
-                        stations: [{x: 225, y: 1025, type: "destination", routeToNext: ""}, {
-                            x: 225,
-                            y: 900,
-                            type: "common",
-                            routeToNext: ""
-                        }, {x: 225, y: 775, type: "common", routeToNext: ""}, {
-                            x: 225,
-                            y: 650,
-                            type: "common",
-                            routeToNext: ""
-                        }, {x: 225, y: 525, type: "common", routeToNext: ""}, {
-                            x: 350,
-                            y: 525,
-                            type: "common",
-                            routeToNext: ""
-                        }, {x: 475, y: 525, type: "common", routeToNext: ""}, {
-                            x: 600,
-                            y: 525,
-                            type: "common",
-                            routeToNext: ""
-                        }, {x: 725, y: 525, type: "common", routeToNext: ""}, {
-                            x: 850,
-                            y: 525,
-                            type: "common",
-                            routeToNext: ""
-                        }, {x: 975, y: 525, type: "common", routeToNext: ""}, {
-                            x: 1100,
-                            y: 525,
-                            type: "common",
-                            routeToNext: ""
-                        }, {x: 1225, y: 525, type: "common", routeToNext: ""}, {
-                            x: 1325,
-                            y: 425,
-                            type: "common",
-                            routeToNext: "3"
-                        }, {x: 1225, y: 325, type: "destination", routeToNext: "2"}]
-                    }]
-                };
+                    "name": "Guangzhou",
+                    "author": "Penguin",
+                    "lastModified": 1585818402592,
+                    "width": 4000,
+                    "height": 4000,
+                    "textStyle": "",
+                    "primaryNameStyle": "font:18px/1 Anodina,sans-serif;",
+                    "secondaryNameStyle": "font:11px/1 Anodina,sans-serif;color:var(--grey)",
+                    "pathInfo": [
+                        {
+                            "lineCap": "round",
+                            "lineJoin": "round",
+                            "strokeWidth": "5px",
+                            "color": "#f3d03e",
+                            "id": 0,
+                            "name": "Line 1",
+                            "opacity": 1,
+                            "stations": [
+                                {
+                                    "x": 2100,
+                                    "y": 3025,
+                                    "type": "destination",
+                                    "routeToNext": "2",
+                                    "text": {
+                                        "type": "withSecondaryName",
+                                        "name": [
+                                            "西塱",
+                                            "Xilang"
+                                        ],
+                                        "position": 4,
+                                        "alignment": "start"
+                                    }
+                                },
+                                {
+                                    "x": 2100,
+                                    "y": 2900,
+                                    "type": "common",
+                                    "routeToNext": "2",
+                                    "text": {
+                                        "type": "withSecondaryName",
+                                        "name": [
+                                            "坑口",
+                                            "Kengkou"
+                                        ],
+                                        "position": 4,
+                                        "alignment": "start"
+                                    }
+                                },
+                                {
+                                    "x": 2100,
+                                    "y": 2775,
+                                    "type": "common",
+                                    "routeToNext": "2",
+                                    "text": {
+                                        "type": "withSecondaryName",
+                                        "name": [
+                                            "花地湾",
+                                            "Huadiwan"
+                                        ],
+                                        "position": 4,
+                                        "alignment": "start"
+                                    }
+                                },
+                                {
+                                    "x": 2100,
+                                    "y": 2650,
+                                    "type": "common",
+                                    "routeToNext": "2",
+                                    "text": {
+                                        "type": "withSecondaryName",
+                                        "name": [
+                                            "芳村",
+                                            "Fangcun"
+                                        ],
+                                        "position": 4,
+                                        "alignment": "start"
+                                    }
+                                },
+                                {
+                                    "x": 2100,
+                                    "y": 2525,
+                                    "type": "common",
+                                    "routeToNext": "2",
+                                    "text": {
+                                        "type": "withSecondaryName",
+                                        "name": [
+                                            "黄沙",
+                                            "Tianhe Park"
+                                        ],
+                                        "position": 4,
+                                        "alignment": "start"
+                                    }
+                                },
+                                {
+                                    "x": 2100,
+                                    "y": 2400,
+                                    "type": "common",
+                                    "routeToNext": "2",
+                                    "text": {
+                                        "type": "withSecondaryName",
+                                        "name": [
+                                            "长寿路",
+                                            "Changshoulu"
+                                        ],
+                                        "position": 4,
+                                        "alignment": "start"
+                                    }
+                                },
+                                {
+                                    "x": 2225,
+                                    "y": 2275,
+                                    "type": "common",
+                                    "routeToNext": "2",
+                                    "text": {
+                                        "type": "withSecondaryName",
+                                        "name": [
+                                            "陈家祠",
+                                            "Chen Clan Academy"
+                                        ],
+                                        "position": 1,
+                                        "alignment": "middle"
+                                    }
+                                },
+                                {
+                                    "x": 2350,
+                                    "y": 2275,
+                                    "type": "common",
+                                    "routeToNext": "2",
+                                    "text": {
+                                        "type": "withSecondaryName",
+                                        "name": [
+                                            "西门口",
+                                            "Ximenkou"
+                                        ],
+                                        "position": 1,
+                                        "alignment": "middle"
+                                    }
+                                },
+                                {
+                                    "x": 2475,
+                                    "y": 2275,
+                                    "type": "common",
+                                    "routeToNext": "2",
+                                    "text": {
+                                        "type": "withSecondaryName",
+                                        "name": [
+                                            "公园前",
+                                            "Gongyuanqian"
+                                        ],
+                                        "position": 5,
+                                        "alignment": "end"
+                                    }
+                                },
+                                {
+                                    "x": 2600,
+                                    "y": 2275,
+                                    "type": "common",
+                                    "routeToNext": "2",
+                                    "text": {
+                                        "type": "withSecondaryName",
+                                        "name": [
+                                            "农讲所",
+                                            "Peasant's Movement Institute"
+                                        ],
+                                        "position": 1,
+                                        "alignment": "middle"
+                                    }
+                                },
+                                {
+                                    "x": 2725,
+                                    "y": 2275,
+                                    "type": "common",
+                                    "routeToNext": "2",
+                                    "text": {
+                                        "type": "withSecondaryName",
+                                        "name": [
+                                            "烈士陵园",
+                                            "Martyrs' Park"
+                                        ],
+                                        "position": 1,
+                                        "alignment": "middle"
+                                    }
+                                },
+                                {
+                                    "x": 2850,
+                                    "y": 2275,
+                                    "type": "common",
+                                    "routeToNext": "2",
+                                    "text": {
+                                        "type": "withSecondaryName",
+                                        "name": [
+                                            "东山口",
+                                            "Dongshankou"
+                                        ],
+                                        "position": 1,
+                                        "alignment": "middle"
+                                    }
+                                },
+                                {
+                                    "x": 2975,
+                                    "y": 2275,
+                                    "type": "common",
+                                    "routeToNext": "2",
+                                    "text": {
+                                        "type": "withSecondaryName",
+                                        "name": [
+                                            "杨箕",
+                                            "Yangji"
+                                        ],
+                                        "position": 1,
+                                        "alignment": "middle"
+                                    }
+                                },
+                                {
+                                    "x": 3100,
+                                    "y": 2275,
+                                    "type": "common",
+                                    "routeToNext": "2",
+                                    "text": {
+                                        "type": "withSecondaryName",
+                                        "name": [
+                                            "体育西路",
+                                            "Tiyu Xilu"
+                                        ],
+                                        "position": 1,
+                                        "alignment": "middle"
+                                    }
+                                },
+                                {
+                                    "x": 3225,
+                                    "y": 2150,
+                                    "type": "common",
+                                    "routeToNext": "3",
+                                    "text": {
+                                        "type": "withSecondaryName",
+                                        "name": [
+                                            "体育中心",
+                                            "Tianhe Sports Center"
+                                        ],
+                                        "position": 4,
+                                        "alignment": "start"
+                                    }
+                                },
+                                {
+                                    "x": 3100,
+                                    "y": 2025,
+                                    "type": "destination",
+                                    "routeToNext": "2",
+                                    "text": {
+                                        "type": "withSecondaryName",
+                                        "name": [
+                                            "广州东站",
+                                            "Guangzhou East\nRailway Station"
+                                        ],
+                                        "position": 3,
+                                        "alignment": "end"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "lineCap": "round",
+                            "lineJoin": "round",
+                            "strokeWidth": "5px",
+                            "color": "#00629b",
+                            "id": 0,
+                            "name": "Line 2",
+                            "opacity": 1,
+                            "stations": [
+                                {
+                                    "x": 2225,
+                                    "y": 3775,
+                                    "type": "destination",
+                                    "routeToNext": "4",
+                                    "text": {
+                                        "type": "withSecondaryName",
+                                        "name": [
+                                            "广州南站",
+                                            "Guangzhou South Railway Station"
+                                        ],
+                                        "position": 3,
+                                        "alignment": "end"
+                                    }
+                                },
+                                {
+                                    "x": 2350,
+                                    "y": 3650,
+                                    "type": "common",
+                                    "routeToNext": "4",
+                                    "text": {
+                                        "type": "withSecondaryName",
+                                        "name": [
+                                            "石壁",
+                                            "Shibi"
+                                        ],
+                                        "position": 0,
+                                        "alignment": "middle"
+                                    }
+                                },
+                                {
+                                    "x": 2475,
+                                    "y": 3525,
+                                    "type": "common",
+                                    "routeToNext": "4",
+                                    "text": {
+                                        "type": "withSecondaryName",
+                                        "name": [
+                                            "会江",
+                                            "Huijiang"
+                                        ],
+                                        "position": 0,
+                                        "alignment": "end"
+                                    }
+                                },
+                                {
+                                    "x": 2600,
+                                    "y": 3400,
+                                    "type": "common",
+                                    "routeToNext": "4",
+                                    "text": {
+                                        "type": "withSecondaryName",
+                                        "name": [
+                                            "南浦",
+                                            "Nanpu"
+                                        ],
+                                        "position": 3,
+                                        "alignment": "end"
+                                    }
+                                },
+                                {
+                                    "x": 2600,
+                                    "y": 3275,
+                                    "type": "common",
+                                    "routeToNext": "0",
+                                    "text": {
+                                        "type": "withSecondaryName",
+                                        "name": [
+                                            "洛溪",
+                                            "Luoxi"
+                                        ],
+                                        "position": 3,
+                                        "alignment": "end"
+                                    }
+                                },
+                                {
+                                    "x": 2600,
+                                    "y": 3150,
+                                    "type": "common",
+                                    "routeToNext": "0",
+                                    "text": {
+                                        "type": "withSecondaryName",
+                                        "name": [
+                                            "南洲",
+                                            "Nanzhou"
+                                        ],
+                                        "position": 3,
+                                        "alignment": "end"
+                                    }
+                                },
+                                {
+                                    "x": 2600,
+                                    "y": 3025,
+                                    "type": "common",
+                                    "routeToNext": "0",
+                                    "text": {
+                                        "type": "withSecondaryName",
+                                        "name": [
+                                            "东晓南",
+                                            "Dongxiaonan"
+                                        ],
+                                        "position": 3,
+                                        "alignment": "end"
+                                    }
+                                },
+                                {
+                                    "x": 2475,
+                                    "y": 2900,
+                                    "type": "common",
+                                    "routeToNext": "4",
+                                    "text": {
+                                        "type": "withSecondaryName",
+                                        "name": [
+                                            "江泰路",
+                                            "Jiangtai Lu"
+                                        ],
+                                        "position": 4,
+                                        "alignment": "start"
+                                    }
+                                },
+                                {
+                                    "x": 2475,
+                                    "y": 2775,
+                                    "type": "common",
+                                    "routeToNext": "0",
+                                    "text": {
+                                        "type": "withSecondaryName",
+                                        "name": [
+                                            "昌岗",
+                                            "Changgang"
+                                        ],
+                                        "position": 4,
+                                        "alignment": "start"
+                                    }
+                                },
+                                {
+                                    "x": 2475,
+                                    "y": 2650,
+                                    "type": "common",
+                                    "routeToNext": "0",
+                                    "text": {
+                                        "type": "withSecondaryName",
+                                        "name": [
+                                            "江南西",
+                                            "Jiangnanxi"
+                                        ],
+                                        "position": 4,
+                                        "alignment": "start"
+                                    }
+                                },
+                                {
+                                    "x": 2475,
+                                    "y": 2525,
+                                    "type": "common",
+                                    "routeToNext": "0",
+                                    "text": {
+                                        "type": "withSecondaryName",
+                                        "name": [
+                                            "市二宫",
+                                            "2nd Workers Cultural Palace"
+                                        ],
+                                        "position": 4,
+                                        "alignment": "start"
+                                    }
+                                },
+                                {
+                                    "x": 2475,
+                                    "y": 2400,
+                                    "type": "common",
+                                    "routeToNext": "0",
+                                    "text": {
+                                        "type": "withSecondaryName",
+                                        "name": [
+                                            "海珠广场",
+                                            "Haizhu Square"
+                                        ],
+                                        "position": 4,
+                                        "alignment": "start"
+                                    }
+                                },
+                                {
+                                    "x": 2475,
+                                    "y": 2150,
+                                    "type": "common",
+                                    "routeToNext": "0",
+                                    "text": {
+                                        "type": "withSecondaryName",
+                                        "name": [
+                                            "纪念堂",
+                                            "Sun Yat-sen Memorial Hall"
+                                        ],
+                                        "position": 4,
+                                        "alignment": "start"
+                                    }
+                                },
+                                {
+                                    "x": 2475,
+                                    "y": 2025,
+                                    "type": "common",
+                                    "routeToNext": "0",
+                                    "text": {
+                                        "type": "withSecondaryName",
+                                        "name": [
+                                            "越秀公园",
+                                            "Yuexiu Park"
+                                        ],
+                                        "position": 4,
+                                        "alignment": "start"
+                                    }
+                                },
+                                {
+                                    "x": 2475,
+                                    "y": 1900,
+                                    "type": "common",
+                                    "routeToNext": "0",
+                                    "text": {
+                                        "type": "withSecondaryName",
+                                        "name": [
+                                            "广州火车站",
+                                            "Guangzhou Railway Station"
+                                        ],
+                                        "position": 4,
+                                        "alignment": "start"
+                                    }
+                                },
+                                {
+                                    "x": 2475,
+                                    "y": 1775,
+                                    "type": "common",
+                                    "routeToNext": "0",
+                                    "text": {
+                                        "type": "withSecondaryName",
+                                        "name": [
+                                            "三元里",
+                                            "Sanyuanli"
+                                        ],
+                                        "position": 4,
+                                        "alignment": "start"
+                                    }
+                                },
+                                {
+                                    "x": 2475,
+                                    "y": 1650,
+                                    "type": "common",
+                                    "routeToNext": "4",
+                                    "text": {
+                                        "type": "withSecondaryName",
+                                        "name": [
+                                            "飞翔公园",
+                                            "Feixiang Park"
+                                        ],
+                                        "position": 4,
+                                        "alignment": "start"
+                                    }
+                                },
+                                {
+                                    "x": 2475,
+                                    "y": 1525,
+                                    "type": "common",
+                                    "routeToNext": "4",
+                                    "text": {
+                                        "type": "withSecondaryName",
+                                        "name": [
+                                            "白云公园",
+                                            "Baiyun Park"
+                                        ],
+                                        "position": 4,
+                                        "alignment": "start"
+                                    }
+                                },
+                                {
+                                    "x": 2475,
+                                    "y": 1400,
+                                    "type": "common",
+                                    "routeToNext": "4",
+                                    "text": {
+                                        "type": "withSecondaryName",
+                                        "name": [
+                                            "白云文化广场",
+                                            "Baiyun Culture Square"
+                                        ],
+                                        "position": 4,
+                                        "alignment": "start"
+                                    }
+                                },
+                                {
+                                    "x": 2475,
+                                    "y": 1275,
+                                    "type": "common",
+                                    "routeToNext": "4",
+                                    "text": {
+                                        "type": "withSecondaryName",
+                                        "name": [
+                                            "萧岗",
+                                            "Xiaogang"
+                                        ],
+                                        "position": 4,
+                                        "alignment": "start"
+                                    }
+                                },
+                                {
+                                    "x": 2600,
+                                    "y": 1150,
+                                    "type": "common",
+                                    "routeToNext": "4",
+                                    "text": {
+                                        "type": "withSecondaryName",
+                                        "name": [
+                                            "江夏",
+                                            "Jiangxia"
+                                        ],
+                                        "position": 4,
+                                        "alignment": "start"
+                                    }
+                                },
+                                {
+                                    "x": 2725,
+                                    "y": 1025,
+                                    "type": "common",
+                                    "routeToNext": "4",
+                                    "text": {
+                                        "type": "withSecondaryName",
+                                        "name": [
+                                            "黄边",
+                                            "Huangbian"
+                                        ],
+                                        "position": 4,
+                                        "alignment": "start"
+                                    }
+                                },
+                                {
+                                    "x": 2850,
+                                    "y": 900,
+                                    "type": "destination",
+                                    "routeToNext": "4",
+                                    "text": {
+                                        "type": "withSecondaryName",
+                                        "name": [
+                                            "嘉禾望岗",
+                                            "Jiahewanggang"
+                                        ],
+                                        "position": 4,
+                                        "alignment": "start"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
                 JSONParser(LocaleStorageManager.get("fileList")).then(i => {
                     i.push(JSON.parse(LocaleStorageManager.get("fileList")).length)
                     LocaleStorageManager.set("fileList", JSON.stringify(i));
@@ -224,9 +791,14 @@ const initInterface = (type, returnFunc) => {
                     LocaleStorageManager.set("fileList", JSON.stringify(i));
                 });
                 window.contentData = {
-                    name: "Untitled Project", author: "Unnamed User", lastModified: new Date().getTime(),
+                    name: "Untitled Project",
+                    author: "Unnamed User",
+                    lastModified: new Date().getTime(),
                     width: 2000,
                     height: 2000,
+                    textStyle: "",
+                    primaryNameStyle: "",
+                    secondaryNameStyle: "",
                     pathInfo: [{
                         stations: []
                     }]
@@ -491,7 +1063,7 @@ const initInterface = (type, returnFunc) => {
         view.appendChild(cE({
             type: "div",
             attr: [["id", "drawable"], ["style", `width:${contentData.width}px;height:${contentData.height}px;`]],
-            innerHTML: `<svg id=\"resSvg\" xmlns=\"http://www.w3.org/2000/svg\" viewBox='0 0 ${contentData.width} ${contentData.height}' style="width:${contentData.width};height:${contentData.height};"><defs><style>._bg-white{fill:#fff;}</style><symbol id='stationStyle_circle'><circle class=\"_bg-white\" cx=\"8\" cy=\"8\" r=\"8\"/><path class=\"_circleStroke\" d=\"M8,0C3.58,0,0,3.58,0,8s3.58,8,8,8s8-3.58,8-8S12.42,0,8,0z M8,14c-3.31,0-6-2.69-6-6c0-3.31,2.69-6,6-6s6,2.69,6,6C14,11.31,11.31,14,8,14z\"/></symbol><symbol id='stationStyle_rect'><path d='M0,0v16h16v-16z' class='_bg-white'/><path d='M0,0v16h16V0H0z M14,14H2V2h12V14z' class='_rectStroke'/></symbol></defs></svg>`
+            innerHTML: `<svg id=\"resSvg\" xmlns=\"http://www.w3.org/2000/svg\" viewBox='0 0 ${contentData.width} ${contentData.height}' style="width:${contentData.width}px;height:${contentData.height}px;"><defs><style>._bg-white{fill:#fff;}</style><symbol id='stationStyle_circle'><circle class=\"_bg-white\" cx=\"8\" cy=\"8\" r=\"8\"/><path class=\"_circleStroke\" d=\"M8,0C3.58,0,0,3.58,0,8s3.58,8,8,8s8-3.58,8-8S12.42,0,8,0z M8,14c-3.31,0-6-2.69-6-6c0-3.31,2.69-6,6-6s6,2.69,6,6C14,11.31,11.31,14,8,14z\"/></symbol><symbol id='stationStyle_rect'><path d='M0,0v16h16v-16z' class='_bg-white'/><path d='M0,0v16h16V0H0z M14,14H2V2h12V14z' class='_rectStroke'/></symbol></defs></svg>`
         }));
         view.appendChild(cE({type: "div", attr: [["id", "cursor"]]}));
 
