@@ -294,7 +294,7 @@ const colorUtils = {
             attr: [["class", "button"], ["style", "width:fit-content;float:right;display:inline-block;line-height:30px!important;color:var(--theme);"]],
             innerText: strings.confirm,
             onclick: () => {
-                const hue = (parseFloat(HueCursor.style.left) - 7.5) / 240 * 360;
+                const hue = (parseFloat(HueCursor.style.left) - 7.5) / 240;
                 const saturation = (parseFloat(BaSCursor.style.left) - 5) / 320;
                 const brightness = (180 - (parseFloat(BaSCursor.style.top) - 5)) / 180;
                 const rgb = colorUtils.HSVToRGB({
