@@ -37,34 +37,38 @@ const LineEditorComp = {
         let lineContent = cE({type: "div", attr: [["id", "pg-lineContent"]]});
         editor.appendChild(lineContent);
 
-        if (MediaQuery.screenWidth().includes("lg"))
+        if (MediaQuery.screenWidth().includes("xlg"))
             WindowManager.create((view) => {
-                pg.$("#pg-app")[0].style.left = "480px";
-                pg.$("#pg-app")[0].style.width = "calc(100% - 480px)";
+                pg.$("#scroll-use")[0].style.left = "480px";
+                pg.$("#scroll-use")[0].style.right = "0";
+                pg.$("#scroll-use")[0].style.width = "calc(100vw - 480px)";
                 view.appendChild(editor);
             }, {
                 withMask: "none",
                 withBlur: "none",
                 size: "small",
                 mode: "vertical_split",
-                alignment: "vertical_bottom horizontal_left", onQuit: () => {
-                    pg.$("#pg-app")[0].style.left = "unset";
-                    pg.$("#pg-app")[0].style.width = "unset";
+                alignment: "vertical_center horizontal_left", onQuit: () => {
+                    pg.$("#scroll-use")[0].style.left = "unset";
+                    pg.$("#scroll-use")[0].style.right = "unset";
+                    pg.$("#scroll-use")[0].style.width = "unset";
                 }
             });
-        else if (MediaQuery.screeHeight().includes("lg"))
+        else if (MediaQuery.screeHeight().includes("xlg"))
             WindowManager.create((view) => {
-                pg.$("#pg-app")[0].style.bottom = "480px";
-                pg.$("#pg-app")[0].style.height = "calc(100% - 480px)";
+                pg.$("#scroll-use")[0].style.bottom = "480px";
+                pg.$("#scroll-use")[0].style.top = "0";
+                pg.$("#scroll-use")[0].style.height = "calc(100vh - 480px)";
                 view.appendChild(editor);
             }, {
                 withMask: "none",
                 withBlur: "none",
                 size: "small",
                 mode: "horizontal_split",
-                alignment: "vertical_center horizontal_left", onQuit: () => {
-                    pg.$("#pg-app")[0].style.bottom = "unset";
-                    pg.$("#pg-app")[0].style.height = "unset";
+                alignment: "vertical_bottom horizontal_left", onQuit: () => {
+                    pg.$("#scroll-use")[0].style.bottom = "unset";
+                    pg.$("#scroll-use")[0].style.top = "unset";
+                    pg.$("#scroll-use")[0].style.height = "unset";
                 }
             });
         else
