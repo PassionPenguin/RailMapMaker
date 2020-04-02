@@ -29,7 +29,7 @@ const WindowManager = {
         let WindowMask;
         if (opt.withMask !== "none") WindowMask = cE({
             type: "div",
-            attr: [["class", "pg-window pg-window-mask"], ["style", `z-index: ${Int(opt.zIndex) - 1}`], ["maskId", opt.channelId]],
+            attr: [["class", "pg-window pg-window-mask"], ["style", `z-index: ${Int(opt.zIndex) - 1};position:fixed;left:0;top:0;`], ["maskId", opt.channelId]],
             onclick: () => {
                 WindowManager.remove(opt.channelId);
             }
