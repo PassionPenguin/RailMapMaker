@@ -86,7 +86,7 @@ const LineEditorComp = {
         e.appendChild(cE({
             type: "div",
             attr: [["class", "pg-lineContent-lineName"], ["style", "margin:10px;"]],
-            innerHTML: `<span class="mi" style="vertical-align: middle;color:var(--grey);">edit</span><span style="width:120px;display:inline-block;color:var(--grey);font:14px/1 Anodina,sans-serif;margin:10px;">${strings.pathName}</span><input value="${i.name}" style="border:0;outline:none;border-bottom:1px solid var(--light);padding:5px;" oninput="[...pg.$('#pg-selectLine-selector')[0].children].filter(i => i.innerText === contentData.pathInfo[state.pathId].name||i.tagName==='SPAN').forEach(i => {i.innerText = this.value;});contentData.pathInfo[state.pathId].name = this.value;savePathComp.current();drawMap(state.pathId);">`
+            innerHTML: `<span class="mi" style="vertical-align: middle;color:var(--grey);">edit</span><span style="width:120px;display:inline-block;color:var(--grey);font:14px/1 Anodina,sans-serif;margin:10px;">${strings.pathName}</span><input value="${i.name}" style="border:0;outline:none;border-bottom:1px solid var(--light);padding:5px;" oninput="[...pg.$('#pg-selectLine-selector')[0].children].filter(i => i.innerText === this.value||i.tagName==='SPAN').forEach(i => {i.innerText = this.value;});contentData.pathInfo[state.pathId].name = this.value;savePathComp.current();drawMap(state.pathId);">`
         }));
         e.appendChild(cE({
             type: "div",
