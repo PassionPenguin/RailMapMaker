@@ -222,9 +222,14 @@
     color: var(--theme900);
 }
 
-.pg-window-close.default {
+.pg-window-close.close {
     left: unset;
     right: 0;
+}
+
+.pg-window-close.close .mi {
+    font-weight: 900;
+    font-size: 28px;
 }
 
 .pg-window.remove {

@@ -44,7 +44,7 @@ const WindowManager = {
         WindowFrame.appendChild(content);
         content.appendChild(cE({
             type: "span",
-            attr: [["class", "pg-window-close"]],
+            attr: [["class", `pg-window-close ${opt.backStyle !== 'default' ? 'close' : ''}`]],
             innerHTML: `${opt.backStyle === 'default' ? '<span class=\'mi\'>chevron_left</span><span>' + strings.back + '</span>' : '<span class="mi">close</span>'}`,
             onclick: () => {
                 WindowManager.remove(opt.channelId);
