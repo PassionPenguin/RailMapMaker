@@ -154,9 +154,9 @@ const initInterface = (type, returnFunc) => {
             onclick: () => {
                 state.fileId++;
                 window.contentData = {
-                    "name": "Guangzhou",
+                    "name": "Guangzhou Line",
                     "author": "Penguin",
-                    "lastModified": 1585818402592,
+                    "lastModified": new Date().getTime(),
                     "width": 4000,
                     "height": 4000,
                     "textStyle": "",
@@ -241,7 +241,7 @@ const initInterface = (type, returnFunc) => {
                                         "type": "withSecondaryName",
                                         "name": [
                                             "黄沙",
-                                            "Tianhe Park"
+                                            "Huangsha"
                                         ],
                                         "position": 4,
                                         "alignment": "start"
@@ -256,7 +256,7 @@ const initInterface = (type, returnFunc) => {
                                         "type": "withSecondaryName",
                                         "name": [
                                             "长寿路",
-                                            "Changshoulu"
+                                            "Changshou Lu"
                                         ],
                                         "position": 4,
                                         "alignment": "start"
