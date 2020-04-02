@@ -301,7 +301,7 @@ const colorUtils = {
                         h: hue, s: saturation, v: brightness
                     }
                 );
-                returnFunc(colorUtils.RGBtoHEX(rgb));
+                returnFunc("#" + colorUtils.RGBtoHEX(rgb));
             }
         }));
         colorSelector.appendChild(bottomSelector);
