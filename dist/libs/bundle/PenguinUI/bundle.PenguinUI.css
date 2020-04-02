@@ -139,12 +139,49 @@
 /* Window */
 .pg-window {
     position: fixed;
-    left: 50%;
-    top: 50%;
     width: 100%;
     height: 100%;
     z-index: 1000;
+}
+
+.pg-window.center {
+    left: 50%;
+    top: 50%;
     transform: translate(-50%, -50%);
+}
+
+.pg-window.horizontal_left {
+    left: 0;
+}
+
+.pg-window.horizontal_right {
+    right: 0;
+}
+
+.pg-window.horizontal_center {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.pg-window.vertical_top {
+    top: 0;
+}
+
+.pg-window.vertical_bottom {
+    bottom: 0;
+}
+
+.pg-window.vertical_center {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.pg-window.horizontal_split {
+    width: 100% !important;
+}
+
+.pg-window.vertical_split {
+    height: 100% !important;
 }
 
 .pg-window-mask {
