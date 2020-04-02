@@ -163,7 +163,7 @@ const colorUtils = {
 
         let selectPalette = cE({
             type: "div",
-            attr: [["style", "width:320px;height:200px;position:absolute;bottom:0;left:50%;transform:translate(-50%);background:var(--white);visibility:hidden;opacity:0;transition:500ms;"]]
+            attr: [["style", "width:320px;height:250px;position:absolute;bottom:0;left:50%;transform:translate(-50%);background:var(--white);visibility:hidden;opacity:0;transition:500ms;overflow-y:scroll;"]]
         });
         let selectPaletteToggle = cE({
             type: "div",
@@ -221,7 +221,7 @@ const colorUtils = {
             });
             selectPalette.appendChild(cE({
                 type: "div",
-                attr: [["style", "padding:5px;"], ["class", "button"]],
+                attr: [["style", "padding:5px;width:calc(100% - 20px)"], ["class", "button"]],
                 innerHTML: `<span style="font:900 16px/28px Anodina, sans-serif;margin-right:20px;color:var(--grey);width:100px;text-overflow:ellipsis;overflow: hidden;white-space:nowrap;vertical-align:middle;display:inline-block;">${colors.name}</span>${colorsPreview}`,
                 onclick: () => {
                     palettes.innerHTML = "";
