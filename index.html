@@ -31,6 +31,13 @@
             transform: translate(-50%, -50%)
         }
 
+        #scroll-use {
+            width: 100vw;
+            height: 100vh;
+            overflow: scroll;
+            position: relative;
+        }
+
         #pg-app {
             width: 100vw;
             height: 100vh;
@@ -117,7 +124,9 @@
     <link href="./manifest.webmanifest" rel="manifest">
 </head>
 <body>
-<div id="pg-app"></div>
+<div id="scroll-use">
+    <div id="pg-app"></div>
+</div>
 <script src="./dist/libs/build.package.js"></script>
 <script>
     window.pg = {
