@@ -6,5 +6,8 @@
                 i(result);
             }
         }
+    };
+    window.getStyle = (el, styleProp) => {
+        return getComputedStyle(el, null)[styleProp];
     }
 })();
