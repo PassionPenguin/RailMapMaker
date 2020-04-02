@@ -15,6 +15,7 @@ const WindowManager = {
         opt.size = opt.size || "medium";
         opt.zIndex = opt.zIndex || "1000";
         opt.channelId = opt.channelId || WindowManager.query.length;
+        WindowManager.query.push(opt.channelId);
         let WindowFrame = cE({
             type: "div",
             attr: [["class", `pg-window ${opt.size}`], ["style", `z-index: ${opt.zIndex}`], ["windowId", opt.channelId]]
@@ -45,5 +46,6 @@ const WindowManager = {
             document.body.removeChild(pg.$(`[maskId='${channelId}']`)[0]);
             pg.$("#pg-app")[0].style.filter = "";
         }, 500);
+        WindowManager.query.filter(i => i !== channelId);
     }
 };
