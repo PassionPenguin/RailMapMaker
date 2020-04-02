@@ -510,7 +510,7 @@ const initInterface = (type, returnFunc) => {
                     }], ["settings", strings.settings, strings.openSettings, strings.openSettingsDescription, () => {
                         // prefDialog()
                     }], ["mouse", strings.select, strings.selectPath, strings.selectPathDescription, () => {
-                        LineEditorComp.showLineEditor();
+                        selectLineDialog();
                     }], ["home", strings.home, strings.home, strings.backHomeDescription, () => {
                         NotificationManager.create(strings.system, strings.fileSaved, 0, {
                             icon: "check",
