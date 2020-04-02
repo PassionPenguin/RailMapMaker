@@ -50,9 +50,13 @@ PenguinUI_selector = {
                                 clicked = false;
                                 displayingDialog = false;
                                 curValue.innerHTML = value;
-                                if (e.getAttribute("on_valueChange") !== -1) {
-                                    eval(e.getAttribute("on_valueChange"))(index.toString());
-                                }
+                                if (e.getAttribute("on_valueChange") !== -1)
+                                    setTimeout(() => {
+                                        try {
+                                            eval(e.getAttribute("on_valueChange"))(index.toString());
+                                        } catch (e) {
+                                        }
+                                    }, 500);
                                 e.setAttribute("pg-selected", index);
                                 document.body.removeChild(selectors);
                                 try {
