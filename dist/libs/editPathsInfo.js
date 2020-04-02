@@ -37,12 +37,41 @@ const LineEditorComp = {
         let lineContent = cE({type: "div", attr: [["id", "pg-lineContent"]]});
         editor.appendChild(lineContent);
 
-        if (MediaQuery.screenWidth().includes("lg") && MediaQuery.screeHeight().includes("lg"))
-            document.body.appendChild(editor);
-        WindowManager.create((view, channelId) => {
-            // editor.appendChild();
-            view.appendChild(editor);
-        });
+        if (MediaQuery.screenWidth().includes("lg"))
+            WindowManager.create((view) => {
+                pg.$("#pg-app")[0].style.left = "480px";
+                pg.$("#pg-app")[0].style.width = "calc(100% - 480px)";
+                view.appendChild(editor);
+            }, {
+                withMask: "none",
+                withBlur: "none",
+                size: "small",
+                mode: "vertical_split",
+                alignment: "vertical_bottom horizontal_left", onQuit: () => {
+                    pg.$("#pg-app")[0].style.left = "unset";
+                    pg.$("#pg-app")[0].style.width = "unset";
+                }
+            });
+        else if (MediaQuery.screeHeight().includes("lg"))
+            WindowManager.create((view) => {
+                pg.$("#pg-app")[0].style.bottom = "480px";
+                pg.$("#pg-app")[0].style.height = "calc(100% - 480px)";
+                view.appendChild(editor);
+            }, {
+                withMask: "none",
+                withBlur: "none",
+                size: "small",
+                mode: "horizontal_split",
+                alignment: "vertical_center horizontal_left", onQuit: () => {
+                    pg.$("#pg-app")[0].style.bottom = "unset";
+                    pg.$("#pg-app")[0].style.height = "unset";
+                }
+            });
+        else
+            WindowManager.create((view, channelId) => {
+                // editor.appendChild();
+                view.appendChild(editor);
+            }, {size: "large"});
 
         LineEditorComp.showLineContent(id, lineContent);
         PenguinUI_selector.init();
