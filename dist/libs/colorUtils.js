@@ -196,6 +196,7 @@ const colorUtils = {
                     BaSCursor.style.left = (HSV.s * 320 + 5) + "px";
                     BaSCursor.style.top = (185 - HSV.v * 180) + "px";
                     resultColor.style.backgroundColor = color[0];
+                    input.value = color[0];
                 }
             });
             paletteContainer.appendChild(colorBlock);
@@ -243,6 +244,7 @@ const colorUtils = {
                                 BaSCursor.style.left = (HSV.s * 320 + 5) + "px";
                                 BaSCursor.style.top = (185 - HSV.v * 180) + "px";
                                 resultColor.style.backgroundColor = color[0];
+                                input.value = color[0];
                             }
                         });
                         paletteContainer.appendChild(colorBlock);
@@ -269,8 +271,7 @@ const colorUtils = {
         });
         let input = cE({
             type: "input",
-            attr: [["style", "outline:none;padding:5px;display:inline-block;width:240px;font-size:14px;vertical-align:middle;"], ["class", "button"], ["placeholder", "#000000"]],
-            innerText: "#"
+            attr: [["style", "outline:none;padding:5px;display:inline-block;width:240px;font-size:14px;vertical-align:middle;"], ["class", "button"], ["id", "inputValue"], ["placeholder", "#000000"]]
         });
         let submit = cE({
             type: "button",
@@ -284,6 +285,26 @@ const colorUtils = {
         inputArea.appendChild(input);
         inputArea.appendChild(submit);
         colorSelector.appendChild(inputArea);
+        let bottomSelector = cE({
+            type: "div",
+            attr: [["style", "display:block;width:calc(100% - 40px);height:48px;position: fixed;bottom: 0;z-index: 1001;"]]
+        });
+        bottomSelector.appendChild(cE({
+            type: "button",
+            attr: [["class", "button"], ["style", "width:fit-content;float:right;display:inline-block;line-height:30px!important;color:var(--theme);"]],
+            innerText: strings.confirm,
+            onclick: () => {
+                const hue = (parseFloat(HueCursor.style.left) - 7.5) / 240 * 360;
+                const saturation = (parseFloat(BaSCursor.style.left) - 5) / 320;
+                const brightness = (180 - (parseFloat(BaSCursor.style.top) - 5)) / 180;
+                const rgb = colorUtils.HSVToRGB({
+                        h: hue, s: saturation, v: brightness
+                    }
+                );
+                returnFunc(colorUtils.RGBtoHEX(rgb));
+            }
+        }));
+        colorSelector.appendChild(bottomSelector);
 
 
         brightnessAndSaturation.onclick = (event) => {
@@ -392,7 +413,6 @@ const colorUtils = {
         };
 
         const writer = (HSV) => {
-            console.log(HSV);
             const bgRgb = colorUtils.HSVToRGB({
                     h: HSV.h, s: 1, v: 1
                 }
@@ -401,12 +421,12 @@ const colorUtils = {
                     h: HSV.h, s: HSV.s, v: HSV.v
                 }
             );
-            console.log(rgb);
             brightnessAndSaturation.style.backgroundColor = `rgb(${bgRgb.r},${bgRgb.g},${bgRgb.b})`;
             HueCursor.style.left = (HSV.h * 240 + 7.5) + "px";
             BaSCursor.style.left = (HSV.s * 320 + 5) + "px";
             BaSCursor.style.top = (185 - HSV.v * 180) + "px";
             resultColor.style.backgroundColor = `rgba(${rgb.r},${rgb.g},${rgb.b},1)`;
+            input.value = "#" + colorUtils.RGBtoHEX(rgb);
         }
     }
 };
