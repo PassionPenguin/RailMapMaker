@@ -16,7 +16,9 @@ const drawMap = id => {
         let path = `M${map[0].x},${map[0].y}`;
         let pathEl = pg.$("path.pathElement")[id];
         let stationsGroup = pg.$("g.stationsGroup")[id];
+        let namesGroup = pg.$("g.nameGroup")[id];
         stationsGroup.innerHTML = "";
+        namesGroup.innerHTML = "";
         const appendStation = (nodeId) => {
             let stationNode = document.createElementNS(pg.$('#resSvg')[0].namespaceURI, 'use');
             stationNode.setAttributeNS(null, 'href', '#stationStyle_' + state.stationStyle);
@@ -24,10 +26,54 @@ const drawMap = id => {
             stationNode.setAttributeNS(null, 'x', '0');
             stationNode.setAttributeNS(null, 'y', '0');
             stationNode.setAttributeNS(null, 'style', 'transform: matrix(1, 0, 0, 1, ' + (map[nodeId].x - 8) + ', ' + (map[nodeId].y - 8) + ');');
-            if (map[nodeId].type === 'destination') stationNode.setAttributeNS(null, 'style', 'transform: matrix(1, 0, 0, 1, ' + (map[nodeId].x - 12) + ', ' + (map[nodeId].y - 12) + ') scale(1.5);');
+            if (map[nodeId].type === 'destination') stationNode.setAttributeNS(null, 'style', 'transform: matrix(1, 0, 0, 1, ' + (map[nodeId].x - 10) + ', ' + (map[nodeId].y - 10) + ') scale(1.2);');
             stationsGroup.appendChild(stationNode);
+
+            let name = document.createElementNS(pg.$('#resSvg')[0].namespaceURI, 'g');
+            let primaryName = document.createElementNS(pg.$('#resSvg')[0].namespaceURI, 'text');
+            primaryName.setAttributeNS(null, "style", contentData.primaryNameStyle);
+            primaryName.innerHTML = map[nodeId].text.name[0];
+            name.appendChild(primaryName);
+
+            if (map[nodeId].text.type === "withSecondaryName") {
+                let secondaryName = document.createElementNS(pg.$('#resSvg')[0].namespaceURI, 'text');
+                secondaryName.setAttributeNS(null, "style", contentData.secondaryNameStyle);
+                secondaryName.setAttributeNS(null, "dy", "16");
+                secondaryName.innerHTML = map[nodeId].text.name[1];
+                name.appendChild(secondaryName);
+            }
+
+            if (map[nodeId].text.alignment === "start")
+                name.setAttributeNS(null, "text-anchor", "start");
+            if (map[nodeId].text.alignment === "end")
+                name.setAttributeNS(null, "text-anchor", "end");
+            else if (map[nodeId].text.alignment === "middle")
+                name.setAttributeNS(null, "text-anchor", "middle");
+
+            let deviationX = 0, deviationY = 0, position = map[nodeId].text.position,
+                deviation = 20;
+
+            if (map[nodeId].type === "destination") {
+                if ([0, 1, 2].indexOf(position) !== -1) deviationY -= map[nodeId].text.type === "withSecondaryName" ? 1.75 * deviation : deviation;
+                else if ([5, 6, 7].indexOf(position) !== -1) deviationY += 1.75 * deviation;
+                if ([0, 3, 5].indexOf(position) !== -1) deviationX -= deviation;
+                else if ([2, 4, 7].indexOf(position) !== -1) deviationX += deviation;
+            } else {
+                if ([0, 1, 2].indexOf(position) !== -1) deviationY -= map[nodeId].text.type === "withSecondaryName" ? 1.75 * deviation : deviation;
+                else if ([5, 6, 7].indexOf(position) !== -1) deviationY += 1.75 * deviation;
+                if ([0, 3, 5].indexOf(position) !== -1) deviationX -= deviation;
+                else if ([2, 4, 7].indexOf(position) !== -1) deviationX += deviation;
+            }
+
+            name.setAttributeNS(null, 'style', `transform: matrix(1, 0, 0, 1, ${map[nodeId].x + deviationX}, ${map[nodeId].y + deviationY})`);
+            name.setAttributeNS(null, 'originalPosition', `[${map[nodeId].x}, ${map[nodeId].y}]`);
+
+            namesGroup.appendChild(name);
+
         };
         appendStation(0);
+
+
         for (let i = 1; i < map.length; i++) {
             appendStation(i);
 
@@ -84,6 +130,8 @@ const drawMap = id => {
             }
             path += `M${node.x},${node.y}`;
         }
+
+
         pathEl.setAttributeNS(null, "d", path);
         pathEl.setAttributeNS(null, "stroke", info.color);
         pathEl.setAttributeNS(null, "fill", "transparent");

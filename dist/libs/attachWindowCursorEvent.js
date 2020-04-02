@@ -39,7 +39,21 @@ const attachEvent = {
                     id: state.pathId,
                     name: `UnnamedPath_${state.pathId}`,
                     opacity: 1,
-                    stations: [{x: curX, y: curY, type: "destination", routeToNext: ""}]
+                    stations: [{
+                        x: curX,
+                        y: curY,
+                        type: "destination",
+                        routeToNext: "",
+                        "text": {
+                            "type": "withSecondaryName",
+                            "name": [
+                                "天河公园",
+                                "Tianhe Park"
+                            ],
+                            "position": 1,
+                            "alignment": "middle"
+                        }
+                    }]
                 });
                 state.newPath = false;
                 initDrawable();
@@ -50,7 +64,16 @@ const attachEvent = {
                     contentData.pathInfo[state.pathId].stations.last().type = "common";
 
                 contentData.pathInfo[state.pathId].stations.push({
-                    x: curX, y: curY, type: "destination", routeToNext: "0"
+                    x: curX, y: curY, type: "destination", routeToNext: "0",
+                    "text": {
+                        "type": "withSecondaryName",
+                        "name": [
+                            "天河公园",
+                            "Tianhe Park"
+                        ],
+                        "position": 1,
+                        "alignment": "middle"
+                    }
                 });
                 drawMap(state.pathId);
             }
