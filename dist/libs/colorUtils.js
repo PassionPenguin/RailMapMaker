@@ -400,7 +400,7 @@ const colorUtils = {
         };
 
         const render = () => {
-            const hue = (parseFloat(HueCursor.style.left) - 7.5) / 240 * 360;
+            const hue = (parseFloat(HueCursor.style.left) - 7.5) / 240;
             const saturation = (parseFloat(BaSCursor.style.left) - 5) / 320;
             const brightness = (180 - (parseFloat(BaSCursor.style.top) - 5)) / 180;
             const alpha = (parseFloat(AlphaCursor.style.left) - 7.5) / 240;
