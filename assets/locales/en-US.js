@@ -87,4 +87,5 @@ const strings = {
     clearData: "Remove Data",
     clearedData: "Deleted All Data",
     confirm: "Confirm",
+    failedInstalling: "Failed Installing",
 }

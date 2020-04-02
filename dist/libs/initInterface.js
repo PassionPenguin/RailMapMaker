@@ -968,62 +968,69 @@ const initInterface = (type, returnFunc) => {
             attr: [["class", "standalone-exclude"]],
             innerHTML: "<span class='mi'>get_app</span><span> " + strings.installApp + " </span>",
             onclick: () => {
-
                 WindowManager.create((view, channelId) => {
-                    let topView = cE({
-                        type: "div",
-                        attr: [["style", "height:calc(100% - 48px);width:100%;;overflow:hidden;"]]
-                    });
-                    let pref = cE({type: "div", attr: [["style", "width:360px;margin:0 auto;"]]});
-                    topView.appendChild(pref);
-                    view.appendChild(topView);
-                    pref.appendChild(cE({
-                        type: "p",
-                        attr: [["style", "margin:30px auto 10px auto;display:block;width:calc(100% - 40px);font:20px/1 Anodina,sans-serif;text-align:center;"]],
-                        innerHTML: strings.installApp
-                    }));
-                    pref.appendChild(cE({
-                        type: "p",
-                        attr: [["style", "margin:30px auto 10px auto;display:block;width:calc(100% - 40px);font:300 14px/21px Anodina,sans-serif"]],
-                        innerHTML: strings.installAppDescription
-                    }));
-                    let bottomSelector = cE({
-                        type: "div",
-                        attr: [["style", "display:block;width:calc(100% - 40px);height:48px;position: fixed;bottom: 0;z-index: 1001;"]]
-                    });
-                    navigator.getInstalledRelatedApps()
-                        .then((relatedApps) => {
-                            relatedApps.forEach((app) => {
-                                if (app.id !== "com.passionpenguin.railmapmaker" && builder.installable && installAppPrompt !== null)
-                                    bottomSelector.appendChild(cE({
-                                        type: "button",
-                                        attr: [["class", "button"], ["style", "width:fit-content;float:right;display:inline-block;line-height:30px!important;color:var(--theme);"]],
-                                        innerText: strings.install,
-                                        onclick: () => {
-                                            installAppPrompt.prompt();
-                                            // Wait for the user to respond to the prompt
-                                            installAppPrompt.userChoice.then((choiceResult) => {
-                                                if (choiceResult.outcome === 'accepted') {
-                                                    window.addEventListener('appinstalled', (evt) => {
-                                                        NotificationManager.create(strings.installedApp, 0);
-                                                    }, {once: true});
-                                                } else {
-                                                    NotificationManager.create(strings.dismissedInstallPrompt, 0);
-                                                }
-                                            })
-                                        }
-                                    }));
-                            });
+                        let topView = cE({
+                            type: "div",
+                            attr: [["style", "height:calc(100% - 48px);width:100%;;overflow:hidden;"]]
                         });
-                    bottomSelector.appendChild(cE({
-                        type: "button",
-                        attr: [["style", "border:none!important;width:fit-content;float:right;display:inline-block;line-height:30px!important;"], ["class", "button"]],
-                        innerText: strings.cancel, onclick: () => {
-                            WindowManager.remove(channelId)
-                        }
-                    }));
-                    view.appendChild(bottomSelector);
-                }, {size: "small"});
+                        let pref = cE({type: "div", attr: [["style", "width:360px;margin:0 auto;"]]});
+                        topView.appendChild(pref);
+                        view.appendChild(topView);
+                        pref.appendChild(cE({
+                            type: "p",
+                            attr: [["style", "margin:30px auto 10px auto;display:block;width:calc(100% - 40px);font:20px/1 Anodina,sans-serif;text-align:center;"]],
+                            innerHTML: strings.installApp
+                        }));
+                        pref.appendChild(cE({
+                            type: "p",
+                            attr: [["style", "margin:30px auto 10px auto;display:block;width:calc(100% - 40px);font:300 14px/21px Anodina,sans-serif"]],
+                            innerHTML: strings.installAppDescription
+                        }));
+                        let bottomSelector = cE({
+                            type: "div",
+                            attr: [["style", "display:block;width:calc(100% - 40px);height:48px;position: fixed;bottom: 0;z-index: 1001;"]]
+                        });
+                        bottomSelector.appendChild(cE({
+                            type: "button",
+                            attr: [["class", "button"], ["style", "width:fit-content;float:right;display:inline-block;line-height:30px!important;color:var(--theme);"]],
+                            innerText: strings.install,
+                            onclick: () => {
+                                if (installAppPrompt.prompt === undefined) {
+                                    NotificationManager.create(strings.failedInstalling, 999, {
+                                        icon: "clear",
+                                        iconColor: "#f44336"
+                                    })
+                                    WindowManager.remove(channelId);
+                                } else {
+                                    installAppPrompt.prompt();
+                                    // Wait for the user to respond to the prompt
+                                    installAppPrompt.userChoice.then((choiceResult) => {
+                                        if (choiceResult.outcome === 'accepted') {
+                                            window.addEventListener('appinstalled', (evt) => {
+                                                NotificationManager.create(strings.installedApp, 0);
+                                            }, {once: true});
+                                        } else {
+                                            NotificationManager.create(strings.dismissedInstallPrompt, 0);
+                                        }
+                                    })
+                                }
+                            }
+                        }));
+
+                        bottomSelector.appendChild(cE({
+                            type: "button",
+                            attr: [["style", "border:none!important;width:fit-content;float:right;display:inline-block;line-height:30px!important;"], ["class", "button"]],
+                            innerText: strings.cancel, onclick: () => {
+                                WindowManager.remove(channelId)
+                            }
+                        }));
+                        view.appendChild(bottomSelector);
+                    },
+                    {
+                        size: "small"
+                    }
+                )
+                ;
             }
         }));
         storyboardCtrlList.appendChild(cE({
