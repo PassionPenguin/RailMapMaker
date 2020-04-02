@@ -52,7 +52,8 @@ const LineEditorComp = {
                     pg.$("#scroll-use")[0].style.left = "unset";
                     pg.$("#scroll-use")[0].style.right = "unset";
                     pg.$("#scroll-use")[0].style.width = "unset";
-                }
+                },
+                backStyle: "close"
             });
         else if (MediaQuery.screeHeight().includes("xlg"))
             WindowManager.create((view) => {
@@ -69,7 +70,8 @@ const LineEditorComp = {
                     pg.$("#scroll-use")[0].style.bottom = "unset";
                     pg.$("#scroll-use")[0].style.top = "unset";
                     pg.$("#scroll-use")[0].style.height = "unset";
-                }
+                },
+                backStyle: "close"
             });
         else
             WindowManager.create((view, channelId) => {

@@ -42,5 +42,5 @@ const selectLineDialog = () => {
             attr: [["style", "font:14px/1 Anodina,sans-serif;color:var(--grey)"], ["on_valueChange", "(val)=>{val==='true'?state.newPath=true:state.newPath=false;}"], ["id", "selectLine_newPathToggle"]]
         }));
         PenguinUI_switchToggle.init();
-    }, {size: "middle"});
+    }, {size: "medium", backStyle: "close"});
 }
