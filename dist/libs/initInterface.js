@@ -73,7 +73,7 @@ const initInterface = (type, returnFunc) => {
             attr: [["class", "xlg-exclude"], ["style", "margin-top: 20px!important;"]],
             innerHTML: "<span class='mi'>folder</span><span> " + strings.recentFiles + " </span>",
             onclick: () => {
-                WindowManager.create(view => {
+                WindowManager.create((view, channelId) => {
                     let popup_storyboardFileList = cE({type: "div", attr: [["class", "pg-storyboard-fileList"]]});
                     let popup_storyboardFileListContent = cE({
                         type: "div",
@@ -98,6 +98,7 @@ const initInterface = (type, returnFunc) => {
                                         window.contentData = i;
                                         initInterface(1);
                                         initDrawable();
+                                        WindowManager.remove(channelId);
                                     }
                                 }));
                             });
