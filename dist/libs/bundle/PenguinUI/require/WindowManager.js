@@ -24,7 +24,7 @@ const WindowManager = {
         WindowManager.query.push(opt.channelId);
         let WindowFrame = cE({
             type: "div",
-            attr: [["class", `pg-window ${opt.size} ${opt.mode} ${opt.alignment}`], ["style", `z-index: ${opt.zIndex}`], ["windowId", opt.channelId]]
+            attr: [["class", `pg-window ${opt.size} ${opt.mode} ${opt.alignment}`], ["style", `z-index: ${opt.zIndex}`], ["windowId", opt.channelId], ["onquit", opt.onQuit]]
         });
         let WindowMask;
         if (opt.withMask !== "none") WindowMask = cE({
@@ -52,11 +52,12 @@ const WindowManager = {
     }, remove: (channelId) => {
         pg.$(`[windowId='${channelId}']`)[0].classList.add("remove");
         setTimeout(() => {
-            document.body.removeChild(pg.$(`[windowId='${channelId}']`)[0]);
             try {
+                eval(pg.$(`[windowId='${channelId}']`)[0].getAttribute("onquit"))();
                 document.body.removeChild(pg.$(`[maskId='${channelId}']`)[0]);
             } catch (e) {
             }
+            document.body.removeChild(pg.$(`[windowId='${channelId}']`)[0]);
             pg.$("#pg-app")[0].style.filter = "";
         }, 500);
         WindowManager.query.filter(i => i !== channelId);
