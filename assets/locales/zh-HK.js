@@ -88,4 +88,5 @@ const strings = {
     clearedData: "已清除所有數據",
     confirm: "確認",
     failedInstalling: "安裝失敗",
+    back: "返回",
 }

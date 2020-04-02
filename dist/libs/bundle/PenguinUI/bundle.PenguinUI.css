@@ -202,14 +202,29 @@
 .pg-window-close {
     position: absolute;
     top: 20px;
-    right: 20px;
-    font-size: 28px;
-    color: var(--light);
+    left: 20px;
+    color: var(--theme800);
     transition: 500ms;
 }
 
+.pg-window-close .mi {
+    font-size: 36px;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.pg-window-close span:not(.mi) {
+    font: 800 18px/36px Anodina, sans-serif;
+    vertical-align: middle;
+}
+
 .pg-window-close:hover, .pg-window-close:focus {
-    color: var(--dark);
+    color: var(--theme900);
+}
+
+.pg-window-close.default {
+    left: unset;
+    right: 0;
 }
 
 .pg-window.remove {

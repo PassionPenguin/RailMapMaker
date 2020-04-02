@@ -88,4 +88,5 @@ const strings = {
     clearedData: "Deleted All Data",
     confirm: "Confirm",
     failedInstalling: "Failed Installing",
+    back: "Back",
 }

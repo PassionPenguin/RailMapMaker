@@ -18,6 +18,7 @@ const WindowManager = {
         opt.withMask = opt.withMask || "true";
         opt.withBlur = opt.withBlur || "true";
         opt.alignment = opt.alignment || "center";
+        opt.backStyle = opt.backStyle || "default";
         opt.channelId = opt.channelId || WindowManager.query.length;
         opt.onQuit = opt.onQuit || (() => {
         });
@@ -42,7 +43,9 @@ const WindowManager = {
             pg.$("#pg-app")[0].style.filter = "blur(10px)";
         WindowFrame.appendChild(content);
         content.appendChild(cE({
-            type: "span", attr: [["class", "pg-window-close mi"]], innerText: "close",
+            type: "span",
+            attr: [["class", "pg-window-close"]],
+            innerHTML: `${opt.backStyle === 'default' ? '<span class=\'mi\'>chevron_left</span><span>${strings.back}</span>' : '<span class="mi">close</span>'}`,
             onclick: () => {
                 WindowManager.remove(opt.channelId);
                 opt.onQuit();
