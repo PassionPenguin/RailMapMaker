@@ -222,7 +222,7 @@ const colorUtils = {
             selectPalette.appendChild(cE({
                 type: "div",
                 attr: [["style", "padding:5px;"], ["class", "button"]],
-                innerHTML: `<span style="font:900 16px/28px Anodina, sans-serif;margin-right:20px;color:var(--grey);">${colors.name}</span>${colorsPreview}`,
+                innerHTML: `<span style="font:900 16px/28px Anodina, sans-serif;margin-right:20px;color:var(--grey);width:100px;text-overflow:ellipsis;overflow: hidden;white-space:nowrap;vertical-align:middle;display:inline-block;">${colors.name}</span>${colorsPreview}`,
                 onclick: () => {
                     palettes.innerHTML = "";
                     selectPalette.style.opacity = "0";
