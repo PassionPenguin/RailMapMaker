@@ -12,6 +12,7 @@ const attachEvent = {
     // Package: EditStation
     EditStation: {
         ClickEventListener: (event) => {
+            console.log(event);
             let curX = min(event.offsetX);
             let curY = min(event.offsetY);
             let lastData = contentData.pathInfo[state.pathId].stations.last();
@@ -55,7 +56,9 @@ const attachEvent = {
             }
         },
         MoveEventListener: (element, event) => {
-            element.setAttribute("style", "left:" + (min(event.offsetX) - pg.$("#pg-app")[0].scrollLeft) + "px; top:" + (min(event.offsetY) - pg.$("#pg-app")[0].scrollTop) + "px;");
+            let curX = min(event.offsetX) + pg.$("#pg-app")[0].getBoundingClientRect().x - pg.$("#pg-app")[0].scrollLeft;
+            let curY = min(event.offsetY) + pg.$("#pg-app")[0].getBoundingClientRect().y - pg.$("#pg-app")[0].scrollTop;
+            element.setAttribute("style", "left:" + curX + "px; top:" + curY + "px;");
             event.stopPropagation();
         },
 
