@@ -512,10 +512,13 @@ const initInterface = (type, returnFunc) => {
                     }], ["mouse", strings.select, strings.selectPath, strings.selectPathDescription, () => {
                         selectLineDialog();
                     }], ["home", strings.home, strings.home, strings.backHomeDescription, () => {
-                        NotificationManager.create(strings.system, strings.fileSaved, 0, {
-                            icon: "check",
-                            icon_color: "var(--theme)"
+                        NotificationManager.create(strings.fileSaved, 0, {
+                            icon: "done",
+                            icon_color: "#8BC34A"
                         });
+                        [...pg.$("[windowid]")].forEach(e => {
+                            WindowManager.remove(e.getAttribute("windowid"));
+                        })
                         initInterface(0);
                     }], ["build", strings.edit, strings.edit, strings.editPathsInfo, () => {
                         LineEditorComp.showLineEditor();
