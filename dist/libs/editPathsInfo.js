@@ -96,7 +96,8 @@ const LineEditorComp = {
 
         LineEditorComp.showLineContent(id, lineContent);
         PenguinUI_selector.init();
-    }, showLineContent: (id, e) => {
+    },
+    showLineContent: (id, e) => {
         e.innerHTML = "";
         state.pathId = id;
         let i = contentData.pathInfo[id];
@@ -113,17 +114,17 @@ const LineEditorComp = {
         e.appendChild(cE({
             type: "div",
             attr: [["class", "pg-lineContent-lineCap"], ["style", "margin:10px;"]],
-            innerHTML: `<span class="mi" style="vertical-align: middle;color:var(--grey);">remove</span><span style="width:100px;display:inline-block;color:var(--grey);font:14px/1 Anodina,sans-serif;margin:10px;">${strings.lineCap}</span><pg-selector on_valueChange="(e)=>{contentData.pathInfo[state.pathId].lineCap=['butt','round','square','inherit'][e];drawMap(state.pathId);savePathComp.current();}"><opt>${strings.buttStyle}</opt><opt>${strings.roundStyle}</opt><opt>${strings.squareStyle}</opt><opt>${strings.inheritStyle}</opt><span>${i.lineCap}</span></pg-selector>`
+            innerHTML: `<span class="mi" style="vertical-align: middle;color:var(--grey);">remove</span><span style="width:100px;display:inline-block;color:var(--grey);font:14px/1 Anodina,sans-serif;margin:10px;">${strings.lineCap}</span><pg-selector style="width:80px;text-align:center;" on_valueChange="(e)=>{contentData.pathInfo[state.pathId].lineCap=['butt','round','square','inherit'][e];drawMap(state.pathId);savePathComp.current();}"><opt>${strings.buttStyle}</opt><opt>${strings.roundStyle}</opt><opt>${strings.squareStyle}</opt><opt>${strings.inheritStyle}</opt><span>${i.lineCap}</span></pg-selector>`
         }));
         e.appendChild(cE({
             type: "div",
             attr: [["class", "pg-lineContent-lineJoin"], ["style", "margin:10px;"]],
-            innerHTML: `<span class="mi" style="vertical-align: middle;color:var(--grey);">border_style</span><span style="width:100px;display:inline-block;color:var(--grey);font:14px/1 Anodina,sans-serif;margin:10px;">${strings.lineJoin}</span><pg-selector on_valueChange="(e)=>{contentData.pathInfo[state.pathId].lineJoin=['butt','round','square','inherit'][e];drawMap(state.pathId);savePathComp.current();}"><opt>${strings.buttStyle}</opt><opt>${strings.roundStyle}</opt><opt>${strings.squareStyle}</opt><opt>${strings.inheritStyle}</opt><span>${i.lineJoin}</span></pg-selector>`
+            innerHTML: `<span class="mi" style="vertical-align: middle;color:var(--grey);">border_style</span><span style="width:100px;display:inline-block;color:var(--grey);font:14px/1 Anodina,sans-serif;margin:10px;">${strings.lineJoin}</span><pg-selector style="width:80px;text-align:center;" on_valueChange="(e)=>{contentData.pathInfo[state.pathId].lineJoin=['butt','round','square','inherit'][e];drawMap(state.pathId);savePathComp.current();}"><opt>${strings.buttStyle}</opt><opt>${strings.roundStyle}</opt><opt>${strings.squareStyle}</opt><opt>${strings.inheritStyle}</opt><span>${i.lineJoin}</span></pg-selector>`
         }));
         let strokeColor = cE({
             type: "div",
             attr: [["class", "pg-lineContent-strokeColor"], ["style", "margin:10px;"]],
-            innerHTML: `<span class="mi" style="vertical-align: middle;color:var(--grey);">format_paint</span><span style="width:80px;display:inline-block;color:var(--grey);font:14px/36px Anodina,sans-serif;margin:10px;">${strings.strokeColor}</span><span class="button" style="width:100px;display:inline-block;font:14px/36px Anodina,sans-serif;margin:10px;text-align:center;color:var(--dark);">${i.color}</span>`,
+            innerHTML: `<span class="mi" style="vertical-align: middle;color:var(--grey);">format_paint</span><span style="width:100px;display:inline-block;color:var(--grey);font:14px/36px Anodina,sans-serif;margin:10px;">${strings.strokeColor}</span><span class="button" style="width:80px;display:inline-block;font:14px/36px Anodina,sans-serif;margin:10px;text-align:center;color:var(--dark);">${i.color}</span>`,
             onclick: (event) => {
                 WindowManager.create((view, colorId) => {
                     colorUtils.getColor(view, i.color, null, (color) => {
@@ -140,7 +141,7 @@ const LineEditorComp = {
         e.appendChild(cE({
             type: "div",
             attr: [["class", "pg-lineContent-strokeWidth"], ["style", "margin:10px;"]],
-            innerHTML: `<span class="mi" style="vertical-align: middle;color:var(--grey);">format_bold</span><span style="width:100px;display:inline-block;color:var(--grey);font:14px/1 Anodina,sans-serif;margin:10px;">${strings.strokeWidth}</span><pg-selector on_valueChange="(e)=>{contentData.pathInfo[state.pathId].strokeWidth=['1px','2px','5px','10px'][e];drawMap(state.pathId);savePathComp.current();}"><opt>1px</opt><opt>2px</opt><opt>5px</opt><opt>10px</opt><span>${i.strokeWidth}</span></pg-selector>`
+            innerHTML: `<span class="mi" style="vertical-align: middle;color:var(--grey);">format_bold</span><span style="width:100px;display:inline-block;color:var(--grey);font:14px/1 Anodina,sans-serif;margin:10px;">${strings.strokeWidth}</span><pg-selector style="width:80px;text-align:center;" on_valueChange="(e)=>{contentData.pathInfo[state.pathId].strokeWidth=['1px','2px','5px','10px'][e];drawMap(state.pathId);savePathComp.current();}"><opt>1px</opt><opt>2px</opt><opt>5px</opt><opt>10px</opt><span>${i.strokeWidth}</span></pg-selector>`
         }));
         PenguinUI_switchToggle.init();
         PenguinUI_selector.init();
