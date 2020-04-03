@@ -54,14 +54,14 @@ const LineEditorComp = {
 
         if (MediaQuery.screenWidth().includes("xlg"))
             WindowManager.create((view) => {
-                pg.$("#scroll-use")[0].style.left = "480px";
+                pg.$("#scroll-use")[0].style.left = "320px";
                 pg.$("#scroll-use")[0].style.right = "0";
-                pg.$("#scroll-use")[0].style.width = "calc(100vw - 480px)";
+                pg.$("#scroll-use")[0].style.width = "calc(100vw - 320px)";
                 view.appendChild(editor);
             }, {
                 withMask: "none",
                 withBlur: "none",
-                size: "small",
+                size: "extraSmall",
                 mode: "vertical_split",
                 alignment: "vertical_center horizontal_left", onQuit: () => {
                     pg.$("#scroll-use")[0].style.left = "unset";
@@ -72,14 +72,14 @@ const LineEditorComp = {
             });
         else if (MediaQuery.screeHeight().includes("xlg"))
             WindowManager.create((view) => {
-                pg.$("#scroll-use")[0].style.bottom = "480px";
+                pg.$("#scroll-use")[0].style.bottom = "320px";
                 pg.$("#scroll-use")[0].style.top = "0";
-                pg.$("#scroll-use")[0].style.height = "calc(100vh - 480px)";
+                pg.$("#scroll-use")[0].style.height = "calc(100vh - 320px)";
                 view.appendChild(editor);
             }, {
                 withMask: "none",
                 withBlur: "none",
-                size: "small",
+                size: "extraSmall",
                 mode: "horizontal_split",
                 alignment: "vertical_bottom horizontal_left", onQuit: () => {
                     pg.$("#scroll-use")[0].style.bottom = "unset";
@@ -92,7 +92,7 @@ const LineEditorComp = {
             WindowManager.create((view) => {
                 // editor.appendChild();
                 view.appendChild(editor);
-            }, {size: "large"});
+            }, {size: "medium"});
 
         LineEditorComp.showLineContent(id, lineContent);
         PenguinUI_selector.init();
@@ -108,22 +108,22 @@ const LineEditorComp = {
         e.appendChild(cE({
             type: "div",
             attr: [["class", "pg-lineContent-lineName"], ["style", "margin:10px;"]],
-            innerHTML: `<span class="mi" style="vertical-align: middle;color:var(--grey);">edit</span><span style="width:120px;display:inline-block;color:var(--grey);font:14px/1 Anodina,sans-serif;margin:10px;">${strings.pathName}</span><input value="${i.name}" style="border:0;outline:none;border-bottom:1px solid var(--light);padding:5px;" oninput="[...pg.$('#pg-selectLine-selector')[0].children].filter(i => i.innerText === this.value||i.tagName==='SPAN').forEach(i => {i.innerText = this.value;});contentData.pathInfo[state.pathId].name = this.value;savePathComp.current();drawMap(state.pathId);">`
+            innerHTML: `<span class="mi" style="vertical-align: middle;color:var(--grey);">edit</span><span style="width:100px;display:inline-block;color:var(--grey);font:14px/1 Anodina,sans-serif;margin:10px;">${strings.pathName}</span><input value="${i.name}" style="border:0;outline:none;border-bottom:1px solid var(--light);padding:5px;width:80px;" oninput="[...pg.$('#pg-selectLine-selector')[0].children].filter(i => i.innerText === this.value||i.tagName==='SPAN').forEach(i => {i.innerText = this.value;});contentData.pathInfo[state.pathId].name = this.value;savePathComp.current();drawMap(state.pathId);">`
         }));
         e.appendChild(cE({
             type: "div",
             attr: [["class", "pg-lineContent-lineCap"], ["style", "margin:10px;"]],
-            innerHTML: `<span class="mi" style="vertical-align: middle;color:var(--grey);">remove</span><span style="width:120px;display:inline-block;color:var(--grey);font:14px/1 Anodina,sans-serif;margin:10px;">${strings.lineCap}</span><pg-selector on_valueChange="(e)=>{contentData.pathInfo[state.pathId].lineCap=['butt','round','square','inherit'][e];drawMap(state.pathId);savePathComp.current();}"><opt>${strings.buttStyle}</opt><opt>${strings.roundStyle}</opt><opt>${strings.squareStyle}</opt><opt>${strings.inheritStyle}</opt><span>${i.lineCap}</span></pg-selector>`
+            innerHTML: `<span class="mi" style="vertical-align: middle;color:var(--grey);">remove</span><span style="width:100px;display:inline-block;color:var(--grey);font:14px/1 Anodina,sans-serif;margin:10px;">${strings.lineCap}</span><pg-selector on_valueChange="(e)=>{contentData.pathInfo[state.pathId].lineCap=['butt','round','square','inherit'][e];drawMap(state.pathId);savePathComp.current();}"><opt>${strings.buttStyle}</opt><opt>${strings.roundStyle}</opt><opt>${strings.squareStyle}</opt><opt>${strings.inheritStyle}</opt><span>${i.lineCap}</span></pg-selector>`
         }));
         e.appendChild(cE({
             type: "div",
             attr: [["class", "pg-lineContent-lineJoin"], ["style", "margin:10px;"]],
-            innerHTML: `<span class="mi" style="vertical-align: middle;color:var(--grey);">border_style</span><span style="width:120px;display:inline-block;color:var(--grey);font:14px/1 Anodina,sans-serif;margin:10px;">${strings.lineJoin}</span><pg-selector on_valueChange="(e)=>{contentData.pathInfo[state.pathId].lineJoin=['butt','round','square','inherit'][e];drawMap(state.pathId);savePathComp.current();}"><opt>${strings.buttStyle}</opt><opt>${strings.roundStyle}</opt><opt>${strings.squareStyle}</opt><opt>${strings.inheritStyle}</opt><span>${i.lineJoin}</span></pg-selector>`
+            innerHTML: `<span class="mi" style="vertical-align: middle;color:var(--grey);">border_style</span><span style="width:100px;display:inline-block;color:var(--grey);font:14px/1 Anodina,sans-serif;margin:10px;">${strings.lineJoin}</span><pg-selector on_valueChange="(e)=>{contentData.pathInfo[state.pathId].lineJoin=['butt','round','square','inherit'][e];drawMap(state.pathId);savePathComp.current();}"><opt>${strings.buttStyle}</opt><opt>${strings.roundStyle}</opt><opt>${strings.squareStyle}</opt><opt>${strings.inheritStyle}</opt><span>${i.lineJoin}</span></pg-selector>`
         }));
         let strokeColor = cE({
             type: "div",
             attr: [["class", "pg-lineContent-strokeColor"], ["style", "margin:10px;"]],
-            innerHTML: `<span class="mi" style="vertical-align: middle;color:var(--grey);">format_paint</span><span style="width:120px;display:inline-block;color:var(--grey);font:14px/1 Anodina,sans-serif;margin:10px;">${strings.strokeColor}</span><span style="width:120px;display:inline-block;color:var(--grey);font:14px/1 Anodina,sans-serif;margin:10px;">${i.color}</span>`,
+            innerHTML: `<span class="mi" style="vertical-align: middle;color:var(--grey);">format_paint</span><span style="width:80px;display:inline-block;color:var(--grey);font:14px/36px Anodina,sans-serif;margin:10px;">${strings.strokeColor}</span><span class="button" style="width:100px;display:inline-block;font:14px/36px Anodina,sans-serif;margin:10px;text-align:center;color:var(--dark);">${i.color}</span>`,
             onclick: (event) => {
                 WindowManager.create((view, colorId) => {
                     colorUtils.getColor(view, i.color, null, (color) => {
@@ -133,14 +133,14 @@ const LineEditorComp = {
                         drawMap(state.pathId);
                         savePathComp.current();
                     })
-                }, {size: "small"});
+                }, {size: "small", backStyle: "close"});
             }
         });
         e.appendChild(strokeColor);
         e.appendChild(cE({
             type: "div",
             attr: [["class", "pg-lineContent-strokeWidth"], ["style", "margin:10px;"]],
-            innerHTML: `<span class="mi" style="vertical-align: middle;color:var(--grey);">format_bold</span><span style="width:120px;display:inline-block;color:var(--grey);font:14px/1 Anodina,sans-serif;margin:10px;">${strings.strokeWidth}</span><pg-selector on_valueChange="(e)=>{contentData.pathInfo[state.pathId].strokeWidth=['1px','2px','5px','10px'][e];drawMap(state.pathId);savePathComp.current();}"><opt>1px</opt><opt>2px</opt><opt>5px</opt><opt>10px</opt><span>${i.strokeWidth}</span></pg-selector>`
+            innerHTML: `<span class="mi" style="vertical-align: middle;color:var(--grey);">format_bold</span><span style="width:100px;display:inline-block;color:var(--grey);font:14px/1 Anodina,sans-serif;margin:10px;">${strings.strokeWidth}</span><pg-selector on_valueChange="(e)=>{contentData.pathInfo[state.pathId].strokeWidth=['1px','2px','5px','10px'][e];drawMap(state.pathId);savePathComp.current();}"><opt>1px</opt><opt>2px</opt><opt>5px</opt><opt>10px</opt><span>${i.strokeWidth}</span></pg-selector>`
         }));
         PenguinUI_switchToggle.init();
         PenguinUI_selector.init();
