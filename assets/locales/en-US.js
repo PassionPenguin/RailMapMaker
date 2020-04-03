@@ -89,4 +89,4 @@ const strings = {
     confirm: "Confirm",
     failedInstalling: "Failed Installing",
     back: "Back",
-}
+};

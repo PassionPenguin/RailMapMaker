@@ -1090,8 +1090,6 @@ const initInterface = (type, returnFunc) => {
                         exportDialog(pg.$("#resSvg")[0]);
                     }], ["settings", strings.settings, strings.openSettings, strings.openSettingsDescription, () => {
                         // prefDialog()
-                    }], ["mouse", strings.select, strings.selectPath, strings.selectPathDescription, () => {
-                        selectLineDialog();
                     }], ["home", strings.home, strings.home, strings.backHomeDescription, () => {
                         NotificationManager.create(strings.fileSaved, 0, {
                             icon: "done",
@@ -1099,7 +1097,7 @@ const initInterface = (type, returnFunc) => {
                         });
                         [...pg.$("[windowid]")].forEach(e => {
                             WindowManager.remove(e.getAttribute("windowid"));
-                        })
+                        });
                         initInterface(0);
                     }], ["build", strings.edit, strings.edit, strings.editPathsInfo, () => {
                         LineEditorComp.showLineEditor();
@@ -1129,7 +1127,7 @@ const initInterface = (type, returnFunc) => {
             }
         });
 
-        HoverTips.create(toggle, strings.helper_more, strings.helper_moreDescription)
+        HoverTips.create(toggle, strings.helper_more, strings.helper_moreDescription);
 
         view.appendChild(toggle);
 

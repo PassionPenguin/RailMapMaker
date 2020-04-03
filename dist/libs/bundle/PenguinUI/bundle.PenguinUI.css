@@ -563,6 +563,11 @@ pg-switchtoggle[selected="true"] {
 }
 
 @media (min-width: 320px), (min-height: 320px) {
+    .pg-window.extraSmall {
+        width: 320px;
+        height: 320px;
+    }
+
     .xxs-only {
         height: unset;
         padding: unset;

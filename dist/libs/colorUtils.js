@@ -74,7 +74,8 @@ const colorUtils = {
             g: Math.round(g * 255),
             b: Math.round(b * 255)
         };
-    }, HEXtoRGB: (hex) => {
+    },
+    HEXtoRGB: (hex) => {
         hex = parseInt(((hex.indexOf('#') > -1) ? hex.substring(1) : hex), 16);
         return {r: hex >> 16, g: (hex & 0x00FF00) >> 8, b: (hex & 0x0000FF)};
     },
