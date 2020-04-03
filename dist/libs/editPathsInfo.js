@@ -14,25 +14,40 @@ const LineEditorComp = {
         let editor = cE({type: "div", attr: [["id", "pg-lineEditor"]]});
         editor.appendChild(cE({
             type: "h3",
-            attr: [["style", "margin-top:20px;font:20px/1 Anodina,sans-serif"]],
-            innerText: strings.editPathsInfo
+            attr: [["style", "margin-top:20px;font:20px/1 Anodina,sans-serif;color:var(--dark);"]],
+            innerText: strings.selectPath
         }));
-
-        let selectLineWrap = cE({
-            type: "div",
-            attr: [["style", "width:fit-content;padding:0 10px;display:inline-block;margin-bottom:20px;"]],
-            innerHTML: `<span class="mi" style="vertical-align: middle;color:var(--grey);">mouse</span><span style="width:120px;display:inline-block;color:var(--grey);font:14px/1 Anodina,sans-serif;margin:10px;">${strings.selectPath}</span>`
+        editor.appendChild(cE({
+            type: "p",
+            attr: [["style", "margin-top:20px;font:14px/1 Anodina,sans-serif;color:var(--grey)"]],
+            innerText: strings.selectLineDescription
+        }));
+        let selectLineGroup = cE({type: "div"});
+        contentData.pathInfo.forEach(value => {
+            selectLineGroup.appendChild(cE({
+                type: "p",
+                attr: [["style", ("margin-top:20px;font:14px/1 Anodina,sans-serif;color:" + (contentData.pathInfo[state.pathId] === value ? "var(--theme800);" : "var(--grey);"))]],
+                innerText: value.name, onclick: (event) => {
+                    pg.$("#selectLine_newPathToggle")[0].setAttribute("selected", "false");
+                    state.newPath = false;
+                    state.pathId = value.id;
+                    [...selectLineGroup.children].filter(i => i.style.color === "var(--theme800)").forEach(ele => {
+                        ele.style.color = "var(--grey)"
+                    });
+                    event.target.style.color = "var(--theme800)";
+                }
+            }));
         });
-        let selectLine = cE({
-            type: "pg-selector",
-            attr: [["style", "width:fit-content;padding: 10px 20px;display: inline-block"], ["id", "selectLine"], ["on_valueChange", "(e)=>{LineEditorComp.showLineContent(e,pg.$('#pg-lineContent')[0])}"], ["id", "pg-selectLine-selector"]]
-        });
-        contentData.pathInfo.forEach(e => {
-            selectLine.appendChild(cE({type: "opt", innerText: e.name}));
-        });
-        selectLine.appendChild(cE({type: "span", innerText: contentData.pathInfo[state.pathId].name}));
-        selectLineWrap.appendChild(selectLine);
-        editor.appendChild(selectLineWrap);
+        editor.appendChild(selectLineGroup);
+        editor.appendChild(cE({
+            type: "p",
+            attr: [["style", "padding-top:20px;font:14px/1 Anodina,sans-serif;color:var(--grey)"]],
+            innerText: strings.orCreateNewPathDescription
+        }));
+        editor.appendChild(cE({
+            type: "pg-switchToggle",
+            attr: [["style", "font:14px/1 Anodina,sans-serif;color:var(--grey)"], ["on_valueChange", "(val)=>{val==='true'?state.newPath=true:state.newPath=false;}"], ["id", "selectLine_newPathToggle"]]
+        }));
 
         let lineContent = cE({type: "div", attr: [["id", "pg-lineContent"]]});
         editor.appendChild(lineContent);
@@ -74,7 +89,7 @@ const LineEditorComp = {
                 backStyle: "close"
             });
         else
-            WindowManager.create((view, channelId) => {
+            WindowManager.create((view) => {
                 // editor.appendChild();
                 view.appendChild(editor);
             }, {size: "large"});
@@ -85,6 +100,11 @@ const LineEditorComp = {
         e.innerHTML = "";
         state.pathId = id;
         let i = contentData.pathInfo[id];
+        e.appendChild(cE({
+            type: "h3",
+            attr: [["style", "margin-top:20px;font:20px/1 Anodina,sans-serif"]],
+            innerText: strings.editPathsInfo
+        }));
         e.appendChild(cE({
             type: "div",
             attr: [["class", "pg-lineContent-lineName"], ["style", "margin:10px;"]],
@@ -122,6 +142,7 @@ const LineEditorComp = {
             attr: [["class", "pg-lineContent-strokeWidth"], ["style", "margin:10px;"]],
             innerHTML: `<span class="mi" style="vertical-align: middle;color:var(--grey);">format_bold</span><span style="width:120px;display:inline-block;color:var(--grey);font:14px/1 Anodina,sans-serif;margin:10px;">${strings.strokeWidth}</span><pg-selector on_valueChange="(e)=>{contentData.pathInfo[state.pathId].strokeWidth=['1px','2px','5px','10px'][e];drawMap(state.pathId);savePathComp.current();}"><opt>1px</opt><opt>2px</opt><opt>5px</opt><opt>10px</opt><span>${i.strokeWidth}</span></pg-selector>`
         }));
+        PenguinUI_switchToggle.init();
         PenguinUI_selector.init();
     }
 };
