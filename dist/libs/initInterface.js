@@ -902,19 +902,21 @@ const initInterface = (type, returnFunc) => {
                                     attr: [["style", "font: 400 16px/1 Anodina, sans-serif;text-align: center;margin: 20px 0;color: var(--grey);"]],
                                     innerHTML: strings.language
                                 }));
-                                let selector = cE({
-                                    type: "pg-selector",
-                                    attr: [["on_valueChange", "(e)=>{CookieManager.set('language',e);window.location.reload();}"], ["style", "    margin: 0 auto;display: block;width: 100px;text-align: center;"]]
-                                });
-                                e.appendChild(selector);
-                                builder.locales.forEach((name, index) => {
-                                    if (index === Int(CookieManager.get('language'))) selector.appendChild(cE({
-                                        type: 'span',
-                                        innerText: name
+                                [["zh-CN", [[240, 0]]], ["zh-HK", [[240, 0], [204, 0]]], ["zh-YUE", [[240, 0]]], ["en-US", [[168, 0]]]].forEach((i, index) => {
+                                    let flag = "<div style='display:inline-block;width:96px;'>";
+                                    i[1].forEach(j => {
+                                        flag += `<span style='display:inline-block;width:36px;height:24px;margin:0 3px;background:url(./assets/mipmap/flags.png);background-position:${j[0]}px ${j[1]};background-size:240px;vertical-align:middle;'></span>`;
+                                    });
+                                    e.appendChild(cE({
+                                        type: "div",
+                                        attr: [["style", "width:200px;margin:10px auto;font:900 16px/1 Anodina,sans-serif;"]],
+                                        innerHTML: `${flag}</div><span style="margin-left:20px;vertical-align:middle;">${i[0]}</span>`,
+                                        onclick: () => {
+                                            CookieManager.set("language", index);
+                                            window.location.reload();
+                                        }
                                     }));
-                                    selector.appendChild(cE({type: "opt", innerText: name}));
                                 });
-                                PenguinUI_selector.init();
                             });
                         }
                     }));
