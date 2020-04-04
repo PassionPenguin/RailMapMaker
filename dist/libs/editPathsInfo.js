@@ -63,7 +63,7 @@ const LineEditorComp = {
                     pg.$("#scroll-use")[0].style.right = "unset";
                     pg.$("#scroll-use")[0].style.width = "unset";
                 },
-                title: strings.editPathsInfo
+                title: strings.edit
             });
         else if (MediaQuery.screeHeight().includes("xlg"))
             WindowManager.create((view) => {
@@ -81,13 +81,13 @@ const LineEditorComp = {
                     pg.$("#scroll-use")[0].style.top = "unset";
                     pg.$("#scroll-use")[0].style.height = "unset";
                 },
-                title: strings.editPathsInfo
+                title: strings.edit
             });
         else
             WindowManager.create((view) => {
                 // editor.appendChild();
                 view.appendChild(editor);
-            }, {size: "medium", title: strings.editPathsInfo});
+            }, {size: "medium", title: strings.edit});
 
         LineEditorComp.showLineContent(state.pathId, lineContent);
         PenguinUI_selector.init();

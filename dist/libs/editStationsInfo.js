@@ -79,7 +79,7 @@ const StationEditorComp = {
                     pg.$("#scroll-use")[0].style.right = "unset";
                     pg.$("#scroll-use")[0].style.width = "unset";
                 },
-                title: strings.editStationsInfo
+                title: strings.edit
             });
         else if (MediaQuery.screeHeight().includes("xlg"))
             WindowManager.create((view) => {
@@ -97,13 +97,13 @@ const StationEditorComp = {
                     pg.$("#scroll-use")[0].style.top = "unset";
                     pg.$("#scroll-use")[0].style.height = "unset";
                 },
-                title: strings.editStationsInfo
+                title: strings.edit
             });
         else
             WindowManager.create((view) => {
                 // editor.appendChild();
                 view.appendChild(editor);
-            }, {size: "medium", title: strings.editStationsInfo});
+            }, {size: "medium", title: strings.edit});
 
         PenguinUI_selector.init();
     },
@@ -235,8 +235,8 @@ const StationEditorComp = {
                     pg.$("#scroll-use")[0].style.right = "unset";
                     pg.$("#scroll-use")[0].style.width = "unset";
                 },
-                backStyle: "close",
-                zIndex: 999
+                zIndex: 999,
+                title: strings.edit
             });
         else if (MediaQuery.screeHeight().includes("xlg"))
             WindowManager.create((view) => {
@@ -255,13 +255,13 @@ const StationEditorComp = {
                     pg.$("#scroll-use")[0].style.top = "unset";
                     pg.$("#scroll-use")[0].style.height = "unset";
                 },
-                backStyle: "close",
-                zIndex: 999
+                zIndex: 999,
+                title: strings.edit
             });
         else
             WindowManager.create((view) => {
                 view.appendChild(wrap);
-            }, {size: "medium", zIndex: 1000, title: strings.editStationsInfo});
+            }, {size: "medium", zIndex: 1000, title: strings.edit});
         PenguinUI_switchToggle.init();
         PenguinUI_selector.init();
     }
