@@ -12,7 +12,10 @@ const attachEvent = {
     // Package: EditStation
     EditStation: {
         ClickEventListener: (event) => {
-            console.log(event);
+            /*
+            * @param: event :Event <Event>
+            * @return: void
+            */
             let curX = min(event.offsetX);
             let curY = min(event.offsetY);
             let lastData = contentData.pathInfo[state.pathId].stations.last();
@@ -79,6 +82,11 @@ const attachEvent = {
             }
         },
         MoveEventListener: (element, event) => {
+            /*
+            * @param: element :Element <The Cursor Element>
+            * @param: event :Event <Event>
+            * @return: void
+            */
             let curX = min(event.offsetX) + pg.$("#pg-app")[0].getBoundingClientRect().x - pg.$("#pg-app")[0].scrollLeft;
             let curY = min(event.offsetY) + pg.$("#pg-app")[0].getBoundingClientRect().y - pg.$("#pg-app")[0].scrollTop;
             element.setAttribute("style", "left:" + curX + "px; top:" + curY + "px;");
@@ -86,6 +94,10 @@ const attachEvent = {
         },
 
         attachClickEvent: (element) => {
+            /*
+            * @param: element :Element <Element need to be bound to Click Event>
+            * @return: void
+            */
             builder.debug("PassionPenguin/RailMapMaker", "attachWindowCursorEvent.js", "Event", "Event Attached: EditStation.Click");
             element.onclick = (event) => {
                 attachEvent.EditStation.ClickEventListener(event);
@@ -93,6 +105,11 @@ const attachEvent = {
         },
 
         attachMoveEvent: (element, target) => {
+            /*
+            * @param: element :Element <Element need to be bound to Click Event>
+            * @param: target :Element <Cursor Element need to be bound to Click Event>
+            * @return: void
+            */
             builder.debug("PassionPenguin/RailMapMaker", "attachWindowCursorEvent.js", "Event", "Event Attached: EditStation.Move");
             element.addEventListener("mousemove", (event) => {
                 event.stopPropagation();

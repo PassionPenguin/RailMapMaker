@@ -119,8 +119,6 @@
             text-align: center;
         }
     </style>
-    <link href="./dist/libs/bundle/PenguinUI/bundle.PenguinUI.css" rel="stylesheet">
-    <link href="./dist/libs/bundle/storyboard/bundle.storyboard.css" rel="stylesheet">
     <link href="./manifest.webmanifest" rel="manifest">
 </head>
 <body>
@@ -164,7 +162,7 @@
             return this[this.length - 1]
         }
     }
-    builder.importScripts(['./dist/libs/bundle/PenguinUI/bundle.PenguinUI.js'], () => {
+    builder.importScripts(['./dist/libs/bundle/PenguinUI/bundle.PenguinUI.js', "./dist/libs/bundle/ColorUtils/bundle.colorUtils.js"], () => {
         initPenguinUI(() => {
             ProgressManager.create(0, 0, 0);
             builder.init(() => {

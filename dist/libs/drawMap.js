@@ -10,6 +10,10 @@
  */
 
 const drawMap = id => {
+    /*
+    * @param: id :Int <Path which id = id need to be drawn>
+    * @return: void
+    */
     const info = contentData.pathInfo[id];
     const map = info.stations;
     if (map.length > 0) {
@@ -20,6 +24,10 @@ const drawMap = id => {
         stationsGroup.innerHTML = "";
         namesGroup.innerHTML = "";
         const appendStation = (nodeId) => {
+            /*
+            * @param: nodeId :Int <Node which id = nodeId which need to be drawn>
+            * @return: void
+            */
             let stationNode = document.createElementNS(pg.$('#resSvg')[0].namespaceURI, 'use');
             stationNode.setAttributeNS(null, 'href', '#stationStyle_' + map[nodeId].stationStyle);
             stationNode.setAttributeNS(null, 'fill', map.color);
