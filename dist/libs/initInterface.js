@@ -424,10 +424,10 @@ const initInterface = (type, returnFunc) => {
                             "opacity": 1,
                             "stations": [
                                 {
-                                    "x": 2225,
+                                    "x": 2375,
                                     "y": 3775,
                                     "type": "destination",
-                                    "routeToNext": "4",
+                                    "routeToNext": "8",
                                     "text": {
                                         "type": "withSecondaryName",
                                         "name": [
@@ -439,10 +439,10 @@ const initInterface = (type, returnFunc) => {
                                     }
                                 },
                                 {
-                                    "x": 2350,
-                                    "y": 3650,
+                                    "x": 2475,
+                                    "y": 3675,
                                     "type": "common",
-                                    "routeToNext": "4",
+                                    "routeToNext": "8",
                                     "text": {
                                         "type": "withSecondaryName",
                                         "name": [
@@ -454,10 +454,10 @@ const initInterface = (type, returnFunc) => {
                                     }
                                 },
                                 {
-                                    "x": 2475,
-                                    "y": 3525,
+                                    "x": 2575,
+                                    "y": 3575,
                                     "type": "common",
-                                    "routeToNext": "4",
+                                    "routeToNext": "8",
                                     "text": {
                                         "type": "withSecondaryName",
                                         "name": [
@@ -469,10 +469,10 @@ const initInterface = (type, returnFunc) => {
                                     }
                                 },
                                 {
-                                    "x": 2600,
-                                    "y": 3400,
+                                    "x": 2675,
+                                    "y": 3425,
                                     "type": "common",
-                                    "routeToNext": "4",
+                                    "routeToNext": "6",
                                     "text": {
                                         "type": "withSecondaryName",
                                         "name": [
@@ -484,10 +484,10 @@ const initInterface = (type, returnFunc) => {
                                     }
                                 },
                                 {
-                                    "x": 2600,
-                                    "y": 3275,
+                                    "x": 2675,
+                                    "y": 3325,
                                     "type": "common",
-                                    "routeToNext": "0",
+                                    "routeToNext": "4",
                                     "text": {
                                         "type": "withSecondaryName",
                                         "name": [
@@ -499,10 +499,10 @@ const initInterface = (type, returnFunc) => {
                                     }
                                 },
                                 {
-                                    "x": 2600,
-                                    "y": 3150,
+                                    "x": 2675,
+                                    "y": 3200,
                                     "type": "common",
-                                    "routeToNext": "0",
+                                    "routeToNext": "8",
                                     "text": {
                                         "type": "withSecondaryName",
                                         "name": [
@@ -514,10 +514,10 @@ const initInterface = (type, returnFunc) => {
                                     }
                                 },
                                 {
-                                    "x": 2600,
-                                    "y": 3025,
+                                    "x": 2575,
+                                    "y": 3050,
                                     "type": "common",
-                                    "routeToNext": "0",
+                                    "routeToNext": "4",
                                     "text": {
                                         "type": "withSecondaryName",
                                         "name": [
@@ -532,7 +532,7 @@ const initInterface = (type, returnFunc) => {
                                     "x": 2475,
                                     "y": 2900,
                                     "type": "common",
-                                    "routeToNext": "4",
+                                    "routeToNext": "6",
                                     "text": {
                                         "type": "withSecondaryName",
                                         "name": [
@@ -547,7 +547,7 @@ const initInterface = (type, returnFunc) => {
                                     "x": 2475,
                                     "y": 2775,
                                     "type": "common",
-                                    "routeToNext": "0",
+                                    "routeToNext": "8",
                                     "text": {
                                         "type": "withSecondaryName",
                                         "name": [
@@ -562,7 +562,7 @@ const initInterface = (type, returnFunc) => {
                                     "x": 2475,
                                     "y": 2650,
                                     "type": "common",
-                                    "routeToNext": "0",
+                                    "routeToNext": "8",
                                     "text": {
                                         "type": "withSecondaryName",
                                         "name": [
@@ -577,7 +577,7 @@ const initInterface = (type, returnFunc) => {
                                     "x": 2475,
                                     "y": 2525,
                                     "type": "common",
-                                    "routeToNext": "0",
+                                    "routeToNext": "8",
                                     "text": {
                                         "type": "withSecondaryName",
                                         "name": [
@@ -592,7 +592,7 @@ const initInterface = (type, returnFunc) => {
                                     "x": 2475,
                                     "y": 2400,
                                     "type": "common",
-                                    "routeToNext": "0",
+                                    "routeToNext": "8",
                                     "text": {
                                         "type": "withSecondaryName",
                                         "name": [
@@ -607,7 +607,7 @@ const initInterface = (type, returnFunc) => {
                                     "x": 2475,
                                     "y": 2150,
                                     "type": "common",
-                                    "routeToNext": "0",
+                                    "routeToNext": "8",
                                     "text": {
                                         "type": "withSecondaryName",
                                         "name": [
@@ -622,7 +622,7 @@ const initInterface = (type, returnFunc) => {
                                     "x": 2475,
                                     "y": 2025,
                                     "type": "common",
-                                    "routeToNext": "0",
+                                    "routeToNext": "8",
                                     "text": {
                                         "type": "withSecondaryName",
                                         "name": [
@@ -637,7 +637,7 @@ const initInterface = (type, returnFunc) => {
                                     "x": 2475,
                                     "y": 1900,
                                     "type": "common",
-                                    "routeToNext": "0",
+                                    "routeToNext": "8",
                                     "text": {
                                         "type": "withSecondaryName",
                                         "name": [
@@ -652,7 +652,7 @@ const initInterface = (type, returnFunc) => {
                                     "x": 2475,
                                     "y": 1775,
                                     "type": "common",
-                                    "routeToNext": "0",
+                                    "routeToNext": "8",
                                     "text": {
                                         "type": "withSecondaryName",
                                         "name": [
@@ -667,7 +667,7 @@ const initInterface = (type, returnFunc) => {
                                     "x": 2475,
                                     "y": 1650,
                                     "type": "common",
-                                    "routeToNext": "4",
+                                    "routeToNext": "8",
                                     "text": {
                                         "type": "withSecondaryName",
                                         "name": [
@@ -682,7 +682,7 @@ const initInterface = (type, returnFunc) => {
                                     "x": 2475,
                                     "y": 1525,
                                     "type": "common",
-                                    "routeToNext": "4",
+                                    "routeToNext": "8",
                                     "text": {
                                         "type": "withSecondaryName",
                                         "name": [
@@ -724,8 +724,8 @@ const initInterface = (type, returnFunc) => {
                                     }
                                 },
                                 {
-                                    "x": 2600,
-                                    "y": 1150,
+                                    "x": 2575,
+                                    "y": 1100,
                                     "type": "common",
                                     "routeToNext": "4",
                                     "text": {
@@ -739,10 +739,10 @@ const initInterface = (type, returnFunc) => {
                                     }
                                 },
                                 {
-                                    "x": 2725,
-                                    "y": 1025,
+                                    "x": 2675,
+                                    "y": 1000,
                                     "type": "common",
-                                    "routeToNext": "4",
+                                    "routeToNext": "8",
                                     "text": {
                                         "type": "withSecondaryName",
                                         "name": [
@@ -754,10 +754,10 @@ const initInterface = (type, returnFunc) => {
                                     }
                                 },
                                 {
-                                    "x": 2850,
+                                    "x": 2775,
                                     "y": 900,
                                     "type": "destination",
-                                    "routeToNext": "4",
+                                    "routeToNext": "8",
                                     "text": {
                                         "type": "withSecondaryName",
                                         "name": [
@@ -771,7 +771,7 @@ const initInterface = (type, returnFunc) => {
                             ]
                         }
                     ]
-                }
+                };
                 JSONParser(LocaleStorageManager.get("fileList")).then(i => {
                     i.push(JSON.parse(LocaleStorageManager.get("fileList")).length)
                     LocaleStorageManager.set("fileList", JSON.stringify(i));
