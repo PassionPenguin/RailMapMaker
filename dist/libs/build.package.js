@@ -10,12 +10,12 @@
 
 const builder = {
     installable: false,
-    debugMode: true,
-    version: "1.3",
-    bundles: [{name: "PenguinUI", version: "0.1.5"}],
-    displayVersion: "Cola/(RMG v1.3 Stable)",
+    debugMode: false,
+    version: "1.5",
+    bundles: [{name: "PenguinUI", version: "0.1.7"}],
+    displayVersion: "Cola/(RMG v1.5 Stable)",
     locales: ["zh-CN", "zh-HK", "zh-YUE", "en-US"],
-    buildTime: 1585118965574,
+    buildTime: 1586010235748,
     debug: (pkg, src, tag, msg) => {
         if (builder.debugMode)
             console.debug("%c> " + pkg + "%c>> " + src + "%c\n" + tag + ":\t %c" + msg, "color:var(--grey);margin:10px auto 0 auto;display:block;font:900 12px/1 Anodina,sans-serif;", "color:var(--black);margin:0 auto 20px auto;display:block;font:900 14px/1 Anodina,sans-serif;", "color:var(--black);margin:10px 20px 0 0;display:context;font:14px/21px Anodina,sans-serif;", "color:var(--black);margin:0;display:context;font:12px/21px Anodina,sans-serif;");
