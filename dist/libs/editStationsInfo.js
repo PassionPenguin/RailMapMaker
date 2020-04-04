@@ -165,11 +165,6 @@ const StationEditorComp = {
             attr: [["class", "pg-stationContent-prevLineStyle"], ["style", "margin:10px;"]],
             innerHTML: `<span class="mi" style="vertical-align: middle;color:var(--grey);">line_style</span><span style="width:100px;display:inline-block;color:var(--grey);font:14px/1 Anodina,sans-serif;margin:10px;">${strings.connLineStyle}</span><pg-selector style="width:80px;text-align:center;" on_valueChange="(e)=>{contentData.pathInfo[${id}].stations[${index}].routeToNext=e.toString();drawMap(${id});savePathComp.current();}"><opt>A</opt><opt>B</opt><opt>C</opt><opt>D</opt><opt>E</opt><opt>F</opt><opt>G</opt><opt>H</opt><opt>I</opt><span>${["A", "B", "C", "D", "E", "F", "G", "H", "I"][Int(e.routeToNext)]}</span></pg-selector>`
         }));
-        wrap.appendChild(cE({
-            type: "div",
-            attr: [["class", "pg-stationContent-prevLineStyle"], ["style", "margin:10px;"]],
-            innerHTML: `<span class="mi" style="vertical-align: middle;color:var(--grey);">format_align_left</span><span style="width:100px;display:inline-block;color:var(--grey);font:14px/1 Anodina,sans-serif;margin:10px;">${strings.align}</span><pg-selector style="width:80px;text-align:center;" on_valueChange="(e)=>{contentData.pathInfo[${id}].stations[${index}].text.alignment=['start', 'middle', 'end'][Int(e)];drawMap(${id});savePathComp.current();}"><opt>${strings.left}</opt><opt>${strings.center}</opt><opt>${strings.right}</opt><span>${[strings.left, strings.center, strings.right][['start', 'middle', 'end'].indexOf(e.text.alignment)]}</span></pg-selector>`
-        }));
         let removeNode = cE({
             type: "div",
             attr: [["class", "pg-stationContent-remove"], ["style", "margin:10px;"]],
