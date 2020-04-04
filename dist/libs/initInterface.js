@@ -419,7 +419,7 @@ const initInterface = (type, returnFunc) => {
                             "lineJoin": "round",
                             "strokeWidth": "5px",
                             "color": "#00629b",
-                            "id": 0,
+                            "id": 1,
                             "name": "Line 2",
                             "opacity": 1,
                             "stations": [
