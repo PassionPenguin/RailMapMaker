@@ -88,7 +88,7 @@ const StationEditorComp = {
             contentData.pathInfo[state.pathId].stations.forEach((e, index) => {
                 selector.appendChild(cE({
                     type: "div",
-                    attr: [["style", "width:calc(100% - 20px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:14px/1 Anodina,sans-serif;margin:15px 10px;"]],
+                    attr: [["style", "width:calc(100% - 20px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:14px/1 Anodina,sans-serif;margin:10px 10px;padding:2.5px 0;"]],
                     innerHTML: `<span style='color:var(--dark);'>${e.text.name[0]}</span>${e.text.type === "withSecondaryName" ? ("<span style='color:var(--grey);'>" + e.text.name[1] + "</span>") : ""}`,
                     onclick: () => {
                         StationEditorComp.showStationContent(state.pathId, index);
