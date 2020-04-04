@@ -125,7 +125,7 @@ const LineEditorComp = {
             type: "div",
             attr: [["class", "pg-lineContent-strokeColor"], ["style", "margin:10px;"]],
             innerHTML: `<span class="mi" style="vertical-align: middle;color:var(--grey);">format_paint</span><span style="width:100px;display:inline-block;color:var(--grey);font:14px/36px Anodina,sans-serif;margin:10px;">${strings.strokeColor}</span><span class="button" style="width:80px;display:inline-block;font:14px/36px Anodina,sans-serif;margin:10px;text-align:center;color:var(--dark);">${i.color}</span>`,
-            onclick: (event) => {
+            onclick: () => {
                 WindowManager.create((view, colorId) => {
                     colorUtils.getColor(view, i.color, null, (color) => {
                         WindowManager.remove(colorId);
