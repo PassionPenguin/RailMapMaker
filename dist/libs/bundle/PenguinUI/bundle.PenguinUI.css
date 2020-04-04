@@ -170,10 +170,12 @@
 
 .pg-window.horizontal_split {
     width: 100% !important;
+    border-radius: 0;
 }
 
 .pg-window.vertical_split {
     height: 100% !important;
+    border-radius: 0;
 }
 
 .pg-window-mask {
