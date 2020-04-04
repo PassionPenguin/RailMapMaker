@@ -81,7 +81,7 @@ const initInterface = (type, returnFunc) => {
                     });
                     popup_storyboardFileListContent.appendChild(cE({
                         type: "div",
-                        attr: [["class", "pg-storyboard-file-title"], ["style", "    width: fit-content;margin: 10px!important;font: 300 20px/1 Anodina,sans-serif;color: var(--dark);"]],
+                        attr: [["class", "pg-storyboard-file-title"], ["style", "width: fit-content;margin: 10px!important;font:300 20px/1 Anodina,sans-serif;color: var(--dark);text-align:center;display:block;text-align:center;"]],
                         innerHTML: strings.recentFiles,
                     }));
                     JSONParser(LocaleStorageManager.get("fileList")).then(val => {
@@ -106,7 +106,7 @@ const initInterface = (type, returnFunc) => {
                     });
                     popup_storyboardFileList.appendChild(popup_storyboardFileListContent);
                     view.appendChild(popup_storyboardFileList);
-                }, {size: "large"});
+                }, {size: "large", title: strings.recentFiles});
             }
         }));
         storyboardCtrlList.appendChild(cE({
@@ -812,7 +812,7 @@ const initInterface = (type, returnFunc) => {
                     ]
                 };
                 JSONParser(LocaleStorageManager.get("fileList")).then(i => {
-                    i.push(JSON.parse(LocaleStorageManager.get("fileList")).length)
+                    i.push(JSON.parse(LocaleStorageManager.get("fileList")).length);
                     LocaleStorageManager.set("fileList", JSON.stringify(i));
                 });
                 initInterface(1, () => {
@@ -826,7 +826,7 @@ const initInterface = (type, returnFunc) => {
             onclick: () => {
                 state.fileId++;
                 JSONParser(LocaleStorageManager.get("fileList")).then(i => {
-                    i.push(JSON.parse(LocaleStorageManager.get("fileList")).length)
+                    i.push(JSON.parse(LocaleStorageManager.get("fileList")).length);
                     LocaleStorageManager.set("fileList", JSON.stringify(i));
                 });
                 window.contentData = {
@@ -899,7 +899,7 @@ const initInterface = (type, returnFunc) => {
                             innerHTML: "Bundle " + i.name + "\t" + i.version
                         }));
                     });
-                });
+                }, {title: strings.about});
             }
         }));
         storyboardCtrlList.appendChild(cE({
@@ -907,20 +907,6 @@ const initInterface = (type, returnFunc) => {
             innerHTML: "<span class='mi'>settings</span><span> " + strings.preference + " </span>",
             onclick: () => {
                 WindowManager.create((e) => {
-                    e.appendChild(cE({
-                        type: "img",
-                        attr: [["alt", "icon"], ["style", "width: 128px;display: block;margin: 0 auto;"], ["src", "./assets/mipmap/icon@1024.png"]]
-                    }));
-                    e.appendChild(cE({
-                        type: "p",
-                        attr: [["style", "font: 900 28px/1 Anodina, sans-serif;text-align: center;margin: 10px 0;"]],
-                        innerHTML: strings.appName
-                    }));
-                    e.appendChild(cE({
-                        type: "p",
-                        attr: [["style", "font: 400 16px/1 Anodina, sans-serif;text-align: center;margin: 20px 0;color: var(--grey);"]],
-                        innerHTML: strings.preference
-                    }));
                     e.appendChild(cE({
                         type: "p",
                         attr: [["style", "font: 400 14px/1 Anodina, sans-serif;text-align: center;margin: 10px 0;color: var(--grey);"]],
@@ -956,10 +942,10 @@ const initInterface = (type, returnFunc) => {
                                         }
                                     }));
                                 });
-                            });
+                            }, {title: strings.language});
                         }
                     }));
-                });
+                }, {title: strings.preference});
             }
         }));
         storyboardCtrlList.appendChild(cE({
@@ -967,20 +953,6 @@ const initInterface = (type, returnFunc) => {
             innerHTML: "<span class='mi'>memory</span><span> " + strings.debugInfo + " </span>",
             onclick: () => {
                 WindowManager.create((e) => {
-                    e.appendChild(cE({
-                        type: "img",
-                        attr: [["alt", "icon"], ["style", "width: 128px;display: block;margin: 0 auto;"], ["src", "./assets/mipmap/icon@1024.png"]]
-                    }));
-                    e.appendChild(cE({
-                        type: "p",
-                        attr: [["style", "font: 900 28px/1 Anodina, sans-serif;text-align: center;margin: 10px 0;"]],
-                        innerHTML: strings.appName
-                    }));
-                    e.appendChild(cE({
-                        type: "p",
-                        attr: [["style", "font: 400 16px/1 Anodina, sans-serif;text-align: center;margin: 20px 0;color: var(--grey);"]],
-                        innerHTML: strings.browserInfo
-                    }));
                     e.appendChild(cE({
                         type: "p",
                         attr: [["style", "font: 400 14px/1 Anodina, sans-serif;text-align: center;margin: 10px 0;color: var(--grey);"]],
@@ -1001,7 +973,7 @@ const initInterface = (type, returnFunc) => {
                         attr: [["style", "font: 400 14px/21px Anodina, sans-serif;text-align: center;margin: 10px auto;color: var(--grey);width:80%;"]],
                         innerHTML: strings.onLine + ":\t" + (navigator.onLine ? strings.cur_onLine : strings.cur_offLine)
                     }));
-                });
+                }, {title: strings.browserInfo});
             }
         }));
         storyboardCtrlList.appendChild(cE({
@@ -1068,10 +1040,9 @@ const initInterface = (type, returnFunc) => {
                         view.appendChild(bottomSelector);
                     },
                     {
-                        size: "small"
+                        size: "small", title: strings.installApp
                     }
-                )
-                ;
+                );
             }
         }));
         storyboardCtrlList.appendChild(cE({

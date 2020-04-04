@@ -10,35 +10,34 @@
 
 const StationEditorComp = {
     showStationEditor: () => {
-        let editor = cE({type: "div", attr: [["id", "pg-stationSelector"]]});
-        editor.appendChild(cE({
-            type: "h3",
-            attr: [["style", "margin-top:20px;font:20px/1 Anodina,sans-serif;color:var(--dark);"]],
-            innerText: strings.selectPath
-        }));
+        let editor = cE({
+            type: "div",
+            attr: [["id", "pg-stationSelector"], ["style", "height:100%;overflow-y:scroll"]]
+        });
         editor.appendChild(cE({
             type: "p",
             attr: [["style", "margin-top:20px;font:14px/1 Anodina,sans-serif;color:var(--grey)"]],
             innerText: strings.selectLineDescription
         }));
-        let selectStationGroup = cE({type: "div"});
+
+        let selectLineGroup = cE({type: "div"});
         contentData.pathInfo.forEach(value => {
-            selectStationGroup.appendChild(cE({
+            selectLineGroup.appendChild(cE({
                 type: "p",
                 attr: [["style", ("margin-top:20px;font:14px/1 Anodina,sans-serif;color:" + (contentData.pathInfo[state.pathId] === value ? "var(--theme800);" : "var(--grey);"))]],
                 innerText: value.name, onclick: (event) => {
-                    pg.$("#selectStation_newPathToggle")[0].setAttribute("selected", "false");
+                    pg.$("#selectLine_newPathToggle")[0].setAttribute("selected", "false");
                     state.newPath = false;
                     state.pathId = value.id;
-                    loadStation();
-                    [...selectStationGroup.children].filter(i => i.style.color === "var(--theme800)").forEach(ele => {
+                    LineEditorComp.showLineContent(value.id);
+                    [...selectLineGroup.children].filter(i => i.style.color === "var(--theme800)").forEach(ele => {
                         ele.style.color = "var(--grey)"
                     });
                     event.target.style.color = "var(--theme800)";
-                    pg.$("#pg-stationEditor")[0].parentElement.removeChild(pg.$("#pg-stationEditor"));
                 }
             }));
         });
+        editor.appendChild(selectLineGroup);
 
         if (MediaQuery.screenWidth().includes("xlg"))
             WindowManager.create((view) => {
@@ -56,7 +55,7 @@ const StationEditorComp = {
                     pg.$("#scroll-use")[0].style.right = "unset";
                     pg.$("#scroll-use")[0].style.width = "unset";
                 },
-                backStyle: "close"
+                title: strings.editStationsInfo
             });
         else if (MediaQuery.screeHeight().includes("xlg"))
             WindowManager.create((view) => {
@@ -74,13 +73,13 @@ const StationEditorComp = {
                     pg.$("#scroll-use")[0].style.top = "unset";
                     pg.$("#scroll-use")[0].style.height = "unset";
                 },
-                backStyle: "close"
+                title: strings.editStationsInfo
             });
         else
             WindowManager.create((view) => {
                 // editor.appendChild();
                 view.appendChild(editor);
-            }, {size: "medium"});
+            }, {size: "medium", title: strings.editStationsInfo});
 
         let selector = cE({type: "div", attr: [["class", "selectStation"]]});
         const loadStation = () => {

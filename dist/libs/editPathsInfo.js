@@ -12,11 +12,6 @@ const LineEditorComp = {
     showLineEditor: () => {
         let editor = cE({type: "div", attr: [["id", "pg-lineEditor"]]});
         editor.appendChild(cE({
-            type: "h3",
-            attr: [["style", "margin-top:20px;font:20px/1 Anodina,sans-serif;color:var(--dark);"]],
-            innerText: strings.selectPath
-        }));
-        editor.appendChild(cE({
             type: "p",
             attr: [["style", "margin-top:20px;font:14px/1 Anodina,sans-serif;color:var(--grey)"]],
             innerText: strings.selectLineDescription
@@ -68,7 +63,7 @@ const LineEditorComp = {
                     pg.$("#scroll-use")[0].style.right = "unset";
                     pg.$("#scroll-use")[0].style.width = "unset";
                 },
-                backStyle: "close"
+                title: strings.editPathsInfo
             });
         else if (MediaQuery.screeHeight().includes("xlg"))
             WindowManager.create((view) => {
@@ -86,13 +81,13 @@ const LineEditorComp = {
                     pg.$("#scroll-use")[0].style.top = "unset";
                     pg.$("#scroll-use")[0].style.height = "unset";
                 },
-                backStyle: "close"
+                title: strings.editPathsInfo
             });
         else
             WindowManager.create((view) => {
                 // editor.appendChild();
                 view.appendChild(editor);
-            }, {size: "medium", backStyle: "close"});
+            }, {size: "medium", title: strings.editPathsInfo});
 
         LineEditorComp.showLineContent(state.pathId, lineContent);
         PenguinUI_selector.init();

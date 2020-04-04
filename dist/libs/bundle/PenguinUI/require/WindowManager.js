@@ -22,6 +22,8 @@ const WindowManager = {
         opt.channelId = opt.channelId || WindowManager.query.length;
         opt.onQuit = opt.onQuit || (() => {
         });
+        opt.title = opt.title || "Untitled Window";
+        opt.withTitle = opt.withTitle || true;
         WindowManager.query.push(opt.channelId);
         let WindowFrame = cE({
             type: "div",
@@ -42,16 +44,29 @@ const WindowManager = {
         if (opt.withBlur !== "none")
             pg.$("#pg-app")[0].style.filter = "blur(10px)";
         WindowFrame.appendChild(content);
-        content.appendChild(cE({
+        let headbar = cE({type: "div", attr: [["class", "pg-window-topBar"]], innerHTML: "<div></div>"});
+        content.appendChild(headbar);
+        headbar.children[0].appendChild(cE({
             type: "span",
-            attr: [["class", `pg-window-close ${opt.backStyle !== 'default' ? 'close' : ''}`]],
+            attr: [["class", `pg-window-close ${opt.backStyle !== 'default' ? 'close' : ''}`], ["style", `z-index:${opt.zIndex + 1}`]],
             innerHTML: `${opt.backStyle === 'default' ? '<span class=\'mi\'>chevron_left</span><span>' + strings.back + '</span>' : '<span class="mi">close</span>'}`,
             onclick: () => {
                 WindowManager.remove(opt.channelId);
                 opt.onQuit();
             }
         }));
-        returnFunc(content, opt.channelId);
+        if (opt.withTitle)
+            headbar.children[0].appendChild(cE({
+                type: "div",
+                attr: [["class", `pg-window-title`]],
+                innerHTML: opt.title
+            }));
+        else content.classList.add("withoutTitleBar");
+
+        let innerContent = cE({type: "div", attr: [["class", "pg-window-innerContent"]]});
+        content.appendChild(innerContent);
+
+        returnFunc(innerContent, opt.channelId);
     }, remove: (channelId) => {
         pg.$(`[windowId='${channelId}']`)[0].classList.add("remove");
         setTimeout(() => {

@@ -157,7 +157,7 @@ const exportDrawable = (svgEl) => {
             document.body.removeChild(canvas);
         }
     }
-}
+};
 
 const saveDrawableAs = (uri, filename) => {
     let link = document.createElement('a');
@@ -174,4 +174,4 @@ const saveDrawableAs = (uri, filename) => {
     } else {
         window.open(uri);
     }
-}
+};
