@@ -11,7 +11,8 @@
 PenguinUI_switchToggle = {
     init: () => {
         [...pg.$("pg-switchToggle:not([pg-init])")].forEach(e => {
-            e.setAttribute("selected", "false")
+            if (e.getAttribute('selected') !== "true")
+                e.setAttribute("selected", "false");
             let curValue = cE({type: "span"});
             e.appendChild(curValue);
             e.onclick = () => {
