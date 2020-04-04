@@ -111,5 +111,6 @@ const strings = {
     bottom: "Bottom",
     bottomRight: "Bottom Right",
     align: "Align",
-    middle: "Middle",
+    center: "Center",
+    connLineStyle: "Connection Line Style",
 }

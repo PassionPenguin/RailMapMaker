@@ -111,5 +111,6 @@ const strings = {
     bottom: "正下方",
     bottomRight: "右下方",
     align: "對齊",
-    middle: "中間",
+    center: "中間",
+    connLineStyle: "連接線樣式",
 }

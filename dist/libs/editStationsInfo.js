@@ -148,16 +148,16 @@ const StationEditorComp = {
         wrap.appendChild(cE({
             type: "div",
             attr: [["class", "pg-stationContent-style"], ["style", "margin:10px;"]],
-            innerHTML: `<span class="mi" style="vertical-align: middle;color:var(--grey);">category</span><span style="width:100px;display:inline-block;color:var(--grey);font:14px/1 Anodina,sans-serif;margin:10px;">${strings.style}</span><pg-selector style="width:80px;text-align:center;" on_valueChange="(e)=>{contentData.pathInfo[${id}].stations[${index}].stationStyle=['rect','circle'][e];drawMap(${id});savePathComp.current();}"><opt>rect</opt><opt>circle</opt><span>${e.stationStyle}</span></pg-selector>`
+            innerHTML: `<span class="mi" style="vertical-align: middle;color:var(--grey);">format_shapes</span><span style="width:100px;display:inline-block;color:var(--grey);font:14px/1 Anodina,sans-serif;margin:10px;">${strings.style}</span><pg-selector style="width:80px;text-align:center;" on_valueChange="(e)=>{contentData.pathInfo[${id}].stations[${index}].stationStyle=['rect','circle'][e];drawMap(${id});savePathComp.current();}"><opt>rect</opt><opt>circle</opt><span>${e.stationStyle}</span></pg-selector>`
         }));
         wrap.appendChild(cE({
             type: "div",
-            attr: [["class", "pg-stationContent-style"], ["style", "margin:10px;"]],
+            attr: [["class", "pg-stationContent-position"], ["style", "margin:10px;"]],
             innerHTML: `<span class="mi" style="vertical-align: middle;color:var(--grey);">style</span><span style="width:100px;display:inline-block;color:var(--grey);font:14px/1 Anodina,sans-serif;margin:10px;">${strings.namePosition}</span><pg-selector style="width:80px;text-align:center;" on_valueChange="(e)=>{contentData.pathInfo[${id}].stations[${index}].text.position=Int(e);drawMap(${id});savePathComp.current();}"><opt>${strings.topLeft}</opt><opt>${strings.top}</opt><opt>${strings.topRight}</opt><opt>${strings.left}</opt><opt>${strings.right}</opt><opt>${strings.bottomLeft}</opt><opt>${strings.bottomRight}</opt><span>${[strings.topLeft, strings.top, strings.topRight, strings.left, strings.right, strings.bottomLeft, strings.bottom, strings.bottomRight][e.text.position]}</span></pg-selector>`
         }));
         wrap.appendChild(cE({
             type: "div",
-            attr: [["class", "pg-stationContent-style"], ["style", "margin:10px;"]],
+            attr: [["class", "pg-stationContent-align"], ["style", "margin:10px;"]],
             innerHTML: `<span class="mi" style="vertical-align: middle;color:var(--grey);">format_align_left</span><span style="width:100px;display:inline-block;color:var(--grey);font:14px/1 Anodina,sans-serif;margin:10px;">${strings.align}</span><pg-selector style="width:80px;text-align:center;" on_valueChange="(e)=>{contentData.pathInfo[${id}].stations[${index}].text.alignment=['start', 'middle', 'end'][Int(e)];drawMap(${id});savePathComp.current();}"><opt>${strings.left}</opt><opt>${strings.middle}</opt><opt>${strings.right}</opt><span>${[strings.left, strings.middle, strings.right][['start', 'middle', 'end'].indexOf(e.text.alignment)]}</span></pg-selector>`
         }));
         let removeNode = cE({
@@ -210,6 +210,16 @@ const StationEditorComp = {
             }
         }));
         wrap.appendChild(removeNode);
+        wrap.appendChild(cE({
+            type: "div",
+            attr: [["class", "pg-stationContent-prevLineStyle"], ["style", "margin:10px;"]],
+            innerHTML: `<span class="mi" style="vertical-align: middle;color:var(--grey);">format_align_left</span><span style="width:100px;display:inline-block;color:var(--grey);font:14px/1 Anodina,sans-serif;margin:10px;">${strings.align}</span><pg-selector style="width:80px;text-align:center;" on_valueChange="(e)=>{contentData.pathInfo[${id}].stations[${index}].text.alignment=['start', 'middle', 'end'][Int(e)];drawMap(${id});savePathComp.current();}"><opt>${strings.left}</opt><opt>${strings.center}</opt><opt>${strings.right}</opt><span>${[strings.left, strings.center, strings.right][['start', 'middle', 'end'].indexOf(e.text.alignment)]}</span></pg-selector>`
+        }));
+        wrap.appendChild(cE({
+            type: "div",
+            attr: [["class", "pg-stationContent-prevLineStyle"], ["style", "margin:10px;"]],
+            innerHTML: `<span class="mi" style="vertical-align: middle;color:var(--grey);">line_style</span><span style="width:100px;display:inline-block;color:var(--grey);font:14px/1 Anodina,sans-serif;margin:10px;">${strings.connLineStyle}</span><pg-selector style="width:80px;text-align:center;" on_valueChange="(e)=>{contentData.pathInfo[${id}].stations[${index}].routeToNext=e.toString();drawMap(${id});savePathComp.current();}"><opt>A</opt><opt>B</opt><opt>C</opt><opt>D</opt><opt>E</opt><opt>F</opt><opt>G</opt><opt>H</opt><opt>I</opt><span>${["A", "B", "C", "D", "E", "F", "G", "H", "I"][Int(e.routeToNext)]}</span></pg-selector>`
+        }));
 
 
         if (MediaQuery.screenWidth().includes("xlg"))
