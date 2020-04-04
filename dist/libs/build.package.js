@@ -52,7 +52,7 @@ const builder = {
 
         builder.importStyles(["./dist/libs/bundle/PenguinUI/bundle.PenguinUI.css", "./dist/libs/bundle/storyboard/bundle.storyboard.css"]);
         ProgressManager.update(0, 33.3, 100);
-        builder.importScripts(["./dist/libs/attachWindowCursorEvent.js", "./dist/libs/initInterface.js", "./dist/libs/exportDrawable.js", "./dist/libs/drawMap.js", "./dist/libs/initDrawable.js", "./dist/libs/SystemFunction.js", "./dist/libs/editPathsInfo.js", "./dist/libs/savePathComp.js", "./dist/libs/colorUtils.js", "./assets/Colors/Colors.js", "./assets/locales/" + builder.locales[pg.language] + ".js"], returnFunc);
+        builder.importScripts(["./dist/libs/attachWindowCursorEvent.js", "./dist/libs/initInterface.js", "./dist/libs/exportDrawable.js", "./dist/libs/drawMap.js", "./dist/libs/initDrawable.js", "./dist/libs/SystemFunction.js", "./dist/libs/editPathsInfo.js", "./dist/libs/editStationsInfo.js", "./dist/libs/savePathComp.js", "./dist/libs/colorUtils.js", "./assets/Colors/Colors.js", "./assets/locales/" + builder.locales[pg.language] + ".js"], returnFunc);
         ProgressManager.update(0, 66.6, 100);
     },
     importScripts: (urls, returnFunc) => {
