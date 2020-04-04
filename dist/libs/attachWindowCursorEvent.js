@@ -55,7 +55,8 @@ const attachEvent = {
                             ],
                             "position": 1,
                             "alignment": "middle"
-                        }
+                        },
+                        "stationStyle": "rect"
                     }]
                 });
                 state.newPath = false;
@@ -75,8 +76,9 @@ const attachEvent = {
                             "Tianhe Park"
                         ],
                         "position": 1,
-                        "alignment": "middle"
-                    }
+                        "alignment": "middle",
+                    },
+                    "stationStyle": "rect"
                 });
                 drawMap(state.pathId);
             }
