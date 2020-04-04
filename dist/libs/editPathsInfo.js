@@ -9,8 +9,7 @@
  */
 
 const LineEditorComp = {
-    showLineEditor: (id) => {
-        id = id || 0;
+    showLineEditor: () => {
         let editor = cE({type: "div", attr: [["id", "pg-lineEditor"]]});
         editor.appendChild(cE({
             type: "h3",
@@ -31,6 +30,7 @@ const LineEditorComp = {
                     pg.$("#selectLine_newPathToggle")[0].setAttribute("selected", "false");
                     state.newPath = false;
                     state.pathId = value.id;
+                    LineEditorComp.showLineContent(value.id, lineContent);
                     [...selectLineGroup.children].filter(i => i.style.color === "var(--theme800)").forEach(ele => {
                         ele.style.color = "var(--grey)"
                     });
@@ -92,9 +92,9 @@ const LineEditorComp = {
             WindowManager.create((view) => {
                 // editor.appendChild();
                 view.appendChild(editor);
-            }, {size: "medium"});
+            }, {size: "medium", backStyle: "close"});
 
-        LineEditorComp.showLineContent(id, lineContent);
+        LineEditorComp.showLineContent(state.pathId, lineContent);
         PenguinUI_selector.init();
     },
     showLineContent: (id, e) => {
