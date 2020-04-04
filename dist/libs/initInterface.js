@@ -1099,7 +1099,79 @@ const initInterface = (type, returnFunc) => {
                     [["open_in_new", strings.export, strings.exportAssets, strings.exportAssetsDescrption, () => {
                         exportDialog(pg.$("#resSvg")[0]);
                     }], ["settings", strings.settings, strings.openSettings, strings.openSettingsDescription, () => {
-                        // prefDialog()
+                        let editor = cE({type: "div", attr: [["id", "pg-prefEditor"]]});
+
+                        editor.appendChild(cE({
+                            type: "div",
+                            attr: [["class", "pg-prefEditor-drawableName"], ["style", "margin:10px;"]],
+                            innerHTML: `<span class="mi" style="vertical-align: middle;color:var(--grey);">text_fields</span><span style="width:100px;display:inline-block;color:var(--grey);font:14px/1 Anodina,sans-serif;margin:10px;">${strings.drawableName}</span><input value="${contentData.name}" style="border:0;outline:none;border-bottom:1px solid var(--light);padding:5px;width:80px;" oninput="contentData.name=this.value;savePathComp.current();">`
+                        }));
+                        editor.appendChild(cE({
+                            type: "div",
+                            attr: [["class", "pg-prefEditor-author"], ["style", "margin:10px;"]],
+                            innerHTML: `<span class="mi" style="vertical-align: middle;color:var(--grey);">person</span><span style="width:100px;display:inline-block;color:var(--grey);font:14px/1 Anodina,sans-serif;margin:10px;">${strings.drawableAuthor}</span><input value="${contentData.author}" style="border:0;outline:none;border-bottom:1px solid var(--light);padding:5px;width:80px;" oninput="contentData.author=this.value;savePathComp.current();">`
+                        }));
+                        editor.appendChild(cE({
+                            type: "div",
+                            attr: [["class", "pg-prefEditor-drawableHeight"], ["style", "margin:10px;"]],
+                            innerHTML: `<span class="mi" style="vertical-align: middle;color:var(--grey);">height</span><span style="width:100px;display:inline-block;color:var(--grey);font:14px/1 Anodina,sans-serif;margin:10px;">${strings.drawableHeight}</span><input value="${contentData.height}" style="border:0;outline:none;border-bottom:1px solid var(--light);padding:5px;width:80px;" oninput="contentData.height=Int(this.value);savePathComp.current();" type="number">`
+                        }));
+                        editor.appendChild(cE({
+                            type: "div",
+                            attr: [["class", "pg-prefEditor-drawableWidth"], ["style", "margin:10px;"]],
+                            innerHTML: `<span class="mi" style="vertical-align: middle;color:var(--grey);transform:rotate(90deg)">height</span><span style="width:100px;display:inline-block;color:var(--grey);font:14px/1 Anodina,sans-serif;margin:10px;">${strings.drawableWidth}</span><input value="${contentData.width}" style="border:0;outline:none;border-bottom:1px solid var(--light);padding:5px;width:80px;" oninput="contentData.width=Int(this.value);savePathComp.current();" type="number">`
+                        }));
+                        editor.appendChild(cE({
+                            type: "div",
+                            attr: [["class", "pg-prefEditor-primaryNameStyle"], ["style", "margin:10px;"]],
+                            innerHTML: `<span class="mi" style="vertical-align: middle;color:var(--grey);">style</span><span style="display:inline-block;color:var(--grey);font:14px/1 Anodina,sans-serif;margin:10px;">${strings.primaryNameStyle}</span><textarea style="border:0;outline:none;border-bottom:1px solid var(--light);padding:5px;width:100%;height:100px;" oninput="contentData.primaryNameStyle=this.innerHTML;savePathComp.current();">${contentData.primaryNameStyle}</textarea>`
+                        }));
+                        editor.appendChild(cE({
+                            type: "div",
+                            attr: [["class", "pg-prefEditor-secondaryNameStyle"], ["style", "margin:10px;"]],
+                            innerHTML: `<span class="mi" style="vertical-align: middle;color:var(--grey);">style</span><span style="display:inline-block;color:var(--grey);font:14px/1 Anodina,sans-serif;margin:10px;">${strings.secondaryNameStyle}</span><textarea style="border:0;outline:none;border-bottom:1px solid var(--light);padding:5px;width:100%;height:100px;" oninput="contentData.secondaryNameStyle=this.innerHTML;savePathComp.current();">${contentData.secondaryNameStyle}</textarea>`
+                        }));
+                        if (MediaQuery.screenWidth().includes("xlg"))
+                            WindowManager.create((view) => {
+                                pg.$("#scroll-use")[0].style.left = "320px";
+                                pg.$("#scroll-use")[0].style.right = "0";
+                                pg.$("#scroll-use")[0].style.width = "calc(100vw - 320px)";
+                                view.appendChild(editor);
+                            }, {
+                                withMask: "none",
+                                withBlur: "none",
+                                size: "extraSmall",
+                                mode: "vertical_split",
+                                alignment: "vertical_center horizontal_left", onQuit: () => {
+                                    pg.$("#scroll-use")[0].style.left = "unset";
+                                    pg.$("#scroll-use")[0].style.right = "unset";
+                                    pg.$("#scroll-use")[0].style.width = "unset";
+                                },
+                                title: strings.preference
+                            });
+                        else if (MediaQuery.screeHeight().includes("xlg"))
+                            WindowManager.create((view) => {
+                                pg.$("#scroll-use")[0].style.bottom = "320px";
+                                pg.$("#scroll-use")[0].style.top = "0";
+                                pg.$("#scroll-use")[0].style.height = "calc(100vh - 320px)";
+                                view.appendChild(editor);
+                            }, {
+                                withMask: "none",
+                                withBlur: "none",
+                                size: "extraSmall",
+                                mode: "horizontal_split",
+                                alignment: "vertical_bottom horizontal_left", onQuit: () => {
+                                    pg.$("#scroll-use")[0].style.bottom = "unset";
+                                    pg.$("#scroll-use")[0].style.top = "unset";
+                                    pg.$("#scroll-use")[0].style.height = "unset";
+                                },
+                                title: strings.preference
+                            });
+                        else
+                            WindowManager.create((view) => {
+                                // editor.appendChild();
+                                view.appendChild(editor);
+                            }, {size: "medium", title: strings.preference});
                     }], ["home", strings.home, strings.home, strings.backHomeDescription, () => {
                         NotificationManager.create(strings.fileSaved, 0, {
                             icon: "done",

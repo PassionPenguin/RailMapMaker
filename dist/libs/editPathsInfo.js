@@ -97,9 +97,9 @@ const LineEditorComp = {
         state.pathId = id;
         let i = contentData.pathInfo[id];
         e.appendChild(cE({
-            type: "h3",
-            attr: [["style", "margin-top:20px;font:20px/1 Anodina,sans-serif"]],
-            innerText: strings.editPathsInfo
+            type: "p",
+            attr: [["style", "margin-top:40px;font:14px/1 Anodina,sans-serif;color:var(--grey)"]],
+            innerText: strings.editLineDescription
         }));
         e.appendChild(cE({
             type: "div",

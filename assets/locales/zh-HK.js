@@ -113,4 +113,12 @@ const strings = {
     align: "對齊",
     center: "中間",
     connLineStyle: "連接線樣式",
+    selectStation: "選擇編輯的車站",
+    editLineDescription: "編輯您選擇嘅線路",
+    drawableWidth: "畫板寬度",
+    drawableHeight: "畫板高度",
+    drawableName: "畫板名稱",
+    drawableAuthor: "作者",
+    primaryNameStyle: "主站名樣式",
+    secondaryNameStyle: "次站名樣式",
 }

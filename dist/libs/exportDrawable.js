@@ -100,7 +100,7 @@ const exportDialog = (originalSvg) => {
             innerText: strings.cancel, onclick: () => WindowManager.remove(channelId)
         }));
         view.appendChild(bottomSelector);
-    }, {size: "medium", backStyle: "close"});
+    }, {size: "medium", title: strings.exportAssets});
     PenguinUI_selector.init();
     PenguinUI_switchToggle.init();
 };

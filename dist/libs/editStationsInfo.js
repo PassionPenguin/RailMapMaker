@@ -39,6 +39,30 @@ const StationEditorComp = {
         });
         editor.appendChild(selectLineGroup);
 
+        editor.appendChild(cE({
+            type: "p",
+            attr: [["style", "margin-top:40px;font:14px/1 Anodina,sans-serif;color:var(--grey)"]],
+            innerText: strings.selectStation
+        }));
+
+        let selector = cE({type: "div", attr: [["class", "selectStation"]]});
+        const loadStation = () => {
+            selector.innerHTML = "";
+            contentData.pathInfo[state.pathId].stations.forEach((e, index) => {
+                selector.appendChild(cE({
+                    type: "div",
+                    attr: [["style", "width:calc(100% - 20px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:14px/1 Anodina,sans-serif;margin:10px 0;padding:2.5px 0;"]],
+                    innerHTML: `<span style='color:var(--dark);'>${e.text.name[0]}</span>${e.text.type === "withSecondaryName" ? ("<span style='color:var(--grey);'>" + e.text.name[1] + "</span>") : ""}`,
+                    onclick: () => {
+                        StationEditorComp.showStationContent(state.pathId, index);
+                    }
+                }));
+            });
+            editor.appendChild(selector);
+        };
+        loadStation();
+
+
         if (MediaQuery.screenWidth().includes("xlg"))
             WindowManager.create((view) => {
                 pg.$("#scroll-use")[0].style.left = "320px";
@@ -81,32 +105,10 @@ const StationEditorComp = {
                 view.appendChild(editor);
             }, {size: "medium", title: strings.editStationsInfo});
 
-        let selector = cE({type: "div", attr: [["class", "selectStation"]]});
-        const loadStation = () => {
-            selector.innerHTML = "";
-            contentData.pathInfo[state.pathId].stations.forEach((e, index) => {
-                selector.appendChild(cE({
-                    type: "div",
-                    attr: [["style", "width:calc(100% - 20px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:14px/1 Anodina,sans-serif;margin:10px 10px;padding:2.5px 0;"]],
-                    innerHTML: `<span style='color:var(--dark);'>${e.text.name[0]}</span>${e.text.type === "withSecondaryName" ? ("<span style='color:var(--grey);'>" + e.text.name[1] + "</span>") : ""}`,
-                    onclick: () => {
-                        StationEditorComp.showStationContent(state.pathId, index);
-                    }
-                }));
-            });
-            editor.appendChild(selector);
-        };
-        loadStation();
-
         PenguinUI_selector.init();
     },
     showStationContent: (id, index) => {
         let wrap = cE({type: "div", attr: [["id", "pg-stationEditor"]]});
-        wrap.appendChild(cE({
-            type: "h3",
-            attr: [["style", "margin-top:20px;font:20px/1 Anodina,sans-serif;color:var(--dark);"]],
-            innerText: strings.selectPath
-        }));
         wrap.appendChild(cE({
             type: "p",
             attr: [["style", "margin-top:20px;font:14px/1 Anodina,sans-serif;color:var(--grey)"]],
@@ -258,9 +260,8 @@ const StationEditorComp = {
             });
         else
             WindowManager.create((view) => {
-                // editor.appendChild();
                 view.appendChild(wrap);
-            }, {size: "medium", zIndex: 999});
+            }, {size: "medium", zIndex: 1000, title: strings.editStationsInfo});
         PenguinUI_switchToggle.init();
         PenguinUI_selector.init();
     }

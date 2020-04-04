@@ -113,4 +113,12 @@ const strings = {
     align: "Align",
     center: "Center",
     connLineStyle: "Connection Line Style",
+    selectStation: "Select the station you want to edit",
+    editLineDescription: "Edit the line you've selected",
+    drawableWidth: "Drawable Width",
+    drawableHeight: "Drawable Height",
+    drawableName: "Drawable Name",
+    drawableAuthor: "Author",
+    primaryNameStyle: "Primary Name Style",
+    secondaryNameStyle: "Secondary Name Style",
 }
