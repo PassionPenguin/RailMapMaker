@@ -156,7 +156,7 @@ const initInterface = (type, returnFunc) => {
                 window.contentData = {
                     "name": "Guangzhou Line",
                     "author": "Penguin",
-                    "lastModified": new Date().getTime(),
+                    "lastModified": 1585992999945,
                     "width": 4000,
                     "height": 4000,
                     "textStyle": "",
@@ -185,7 +185,8 @@ const initInterface = (type, returnFunc) => {
                                         ],
                                         "position": 4,
                                         "alignment": "start"
-                                    }
+                                    },
+                                    "stationStyle": "rect"
                                 },
                                 {
                                     "x": 1975,
@@ -200,7 +201,8 @@ const initInterface = (type, returnFunc) => {
                                         ],
                                         "position": 4,
                                         "alignment": "start"
-                                    }
+                                    },
+                                    "stationStyle": "rect"
                                 },
                                 {
                                     "x": 1975,
@@ -215,7 +217,8 @@ const initInterface = (type, returnFunc) => {
                                         ],
                                         "position": 4,
                                         "alignment": "start"
-                                    }
+                                    },
+                                    "stationStyle": "rect"
                                 },
                                 {
                                     "x": 1975,
@@ -230,7 +233,8 @@ const initInterface = (type, returnFunc) => {
                                         ],
                                         "position": 4,
                                         "alignment": "start"
-                                    }
+                                    },
+                                    "stationStyle": "rect"
                                 },
                                 {
                                     "x": 1975,
@@ -245,7 +249,8 @@ const initInterface = (type, returnFunc) => {
                                         ],
                                         "position": 4,
                                         "alignment": "start"
-                                    }
+                                    },
+                                    "stationStyle": "rect"
                                 },
                                 {
                                     "x": 2100,
@@ -260,7 +265,8 @@ const initInterface = (type, returnFunc) => {
                                         ],
                                         "position": 1,
                                         "alignment": "middle"
-                                    }
+                                    },
+                                    "stationStyle": "rect"
                                 },
                                 {
                                     "x": 2225,
@@ -275,7 +281,8 @@ const initInterface = (type, returnFunc) => {
                                         ],
                                         "position": 1,
                                         "alignment": "middle"
-                                    }
+                                    },
+                                    "stationStyle": "rect"
                                 },
                                 {
                                     "x": 2350,
@@ -290,7 +297,8 @@ const initInterface = (type, returnFunc) => {
                                         ],
                                         "position": 1,
                                         "alignment": "middle"
-                                    }
+                                    },
+                                    "stationStyle": "rect"
                                 },
                                 {
                                     "x": 2475,
@@ -305,7 +313,8 @@ const initInterface = (type, returnFunc) => {
                                         ],
                                         "position": 5,
                                         "alignment": "end"
-                                    }
+                                    },
+                                    "stationStyle": "rect"
                                 },
                                 {
                                     "x": 2600,
@@ -320,7 +329,8 @@ const initInterface = (type, returnFunc) => {
                                         ],
                                         "position": 1,
                                         "alignment": "middle"
-                                    }
+                                    },
+                                    "stationStyle": "rect"
                                 },
                                 {
                                     "x": 2725,
@@ -335,7 +345,8 @@ const initInterface = (type, returnFunc) => {
                                         ],
                                         "position": 1,
                                         "alignment": "middle"
-                                    }
+                                    },
+                                    "stationStyle": "rect"
                                 },
                                 {
                                     "x": 2850,
@@ -350,7 +361,8 @@ const initInterface = (type, returnFunc) => {
                                         ],
                                         "position": 1,
                                         "alignment": "middle"
-                                    }
+                                    },
+                                    "stationStyle": "rect"
                                 },
                                 {
                                     "x": 2975,
@@ -365,7 +377,8 @@ const initInterface = (type, returnFunc) => {
                                         ],
                                         "position": 1,
                                         "alignment": "middle"
-                                    }
+                                    },
+                                    "stationStyle": "rect"
                                 },
                                 {
                                     "x": 3100,
@@ -380,7 +393,8 @@ const initInterface = (type, returnFunc) => {
                                         ],
                                         "position": 1,
                                         "alignment": "middle"
-                                    }
+                                    },
+                                    "stationStyle": "rect"
                                 },
                                 {
                                     "x": 3225,
@@ -395,7 +409,8 @@ const initInterface = (type, returnFunc) => {
                                         ],
                                         "position": 4,
                                         "alignment": "start"
-                                    }
+                                    },
+                                    "stationStyle": "rect"
                                 },
                                 {
                                     "x": 3100,
@@ -410,7 +425,8 @@ const initInterface = (type, returnFunc) => {
                                         ],
                                         "position": 3,
                                         "alignment": "end"
-                                    }
+                                    },
+                                    "stationStyle": "rect"
                                 }
                             ]
                         },
@@ -436,7 +452,8 @@ const initInterface = (type, returnFunc) => {
                                         ],
                                         "position": 3,
                                         "alignment": "end"
-                                    }
+                                    },
+                                    "stationStyle": "rect"
                                 },
                                 {
                                     "x": 2475,
@@ -451,7 +468,8 @@ const initInterface = (type, returnFunc) => {
                                         ],
                                         "position": 0,
                                         "alignment": "middle"
-                                    }
+                                    },
+                                    "stationStyle": "rect"
                                 },
                                 {
                                     "x": 2575,
@@ -466,7 +484,8 @@ const initInterface = (type, returnFunc) => {
                                         ],
                                         "position": 0,
                                         "alignment": "end"
-                                    }
+                                    },
+                                    "stationStyle": "rect"
                                 },
                                 {
                                     "x": 2675,
@@ -481,7 +500,8 @@ const initInterface = (type, returnFunc) => {
                                         ],
                                         "position": 3,
                                         "alignment": "end"
-                                    }
+                                    },
+                                    "stationStyle": "rect"
                                 },
                                 {
                                     "x": 2675,
@@ -496,7 +516,8 @@ const initInterface = (type, returnFunc) => {
                                         ],
                                         "position": 3,
                                         "alignment": "end"
-                                    }
+                                    },
+                                    "stationStyle": "rect"
                                 },
                                 {
                                     "x": 2675,
@@ -511,7 +532,8 @@ const initInterface = (type, returnFunc) => {
                                         ],
                                         "position": 3,
                                         "alignment": "end"
-                                    }
+                                    },
+                                    "stationStyle": "rect"
                                 },
                                 {
                                     "x": 2575,
@@ -526,7 +548,8 @@ const initInterface = (type, returnFunc) => {
                                         ],
                                         "position": 3,
                                         "alignment": "end"
-                                    }
+                                    },
+                                    "stationStyle": "rect"
                                 },
                                 {
                                     "x": 2475,
@@ -541,7 +564,8 @@ const initInterface = (type, returnFunc) => {
                                         ],
                                         "position": 4,
                                         "alignment": "start"
-                                    }
+                                    },
+                                    "stationStyle": "rect"
                                 },
                                 {
                                     "x": 2475,
@@ -556,7 +580,8 @@ const initInterface = (type, returnFunc) => {
                                         ],
                                         "position": 4,
                                         "alignment": "start"
-                                    }
+                                    },
+                                    "stationStyle": "rect"
                                 },
                                 {
                                     "x": 2475,
@@ -571,7 +596,8 @@ const initInterface = (type, returnFunc) => {
                                         ],
                                         "position": 4,
                                         "alignment": "start"
-                                    }
+                                    },
+                                    "stationStyle": "rect"
                                 },
                                 {
                                     "x": 2475,
@@ -586,7 +612,8 @@ const initInterface = (type, returnFunc) => {
                                         ],
                                         "position": 4,
                                         "alignment": "start"
-                                    }
+                                    },
+                                    "stationStyle": "rect"
                                 },
                                 {
                                     "x": 2475,
@@ -601,7 +628,8 @@ const initInterface = (type, returnFunc) => {
                                         ],
                                         "position": 4,
                                         "alignment": "start"
-                                    }
+                                    },
+                                    "stationStyle": "rect"
                                 },
                                 {
                                     "x": 2475,
@@ -616,7 +644,8 @@ const initInterface = (type, returnFunc) => {
                                         ],
                                         "position": 4,
                                         "alignment": "start"
-                                    }
+                                    },
+                                    "stationStyle": "rect"
                                 },
                                 {
                                     "x": 2475,
@@ -631,7 +660,8 @@ const initInterface = (type, returnFunc) => {
                                         ],
                                         "position": 4,
                                         "alignment": "start"
-                                    }
+                                    },
+                                    "stationStyle": "rect"
                                 },
                                 {
                                     "x": 2475,
@@ -646,7 +676,8 @@ const initInterface = (type, returnFunc) => {
                                         ],
                                         "position": 4,
                                         "alignment": "start"
-                                    }
+                                    },
+                                    "stationStyle": "rect"
                                 },
                                 {
                                     "x": 2475,
@@ -661,7 +692,8 @@ const initInterface = (type, returnFunc) => {
                                         ],
                                         "position": 4,
                                         "alignment": "start"
-                                    }
+                                    },
+                                    "stationStyle": "rect"
                                 },
                                 {
                                     "x": 2475,
@@ -676,7 +708,8 @@ const initInterface = (type, returnFunc) => {
                                         ],
                                         "position": 4,
                                         "alignment": "start"
-                                    }
+                                    },
+                                    "stationStyle": "rect"
                                 },
                                 {
                                     "x": 2475,
@@ -691,7 +724,8 @@ const initInterface = (type, returnFunc) => {
                                         ],
                                         "position": 4,
                                         "alignment": "start"
-                                    }
+                                    },
+                                    "stationStyle": "rect"
                                 },
                                 {
                                     "x": 2475,
@@ -706,7 +740,8 @@ const initInterface = (type, returnFunc) => {
                                         ],
                                         "position": 4,
                                         "alignment": "start"
-                                    }
+                                    },
+                                    "stationStyle": "rect"
                                 },
                                 {
                                     "x": 2475,
@@ -721,7 +756,8 @@ const initInterface = (type, returnFunc) => {
                                         ],
                                         "position": 4,
                                         "alignment": "start"
-                                    }
+                                    },
+                                    "stationStyle": "rect"
                                 },
                                 {
                                     "x": 2575,
@@ -736,7 +772,8 @@ const initInterface = (type, returnFunc) => {
                                         ],
                                         "position": 4,
                                         "alignment": "start"
-                                    }
+                                    },
+                                    "stationStyle": "rect"
                                 },
                                 {
                                     "x": 2675,
@@ -751,7 +788,8 @@ const initInterface = (type, returnFunc) => {
                                         ],
                                         "position": 4,
                                         "alignment": "start"
-                                    }
+                                    },
+                                    "stationStyle": "rect"
                                 },
                                 {
                                     "x": 2775,
@@ -766,7 +804,8 @@ const initInterface = (type, returnFunc) => {
                                         ],
                                         "position": 4,
                                         "alignment": "start"
-                                    }
+                                    },
+                                    "stationStyle": "rect"
                                 }
                             ]
                         }
@@ -1099,7 +1138,9 @@ const initInterface = (type, returnFunc) => {
                             WindowManager.remove(e.getAttribute("windowid"));
                         });
                         initInterface(0);
-                    }], ["build", strings.edit, strings.edit, strings.editPathsInfo, () => {
+                    }], ["place", strings.station, strings.station, strings.editStationsInfo, () => {
+                        StationEditorComp.showStationEditor();
+                    }], ["all_inclusive", strings.path, strings.path, strings.editPathsInfo, () => {
                         LineEditorComp.showLineEditor();
                     }]].forEach((result) => {
                         let element = cE({
