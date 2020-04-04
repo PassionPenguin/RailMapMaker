@@ -21,7 +21,7 @@ const drawMap = id => {
         namesGroup.innerHTML = "";
         const appendStation = (nodeId) => {
             let stationNode = document.createElementNS(pg.$('#resSvg')[0].namespaceURI, 'use');
-            stationNode.setAttributeNS(null, 'href', '#stationStyle_' + state.stationStyle);
+            stationNode.setAttributeNS(null, 'href', '#stationStyle_' + map[nodeId].stationStyle);
             stationNode.setAttributeNS(null, 'fill', map.color);
             stationNode.setAttributeNS(null, 'x', '0');
             stationNode.setAttributeNS(null, 'y', '0');
