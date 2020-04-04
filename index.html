@@ -169,7 +169,7 @@
             ProgressManager.create(0, 0, 0);
             builder.init(() => {
                 initInterface(0);
-                if ('serviceWorker' in navigator) {
+                if ('serviceWorker' in navigator && !builder.debugMode) {
                     navigator.serviceWorker
                         .register('./ServiceWorker.js')
                         .then(() => {
