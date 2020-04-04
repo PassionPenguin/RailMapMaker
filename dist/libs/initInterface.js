@@ -173,8 +173,8 @@ const initInterface = (type, returnFunc) => {
                             "opacity": 1,
                             "stations": [
                                 {
-                                    "x": 2100,
-                                    "y": 3025,
+                                    "x": 1975,
+                                    "y": 2900,
                                     "type": "destination",
                                     "routeToNext": "2",
                                     "text": {
@@ -188,8 +188,8 @@ const initInterface = (type, returnFunc) => {
                                     }
                                 },
                                 {
-                                    "x": 2100,
-                                    "y": 2900,
+                                    "x": 1975,
+                                    "y": 2775,
                                     "type": "common",
                                     "routeToNext": "2",
                                     "text": {
@@ -203,8 +203,8 @@ const initInterface = (type, returnFunc) => {
                                     }
                                 },
                                 {
-                                    "x": 2100,
-                                    "y": 2775,
+                                    "x": 1975,
+                                    "y": 2650,
                                     "type": "common",
                                     "routeToNext": "2",
                                     "text": {
@@ -218,8 +218,8 @@ const initInterface = (type, returnFunc) => {
                                     }
                                 },
                                 {
-                                    "x": 2100,
-                                    "y": 2650,
+                                    "x": 1975,
+                                    "y": 2525,
                                     "type": "common",
                                     "routeToNext": "2",
                                     "text": {
@@ -233,8 +233,8 @@ const initInterface = (type, returnFunc) => {
                                     }
                                 },
                                 {
-                                    "x": 2100,
-                                    "y": 2525,
+                                    "x": 1975,
+                                    "y": 2400,
                                     "type": "common",
                                     "routeToNext": "2",
                                     "text": {
@@ -249,7 +249,7 @@ const initInterface = (type, returnFunc) => {
                                 },
                                 {
                                     "x": 2100,
-                                    "y": 2400,
+                                    "y": 2275,
                                     "type": "common",
                                     "routeToNext": "2",
                                     "text": {
@@ -258,8 +258,8 @@ const initInterface = (type, returnFunc) => {
                                             "长寿路",
                                             "Changshou Lu"
                                         ],
-                                        "position": 4,
-                                        "alignment": "start"
+                                        "position": 1,
+                                        "alignment": "middle"
                                     }
                                 },
                                 {
