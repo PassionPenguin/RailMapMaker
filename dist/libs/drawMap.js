@@ -123,6 +123,18 @@ const drawMap = id => {
                 } else if (node.routeToNext === "3") {
                     // 垂直線，水平方優先
                     path += `h${node.x - prev_node.x - Rx}c${Rx},0,${Rx},0,${Rx},${sqrtY}v${node.y - prev_node.y - sqrtY}`;
+                } else if (node.routeToNext === "4") {
+                    // 斜线，垂直方优先，仅一次转弯
+                    path += `v${node.y - prev_node.y - Ry * 2 + (node.y > prev_node.y ? -1 : 1) * Math.abs(node.x - prev_node.x - Rx)}c0,${Ry},0,${Ry},${sqrtX},${sqrtY + Ry},l${node.x - prev_node.x - Rx},${(restX * restY > 0 ? 1 : -1) * (node.x - prev_node.x - Rx)}`;
+                } else if (node.routeToNext === "5") {
+                    // 斜线，水平方优先，仅一次转弯
+                    path += `h${node.x - prev_node.x - Rx * 2 + (node.x > prev_node.x ? -1 : 1) * Math.abs(node.y - prev_node.y - Ry)}c${Rx},0,${Rx},0,${sqrtX + Rx},${sqrtY},l${(restY * restX > 0 ? 1 : -1) * (node.y - prev_node.y - Ry)},${node.y - prev_node.y - Ry}`;
+                } else if (node.routeToNext === "6") {
+                    // 斜线，垂直方优先，仅一次转弯，斜方出发
+                    path += `l${node.x - prev_node.x - Rx},${(restX * restY > 0 ? 1 : -1) * (node.x - prev_node.x - Rx)}c${Rx},${Ry},${Rx},${Ry},${Rx},${sqrtY + Ry}v${node.y - prev_node.y - Ry * 2 + (node.y > prev_node.y ? -1 : 1) * Math.abs(node.x - prev_node.x - Rx)}`;
+                } else if (node.routeToNext === "7") {
+                    // 斜线，水平方优先，仅一次转弯，斜方出发
+                    path += `l${(restY * restX > 0 ? 1 : -1) * (node.y - prev_node.y - Ry)},${node.y - prev_node.y - Ry}c${Rx},${Ry},${Rx},${Ry},${Rx + sqrtX},${Ry}v${node.x - prev_node.x - Rx * 2 + (node.x > prev_node.x ? -1 : 1) * Math.abs(node.y - prev_node.y - Ry)}`;
                 } else {
                     // 直线
                     path += `L${node.x},${node.y}`;
