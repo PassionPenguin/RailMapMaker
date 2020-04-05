@@ -1113,12 +1113,12 @@ const initInterface = (type, returnFunc) => {
                         editor.appendChild(cE({
                             type: "div",
                             attr: [["class", "pg-prefEditor-primaryNameStyle"], ["style", "margin:10px;"]],
-                            innerHTML: `<span class="mi" style="vertical-align: middle;color:var(--grey);">style</span><span style="display:inline-block;color:var(--grey);font:14px/1 Anodina,sans-serif;margin:10px;">${strings.primaryNameStyle}</span><textarea style="border:0;outline:none;border-bottom:1px solid var(--light);padding:5px;width:100%;height:100px;" oninput="contentData.primaryNameStyle=this.innerHTML;savePathComp.current();contentData.pathInfo.forEach((i,index)=>{drawMap(index)})">${contentData.primaryNameStyle}</textarea>`
+                            innerHTML: `<span class="mi" style="vertical-align: middle;color:var(--grey);">style</span><span style="display:inline-block;color:var(--grey);font:14px/1 Anodina,sans-serif;margin:10px;">${strings.primaryNameStyle}</span><textarea style="border:0;outline:none;border-bottom:1px solid var(--light);padding:5px;width:100%;height:100px;" oninput="contentData.primaryNameStyle=this.value;savePathComp.current();contentData.pathInfo.forEach((i,index)=>{drawMap(index)})">${contentData.primaryNameStyle}</textarea>`
                         }));
                         editor.appendChild(cE({
                             type: "div",
                             attr: [["class", "pg-prefEditor-secondaryNameStyle"], ["style", "margin:10px;"]],
-                            innerHTML: `<span class="mi" style="vertical-align: middle;color:var(--grey);">style</span><span style="display:inline-block;color:var(--grey);font:14px/1 Anodina,sans-serif;margin:10px;">${strings.secondaryNameStyle}</span><textarea style="border:0;outline:none;border-bottom:1px solid var(--light);padding:5px;width:100%;height:100px;" oninput="contentData.secondaryNameStyle=this.innerHTML;savePathComp.current();contentData.pathInfo.forEach((i,index)=>{drawMap(index)})">${contentData.secondaryNameStyle}</textarea>`
+                            innerHTML: `<span class="mi" style="vertical-align: middle;color:var(--grey);">style</span><span style="display:inline-block;color:var(--grey);font:14px/1 Anodina,sans-serif;margin:10px;">${strings.secondaryNameStyle}</span><textarea style="border:0;outline:none;border-bottom:1px solid var(--light);padding:5px;width:100%;height:100px;" oninput="contentData.secondaryNameStyle=this.value;savePathComp.current();contentData.pathInfo.forEach((i,index)=>{drawMap(index)})">${contentData.secondaryNameStyle}</textarea>`
                         }));
                         if (MediaQuery.screenWidth().includes("xlg"))
                             WindowManager.create((view) => {
