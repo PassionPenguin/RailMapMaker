@@ -14,24 +14,22 @@ const initDrawable = () => {
 
         let pathsGroup, stationsGroup, namesGroup;
         if (pg.$("#AllPathsGroup").length === 0) {
-            pathsGroup = document.createElementNS(svg.namespaceURI, "g")
+            pathsGroup = document.createElementNS(svg.namespaceURI, "g");
             pathsGroup.setAttributeNS(null, "id", "AllPathsGroup");
             svg.appendChild(pathsGroup);
         } else pathsGroup = pg.$("#AllPathsGroup")[0];
 
         if (pg.$("#AllStationsGroup").length === 0) {
-            stationsGroup = document.createElementNS(svg.namespaceURI, "g")
+            stationsGroup = document.createElementNS(svg.namespaceURI, "g");
             stationsGroup.setAttributeNS(null, "id", "AllStationsGroup");
             svg.appendChild(stationsGroup);
         } else stationsGroup = pg.$("#AllStationsGroup")[0];
 
         if (pg.$("#stationNames").length === 0) {
-            namesGroup = document.createElementNS(svg.namespaceURI, "g")
+            namesGroup = document.createElementNS(svg.namespaceURI, "g");
             namesGroup.setAttributeNS(null, "id", "stationNames");
-            svg.appendChild(namesGroup);
         } else namesGroup = pg.$("#stationNames")[0];
-
-        namesGroup = document.createElementNS(svg.namespaceURI, "g");
+        svg.appendChild(namesGroup);
 
         let path = document.createElementNS(svg.namespaceURI, "path");
         let stations = document.createElementNS(svg.namespaceURI, "g");
