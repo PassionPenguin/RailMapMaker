@@ -120,7 +120,6 @@ const exportDrawable = (svgEl) => {
         svg.style.backgroundImage = "";
         svg.style.backgroundSize = "";
         svg.style.backgroundRepeat = "";
-        svg.style.background = "transparent";
     }
 
     if (pg.$("#fileName")[0].value === "")
