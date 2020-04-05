@@ -121,4 +121,5 @@ const strings = {
     drawableAuthor: "作者",
     primaryNameStyle: "主站名样式",
     secondaryNameStyle: "次站名样式",
+    test: "性能测试 - 东京2110站",
 }

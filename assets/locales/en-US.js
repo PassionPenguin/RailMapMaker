@@ -121,4 +121,5 @@ const strings = {
     drawableAuthor: "Author",
     primaryNameStyle: "Primary Name Style",
     secondaryNameStyle: "Secondary Name Style",
+    test: "Testing with 2110 Stations in Tokyo",
 }
