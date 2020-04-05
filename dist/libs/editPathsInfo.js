@@ -16,6 +16,10 @@ const LineEditorComp = {
             attr: [["style", "margin-top:20px;font:14px/1 Anodina,sans-serif;color:var(--grey)"]],
             innerText: strings.selectLineDescription
         }));
+
+        let lineContent = cE({type: "div", attr: [["id", "pg-lineContent"]]});
+        editor.appendChild(lineContent);
+
         let selectLineGroup = cE({type: "div"});
         contentData.pathInfo.forEach(value => {
             selectLineGroup.appendChild(cE({
@@ -43,9 +47,6 @@ const LineEditorComp = {
             type: "pg-switchToggle",
             attr: [["style", "font:14px/1 Anodina,sans-serif;color:var(--grey)"], ["on_valueChange", "(val)=>{val==='true'?state.newPath=true:state.newPath=false;}"], ["id", "selectLine_newPathToggle"]]
         }));
-
-        let lineContent = cE({type: "div", attr: [["id", "pg-lineContent"]]});
-        editor.appendChild(lineContent);
 
         if (MediaQuery.screenWidth().includes("xlg"))
             WindowManager.create((view) => {
@@ -122,14 +123,15 @@ const LineEditorComp = {
             innerHTML: `<span class="mi" style="vertical-align: middle;color:var(--grey);">format_paint</span><span style="width:100px;display:inline-block;color:var(--grey);font:14px/36px Anodina,sans-serif;margin:10px;">${strings.strokeColor}</span><span class="button" style="width:80px;display:inline-block;font:14px/36px Anodina,sans-serif;margin:10px;text-align:center;color:var(--dark);">${i.color}</span>`,
             onclick: () => {
                 WindowManager.create((view, colorId) => {
-                    bundleColorUtils.getColor(view, i.color, null, (color) => {
+                    colorUtils.getColor(view, i.color, null, (color) => {
                         WindowManager.remove(colorId);
                         strokeColor.children[2].innerText = color;
                         i.color = color;
                         drawMap(state.pathId);
                         savePathComp.current();
-                    })
-                }, {size: "small", backStyle: "close"});
+                    });
+                    view.children[0].style.marginTop = "48px";
+                }, {size: "medium", title: strings.strokeColor});
             }
         });
         e.appendChild(strokeColor);

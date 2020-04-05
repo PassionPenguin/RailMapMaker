@@ -75,23 +75,14 @@ const initInterface = (type, returnFunc) => {
             onclick: () => {
                 WindowManager.create((view, channelId) => {
                     let popup_storyboardFileList = cE({type: "div", attr: [["class", "pg-storyboard-fileList"]]});
-                    let popup_storyboardFileListContent = cE({
-                        type: "div",
-                        attr: [["style", "position:relative;width:100%;height:100%;"]]
-                    });
-                    popup_storyboardFileListContent.appendChild(cE({
-                        type: "div",
-                        attr: [["class", "pg-storyboard-file-title"], ["style", "width: fit-content;margin: 10px!important;font:300 20px/1 Anodina,sans-serif;color: var(--dark);text-align:center;display:block;text-align:center;"]],
-                        innerHTML: strings.recentFiles,
-                    }));
                     JSONParser(LocaleStorageManager.get("fileList")).then(val => {
-                        (val.length === 0) ? popup_storyboardFileListContent.appendChild(cE({
+                        (val.length === 0) ? popup_storyboardFileList.appendChild(cE({
                             type: "span",
                             attr: [["style", "left:50%;top:50%;transform:translate(-50%,-50%);position:absolute;display:inline-block;font:24px/1 Anodina,sans-serif;color:var(--grey);"]],
                             innerHTML: strings.noFile
                         })) : val.forEach(e => {
                             JSONParser(LocaleStorageManager.get('fileData_' + e)).then(i => {
-                                popup_storyboardFileListContent.appendChild(cE({
+                                popup_storyboardFileList.appendChild(cE({
                                     type: "div", attr: [["class", "pg-storyboard-file"]],
                                     innerHTML: `<p class='fileName' style="font-weight:600;font-size:18px;">${i.name}</p><span class='fileMeta'>${new Date(i.lastModified).toLocaleString()} | ${i.author} </span>`,
                                     onclick: () => {
@@ -104,7 +95,6 @@ const initInterface = (type, returnFunc) => {
                             });
                         });
                     });
-                    popup_storyboardFileList.appendChild(popup_storyboardFileListContent);
                     view.appendChild(popup_storyboardFileList);
                 }, {size: "large", title: strings.recentFiles});
             }
@@ -130,7 +120,6 @@ const initInterface = (type, returnFunc) => {
                             lastModified: fileContent.lastModified, type: fileContent.type
                         };
                         NotificationManager.create(strings.uploaded + " <span class='color-primary'>" + fileContent.name + "</span>", 0, {
-                            time: -1,
                             icon: "check"
                         });
                         try {

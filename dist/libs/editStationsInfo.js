@@ -20,31 +20,6 @@ const StationEditorComp = {
             innerText: strings.selectLineDescription
         }));
 
-        let selectLineGroup = cE({type: "div"});
-        contentData.pathInfo.forEach(value => {
-            selectLineGroup.appendChild(cE({
-                type: "p",
-                attr: [["style", ("margin-top:20px;font:14px/1 Anodina,sans-serif;color:" + (contentData.pathInfo[state.pathId] === value ? "var(--theme800);" : "var(--grey);"))]],
-                innerText: value.name, onclick: (event) => {
-                    pg.$("#selectLine_newPathToggle")[0].setAttribute("selected", "false");
-                    state.newPath = false;
-                    state.pathId = value.id;
-                    LineEditorComp.showLineContent(value.id);
-                    [...selectLineGroup.children].filter(i => i.style.color === "var(--theme800)").forEach(ele => {
-                        ele.style.color = "var(--grey)"
-                    });
-                    event.target.style.color = "var(--theme800)";
-                }
-            }));
-        });
-        editor.appendChild(selectLineGroup);
-
-        editor.appendChild(cE({
-            type: "p",
-            attr: [["style", "margin-top:40px;font:14px/1 Anodina,sans-serif;color:var(--grey)"]],
-            innerText: strings.selectStation
-        }));
-
         let selector = cE({type: "div", attr: [["class", "selectStation"]]});
         const loadStation = () => {
             selector.innerHTML = "";
@@ -58,10 +33,32 @@ const StationEditorComp = {
                     }
                 }));
             });
-            editor.appendChild(selector);
         };
         loadStation();
 
+        let selectLineGroup = cE({type: "div"});
+        contentData.pathInfo.forEach(value => {
+            selectLineGroup.appendChild(cE({
+                type: "p",
+                attr: [["style", ("margin-top:20px;font:14px/1 Anodina,sans-serif;color:" + (contentData.pathInfo[state.pathId] === value ? "var(--theme800);" : "var(--grey);"))]],
+                innerText: value.name, onclick: (event) => {
+                    state.pathId = value.id;
+                    loadStation();
+                    [...selectLineGroup.children].filter(i => i.style.color === "var(--theme800)").forEach(ele => {
+                        ele.style.color = "var(--grey)"
+                    });
+                    event.target.style.color = "var(--theme800)";
+                }
+            }));
+        });
+        editor.appendChild(selectLineGroup);
+        editor.appendChild(selector);
+
+        editor.appendChild(cE({
+            type: "p",
+            attr: [["style", "margin-top:40px;font:14px/1 Anodina,sans-serif;color:var(--grey)"]],
+            innerText: strings.selectStation
+        }));
 
         if (MediaQuery.screenWidth().includes("xlg"))
             WindowManager.create((view) => {

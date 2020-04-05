@@ -8,7 +8,7 @@
 
  */
 
-const bundleColorUtils = {
+const colorUtils = {
     RGBtoHSV: (rgb) => {
         let r = rgb.r, g = rgb.g, b = rgb.b;
 
@@ -80,7 +80,7 @@ const bundleColorUtils = {
         return {r: hex >> 16, g: (hex & 0x00FF00) >> 8, b: (hex & 0x0000FF)};
     },
     HEXtoHSV: (hex) => {
-        return bundleColorUtils.RGBtoHSV(bundleColorUtils.HEXtoRGB(hex));
+        return colorUtils.RGBtoHSV(colorUtils.HEXtoRGB(hex));
     },
     RGBtoHEX: (rgb) => {
         let hex = [
@@ -187,9 +187,9 @@ const bundleColorUtils = {
                 type: "div",
                 attr: [["style", `background:${color[0]};width:18px;height:18px;border-radius:4px;display:inline-block;margin:5px;`]],
                 onclick: () => {
-                    let HSV = bundleColorUtils.HEXtoHSV(color[0]);
+                    let HSV = colorUtils.HEXtoHSV(color[0]);
                     HueCursor.style.left = (HSV.h * 240 + 7.5) + "px";
-                    const rgb = bundleColorUtils.HSVToRGB({
+                    const rgb = colorUtils.HSVToRGB({
                             h: HSV.h, s: 1, v: 1
                         }
                     );
@@ -235,9 +235,9 @@ const bundleColorUtils = {
                             type: "div",
                             attr: [["style", `background:${color[0]};width:18px;height:18px;border-radius:4px;display:inline-block;margin:5px;`]],
                             onclick: () => {
-                                let HSV = bundleColorUtils.HEXtoHSV(color[0]);
+                                let HSV = colorUtils.HEXtoHSV(color[0]);
                                 HueCursor.style.left = (HSV.h * 240 + 7.5) + "px";
-                                const rgb = bundleColorUtils.HSVToRGB({
+                                const rgb = colorUtils.HSVToRGB({
                                         h: HSV.h, s: 1, v: 1
                                     }
                                 );
@@ -280,7 +280,7 @@ const bundleColorUtils = {
             innerHTML: "<span class='mi'>done</span>",
             onclick: (e) => {
                 console.log(input.value);
-                writer(bundleColorUtils.HEXtoHSV(input.value));
+                writer(colorUtils.HEXtoHSV(input.value));
             }
         });
         inputArea.appendChild(input);
@@ -298,11 +298,11 @@ const bundleColorUtils = {
                 const hue = (parseFloat(HueCursor.style.left) - 7.5) / 240;
                 const saturation = (parseFloat(BaSCursor.style.left) - 5) / 320;
                 const brightness = (180 - (parseFloat(BaSCursor.style.top) - 5)) / 180;
-                const rgb = bundleColorUtils.HSVToRGB({
+                const rgb = colorUtils.HSVToRGB({
                         h: hue, s: saturation, v: brightness
                     }
                 );
-                returnFunc("#" + bundleColorUtils.RGBtoHEX(rgb));
+                returnFunc("#" + colorUtils.RGBtoHEX(rgb));
             }
         }));
         colorSelector.appendChild(bottomSelector);
@@ -383,7 +383,7 @@ const bundleColorUtils = {
             else if (e.offsetX < 0) event.offsetX = 0;
             else event.offsetX = e.offsetX + 7.5;
             HueCursor.style.left = event.offsetX + "px";
-            const rgb = bundleColorUtils.HSVToRGB({
+            const rgb = colorUtils.HSVToRGB({
                     h: (parseFloat(HueCursor.style.left) - 7.5) / 240, s: 1, v: 1
                 }
             );
@@ -405,20 +405,20 @@ const bundleColorUtils = {
             const saturation = (parseFloat(BaSCursor.style.left) - 5) / 320;
             const brightness = (180 - (parseFloat(BaSCursor.style.top) - 5)) / 180;
             const alpha = (parseFloat(AlphaCursor.style.left) - 7.5) / 240;
-            const rgb = bundleColorUtils.HSVToRGB({
+            const rgb = colorUtils.HSVToRGB({
                     h: hue, s: saturation, v: brightness
                 }
             );
             resultColor.style.backgroundColor = `rgba(${rgb.r},${rgb.g},${rgb.b},${alpha})`;
-            input.value = "#" + bundleColorUtils.RGBtoHEX(rgb);
+            input.value = "#" + colorUtils.RGBtoHEX(rgb);
         };
 
         const writer = (HSV) => {
-            const bgRgb = bundleColorUtils.HSVToRGB({
+            const bgRgb = colorUtils.HSVToRGB({
                     h: HSV.h, s: 1, v: 1
                 }
             );
-            const rgb = bundleColorUtils.HSVToRGB({
+            const rgb = colorUtils.HSVToRGB({
                     h: HSV.h, s: HSV.s, v: HSV.v
                 }
             );
@@ -427,7 +427,7 @@ const bundleColorUtils = {
             BaSCursor.style.left = (HSV.s * 320 + 5) + "px";
             BaSCursor.style.top = (185 - HSV.v * 180) + "px";
             resultColor.style.backgroundColor = `rgba(${rgb.r},${rgb.g},${rgb.b},1)`;
-            input.value = "#" + bundleColorUtils.RGBtoHEX(rgb);
+            input.value = "#" + colorUtils.RGBtoHEX(rgb);
         }
     }
 };

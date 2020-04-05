@@ -8,7 +8,7 @@
 
  */
 
-.pg-storyboard, .pg-storyboard-fileList {
+.pg-storyboard {
     position: fixed;
     left: 50%;
     top: 50%;
@@ -31,7 +31,9 @@
 .pg-window .pg-storyboard-fileList {
     visibility: visible;
     transform: unset;
-    z-index: -1;
+    position: unset;
+    width: unset;
+    height: unset;
 }
 
 @media screen and (min-width: 1024px) {
