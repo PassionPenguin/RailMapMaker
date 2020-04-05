@@ -113,7 +113,7 @@ const initInterface = (type, returnFunc) => {
             type: "p",
             innerHTML: "<span class='mi'>attachment</span><span> " + strings.importFile + " (*.rmg) </span>",
             onclick: () => {
-                let file = cE({type: "input", attr: [[type, "file"], ["accept", ".rmg"]]});
+                let file = cE({type: "input", attr: [["type", "file"], ["accept", ".rmg"]]});
                 file.click();
                 file.onchange = () => {
                     let fileContent = file.files[0];

@@ -128,7 +128,7 @@ const exportDrawable = (svgEl) => {
     else name = pg.$("#fileName")[0].value;
 
     if (format === "RMG")
-        saveDrawableAs('data:image/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(contentData.pathInfo)))), name + ".rmg");
+        saveDrawableAs('data:image/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(contentData)))), name + ".rmg");
     else if (format === "SVG")
         saveDrawableAs('data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(new XMLSerializer().serializeToString(svg)))), name + ".svg");
     else {
