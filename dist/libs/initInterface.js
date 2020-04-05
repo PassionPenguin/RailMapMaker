@@ -874,21 +874,23 @@ const initInterface = (type, returnFunc) => {
                 window.contentData = {
                     "name": "Guangzhou Line",
                     "author": "Penguin",
-                    "lastModified": 15859929999945,
+                    "lastModified": 1586072905067,
                     "width": 9999,
                     "height": 9999,
                     "textStyle": "",
                     "primaryNameStyle": "font:18px/1 Anodina,sans-serif;",
                     "secondaryNameStyle": "font:11px/1 Anodina,sans-serif;color:var(--grey)", "pathInfo": info
                 };
-                initDrawable();
-                pg.$("#resSvg")[0].setAttribute("viewBox", "0 0 99999 99999");
-                pg.$("#resSvg")[0].style.width = 9999 + "px";
-                pg.$("#resSvg")[0].style.height = 9999 + "px";
-                pg.$("#grid")[0].style.width = 9999 + "px";
-                pg.$("#grid")[0].style.height = 9999 + "px";
-                pg.$("#drawable")[0].style.width = 9999 + "px";
-                pg.$("#drawable")[0].style.height = 9999 + "px";
+                initInterface(1, () => {
+                    initDrawable();
+                    pg.$("#resSvg")[0].setAttribute("viewBox", "0 0 9999 9999");
+                    pg.$("#resSvg")[0].style.width = 999 + "px";
+                    pg.$("#resSvg")[0].style.height = 999 + "px";
+                    pg.$("#grid")[0].style.width = 999 + "px";
+                    pg.$("#grid")[0].style.height = 999 + "px";
+                    pg.$("#drawable")[0].style.width = 999 + "px";
+                    pg.$("#drawable")[0].style.height = 999 + "px";
+                });
             }
         }));
         storyboardCtrlList.appendChild(cE({
