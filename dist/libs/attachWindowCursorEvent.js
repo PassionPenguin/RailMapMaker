@@ -54,7 +54,7 @@ const attachEvent = {
                             "type": "withSecondaryName",
                             "name": [
                                 ["天河公园", "东郊公园", "爱心公园", "流花湖公园", "雕塑公园"][randomSeedA] + ["东", "西", "南", "北", "中"][randomSeedB],
-                                ["Tianhe Park", "Eastend Park", "Love Park", "Liuhua Lake Park", "Sculpture Park"][randomSeedA] + [" East", " West", " South", " North", "Middle"][randomSeedB]
+                                ["Tianhe Park", "Eastend Park", "Love Park", "Liuhua Lake Park", "Sculpture Park"][randomSeedA] + [" East", " West", " South", " North", " Middle"][randomSeedB]
                             ],
                             "position": 1,
                             "alignment": "middle"
@@ -76,7 +76,7 @@ const attachEvent = {
                         "type": "withSecondaryName",
                         "name": [
                             ["天河公园", "东郊公园", "爱心公园", "流花湖公园", "雕塑公园"][randomSeedA] + ["东", "西", "南", "北", "中"][randomSeedB],
-                            ["Tianhe Park", "Eastend Park", "Love Park", "Liuhua Lake Park", "Sculpture Park"][randomSeedA] + [" East", " West", " South", " North", "Middle"][randomSeedB]
+                            ["Tianhe Park", "Eastend Park", "Love Park", "Liuhua Lake Park", "Sculpture Park"][randomSeedA] + [" East", " West", " South", " North", " Middle"][randomSeedB]
                         ],
                         "position": 1,
                         "alignment": "middle",
