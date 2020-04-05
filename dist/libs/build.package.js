@@ -12,7 +12,7 @@ const builder = {
     installable: false,
     debugMode: false,
     version: "1.5",
-    bundles: [{name: "PenguinUI", version: "0.1.7"}],
+    bundles: [{name: "PenguinUI", version: "0.1.7"}, {name: "ColorUtils", version: "0.2"}],
     displayVersion: "Cola/(RMG v1.5 Stable)",
     locales: ["zh-CN", "zh-HK", "zh-YUE", "en-US"],
     buildTime: 1586010235748,

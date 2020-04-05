@@ -49,6 +49,7 @@
         transform: translateY(-50%);
         visibility: visible;
         margin: 0;
+        position: fixed;
     }
 }
 
