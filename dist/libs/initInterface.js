@@ -973,7 +973,7 @@ const initInterface = (type, returnFunc) => {
                                     attr: [["style", "font: 400 16px/1 Anodina, sans-serif;text-align: center;margin: 20px 0;color: var(--grey);"]],
                                     innerHTML: strings.language
                                 }));
-                                [["zh-CN", [[240, 0]]], ["zh-HK", [[240, 0], [204, 0]]], ["zh-YUE", [[240, 0]]], ["en-US", [[168, 0]]]].forEach((i, index) => {
+                                [["zh-CN", [[240, 0]]], ["zh-HK", [[240, 0], [204, 0]]], ["zh-YUE", [[240, 0]]], ["en-US", [[132, 0]]]].forEach((i, index) => {
                                     let flag = "<div style='display:inline-block;width:96px;'>";
                                     i[1].forEach(j => {
                                         flag += `<span style='display:inline-block;width:36px;height:24px;margin:0 3px;background:url(./assets/mipmap/flags.png);background-position:${j[0]}px ${j[1]};background-size:240px;vertical-align:middle;'></span>`;
