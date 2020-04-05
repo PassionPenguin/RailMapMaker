@@ -108,13 +108,16 @@ const StationEditorComp = {
         PenguinUI_selector.init();
     },
     showStationContent: (id, index) => {
-        let wrap = cE({type: "div", attr: [["id", "pg-stationEditor"]]});
+        let wrap = cE({type: "div", attr: [["id", "pg-stationEditor"], ["style", "margin-left:10px"]]});
         wrap.appendChild(cE({
             type: "p",
             attr: [["style", "margin-top:20px;font:14px/1 Anodina,sans-serif;color:var(--grey)"]],
             innerText: strings.editStationDescription
         }));
 
+        [...pg.$("#pg-stationEditor")].forEach(e => {
+            document.body.removeChild(e.parentElement.parentElement.parentElement);
+        });
 
         let e = contentData.pathInfo[id].stations[index];
 
