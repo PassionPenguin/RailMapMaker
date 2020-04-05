@@ -227,7 +227,7 @@ const StationEditorComp = {
                 pg.$("#scroll-use")[0].style.right = "0";
                 pg.$("#scroll-use")[0].style.width = "calc(100vw - 640px)";
                 view.appendChild(wrap);
-                view.setAttribute("style", "left:320px");
+                view.parentElement.parentElement.setAttribute("style", "left:320px;z-index:999");
             }, {
                 withMask: "none",
                 withBlur: "none",
@@ -238,7 +238,6 @@ const StationEditorComp = {
                     pg.$("#scroll-use")[0].style.right = "unset";
                     pg.$("#scroll-use")[0].style.width = "unset";
                 },
-                zIndex: 999,
                 title: strings.edit
             });
         else if (MediaQuery.screeHeight().includes("xlg"))
@@ -247,7 +246,7 @@ const StationEditorComp = {
                 pg.$("#scroll-use")[0].style.top = "0";
                 pg.$("#scroll-use")[0].style.height = "calc(100vh - 640px)";
                 view.appendChild(wrap);
-                view.setAttribute("style", "bottom:320px");
+                view.parentElement.parentElement.setAttribute("style", "bottom:320px;z-index:999");
             }, {
                 withMask: "none",
                 withBlur: "none",
@@ -258,7 +257,6 @@ const StationEditorComp = {
                     pg.$("#scroll-use")[0].style.top = "unset";
                     pg.$("#scroll-use")[0].style.height = "unset";
                 },
-                zIndex: 999,
                 title: strings.edit
             });
         else
