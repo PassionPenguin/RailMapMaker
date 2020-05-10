@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import 'tailwindcss';
+@import './material-symbols.css';
+
+:root {
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Space Grotesk', 'Helvetica Neue', sans-serif;
+  background: #f8fafc;
+  color: #0f172a;
+  overflow: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+input,
+select,
+textarea,
+button {
+  font: inherit;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(30, 41, 59, 0.25);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(148, 163, 184, 0.15);
+}
+
+.material-symbols-rounded {
+  vertical-align: middle;
+}
