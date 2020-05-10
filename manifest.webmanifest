@@ -1,35 +1,27 @@
 {
-   "name":"RailMapMaker",
-   "short_name":"RMG",
-   "scope":"./",
-   "start_url":".",
-   "display":"standalone",
-   "background_color":"#fff",
-   "theme_color":"#b2ebf2",
-   "description":"A tool for generating maps.",
-   "icons":[
-      {
-         "src":"./assets/mipmap/icon@1024.png",
-         "sizes":"1024x1024",
-         "type":"image/png"
-      },
-      {
-         "src":"./assets/mipmap/icon@192.png",
-         "sizes":"192x192",
-         "type":"image/png"
-      },
-      {
-         "src":"./assets/mipmap/icon@512.png",
-         "sizes":"512x512",
-         "type":"image/png"
-      }
-   ],
-   "prefer_related_applications":true,
-   "related_applications":[
-      {
-         "platform":"webapp",
-         "id":"com.passionpenguin.railmapmaker",
-         "url":"./manifest.webmanifest"
-      }
-   ]
+  "name": "RailMapMaker",
+  "short_name": "RailMap",
+  "scope": "/",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#0f172a",
+  "description": "A modern canvas-first rail map editor.",
+  "icons": [
+    {
+      "src": "/assets/mipmap/icon@192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/mipmap/icon@512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/mipmap/icon@1024.png",
+      "sizes": "1024x1024",
+      "type": "image/png"
+    }
+  ]
 }
